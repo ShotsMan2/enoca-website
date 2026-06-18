@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft, ChevronRight } from "lucide-react";
+import PublicLayout from "@/components/PublicLayout";
 
 export default async function CatchAllPage({
     params
@@ -22,6 +23,7 @@ export default async function CatchAllPage({
         : 'ENOCA™';
 
     return (
+        <PublicLayout>
         <div className="min-h-screen bg-background relative overflow-hidden">
             {/* Dekoratif Arka Plan Işıltısı */}
             <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-accent/5 rounded-full blur-[120px] -z-10" />
@@ -101,5 +103,6 @@ export default async function CatchAllPage({
                 </div>
             </div>
         </div>
+    </PublicLayout>
     );
 }

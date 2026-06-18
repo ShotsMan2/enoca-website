@@ -1,0 +1,33 @@
+{
+  "Navbar": {
+    "home": "Home",
+    "about": "About",
+    "services": "Services",
+    "projects": "Projects",
+    "careers": "Careers",
+    "contact": "Contact",
+    "admin": "Admin"
+  },
+  "Hero": {
+    "title1": "WE DO SAP CX",
+    "titleHighlight": "HYBRIS",
+    "subtitle": "Experienced In SAP CX Hybris Delivery",
+    "btnPrimary": "Our Services",
+    "btnSecondary": "Contact Us"
+  },
+  "Careers": {
+    "title": "Open Positions",
+    "subtitle": "Let's Build the Future Together",
+    "viewDetails": "View & Apply",
+    "noJobs": "There are currently no open positions.",
+    "applyNow": "Apply Now",
+    "jobDesc": "Job Description",
+    "req": "Requirements",
+    "formTitle": "Application Form",
+    "name": "Full Name",
+    "email": "Email",
+    "phone": "Phone",
+    "portfolioUrl": "Portfolio / LinkedIn (Optional)",
+    "submit": "Submit Application"
+  }
+}

@@ -1,14 +1,17 @@
 "use client";
 
-import Link from 'next/link';
 import { useState } from 'react';
-import { ChevronDown, Mail, Phone, Search, X } from 'lucide-react';
-import { useRouter } from 'next/navigation';
+import { ChevronDown, Mail, Phone, Search, X, Globe } from 'lucide-react';
+import { useTranslations, useLocale } from 'next-intl';
+import { Link, usePathname, useRouter } from '@/i18n/routing';
 
 export default function Navbar() {
     const [isSearchOpen, setIsSearchOpen] = useState(false);
     const [searchQuery, setSearchQuery] = useState("");
     const router = useRouter();
+    const pathname = usePathname();
+    const locale = useLocale();
+    const t = useTranslations('Navbar');
 
     const handleSearch = (e: React.FormEvent) => {
         e.preventDefault();
@@ -23,7 +26,7 @@ export default function Navbar() {
     // Enoca.com'un orijinal menü yapısı
     const menuItems: any[] = [
         {
-            title: "ÇÖZÜMLER",
+            title: t('services'),
             url: "/cozumler",
             children: [
                 { 
@@ -57,7 +60,7 @@ export default function Navbar() {
             ]
         },
         {
-            title: "DANIŞMANLIK",
+            title: t('projects'),
             url: "/danismanlik",
             children: [
                 { title: "SAP CX HYBRIS DANIŞMANLIĞI", url: "/danismanlik/hybris-danismanligi" },
@@ -99,18 +102,18 @@ export default function Navbar() {
             ]
         },
         { 
-            title: "HABERLER", 
+            title: t('news'), 
             url: "/haberler",
             children: [
                 { title: "enoca™'DAN SON HABERLER", url: "/haberler/enocadan-son-haberler" },
             ]
         },
         {
-            title: "KURUMSAL",
+            title: t('about'), // Or corporate
             url: "/kurumsal",
             children: [
                 { title: "HAKKIMIZDA", url: "/kurumsal/hakkimizda" },
-                { title: "KARİYER", url: "/kurumsal/kariyer" },
+                { title: "KARİYER", url: "/kariyer" },
                 { title: "YASAL BİLGİLER", url: "/kurumsal/yasal-bilgiler" },
                 { title: "BİLGİ GÜVENLİĞİ POLİTİKASI", url: "/bilgi-guvenligi-politikasi" },
                 { title: "KVKK", url: "/kisisel-verilerin-korunmasi-ve-islenmesi-politikasi" },
@@ -221,12 +224,23 @@ export default function Navbar() {
                             ))}
                             
                             {/* Türkçe (Dil Seçimi) ve Arama İkonu */}
-                            <div className="flex items-center gap-2 pl-4 ml-2 border-l border-border/50 h-8 relative">
-                                <button className="flex items-center gap-1 px-2 py-2 text-[13px] font-bold text-foreground/80 hover:text-accent transition-all duration-200 uppercase tracking-wide group">
-                                    TÜRKÇE <ChevronDown className="w-3.5 h-3.5 opacity-50 group-hover:rotate-180 transition-transform duration-300" />
+                            <div className="flex items-center gap-2 pl-4 ml-2 border-l border-border/50 h-8 relative group/lang">
+                                <button className="flex items-center gap-1.5 px-2 py-2 text-[13px] font-bold text-foreground/80 hover:text-accent transition-all duration-200 uppercase tracking-wide">
+                                    <Globe className="w-3.5 h-3.5 opacity-70" />
+                                    {locale === 'tr' ? 'TÜRKÇE' : 'ENGLISH'} 
+                                    <ChevronDown className="w-3.5 h-3.5 opacity-50 group-hover/lang:rotate-180 transition-transform duration-300" />
                                 </button>
+
+                                {/* Dil Dropdown */}
+                                <div className="absolute top-full left-1/2 -translate-x-1/2 pt-2 opacity-0 invisible group-hover/lang:opacity-100 group-hover/lang:visible transition-all duration-300 z-50">
+                                    <div className="bg-white rounded-xl shadow-xl border border-border/50 overflow-hidden flex flex-col min-w-[120px]">
+                                        <button onClick={() => router.replace(pathname, {locale: 'tr'})} className={`px-4 py-2.5 text-xs font-bold uppercase text-left hover:bg-gray-50 transition-colors ${locale === 'tr' ? 'text-accent' : 'text-gray-600'}`}>TÜRKÇE</button>
+                                        <div className="w-full h-px bg-gray-100" />
+                                        <button onClick={() => router.replace(pathname, {locale: 'en'})} className={`px-4 py-2.5 text-xs font-bold uppercase text-left hover:bg-gray-50 transition-colors ${locale === 'en' ? 'text-accent' : 'text-gray-600'}`}>ENGLISH</button>
+                                    </div>
+                                </div>
                                 
-                                <div className="relative flex items-center justify-center">
+                                <div className="relative flex items-center justify-center ml-1">
                                     <button 
                                         onClick={() => setIsSearchOpen(!isSearchOpen)}
                                         className="w-9 h-9 flex items-center justify-center rounded-full hover:bg-accent/10 text-foreground/80 hover:text-accent transition-colors"

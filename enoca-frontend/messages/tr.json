@@ -1,0 +1,33 @@
+{
+  "Navbar": {
+    "home": "Ana Sayfa",
+    "about": "Hakkımızda",
+    "services": "Hizmetler",
+    "projects": "Projeler",
+    "careers": "Kariyer",
+    "contact": "İletişim",
+    "admin": "Yönetici"
+  },
+  "Hero": {
+    "title1": "WE DO SAP CX",
+    "titleHighlight": "HYBRIS",
+    "subtitle": "Experienced In SAP CX Hybris Delivery",
+    "btnPrimary": "Hizmetlerimiz",
+    "btnSecondary": "Bize Ulaşın"
+  },
+  "Careers": {
+    "title": "Açık Pozisyonlar",
+    "subtitle": "Geleceği Birlikte İnşa Edelim",
+    "viewDetails": "İncele ve Başvur",
+    "noJobs": "Şu an açık pozisyon bulunmamaktadır.",
+    "applyNow": "Hemen Başvur",
+    "jobDesc": "İş Tanımı",
+    "req": "Aranan Nitelikler",
+    "formTitle": "Başvuru Formu",
+    "name": "Ad Soyad",
+    "email": "E-posta",
+    "phone": "Telefon",
+    "portfolioUrl": "Portfolyo / LinkedIn (Opsiyonel)",
+    "submit": "Başvuruyu Gönder"
+  }
+}

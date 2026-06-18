@@ -59,6 +59,30 @@ export interface ContentPage {
   updatedAt: string;
 }
 
+export interface JobPosting {
+  id: number;
+  title: string;
+  department: string;
+  location: string;
+  type: string; // Tam Zamanlı, Yarı Zamanlı vs.
+  description: string;
+  requirements: string[];
+  status: "active" | "closed";
+  postedAt: string;
+}
+
+export interface JobApplication {
+  id: number;
+  jobId: number;
+  jobTitle: string;
+  name: string;
+  email: string;
+  phone: string;
+  portfolioUrl?: string;
+  status: "new" | "reviewed" | "rejected" | "accepted";
+  appliedAt: string;
+}
+
 // ─── Mock Veriler ───────────────────────────────────────────
 
 const mockStats: Stats = {
@@ -113,6 +137,17 @@ let mockContentPages: ContentPage[] = [
   { id: 3, menuTitle: "Metodoloji", slug: "/projeler/metodoloji", category: "Projeler", content: "<h2>Metodoloji</h2><p>Çevik geliştirme metodolojisi ile projelerinizi zamanında ve bütçe dahilinde teslim ediyoruz.</p>", status: "published", updatedAt: "2025-05-30" },
   { id: 4, menuTitle: "Hakkımızda", slug: "/kurumsal/hakkimizda", category: "Kurumsal", content: "<h2>Hakkımızda</h2><p>Enoca, 2013 yılından bu yana SAP teknolojileri alanında uzmanlaşmış bir teknoloji danışmanlığı firmasıdır.</p>", status: "published", updatedAt: "2025-05-25" },
   { id: 5, menuTitle: "SAP HANA", slug: "/cozumler/sap-cozumleri/sap-hana", category: "Çözümler", content: "<h2>SAP HANA</h2><p>In-memory computing teknolojisi ile gerçek zamanlı veri analizi yapın.</p>", status: "draft", updatedAt: "2025-06-15" },
+];
+
+let mockJobs: JobPosting[] = [
+  { id: 1, title: "Frontend Developer (React/Next.js)", department: "Yazılım Geliştirme", location: "İstanbul (Hibrit)", type: "Tam Zamanlı", description: "Modern web teknolojileri ile kurumsal projelere arayüz geliştirecek takım arkadaşı arıyoruz.", requirements: ["En az 3 yıl React tecrübesi", "Next.js App Router bilgisi", "TypeScript hakimiyeti", "Tailwind CSS deneyimi"], status: "active", postedAt: "2025-06-15" },
+  { id: 2, title: "SAP Hybris Danışmanı", department: "Danışmanlık", location: "Ankara (Uzaktan)", type: "Tam Zamanlı", description: "Büyük ölçekli e-ticaret projelerinde yer alacak deneyimli SAP Hybris danışmanı aranıyor.", requirements: ["SAP Commerce Cloud tecrübesi", "Java/Spring bilgisi", "İyi derecede İngilizce"], status: "active", postedAt: "2025-06-10" },
+  { id: 3, title: "UI/UX Designer", department: "Tasarım", location: "İstanbul (Ofis)", type: "Tam Zamanlı", description: "Kurumsal müşterilerimiz için yenilikçi kullanıcı deneyimleri tasarlayacak.", requirements: ["Figma uzmanlığı", "Kullanıcı testleri planlama", "Portfolyo sunabilme"], status: "closed", postedAt: "2025-05-20" },
+];
+
+let mockApplications: JobApplication[] = [
+  { id: 1, jobId: 1, jobTitle: "Frontend Developer", name: "Ali Veli", email: "ali@veli.com", phone: "0555 123 4567", portfolioUrl: "https://github.com/aliveli", status: "new", appliedAt: "2025-06-16T10:00:00Z" },
+  { id: 2, jobId: 2, jobTitle: "SAP Hybris Danışmanı", name: "Ayşe Yılmaz", email: "ayse@yilmaz.com", phone: "0532 987 6543", status: "reviewed", appliedAt: "2025-06-11T14:30:00Z" },
 ];
 
 // ─── Servis Fonksiyonları ────────────────────────────────────
@@ -187,8 +222,8 @@ export const adminApi = {
     return [...mockContentPages];
   },
   async updateContentPage(id: number, data: Partial<ContentPage>): Promise<ContentPage> {
-    await delay(500);
-    mockContentPages = mockContentPages.map(p => p.id === id ? { ...p, ...data } : p);
+    await delay(400);
+    mockContentPages = mockContentPages.map(p => p.id === id ? { ...p, ...data, updatedAt: new Date().toISOString().split("T")[0] } : p);
     return mockContentPages.find(p => p.id === id)!;
   },
   async createContentPage(data: Omit<ContentPage, "id">): Promise<ContentPage> {
@@ -201,6 +236,53 @@ export const adminApi = {
     await delay(300);
     mockContentPages = mockContentPages.filter(p => p.id !== id);
   },
+
+  // Career: Job Postings
+  async getJobs(): Promise<JobPosting[]> {
+    await delay(300);
+    return [...mockJobs];
+  },
+  async getJobById(id: number): Promise<JobPosting | null> {
+    await delay(200);
+    return mockJobs.find(j => j.id === id) || null;
+  },
+  async createJob(data: Omit<JobPosting, "id">): Promise<JobPosting> {
+    await delay(500);
+    const newJob = { ...data, id: Date.now() };
+    mockJobs = [newJob, ...mockJobs];
+    return newJob;
+  },
+  async updateJob(id: number, data: Partial<JobPosting>): Promise<JobPosting> {
+    await delay(400);
+    mockJobs = mockJobs.map(j => j.id === id ? { ...j, ...data } : j);
+    return mockJobs.find(j => j.id === id)!;
+  },
+  async deleteJob(id: number): Promise<void> {
+    await delay(300);
+    mockJobs = mockJobs.filter(j => j.id !== id);
+  },
+
+  // Career: Job Applications
+  async getApplications(): Promise<JobApplication[]> {
+    await delay(400);
+    return [...mockApplications];
+  },
+  async createApplication(data: Omit<JobApplication, "id" | "status" | "appliedAt">): Promise<JobApplication> {
+    await delay(500);
+    const newApp: JobApplication = {
+      ...data,
+      id: Date.now(),
+      status: "new",
+      appliedAt: new Date().toISOString()
+    };
+    mockApplications = [newApp, ...mockApplications];
+    return newApp;
+  },
+  async updateApplicationStatus(id: number, status: JobApplication["status"]): Promise<JobApplication> {
+    await delay(300);
+    mockApplications = mockApplications.map(a => a.id === id ? { ...a, status } : a);
+    return mockApplications.find(a => a.id === id)!;
+  }
 };
 
 // ─── Yardımcı ────────────────────────────────────────────────

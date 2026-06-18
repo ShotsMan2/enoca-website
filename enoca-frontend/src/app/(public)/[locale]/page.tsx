@@ -1,6 +1,8 @@
-import Link from "next/link";
+import { Link } from "@/i18n/routing";
 import { Button } from "@/components/ui/button";
 import HeroVisual from "@/components/HeroVisual";
+import PublicLayout from "@/components/PublicLayout";
+import { getTranslations } from "next-intl/server";
 
 // Kategorileri ve linkleri dinamik alıyoruz
 async function getCategories() {
@@ -17,6 +19,7 @@ async function getCategories() {
 
 export default async function Home() {
   const categories = await getCategories();
+  const t = await getTranslations('Hero');
 
   // Sabit referans listesi (siteden alınan)
   const references = [
@@ -26,7 +29,7 @@ export default async function Home() {
   ];
 
   return (
-    <div className="flex flex-col min-h-screen">
+    <PublicLayout>
       {/* 1. KAHRAMAN BÖLÜMÜ (HERO) */}
       <section className="relative overflow-hidden pt-4 pb-20 lg:pt-6 lg:pb-28">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -43,24 +46,24 @@ export default async function Home() {
                 </span>
               </div>
 
-              <h1 className="text-5xl md:text-6xl lg:text-[5.25rem] leading-[1.05] font-display text-foreground tracking-tight">
-                WE DO SAP CX <br />
-                <span className="relative inline-block mt-2">
-                  <span className="gradient-text font-bold">HYBRIS</span>
-                  <span className="gradient-underline" />
+              <h1 className="text-[3.5rem] leading-[1.05] sm:text-[4rem] lg:text-[5rem] font-black tracking-tighter text-foreground mb-4 font-display">
+                {t('title1')} <br className="hidden sm:block" />
+                <span className="text-accent relative inline-block">
+                  {t('titleHighlight')}
+                  <svg className="absolute w-full h-3 -bottom-1 left-0 text-accent/20" viewBox="0 0 100 10" preserveAspectRatio="none"><path d="M0 5 Q 50 10 100 5" stroke="currentColor" strokeWidth="2" fill="none" /></svg>
                 </span>
               </h1>
-
-              <p className="text-lg md:text-xl text-muted-foreground max-w-xl leading-relaxed">
-                Experienced In SAP CX Hybris Delivery
+              
+              <p className="text-lg sm:text-xl text-foreground/60 max-w-lg leading-relaxed font-medium">
+                {t('subtitle')}
               </p>
 
               <div className="flex flex-col sm:flex-row gap-4 pt-4">
-                <Button size="lg" className="w-full sm:w-auto text-base text-wrap md:text-nowrap" asChild>
-                  <Link href="/cozumler/hybris-cozumleri/hybris-b2c-ticaret">SAP CX Hybris B2C E-Ticaret</Link>
+                <Button size="lg" className="h-14 px-8 text-sm font-bold tracking-widest bg-accent hover:bg-accent/90 text-white rounded-xl shadow-xl shadow-accent/20 hover:shadow-2xl hover:shadow-accent/30 transition-all duration-300 hover:-translate-y-1">
+                  {t('btnPrimary')}
                 </Button>
-                <Button size="lg" variant="secondary" className="w-full sm:w-auto text-base text-wrap md:text-nowrap" asChild>
-                  <Link href="/cozumler/hybris-cozumleri/hybris-b2b-ticaret">SAP CX Hybris B2B E-Ticaret</Link>
+                <Button size="lg" variant="secondary" className="h-14 px-8 text-sm font-bold tracking-widest border-2 border-border/50 hover:bg-accent/5 hover:border-accent hover:text-accent rounded-xl transition-all duration-300">
+                  {t('btnSecondary')}
                 </Button>
               </div>
             </div>
@@ -242,6 +245,6 @@ export default async function Home() {
         </div>
       </section>
 
-    </div>
+    </PublicLayout>
   );
 }
