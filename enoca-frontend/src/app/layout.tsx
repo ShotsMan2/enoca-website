@@ -1,13 +1,31 @@
 import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
+import { Inter, Calistoga, JetBrains_Mono } from 'next/font/google';
 import './globals.css';
 import Navbar from '@/components/Navbar';
+import Footer from '@/components/Footer';
 
-const inter = Inter({ subsets: ['latin'] });
+const inter = Inter({ 
+  subsets: ['latin'],
+  variable: '--font-inter',
+  display: 'swap',
+});
+
+const calistoga = Calistoga({ 
+  weight: '400',
+  subsets: ['latin'],
+  variable: '--font-calistoga',
+  display: 'swap',
+});
+
+const jetbrainsMono = JetBrains_Mono({ 
+  subsets: ['latin'],
+  variable: '--font-jetbrains-mono',
+  display: 'swap',
+});
 
 export const metadata: Metadata = {
-  title: 'Enoca | Yeni Nesil Yazılım Çözümleri',
-  description: 'Next.js ve NestJS kullanılarak geliştirildi.',
+  title: 'Enoca | Minimalist Modern Yazılım',
+  description: 'Next.js ve NestJS kullanılarak modern bir arayüz ile geliştirildi.',
 };
 
 export default function RootLayout({
@@ -17,11 +35,12 @@ export default function RootLayout({
 }) {
   return (
     <html lang="tr">
-      <body className={`${inter.className} bg-gray-50 min-h-screen`}>
+      <body className={`${inter.variable} ${calistoga.variable} ${jetbrainsMono.variable} antialiased min-h-screen flex flex-col`}>
         <Navbar />
-        <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+        <main className="flex-grow">
           {children}
         </main>
+        <Footer />
       </body>
     </html>
   );

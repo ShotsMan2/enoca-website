@@ -1,26 +1,64 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@theme {
+  --font-display: var(--font-calistoga);
+  --font-sans: var(--font-inter);
+  --font-mono: var(--font-jetbrains-mono);
+  
+  --color-background: #FAFAFA;
+  --color-foreground: #0F172A;
+  
+  --color-muted: #F1F5F9;
+  --color-muted-foreground: #64748B;
+  
+  --color-accent: #0052FF;
+  --color-accent-secondary: #4D7CFF;
+  --color-accent-foreground: #FFFFFF;
+  
+  --color-border: #E2E8F0;
+  --color-card: #FFFFFF;
+  --color-ring: #0052FF;
+
+  --shadow-accent: 0 4px 14px rgba(0, 82, 255, 0.25);
+  --shadow-accent-lg: 0 8px 24px rgba(0, 82, 255, 0.35);
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@layer base {
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  
+  ::selection {
+    background-color: rgba(0, 82, 255, 0.2);
+    color: var(--color-accent);
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@layer utilities {
+  .gradient-text {
+    background: linear-gradient(to right, var(--color-accent), var(--color-accent-secondary));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .gradient-underline {
+    position: absolute;
+    bottom: -0.25rem;
+    left: 0;
+    height: 0.75rem;
+    width: 100%;
+    border-radius: 0.125rem;
+    background: linear-gradient(to right, rgba(0, 82, 255, 0.15), rgba(77, 124, 255, 0.1));
+    z-index: -1;
+  }
+  
+  .bg-dot-pattern {
+    background-image: radial-gradient(circle, #ffffff 1px, transparent 1px);
+    background-size: 32px 32px;
+  }
 }
