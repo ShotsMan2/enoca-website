@@ -178,7 +178,7 @@ export default function Navbar() {
                                     {/* Açılır Menü (1. Seviye) */}
                                     {item.children && (
                                         <div className="absolute left-0 top-full pt-2 w-[280px] opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform origin-top-left group-hover:translate-y-0 translate-y-2 z-50">
-                                            <div className="bg-card rounded-xl border border-border/50 shadow-xl p-2 relative overflow-hidden backdrop-blur-xl bg-white/95">
+                                            <div className="bg-card rounded-xl border border-border/50 shadow-xl p-2 relative backdrop-blur-xl bg-white/95">
                                                 <div className="flex flex-col gap-1">
                                                     {item.children.map((child: any, cIdx: number) => (
                                                         <div key={cIdx} className="group/sub relative">
@@ -195,8 +195,8 @@ export default function Navbar() {
                                                             
                                                             {/* Yana Açılan İç İçe Menü (2. Seviye) */}
                                                             {child.subChildren && (
-                                                                <div className="absolute left-full top-0 pl-2 w-[280px] opacity-0 invisible group-hover/sub:opacity-100 group-hover/sub:visible transition-all duration-300 transform origin-top-left group-hover/sub:translate-x-0 -translate-x-2 z-50">
-                                                                    <div className="bg-card rounded-xl border border-border/50 shadow-xl p-2 relative overflow-hidden backdrop-blur-xl bg-white/95">
+                                                                <div className="absolute left-full top-0 pl-1 w-[280px] opacity-0 invisible group-hover/sub:opacity-100 group-hover/sub:visible transition-all duration-300 transform origin-top-left group-hover/sub:translate-x-0 -translate-x-2 z-[60]">
+                                                                    <div className="bg-card rounded-xl border border-border/50 shadow-xl p-2 relative backdrop-blur-xl bg-white/95">
                                                                         <div className="flex flex-col gap-1">
                                                                             {child.subChildren.map((sub: any, sIdx: number) => (
                                                                                 <Link
