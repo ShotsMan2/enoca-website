@@ -21,14 +21,39 @@ export default function Navbar() {
     };
 
     // Enoca.com'un orijinal menü yapısı
-    const menuItems = [
+    const menuItems: any[] = [
         {
             title: "ÇÖZÜMLER",
             url: "/cozumler",
             children: [
-                { title: "SAP CX HYBRİS ÇÖZÜMLERİ", url: "/cozumler/hybris-cozumleri" },
-                { title: "SAP ÇÖZÜMLERİ", url: "/cozumler/sap-cozumleri" },
-                { title: "SİSTEM İZLEME ÇÖZÜMLERİ", url: "/cozumler/sistem-izleme-cozumleri" },
+                { 
+                    title: "SAP CX HYBRİS ÇÖZÜMLERİ", 
+                    url: "/cozumler/hybris-cozumleri",
+                    subChildren: [
+                        { title: "SAP CX Hybris B2C E-Ticaret", url: "/cozumler/hybris-cozumleri/hybris-b2c-ticaret" },
+                        { title: "SAP CX Hybris B2B E-Ticaret", url: "/cozumler/hybris-cozumleri/hybris-b2b-ticaret" },
+                        { title: "SAP CX Hybris Mobil E-Ticaret", url: "/cozumler/hybris-cozumleri/hybris-mobil-ticaret" },
+                        { title: "SAP CX Hybris MDM", url: "/cozumler/hybris-cozumleri/hybris-mdm" },
+                    ]
+                },
+                { 
+                    title: "SAP ÇÖZÜMLERİ", 
+                    url: "/cozumler/sap-cozumleri",
+                    subChildren: [
+                        { title: "SAP Mobility", url: "/cozumler/sap-cozumleri/sap-mobility" },
+                        { title: "SAP HANA", url: "/cozumler/sap-cozumleri/sap-hana" },
+                        { title: "SAP Uygulama Yönetimi", url: "/cozumler/sap-cozumleri/sap-uygulama-yonetimi" },
+                        { title: "SAP Bulut", url: "/cozumler/sap-cozumleri/sap-bulut" },
+                    ]
+                },
+                { 
+                    title: "SİSTEM İZLEME ÇÖZÜMLERİ", 
+                    url: "/cozumler/sistem-izleme-cozumleri",
+                    subChildren: [
+                        { title: "vFabric Hyperic", url: "/cozumler/sistem-izleme-cozumleri/vfabric-hyperic" },
+                        { title: "Nagios", url: "/cozumler/sistem-izleme-cozumleri/nagios" },
+                    ]
+                },
             ]
         },
         {
@@ -55,9 +80,22 @@ export default function Navbar() {
             title: "TEKNOLOJİ",
             url: "/teknoloji",
             children: [
-                { title: "MİMARİ", url: "/teknoloji/mimari" },
+                { 
+                    title: "MİMARİ", 
+                    url: "/teknoloji/mimari",
+                    subChildren: [
+                        { title: "Modülerlik", url: "/teknoloji/mimari/modulerlik" },
+                        { title: "Tasarım Tabanlı", url: "/teknoloji/mimari/tasarim-tabanli" },
+                    ]
+                },
                 { title: "İNOVASYON", url: "/teknoloji/inovasyon" },
-                { title: "ARAŞTIRMA-GELİŞTİRME", url: "/teknoloji/arastirma-gelistirme" },
+                { 
+                    title: "ARAŞTIRMA-GELİŞTİRME", 
+                    url: "/teknoloji/arastirma-gelistirme",
+                    subChildren: [
+                        { title: "Modelleme ve Simulasyon", url: "/teknoloji/arastirma-gelistirme/modelleme-ve-simulasyon" },
+                    ]
+                },
             ]
         },
         { 
@@ -137,19 +175,43 @@ export default function Navbar() {
                                         )}
                                     </Link>
 
-                                    {/* Açılır Menü */}
+                                    {/* Açılır Menü (1. Seviye) */}
                                     {item.children && (
                                         <div className="absolute left-0 top-full pt-2 w-[280px] opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform origin-top-left group-hover:translate-y-0 translate-y-2 z-50">
                                             <div className="bg-card rounded-xl border border-border/50 shadow-xl p-2 relative overflow-hidden backdrop-blur-xl bg-white/95">
                                                 <div className="flex flex-col gap-1">
-                                                    {item.children.map((child, cIdx) => (
-                                                        <Link
-                                                            key={cIdx}
-                                                            href={child.url}
-                                                            className="group/link flex items-center px-4 py-3 text-[13px] font-semibold text-foreground/70 hover:text-accent hover:bg-accent/5 rounded-lg transition-colors duration-200"
-                                                        >
-                                                            <span className="flex-1 uppercase tracking-wide">{child.title}</span>
-                                                        </Link>
+                                                    {item.children.map((child: any, cIdx: number) => (
+                                                        <div key={cIdx} className="group/sub relative">
+                                                            <Link
+                                                                href={child.url}
+                                                                className="flex items-center px-4 py-3 text-[13px] font-semibold text-foreground/70 hover:text-accent hover:bg-accent/5 rounded-lg transition-colors duration-200"
+                                                            >
+                                                                <span className="flex-1 uppercase tracking-wide">{child.title}</span>
+                                                                {/* Eğer alt menünün de alt menüsü varsa minik ok çıkartıyoruz */}
+                                                                {child.subChildren && (
+                                                                    <ChevronDown className="w-3.5 h-3.5 opacity-50 -rotate-90" />
+                                                                )}
+                                                            </Link>
+                                                            
+                                                            {/* Yana Açılan İç İçe Menü (2. Seviye) */}
+                                                            {child.subChildren && (
+                                                                <div className="absolute left-full top-0 pl-2 w-[280px] opacity-0 invisible group-hover/sub:opacity-100 group-hover/sub:visible transition-all duration-300 transform origin-top-left group-hover/sub:translate-x-0 -translate-x-2 z-50">
+                                                                    <div className="bg-card rounded-xl border border-border/50 shadow-xl p-2 relative overflow-hidden backdrop-blur-xl bg-white/95">
+                                                                        <div className="flex flex-col gap-1">
+                                                                            {child.subChildren.map((sub: any, sIdx: number) => (
+                                                                                <Link
+                                                                                    key={sIdx}
+                                                                                    href={sub.url}
+                                                                                    className="flex items-center px-4 py-3 text-[13px] font-semibold text-foreground/70 hover:text-accent hover:bg-accent/5 rounded-lg transition-colors duration-200"
+                                                                                >
+                                                                                    <span className="flex-1 uppercase tracking-wide">{sub.title}</span>
+                                                                                </Link>
+                                                                            ))}
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            )}
+                                                        </div>
                                                     ))}
                                                 </div>
                                             </div>

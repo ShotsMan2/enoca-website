@@ -28,7 +28,7 @@ export default async function Home() {
   return (
     <div className="flex flex-col min-h-screen">
       {/* 1. KAHRAMAN BÖLÜMÜ (HERO) */}
-      <section className="relative overflow-hidden pt-8 pb-20 lg:pt-16 lg:pb-28">
+      <section className="relative overflow-hidden pt-4 pb-20 lg:pt-6 lg:pb-28">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-[1.1fr_0.9fr] gap-12 items-center">
             
