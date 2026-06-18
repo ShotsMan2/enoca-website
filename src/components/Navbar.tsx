@@ -40,7 +40,7 @@ export default async function Navbar() {
                                                     {link.title}
                                                 </Link>
                                             ))}
-                                        </div>
+                                        </div>  
                                     </div>
                                 )}
                             </div>
