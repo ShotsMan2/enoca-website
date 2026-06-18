@@ -1,6 +1,5 @@
 import Link from 'next/link';
 
-// NestJS backend'imizden verileri çeken fonksiyon
 async function getCategories() {
     const res = await fetch('http://localhost:3000/categories', { cache: 'no-store' });
     if (!res.ok) return [];
@@ -40,7 +39,7 @@ export default async function Navbar() {
                                                     {link.title}
                                                 </Link>
                                             ))}
-                                        </div>  
+                                        </div>
                                     </div>
                                 )}
                             </div>
