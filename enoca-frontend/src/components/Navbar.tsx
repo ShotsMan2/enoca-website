@@ -5,7 +5,7 @@ import { ChevronDown, Mail, Phone, Search, X, Globe, Menu } from 'lucide-react';
 import { useTranslations, useLocale } from 'next-intl';
 import { Link, usePathname, useRouter } from '@/i18n/routing';
 
-export default function Navbar({ settings }: { settings?: any }) {
+export default function Navbar({ settings, pages = [] }: { settings?: any, pages?: any[] }) {
     const [isSearchOpen, setIsSearchOpen] = useState(false);
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const [searchQuery, setSearchQuery] = useState("");
@@ -129,6 +129,52 @@ export default function Navbar({ settings }: { settings?: any }) {
         { title: t('contact'), url: "/iletisim" },
         { title: t('admin'), url: "/admin" },
     ];
+
+    // DB'den gelen aktif sayfaları (eğer statik menüde yoksa) ilgili kategoriye ekliyoruz
+    const activePages = pages.filter(p => p.status === "published");
+    activePages.forEach(page => {
+        // Zaten bir alt menüde var mı kontrol edelim
+        let exists = false;
+        for (const item of menuItems) {
+            if (item.url === page.slug) exists = true;
+            if (item.children) {
+                for (const child of item.children) {
+                    if (child.url === page.slug) exists = true;
+                    if (child.subChildren) {
+                        for (const sub of child.subChildren) {
+                            if (sub.url === page.slug) exists = true;
+                        }
+                    }
+                }
+            }
+        }
+        
+        // Yoksa ilgili kategoriye ekleyelim
+        if (!exists) {
+            const categoryUrlMap: Record<string, string> = {
+                "Çözümler": "/cozumler",
+                "Danışmanlık": "/danismanlik",
+                "Projeler": "/projeler",
+                "Teknoloji": "/teknoloji",
+                "Kurumsal": "/kurumsal",
+                "Haberler": "/haberler"
+            };
+            const mappedUrl = categoryUrlMap[page.category];
+            const categoryItem = menuItems.find(item => 
+                (mappedUrl && item.url === mappedUrl) || 
+                item.title.toUpperCase() === page.category.toUpperCase()
+            );
+
+            if (categoryItem) {
+                if (!categoryItem.children) categoryItem.children = [];
+                categoryItem.children.push({ title: page.menuTitle, url: page.slug });
+            } else {
+                // Eğer kategori de bulunamazsa ana menüye ekleyelim (Admin hariç)
+                const adminIndex = menuItems.findIndex(i => i.url === "/admin");
+                menuItems.splice(adminIndex !== -1 ? adminIndex : menuItems.length, 0, { title: page.menuTitle, url: page.slug });
+            }
+        }
+    });
 
     return (
         <header className="w-full flex flex-col z-50 sticky top-0">
