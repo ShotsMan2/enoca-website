@@ -2,8 +2,9 @@
 
 import { Link } from '@/i18n/routing';
 import { useTranslations } from 'next-intl';
+import { SiteSettings } from '@/lib/admin-api';
 
-export default function Footer({ settings }: { settings?: any }) {
+export default function Footer({ settings }: { settings?: SiteSettings }) {
     const t = useTranslations('Footer');
 
     return (

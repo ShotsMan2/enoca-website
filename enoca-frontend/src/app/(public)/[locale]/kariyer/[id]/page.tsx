@@ -5,13 +5,15 @@ import { Briefcase, MapPin, Calendar, CheckCircle2 } from "lucide-react";
 import PublicLayout from "@/components/PublicLayout";
 import JobApplicationForm from "@/components/JobApplicationForm";
 
+import { JobPosting } from "@/lib/admin-api";
+
 // Next.js App Router dynamic page params should be awaited if Next 15+
 export default async function JobDetailsPage({ params }: { params: Promise<{ id: string, locale: string }> }) {
   const { id } = await params;
   const jobId = parseInt(id, 10);
   
   const db = await readDB();
-  const job = db?.jobs?.find((j: any) => j.id === jobId);
+  const job = db?.jobs?.find((j: JobPosting) => j.id === jobId);
   
   if (!job || job.status !== "active") {
     notFound();
@@ -51,7 +53,7 @@ export default async function JobDetailsPage({ params }: { params: Promise<{ id:
                 <div>
                   <h3 className="text-xl font-bold mb-4">{t('req')}</h3>
                   <ul className="space-y-3">
-                    {job.requirements.map((req, idx) => (
+                    {job.requirements.map((req: string, idx: number) => (
                       <li key={idx} className="flex items-start gap-3 text-gray-600 dark:text-gray-300">
                         <CheckCircle2 className="w-6 h-6 text-green-500 shrink-0" />
                         <span className="leading-relaxed">{req}</span>

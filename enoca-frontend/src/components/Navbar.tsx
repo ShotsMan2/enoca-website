@@ -4,8 +4,9 @@ import { useState } from 'react';
 import { ChevronDown, Mail, Phone, Search, X, Globe, Menu } from 'lucide-react';
 import { useTranslations, useLocale } from 'next-intl';
 import { Link, usePathname, useRouter } from '@/i18n/routing';
+import { SiteSettings, ContentPage } from '@/lib/admin-api';
 
-export default function Navbar({ settings, pages = [] }: { settings?: any, pages?: any[] }) {
+export default function Navbar({ settings, pages = [] }: { settings?: SiteSettings, pages?: ContentPage[] }) {
     const [isSearchOpen, setIsSearchOpen] = useState(false);
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const [searchQuery, setSearchQuery] = useState("");

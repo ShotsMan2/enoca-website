@@ -90,7 +90,7 @@ async function fetchEntity(entity: string) {
   return res.json();
 }
 
-async function postEntity(entity: string, data: any) {
+async function postEntity(entity: string, data: unknown) {
   const res = await fetch(`/api/admin/${entity}`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
@@ -115,7 +115,7 @@ export const adminApi = {
   },
   async createNews(data: Omit<NewsItem, "id">): Promise<NewsItem> {
     const list = await fetchEntity('news');
-    const newId = list.length ? Math.max(...list.map((n: any) => n.id)) + 1 : 1;
+    const newId = list.length ? Math.max(...list.map((n: NewsItem) => n.id)) + 1 : 1;
     const newItem = { ...data, id: newId };
     list.unshift(newItem);
     await postEntity('news', list);
@@ -123,14 +123,14 @@ export const adminApi = {
   },
   async updateNews(data: NewsItem): Promise<NewsItem> {
     const list = await fetchEntity('news');
-    const i = list.findIndex((n: any) => n.id === data.id);
+    const i = list.findIndex((n: NewsItem) => n.id === data.id);
     if (i !== -1) list[i] = data;
     await postEntity('news', list);
     return data;
   },
   async deleteNews(id: number): Promise<void> {
     const list = await fetchEntity('news');
-    const filtered = list.filter((n: any) => n.id !== id);
+    const filtered = list.filter((n: NewsItem) => n.id !== id);
     await postEntity('news', filtered);
   },
 
@@ -140,19 +140,19 @@ export const adminApi = {
   },
   async createMessage(data: Omit<ContactMessage, "id" | "receivedAt" | "isRead">): Promise<void> {
     const list = await fetchEntity('messages');
-    const newId = list.length ? Math.max(...list.map((m: any) => m.id)) + 1 : 1;
+    const newId = list.length ? Math.max(...list.map((m: ContactMessage) => m.id)) + 1 : 1;
     list.unshift({ ...data, id: newId, receivedAt: new Date().toISOString(), isRead: false });
     await postEntity('messages', list);
   },
-  async markMessageRead(id: number): Promise<void> {
+  async markAsRead(id: number): Promise<void> {
     const list = await fetchEntity('messages');
-    const msg = list.find((m: any) => m.id === id);
+    const msg = list.find((m: ContactMessage) => m.id === id);
     if (msg) msg.isRead = true;
     await postEntity('messages', list);
   },
   async deleteMessage(id: number): Promise<void> {
     const list = await fetchEntity('messages');
-    const filtered = list.filter((m: any) => m.id !== id);
+    const filtered = list.filter((m: ContactMessage) => m.id !== id);
     await postEntity('messages', filtered);
   },
 
@@ -178,7 +178,7 @@ export const adminApi = {
   },
   async createContentPage(data: Omit<ContentPage, "id" | "updatedAt">): Promise<ContentPage> {
     const list = await fetchEntity('pages');
-    const newId = list.length ? Math.max(...list.map((p: any) => p.id)) + 1 : 1;
+    const newId = list.length ? Math.max(...list.map((p: ContentPage) => p.id)) + 1 : 1;
     const newItem = { ...data, id: newId, updatedAt: new Date().toISOString() };
     list.push(newItem);
     await postEntity('pages', list);
@@ -186,14 +186,14 @@ export const adminApi = {
   },
   async updateContentPage(data: ContentPage): Promise<ContentPage> {
     const list = await fetchEntity('pages');
-    const i = list.findIndex((p: any) => p.id === data.id);
+    const i = list.findIndex((p: ContentPage) => p.id === data.id);
     if (i !== -1) list[i] = { ...data, updatedAt: new Date().toISOString() };
     await postEntity('pages', list);
     return data;
   },
   async deleteContentPage(id: number): Promise<void> {
     const list = await fetchEntity('pages');
-    const filtered = list.filter((p: any) => p.id !== id);
+    const filtered = list.filter((p: ContentPage) => p.id !== id);
     await postEntity('pages', filtered);
   },
 
@@ -203,7 +203,7 @@ export const adminApi = {
   },
   async createJob(data: Omit<JobPosting, "id" | "postedAt">): Promise<JobPosting> {
     const list = await fetchEntity('jobs');
-    const newId = list.length ? Math.max(...list.map((j: any) => j.id)) + 1 : 1;
+    const newId = list.length ? Math.max(...list.map((j: JobPosting) => j.id)) + 1 : 1;
     const newItem = { ...data, id: newId, postedAt: new Date().toISOString().split("T")[0] };
     list.unshift(newItem);
     await postEntity('jobs', list);
@@ -211,14 +211,14 @@ export const adminApi = {
   },
   async updateJob(data: JobPosting): Promise<JobPosting> {
     const list = await fetchEntity('jobs');
-    const i = list.findIndex((j: any) => j.id === data.id);
+    const i = list.findIndex((j: JobPosting) => j.id === data.id);
     if (i !== -1) list[i] = data;
     await postEntity('jobs', list);
     return data;
   },
   async deleteJob(id: number): Promise<void> {
     const list = await fetchEntity('jobs');
-    const filtered = list.filter((j: any) => j.id !== id);
+    const filtered = list.filter((j: JobPosting) => j.id !== id);
     await postEntity('jobs', filtered);
   },
 
@@ -228,13 +228,13 @@ export const adminApi = {
   },
   async createApplication(data: Omit<JobApplication, "id" | "status" | "appliedAt">): Promise<void> {
     const list = await fetchEntity('applications');
-    const newId = list.length ? Math.max(...list.map((a: any) => a.id)) + 1 : 1;
+    const newId = list.length ? Math.max(...list.map((a: JobApplication) => a.id)) + 1 : 1;
     list.unshift({ ...data, id: newId, status: "new", appliedAt: new Date().toISOString() });
     await postEntity('applications', list);
   },
   async updateApplicationStatus(id: number, status: JobApplication["status"]): Promise<void> {
     const list = await fetchEntity('applications');
-    const app = list.find((a: any) => a.id === id);
+    const app = list.find((a: JobApplication) => a.id === id);
     if (app) app.status = status;
     await postEntity('applications', list);
   }

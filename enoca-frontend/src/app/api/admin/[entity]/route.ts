@@ -29,7 +29,7 @@ export async function POST(request: Request, { params }: { params: Promise<{ ent
       return NextResponse.json({ success: true, data: db[entity] });
     }
     return NextResponse.json({ error: 'DB yazılamadı' }, { status: 500 });
-  } catch (err) {
-    return NextResponse.json({ error: 'Geçersiz JSON verisi' }, { status: 400 });
+  } catch {
+    return NextResponse.json({ error: 'Geçersiz veri formatı' }, { status: 400 });
   }
 }

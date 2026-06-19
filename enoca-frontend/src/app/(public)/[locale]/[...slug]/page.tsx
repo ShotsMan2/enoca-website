@@ -1,9 +1,11 @@
 import { Link } from "@/i18n/routing";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft, ChevronRight } from "lucide-react";
-import PublicLayout from "@/components/PublicLayout";
+
 import { getTranslations } from "next-intl/server";
 import { readDB } from "@/lib/db";
+import { ContentPage } from "@/lib/admin-api";
+import PublicLayout from "@/components/PublicLayout";
 
 export default async function CatchAllPage({
     params
@@ -26,7 +28,7 @@ export default async function CatchAllPage({
 
     const db = await readDB();
     const currentSlug = "/" + slugArray.join("/");
-    const dynamicPage = db?.pages?.find((p: any) => p.slug === currentSlug && p.status === "published");
+    const dynamicPage = db?.pages?.find((p: ContentPage) => p.slug === currentSlug && p.status === "published");
 
     return (
         <PublicLayout>

@@ -3,11 +3,12 @@ import { Link } from "@/i18n/routing";
 import { getTranslations } from "next-intl/server";
 import { Briefcase, MapPin } from "lucide-react";
 import PublicLayout from "@/components/PublicLayout";
+import { JobPosting } from "@/lib/admin-api";
 
 export default async function CareersPage() {
   const db = await readDB();
-  const jobs = db?.jobs || [];
-  const activeJobs = jobs.filter((j: any) => j.status === "active");
+  const jobs: JobPosting[] = db?.jobs || [];
+  const activeJobs = jobs.filter((j) => j.status === "active");
   const t = await getTranslations("Careers");
 
   return (
@@ -25,9 +26,9 @@ export default async function CareersPage() {
               <p className="text-gray-500 dark:text-gray-400 text-lg">{t('noJobs')}</p>
             </div>
           ) : (
-            <div className="grid grid-cols-1 gap-6">
-              {activeJobs.map(job => (
-                <div key={job.id} className="bg-white dark:bg-gray-900 rounded-2xl p-6 sm:p-8 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-6 shadow-sm border border-gray-100 dark:border-gray-800 hover:shadow-xl hover:border-blue-500/30 transition-all duration-300 group">
+            <div className="space-y-4">
+              {activeJobs.map((job: JobPosting) => (
+                <div key={job.id} className="group bg-white dark:bg-gray-900 border border-gray-100 dark:border-gray-800 rounded-2xl p-6 lg:p-8 hover:shadow-xl hover:border-blue-100 dark:hover:border-blue-900/50 transition-all duration-300 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-6">
                   
                   <div>
                     <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-3 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">{job.title}</h2>

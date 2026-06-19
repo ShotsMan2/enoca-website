@@ -111,7 +111,7 @@ export default function AdminHeader({ title }: { title: string }) {
     setNotifications(prev => prev.map(n => n.id === id ? { ...n, read: true } : n));
     try {
       if (id.startsWith("msg-")) {
-        await adminApi.markMessageRead(Number(id.split("-")[1]));
+        await adminApi.markAsRead(Number(id.split("-")[1]));
       } else if (id.startsWith("app-")) {
         await adminApi.updateApplicationStatus(Number(id.split("-")[1]), "reviewed");
       }
@@ -123,7 +123,7 @@ export default function AdminHeader({ title }: { title: string }) {
     setNotifications(prev => prev.map(n => ({ ...n, read: true })));
     try {
       for (const n of currentUnread) {
-        if (n.id.startsWith("msg-")) await adminApi.markMessageRead(Number(n.id.split("-")[1]));
+        if (n.id.startsWith("msg-")) await adminApi.markAsRead(Number(n.id.split("-")[1]));
         else if (n.id.startsWith("app-")) await adminApi.updateApplicationStatus(Number(n.id.split("-")[1]), "reviewed");
       }
     } catch {}

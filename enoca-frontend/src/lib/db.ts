@@ -14,7 +14,7 @@ export async function readDB() {
   }
 }
 
-export async function writeDB(data: any) {
+export async function writeDB(data: Record<string, unknown>) {
   try {
     await fs.writeFile(dbPath, JSON.stringify(data, null, 2), 'utf8');
     return true;
