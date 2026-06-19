@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { ArrowLeft, ChevronRight } from "lucide-react";
 import PublicLayout from "@/components/PublicLayout";
 import { getTranslations } from "next-intl/server";
+import { readDB } from "@/lib/db";
 
 export default async function CatchAllPage({
     params
@@ -22,6 +23,10 @@ export default async function CatchAllPage({
     const topCategory = slugArray.length > 1 
         ? slugArray[0].replace(/-/g, ' ') 
         : 'ENOCA™';
+
+    const db = await readDB();
+    const currentSlug = "/" + slugArray.join("/");
+    const dynamicPage = db?.pages?.find((p: any) => p.slug === currentSlug && p.status === "published");
 
     return (
         <PublicLayout>
@@ -78,27 +83,33 @@ export default async function CatchAllPage({
                         {/* Subtle inner glow */}
                         <div className="absolute -bottom-20 -right-20 w-40 h-40 bg-accent/10 rounded-full blur-[50px] -z-10" />
                         
-                        <p className="text-lg md:text-xl text-muted-foreground leading-relaxed">
-                            {t('catchAllDesc', { pageTitle })}
-                        </p>
-                        
-                        <div className="mt-10 pt-8 border-t border-border/50">
-                            <h3 className="text-xl font-bold text-foreground mb-6">{t('techTitle')}</h3>
-                            <ul className="space-y-4 text-muted-foreground">
-                                <li className="flex items-start gap-4">
-                                    <div className="w-8 h-8 rounded-full bg-accent/10 text-accent flex-shrink-0 flex items-center justify-center text-sm font-bold mt-0.5">✓</div>
-                                    <p>{t('techPoint1')}</p>
-                                </li>
-                                <li className="flex items-start gap-4">
-                                    <div className="w-8 h-8 rounded-full bg-accent/10 text-accent flex-shrink-0 flex items-center justify-center text-sm font-bold mt-0.5">✓</div>
-                                    <p>{t('techPoint2')}</p>
-                                </li>
-                                <li className="flex items-start gap-4">
-                                    <div className="w-8 h-8 rounded-full bg-accent/10 text-accent flex-shrink-0 flex items-center justify-center text-sm font-bold mt-0.5">✓</div>
-                                    <p>{t('techPoint3')}</p>
-                                </li>
-                            </ul>
-                        </div>
+                        {dynamicPage ? (
+                            <div className="prose prose-lg dark:prose-invert max-w-none" dangerouslySetInnerHTML={{ __html: dynamicPage.content }} />
+                        ) : (
+                            <>
+                                <p className="text-lg md:text-xl text-muted-foreground leading-relaxed">
+                                    {t('catchAllDesc', { pageTitle })}
+                                </p>
+                                
+                                <div className="mt-10 pt-8 border-t border-border/50">
+                                    <h3 className="text-xl font-bold text-foreground mb-6">{t('techTitle')}</h3>
+                                    <ul className="space-y-4 text-muted-foreground">
+                                        <li className="flex items-start gap-4">
+                                            <div className="w-8 h-8 rounded-full bg-accent/10 text-accent flex-shrink-0 flex items-center justify-center text-sm font-bold mt-0.5">✓</div>
+                                            <p>{t('techPoint1')}</p>
+                                        </li>
+                                        <li className="flex items-start gap-4">
+                                            <div className="w-8 h-8 rounded-full bg-accent/10 text-accent flex-shrink-0 flex items-center justify-center text-sm font-bold mt-0.5">✓</div>
+                                            <p>{t('techPoint2')}</p>
+                                        </li>
+                                        <li className="flex items-start gap-4">
+                                            <div className="w-8 h-8 rounded-full bg-accent/10 text-accent flex-shrink-0 flex items-center justify-center text-sm font-bold mt-0.5">✓</div>
+                                            <p>{t('techPoint3')}</p>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </>
+                        )}
                     </div>
                 </div>
             </div>

@@ -57,7 +57,7 @@ export default function AdminCareersPage() {
     setSavingJob(true);
     try {
       if (jobModal.item) {
-        const updated = await adminApi.updateJob(jobModal.item.id, jobForm);
+        const updated = await adminApi.updateJob({ ...jobForm, id: jobModal.item.id });
         setJobs(prev => prev.map(j => j.id === updated.id ? updated : j));
       } else {
         const created = await adminApi.createJob(jobForm);

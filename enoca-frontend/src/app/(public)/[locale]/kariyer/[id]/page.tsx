@@ -1,4 +1,4 @@
-import { adminApi } from "@/lib/admin-api";
+import { readDB } from "@/lib/db";
 import { notFound } from "next/navigation";
 import { getTranslations } from "next-intl/server";
 import { Briefcase, MapPin, Calendar, CheckCircle2 } from "lucide-react";
@@ -10,7 +10,9 @@ export default async function JobDetailsPage({ params }: { params: Promise<{ id:
   const { id } = await params;
   const jobId = parseInt(id, 10);
   
-  const job = await adminApi.getJobById(jobId);
+  const db = await readDB();
+  const job = db?.jobs?.find((j: any) => j.id === jobId);
+  
   if (!job || job.status !== "active") {
     notFound();
   }

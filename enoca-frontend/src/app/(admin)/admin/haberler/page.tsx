@@ -59,7 +59,7 @@ export default function HaberlerPage() {
     e.preventDefault();
     setSaving(true);
     if (editItem) {
-      const updated = await adminApi.updateNews(editItem.id, formData);
+      const updated = await adminApi.updateNews({ ...formData, id: editItem.id });
       setNews(n => n.map(x => x.id === updated.id ? updated : x));
     } else {
       const created = await adminApi.createNews(formData);

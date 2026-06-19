@@ -5,21 +5,49 @@ import PublicLayout from "@/components/PublicLayout";
 import HomePageContactForm from "@/components/HomePageContactForm";
 import { getTranslations } from "next-intl/server";
 
-// Kategorileri ve linkleri dinamik alıyoruz
 async function getCategories() {
-  try {
-    const res = await fetch("http://localhost:3000/categories", {
-      cache: "no-store",
-    });
-    if (!res.ok) return [];
-    return res.json();
-  } catch {
-    return [];
-  }
+  return [
+    {
+      id: "1",
+      name: "SAP CX Hybris",
+      links: [
+        { id: "1-1", title: "SAP CX Hybris B2C E-Ticaret", url: "/cozumler/hybris-cozumleri/hybris-b2c-ticaret" },
+        { id: "1-2", title: "SAP CX Hybris B2B E-Ticaret", url: "/cozumler/hybris-cozumleri/hybris-b2b-ticaret" },
+      ]
+    },
+    {
+      id: "2",
+      name: "SAP Çözümleri",
+      links: [
+        { id: "2-1", title: "SAP Mobility", url: "/cozumler/sap-cozumleri/sap-mobility" },
+        { id: "2-2", title: "SAP HANA", url: "/cozumler/sap-cozumleri/sap-hana" },
+      ]
+    },
+    {
+      id: "3",
+      name: "Sistem İzleme",
+      links: [
+        { id: "3-1", title: "vFabric Hyperic", url: "/cozumler/sistem-izleme-cozumleri/vfabric-hyperic" },
+        { id: "3-2", title: "Nagios", url: "/cozumler/sistem-izleme-cozumleri/nagios" },
+      ]
+    }
+  ];
 }
+
+import { readDB } from '@/lib/db';
 
 export default async function Home() {
   const categories = await getCategories();
+  const db = await readDB();
+  const heroSettings = db?.hero || {
+    mainTitle: "WE DO SAP CX",
+    highlightedWord: "HYBRIS",
+    subtitle: "Experienced In SAP CX Hybris Delivery",
+    button1Text: "SAP CX Hybris B2C E-Ticaret",
+    button1Url: "/cozumler/hybris-cozumleri/hybris-b2c-ticaret",
+    button2Text: "SAP CX Hybris B2B E-Ticaret",
+    button2Url: "/cozumler/hybris-cozumleri/hybris-b2b-ticaret"
+  };
   const tHero = await getTranslations('Hero');
   const tFeatures = await getTranslations('Features');
   const tRefs = await getTranslations('References');
@@ -52,23 +80,23 @@ export default async function Home() {
               </div>
 
               <h1 className="text-[3.5rem] leading-[1.05] sm:text-[4rem] lg:text-[5rem] font-black tracking-tighter text-foreground mb-4 font-display">
-                {tHero('title1')} <br className="hidden sm:block" />
+                {heroSettings.mainTitle} <br className="hidden sm:block" />
                 <span className="text-accent relative inline-block">
-                  {tHero('titleHighlight')}
+                  {heroSettings.highlightedWord}
                   <svg className="absolute w-full h-3 -bottom-1 left-0 text-accent/20" viewBox="0 0 100 10" preserveAspectRatio="none"><path d="M0 5 Q 50 10 100 5" stroke="currentColor" strokeWidth="2" fill="none" /></svg>
                 </span>
               </h1>
               
               <p className="text-lg sm:text-xl text-foreground/60 max-w-lg leading-relaxed font-medium">
-                {tHero('subtitle')}
+                {heroSettings.subtitle}
               </p>
 
               <div className="flex flex-col sm:flex-row gap-4 pt-4">
                 <Button asChild size="lg" className="h-14 px-8 text-sm font-bold tracking-widest bg-accent hover:bg-accent/90 text-white rounded-xl shadow-xl shadow-accent/20 hover:shadow-2xl hover:shadow-accent/30 transition-all duration-300 hover:-translate-y-1">
-                  <Link href="/cozumler">{tHero('btnPrimary')}</Link>
+                  <Link href={heroSettings.button1Url || "/cozumler"}>{heroSettings.button1Text}</Link>
                 </Button>
                 <Button asChild size="lg" variant="secondary" className="h-14 px-8 text-sm font-bold tracking-widest border-2 border-border/50 hover:bg-accent/5 hover:border-accent hover:text-accent rounded-xl transition-all duration-300">
-                  <Link href="/iletisim">{tHero('btnSecondary')}</Link>
+                  <Link href={heroSettings.button2Url || "/iletisim"}>{heroSettings.button2Text}</Link>
                 </Button>
               </div>
             </div>

@@ -2,15 +2,23 @@
 // Admin sayfaları bu bileşeni kullanmaz.
 import Navbar from './Navbar';
 import Footer from './Footer';
+import { readDB } from '@/lib/db';
 
-export default function PublicLayout({ children }: { children: React.ReactNode }) {
+export default async function PublicLayout({ children }: { children: React.ReactNode }) {
+  const db = await readDB();
+  const settings = db?.settings || {
+    email: "contact@enoca.com", phone: "+90 850 221 73 54", 
+    linkedinUrl: "https://linkedin.com/company/enoca", twitterUrl: "https://twitter.com/enoca_", 
+    privacyUrl: "/gizlilik", termsUrl: "/kullanim-kosullari"
+  };
+
   return (
     <div className="min-h-screen flex flex-col">
-      <Navbar />
+      <Navbar settings={settings} />
       <main className="flex-grow">
         {children}
       </main>
-      <Footer />
+      <Footer settings={settings} />
     </div>
   );
 }

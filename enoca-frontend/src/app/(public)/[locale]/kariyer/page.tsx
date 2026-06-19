@@ -1,12 +1,13 @@
-import { adminApi } from "@/lib/admin-api";
+import { readDB } from "@/lib/db";
 import { Link } from "@/i18n/routing";
 import { getTranslations } from "next-intl/server";
 import { Briefcase, MapPin } from "lucide-react";
 import PublicLayout from "@/components/PublicLayout";
 
 export default async function CareersPage() {
-  const jobs = await adminApi.getJobs();
-  const activeJobs = jobs.filter(j => j.status === "active");
+  const db = await readDB();
+  const jobs = db?.jobs || [];
+  const activeJobs = jobs.filter((j: any) => j.status === "active");
   const t = await getTranslations("Careers");
 
   return (

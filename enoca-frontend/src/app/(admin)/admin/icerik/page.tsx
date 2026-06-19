@@ -27,7 +27,7 @@ export default function IcerikPage() {
   const handleSave = async () => {
     if (!selected) return;
     setSaving(true);
-    const updated = await adminApi.updateContentPage(selected.id, selected);
+    const updated = await adminApi.updateContentPage(selected);
     setPages(ps => ps.map(p => p.id === updated.id ? updated : p));
     setSaving(false);
     setSaved(true);

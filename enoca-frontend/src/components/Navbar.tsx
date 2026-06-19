@@ -5,7 +5,7 @@ import { ChevronDown, Mail, Phone, Search, X, Globe, Menu } from 'lucide-react';
 import { useTranslations, useLocale } from 'next-intl';
 import { Link, usePathname, useRouter } from '@/i18n/routing';
 
-export default function Navbar() {
+export default function Navbar({ settings }: { settings?: any }) {
     const [isSearchOpen, setIsSearchOpen] = useState(false);
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const [searchQuery, setSearchQuery] = useState("");
@@ -136,25 +136,23 @@ export default function Navbar() {
             <div className="bg-[#222222] text-[#aaaaaa] text-xs py-2 hidden lg:block relative z-20">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center">
                     <div className="flex items-center gap-6 font-medium tracking-wider">
-                        <a href="mailto:contact@enoca.com" className="flex items-center gap-2 hover:text-white transition-colors">
-                            <Mail className="w-3.5 h-3.5" />
-                            <span>contact@enoca.com</span>
-                        </a>
-                        <a href="tel:+908502217354" className="flex items-center gap-2 hover:text-white transition-colors">
-                            <Phone className="w-3.5 h-3.5" />
-                            <span>+90 850 221 73 54</span>
-                        </a>
+                            <a href={`mailto:${settings?.email || 'contact@enoca.com'}`} className="hover:text-white transition-colors flex items-center gap-1.5"><Mail className="w-3.5 h-3.5" />{settings?.email || 'contact@enoca.com'}</a>
+                            <a href={`tel:${settings?.phone || '+90 850 221 73 54'}`} className="hover:text-white transition-colors flex items-center gap-1.5"><Phone className="w-3.5 h-3.5" />{settings?.phone || '+90 850 221 73 54'}</a>
                     </div>
                     <div className="flex items-center gap-6 font-medium tracking-wider">
                         <Link href="/gizlilik" className="hover:text-white transition-colors uppercase">{t('privacy')}</Link>
                         <Link href="/kullanim-kosullari" className="hover:text-white transition-colors uppercase">{t('terms')}</Link>
                         <div className="flex items-center gap-4 ml-4 border-l border-white/20 pl-4">
-                            <a href="https://linkedin.com/company/enoca" target="_blank" rel="noreferrer" className="hover:text-white transition-colors" aria-label="LinkedIn">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg>
-                            </a>
-                            <a href="https://twitter.com/enoca_" target="_blank" rel="noreferrer" className="hover:text-white transition-colors" aria-label="Twitter">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"/></svg>
-                            </a>
+                            {settings?.linkedinUrl && (
+                                <a href={settings.linkedinUrl} target="_blank" rel="noreferrer" className="hover:text-white transition-colors" aria-label="LinkedIn">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg>
+                                </a>
+                            )}
+                            {settings?.twitterUrl && (
+                                <a href={settings.twitterUrl} target="_blank" rel="noreferrer" className="hover:text-white transition-colors" aria-label="Twitter">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"/></svg>
+                                </a>
+                            )}
                         </div>
                     </div>
                 </div>
