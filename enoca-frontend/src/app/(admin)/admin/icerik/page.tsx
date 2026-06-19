@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState, useRef, useCallback } from "react";
+import { useEffect, useState, useRef } from "react";
 import AdminHeader from "@/components/admin/AdminHeader";
 import ConfirmModal from "@/components/admin/ConfirmModal";
 import { adminApi, type ContentPage } from "@/lib/admin-api";
@@ -60,6 +60,7 @@ export default function IcerikPage() {
     if (editorRef.current && selected) {
       editorRef.current.innerHTML = selected.content;
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selected?.id]);
 
   const execFormat = (cmd: string, value?: string) => {

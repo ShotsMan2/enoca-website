@@ -3,14 +3,15 @@
 import { useState, useEffect, useRef } from "react";
 import { Search, Bell, Sun, Moon, X, User, Settings, LogOut, ChevronDown, Check } from "lucide-react";
 import { useRouter } from "next/navigation";
+import { adminApi } from "@/lib/admin-api";
 
-// Örnek bildirimler
-const MOCK_NOTIFICATIONS = [
-  { id: 1, text: "Yeni bir iletişim formu mesajı geldi.", time: "2 dk önce", read: false, icon: "📩" },
-  { id: 2, text: "Yeni iş başvurusu: Ali Veli — Frontend Dev", time: "15 dk önce", read: false, icon: "📋" },
-  { id: 3, text: "Hero bölümü güncellendi.", time: "1 sa önce", read: true, icon: "🖼️" },
-  { id: 4, text: "Yeni haber içeriği taslağa alındı.", time: "3 sa önce", read: true, icon: "📰" },
-];
+type NotificationItem = {
+  id: string;
+  text: string;
+  time: string;
+  read: boolean;
+  icon: string;
+};
 
 const SEARCH_ROUTES: Record<string, string> = {
   "Dashboard": "/admin/dashboard",
@@ -29,7 +30,7 @@ export default function AdminHeader({ title }: { title: string }) {
   const [searchOpen, setSearchOpen] = useState(false);
   const [notifOpen, setNotifOpen] = useState(false);
   const [profileOpen, setProfileOpen] = useState(false);
-  const [notifications, setNotifications] = useState(MOCK_NOTIFICATIONS);
+  const [notifications, setNotifications] = useState<NotificationItem[]>([]);
   const notifRef = useRef<HTMLDivElement>(null);
   const profileRef = useRef<HTMLDivElement>(null);
   const searchRef = useRef<HTMLInputElement>(null);
@@ -39,8 +40,47 @@ export default function AdminHeader({ title }: { title: string }) {
     const stored = localStorage.getItem("admin-theme");
     if (stored === "dark") {
       document.documentElement.classList.add("dark");
+      // eslint-disable-next-line
       setIsDark(true);
     }
+  }, []);
+
+  // Fetch notifications
+  useEffect(() => {
+    let active = true;
+    const fetchNotifs = async () => {
+      try {
+        const [messages, apps] = await Promise.all([
+          adminApi.getMessages(),
+          adminApi.getApplications()
+        ]);
+        if (!active) return;
+        
+        const unreadMsgs: NotificationItem[] = messages.filter(m => !m.isRead).map(m => ({
+          id: `msg-${m.id}`,
+          text: `Yeni mesaj: ${m.name}`,
+          time: new Date(m.receivedAt).toLocaleDateString("tr-TR"),
+          read: false,
+          icon: "📩"
+        }));
+        
+        const unreadApps: NotificationItem[] = apps.filter(a => a.status === "new").map(a => ({
+          id: `app-${a.id}`,
+          text: `Yeni başvuru: ${a.name} — ${a.jobTitle}`,
+          time: new Date(a.appliedAt).toLocaleDateString("tr-TR"),
+          read: false,
+          icon: "📋"
+        }));
+        
+        setNotifications([...unreadMsgs, ...unreadApps]);
+      } catch (e) {
+        console.error("Notif fetch error", e);
+      }
+    };
+
+    fetchNotifs();
+    const interval = setInterval(fetchNotifs, 5000);
+    return () => { active = false; clearInterval(interval); };
   }, []);
 
   // Dışarı tıklayınca kapat
@@ -67,8 +107,27 @@ export default function AdminHeader({ title }: { title: string }) {
 
   const unreadCount = notifications.filter(n => !n.read).length;
 
-  const markAllRead = () => setNotifications(prev => prev.map(n => ({ ...n, read: true })));
-  const markRead = (id: number) => setNotifications(prev => prev.map(n => n.id === id ? { ...n, read: true } : n));
+  const markRead = async (id: string) => {
+    setNotifications(prev => prev.map(n => n.id === id ? { ...n, read: true } : n));
+    try {
+      if (id.startsWith("msg-")) {
+        await adminApi.markAsRead(Number(id.split("-")[1]));
+      } else if (id.startsWith("app-")) {
+        await adminApi.updateApplicationStatus(Number(id.split("-")[1]), "reviewed");
+      }
+    } catch {}
+  };
+
+  const markAllRead = async () => {
+    const currentUnread = notifications.filter(n => !n.read);
+    setNotifications(prev => prev.map(n => ({ ...n, read: true })));
+    try {
+      for (const n of currentUnread) {
+        if (n.id.startsWith("msg-")) await adminApi.markAsRead(Number(n.id.split("-")[1]));
+        else if (n.id.startsWith("app-")) await adminApi.updateApplicationStatus(Number(n.id.split("-")[1]), "reviewed");
+      }
+    } catch {}
+  };
 
   return (
     <header className="h-16 bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-700 flex items-center justify-between px-6 flex-shrink-0 relative z-40">
@@ -180,7 +239,7 @@ export default function AdminHeader({ title }: { title: string }) {
                 ))}
               </div>
               <div className="px-4 py-2.5 border-t border-gray-100 dark:border-gray-700 text-center">
-                <button className="text-xs text-blue-500 hover:text-blue-700 font-medium">Tüm Bildirimleri Gör</button>
+                {notifications.length === 0 && <p className="text-xs text-gray-500">Yeni bildiriminiz yok</p>}
               </div>
             </div>
           )}

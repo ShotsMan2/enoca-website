@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import { adminApi, JobPosting, JobApplication } from "@/lib/admin-api";
 import { Plus, Search, MapPin, Briefcase, Trash2, Edit, X, ExternalLink } from "lucide-react";
 import AdminHeader from "@/components/admin/AdminHeader";
@@ -31,7 +31,6 @@ export default function AdminCareersPage() {
   // Başvuru detay modal
   const [appDetail, setAppDetail] = useState<JobApplication | null>(null);
 
-  useEffect(() => { fetchData(); }, []);
 
   const fetchData = async () => {
     setLoading(true);
@@ -42,6 +41,9 @@ export default function AdminCareersPage() {
     } catch (e) { console.error(e); }
     finally { setLoading(false); }
   };
+
+  // eslint-disable-next-line
+  useEffect(() => { fetchData(); }, []);
 
   // --- İlan İşlemleri ---
   const openAddJob = () => { setJobForm(emptyJob); setJobModal({ open: true, item: null }); };
@@ -258,7 +260,7 @@ export default function AdminCareersPage() {
                 </div>
                 <div className="space-y-1.5">
                   <label className="text-xs font-semibold text-gray-600 dark:text-gray-400 uppercase">Çalışma Tipi</label>
-                  <select value={jobForm.type} onChange={e => setJobForm(f => ({ ...f, type: e.target.value as any }))} className={inputCls}>
+                  <select value={jobForm.type} onChange={e => setJobForm(f => ({ ...f, type: e.target.value as "full-time" | "part-time" | "remote" | "hybrid" }))} className={inputCls}>
                     <option value="full-time">Tam Zamanlı</option>
                     <option value="part-time">Yarı Zamanlı</option>
                     <option value="remote">Uzaktan</option>
@@ -273,7 +275,7 @@ export default function AdminCareersPage() {
                 </div>
                 <div className="space-y-1.5">
                   <label className="text-xs font-semibold text-gray-600 dark:text-gray-400 uppercase">Durum</label>
-                  <select value={jobForm.status} onChange={e => setJobForm(f => ({ ...f, status: e.target.value as any }))} className={inputCls}>
+                  <select value={jobForm.status} onChange={e => setJobForm(f => ({ ...f, status: e.target.value as "active" | "closed" }))} className={inputCls}>
                     <option value="active">Aktif</option>
                     <option value="closed">Kapalı</option>
                   </select>

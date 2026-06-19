@@ -25,7 +25,13 @@ export default function Navbar() {
     };
 
     // Enoca.com'un orijinal menü yapısı
-    const menuItems: any[] = [
+    type MenuItem = {
+        title: string;
+        url: string;
+        children?: MenuItem[];
+        subChildren?: { title: string; url: string }[];
+    };
+    const menuItems: MenuItem[] = [
         {
             title: t('services'),
             url: "/cozumler",
@@ -121,6 +127,7 @@ export default function Navbar() {
             ]
         },
         { title: t('contact'), url: "/iletisim" },
+        { title: t('admin'), url: "/admin" },
     ];
 
     return (
@@ -184,7 +191,7 @@ export default function Navbar() {
                                         <div className="absolute left-0 top-full pt-2 w-[280px] opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform origin-top-left group-hover:translate-y-0 translate-y-2 z-50">
                                             <div className="bg-card rounded-xl border border-border/50 shadow-xl p-2 relative backdrop-blur-xl bg-white/95">
                                                 <div className="flex flex-col gap-1">
-                                                    {item.children.map((child: any, cIdx: number) => (
+                                                    {item.children.map((child: MenuItem, cIdx: number) => (
                                                         <div key={cIdx} className="group/sub relative">
                                                             <Link
                                                                 href={child.url}
@@ -202,7 +209,7 @@ export default function Navbar() {
                                                                 <div className="absolute left-full top-0 pl-1 w-[280px] opacity-0 invisible group-hover/sub:opacity-100 group-hover/sub:visible transition-all duration-300 transform origin-top-left group-hover/sub:translate-x-0 -translate-x-2 z-[60]">
                                                                     <div className="bg-card rounded-xl border border-border/50 shadow-xl p-2 relative backdrop-blur-xl bg-white/95">
                                                                         <div className="flex flex-col gap-1">
-                                                                            {child.subChildren.map((sub: any, sIdx: number) => (
+                                                                            {child.subChildren.map((sub: { title: string; url: string }, sIdx: number) => (
                                                                                 <Link
                                                                                     key={sIdx}
                                                                                     href={sub.url}
@@ -328,7 +335,7 @@ export default function Navbar() {
                                     </Link>
                                     {item.children && (
                                         <div className="flex flex-col pl-6 border-l-2 border-gray-100 ml-4 mb-2 mt-1 gap-1">
-                                            {item.children.map((child: any, cIdx: number) => (
+                                            {item.children.map((child: MenuItem, cIdx: number) => (
                                                 <Link 
                                                     key={cIdx} 
                                                     href={child.url}

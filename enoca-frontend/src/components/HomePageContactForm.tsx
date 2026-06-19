@@ -3,18 +3,21 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { useTranslations } from "next-intl";
+import { adminApi } from "@/lib/admin-api";
 
 export default function HomePageContactForm() {
     const tContact = useTranslations('Contact');
     const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
+    const [formData, setFormData] = useState({ name: "", email: "", message: "" });
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         setStatus("loading");
         try {
-            await new Promise(resolve => setTimeout(resolve, 1000));
+            await adminApi.createMessage(formData);
             setStatus("success");
-        } catch (error) {
+            setFormData({ name: "", email: "", message: "" });
+        } catch {
             setStatus("error");
         }
     };
@@ -37,6 +40,8 @@ export default function HomePageContactForm() {
                     <input 
                         type="text" 
                         required 
+                        value={formData.name}
+                        onChange={e => setFormData({ ...formData, name: e.target.value })}
                         placeholder={tContact('namePlaceholder')} 
                         className="w-full h-12 px-4 rounded-xl border border-border bg-transparent focus:ring-2 focus:ring-accent focus:border-transparent outline-none transition-all"
                     />
@@ -46,6 +51,8 @@ export default function HomePageContactForm() {
                     <input 
                         type="email" 
                         required 
+                        value={formData.email}
+                        onChange={e => setFormData({ ...formData, email: e.target.value })}
                         placeholder={tContact('emailPlaceholder')} 
                         className="w-full h-12 px-4 rounded-xl border border-border bg-transparent focus:ring-2 focus:ring-accent focus:border-transparent outline-none transition-all"
                     />
@@ -56,6 +63,8 @@ export default function HomePageContactForm() {
                 <textarea 
                     required 
                     rows={4}
+                    value={formData.message}
+                    onChange={e => setFormData({ ...formData, message: e.target.value })}
                     placeholder={tContact('messagePlaceholder')} 
                     className="w-full px-4 py-3 rounded-xl border border-border bg-transparent focus:ring-2 focus:ring-accent focus:border-transparent outline-none transition-all resize-none"
                 ></textarea>

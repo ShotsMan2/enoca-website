@@ -185,6 +185,17 @@ export const adminApi = {
     await delay(400);
     return [...mockMessages];
   },
+  async createMessage(data: Omit<ContactMessage, "id" | "receivedAt" | "isRead">): Promise<ContactMessage> {
+    await delay(500);
+    const newMsg: ContactMessage = {
+      ...data,
+      id: Date.now(),
+      receivedAt: new Date().toISOString(),
+      isRead: false
+    };
+    mockMessages = [newMsg, ...mockMessages];
+    return newMsg;
+  },
   async markAsRead(id: number): Promise<void> {
     await delay(200);
     mockMessages = mockMessages.map(m => m.id === id ? { ...m, isRead: true } : m);

@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { useTranslations } from "next-intl";
+import { adminApi } from "@/lib/admin-api";
 
 export default function JobApplicationForm({ jobId, jobTitle }: { jobId: number, jobTitle: string }) {
   const t = useTranslations("Careers");
@@ -13,10 +14,16 @@ export default function JobApplicationForm({ jobId, jobTitle }: { jobId: number,
     e.preventDefault();
     setStatus("loading");
     try {
-      // Mock submission — replace with real API call
-      await new Promise(resolve => setTimeout(resolve, 1000));
+      await adminApi.createApplication({
+        jobId: jobId,
+        jobTitle: jobTitle,
+        name: formData.name,
+        email: formData.email,
+        phone: formData.phone,
+        portfolioUrl: formData.portfolioUrl || undefined
+      });
       setStatus("success");
-    } catch (error) {
+    } catch {
       setStatus("error");
     }
   };
