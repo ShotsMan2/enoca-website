@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef } from "react";
 import { Search, Bell, Sun, Moon, X, User, Settings, LogOut, ChevronDown, Check } from "lucide-react";
+import { useRouter } from "next/navigation";
 
 // Örnek bildirimler
 const MOCK_NOTIFICATIONS = [
@@ -11,7 +12,18 @@ const MOCK_NOTIFICATIONS = [
   { id: 4, text: "Yeni haber içeriği taslağa alındı.", time: "3 sa önce", read: true, icon: "📰" },
 ];
 
+const SEARCH_ROUTES: Record<string, string> = {
+  "Dashboard": "/admin/dashboard",
+  "Site Ayarları": "/admin/ayarlar",
+  "Hero Yönetimi": "/admin/hero",
+  "İçerik / CMS": "/admin/icerik",
+  "Haberler": "/admin/haberler",
+  "Gelen Kutusu": "/admin/iletisim",
+  "Kariyer": "/admin/kariyer"
+};
+
 export default function AdminHeader({ title }: { title: string }) {
+  const router = useRouter();
   const [isDark, setIsDark] = useState(false);
   const [search, setSearch] = useState("");
   const [searchOpen, setSearchOpen] = useState(false);
@@ -91,19 +103,23 @@ export default function AdminHeader({ title }: { title: string }) {
           {/* Arama Sonuçları Dropdown */}
           {searchOpen && search.length > 0 && (
             <div className="absolute top-full left-0 mt-1 w-72 bg-white dark:bg-gray-800 rounded-xl shadow-xl border border-gray-200 dark:border-gray-700 overflow-hidden">
-              {["Dashboard", "Site Ayarları", "Hero Yönetimi", "İçerik / CMS", "Haberler", "Gelen Kutusu", "Kariyer"]
+              {Object.keys(SEARCH_ROUTES)
                 .filter(item => item.toLowerCase().includes(search.toLowerCase()))
                 .map((item, idx) => (
                   <button
                     key={idx}
                     className="w-full flex items-center gap-3 px-4 py-3 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors text-left"
-                    onMouseDown={() => { setSearch(""); setSearchOpen(false); }}
+                    onMouseDown={() => { 
+                      setSearch(""); 
+                      setSearchOpen(false); 
+                      router.push(SEARCH_ROUTES[item]); 
+                    }}
                   >
                     <Search className="w-4 h-4 text-gray-400 flex-shrink-0" />
                     <span className="text-sm text-gray-700 dark:text-gray-200">{item}</span>
                   </button>
                 ))}
-              {["Dashboard", "Site Ayarları", "Hero Yönetimi", "İçerik / CMS", "Haberler", "Gelen Kutusu", "Kariyer"].filter(item => item.toLowerCase().includes(search.toLowerCase())).length === 0 && (
+              {Object.keys(SEARCH_ROUTES).filter(item => item.toLowerCase().includes(search.toLowerCase())).length === 0 && (
                 <p className="px-4 py-3 text-sm text-gray-400 text-center">Sonuç bulunamadı</p>
               )}
             </div>
@@ -191,15 +207,15 @@ export default function AdminHeader({ title }: { title: string }) {
                 <p className="text-xs text-gray-400 mt-0.5">admin@enoca.com</p>
               </div>
               <div className="py-1.5">
-                <button className="w-full flex items-center gap-3 px-4 py-2.5 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
+                <button onClick={() => { setProfileOpen(false); router.push("/admin/ayarlar"); }} className="w-full flex items-center gap-3 px-4 py-2.5 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
                   <User className="w-4 h-4 text-gray-400" /> Profil Bilgileri
                 </button>
-                <button className="w-full flex items-center gap-3 px-4 py-2.5 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
+                <button onClick={() => { setProfileOpen(false); router.push("/admin/ayarlar"); }} className="w-full flex items-center gap-3 px-4 py-2.5 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
                   <Settings className="w-4 h-4 text-gray-400" /> Hesap Ayarları
                 </button>
               </div>
               <div className="py-1.5 border-t border-gray-100 dark:border-gray-700">
-                <button className="w-full flex items-center gap-3 px-4 py-2.5 text-sm text-red-600 hover:bg-red-50 dark:hover:bg-red-900/20 transition-colors">
+                <button onClick={() => { setProfileOpen(false); router.push("/"); }} className="w-full flex items-center gap-3 px-4 py-2.5 text-sm text-red-600 hover:bg-red-50 dark:hover:bg-red-900/20 transition-colors">
                   <LogOut className="w-4 h-4" /> Çıkış Yap
                 </button>
               </div>

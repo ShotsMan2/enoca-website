@@ -1,12 +1,13 @@
 "use client";
 
 import { useState } from 'react';
-import { ChevronDown, Mail, Phone, Search, X, Globe } from 'lucide-react';
+import { ChevronDown, Mail, Phone, Search, X, Globe, Menu } from 'lucide-react';
 import { useTranslations, useLocale } from 'next-intl';
 import { Link, usePathname, useRouter } from '@/i18n/routing';
 
 export default function Navbar() {
     const [isSearchOpen, setIsSearchOpen] = useState(false);
+    const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const [searchQuery, setSearchQuery] = useState("");
     const router = useRouter();
     const pathname = usePathname();
@@ -268,8 +269,82 @@ export default function Navbar() {
                             </div>
                         </div>
 
+                        {/* Mobile Menu Toggle */}
+                        <div className="flex lg:hidden items-center gap-2">
+                            <button 
+                                onClick={() => { setIsSearchOpen(!isSearchOpen); setIsMobileMenuOpen(false); }}
+                                className="w-10 h-10 flex items-center justify-center rounded-lg hover:bg-accent/10 text-foreground/80 hover:text-accent transition-colors"
+                            >
+                                <Search className="w-5 h-5" />
+                            </button>
+                            <button 
+                                onClick={() => { setIsMobileMenuOpen(!isMobileMenuOpen); setIsSearchOpen(false); }}
+                                className="w-10 h-10 flex items-center justify-center rounded-lg hover:bg-accent/10 text-foreground/80 hover:text-accent transition-colors"
+                            >
+                                {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+                            </button>
+                        </div>
                     </div>
                 </div>
+
+                {/* Mobile Search Dropdown */}
+                {isSearchOpen && (
+                    <div className="lg:hidden absolute top-full left-0 w-full bg-white border-b border-border p-4 shadow-xl">
+                        <form onSubmit={handleSearch} className="flex items-center gap-2">
+                            <input 
+                                type="text" 
+                                value={searchQuery}
+                                onChange={(e) => setSearchQuery(e.target.value)}
+                                placeholder={t('searchPlaceholder')} 
+                                className="flex-1 h-12 px-4 rounded-lg border border-border bg-gray-50 focus:ring-2 focus:ring-accent focus:border-transparent outline-none text-sm transition-all"
+                                autoFocus
+                            />
+                            <button type="submit" className="h-12 px-6 bg-accent text-white rounded-lg text-[13px] font-bold uppercase tracking-wider">
+                                {t('searchBtn')}
+                            </button>
+                        </form>
+                    </div>
+                )}
+
+                {/* Mobile Menu Dropdown */}
+                {isMobileMenuOpen && (
+                    <div className="lg:hidden absolute top-full left-0 w-full bg-white border-b border-border shadow-xl max-h-[calc(100vh-88px)] overflow-y-auto">
+                        <div className="flex flex-col p-4 gap-2">
+                            {/* Language Switcher Mobile */}
+                            <div className="flex justify-center gap-4 py-4 border-b border-gray-100 mb-2">
+                                <button onClick={() => { router.replace(pathname, {locale: 'tr'}); setIsMobileMenuOpen(false); }} className={`text-sm font-bold uppercase ${locale === 'tr' ? 'text-accent' : 'text-gray-500'}`}>TR</button>
+                                <span className="text-gray-300">|</span>
+                                <button onClick={() => { router.replace(pathname, {locale: 'en'}); setIsMobileMenuOpen(false); }} className={`text-sm font-bold uppercase ${locale === 'en' ? 'text-accent' : 'text-gray-500'}`}>EN</button>
+                            </div>
+                            
+                            {menuItems.map((item, idx) => (
+                                <div key={idx} className="flex flex-col">
+                                    <Link 
+                                        href={item.url} 
+                                        onClick={() => setIsMobileMenuOpen(false)}
+                                        className="py-3 px-4 text-sm font-bold text-gray-800 hover:text-accent hover:bg-gray-50 rounded-lg"
+                                    >
+                                        {item.title}
+                                    </Link>
+                                    {item.children && (
+                                        <div className="flex flex-col pl-6 border-l-2 border-gray-100 ml-4 mb-2 mt-1 gap-1">
+                                            {item.children.map((child: any, cIdx: number) => (
+                                                <Link 
+                                                    key={cIdx} 
+                                                    href={child.url}
+                                                    onClick={() => setIsMobileMenuOpen(false)}
+                                                    className="py-2 text-[13px] font-semibold text-gray-600 hover:text-accent"
+                                                >
+                                                    {child.title}
+                                                </Link>
+                                            ))}
+                                        </div>
+                                    )}
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                )}
             </nav>
         </header>
     );
