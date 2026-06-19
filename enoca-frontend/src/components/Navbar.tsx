@@ -30,7 +30,7 @@ export default function Navbar() {
             url: "/cozumler",
             children: [
                 { 
-                    title: "SAP CX HYBRİS ÇÖZÜMLERİ", 
+                    title: t('hybrisSolutions'), 
                     url: "/cozumler/hybris-cozumleri",
                     subChildren: [
                         { title: "SAP CX Hybris B2C E-Ticaret", url: "/cozumler/hybris-cozumleri/hybris-b2c-ticaret" },
@@ -40,17 +40,17 @@ export default function Navbar() {
                     ]
                 },
                 { 
-                    title: "SAP ÇÖZÜMLERİ", 
+                    title: t('sapSolutions'), 
                     url: "/cozumler/sap-cozumleri",
                     subChildren: [
                         { title: "SAP Mobility", url: "/cozumler/sap-cozumleri/sap-mobility" },
                         { title: "SAP HANA", url: "/cozumler/sap-cozumleri/sap-hana" },
-                        { title: "SAP Uygulama Yönetimi", url: "/cozumler/sap-cozumleri/sap-uygulama-yonetimi" },
-                        { title: "SAP Bulut", url: "/cozumler/sap-cozumleri/sap-bulut" },
+                        { title: t('sapAppMgmt'), url: "/cozumler/sap-cozumleri/sap-uygulama-yonetimi" },
+                        { title: t('sapCloud'), url: "/cozumler/sap-cozumleri/sap-bulut" },
                     ]
                 },
                 { 
-                    title: "SİSTEM İZLEME ÇÖZÜMLERİ", 
+                    title: t('monitoringSolutions'), 
                     url: "/cozumler/sistem-izleme-cozumleri",
                     subChildren: [
                         { title: "vFabric Hyperic", url: "/cozumler/sistem-izleme-cozumleri/vfabric-hyperic" },
@@ -60,43 +60,43 @@ export default function Navbar() {
             ]
         },
         {
-            title: t('projects'),
+            title: t('consulting'),
             url: "/danismanlik",
             children: [
-                { title: "SAP CX HYBRIS DANIŞMANLIĞI", url: "/danismanlik/hybris-danismanligi" },
-                { title: "SAP TEKNİK DANIŞMANLIĞI", url: "/danismanlik/sap-teknik-danismanlik" },
-                { title: "SAP FONKSİYONEL DANIŞMANLIĞI", url: "/danismanlik/sap-fonksiyonel-danismanlik" },
-                { title: "GELİŞTİRME DANIŞMANLIĞI", url: "/danismanlik/gelistirme-danismanligi" },
-                { title: "KALİTE YÖNETİMİ", url: "/danismanlik/kalite-yonetimi" },
-                { title: "DIŞ KAYNAK HİZMETLERİ", url: "/danismanlik/diskaynak-hizmetleri" },
+                { title: t('hybrisConsulting'), url: "/danismanlik/hybris-danismanligi" },
+                { title: t('sapTechnical'), url: "/danismanlik/sap-teknik-danismanlik" },
+                { title: t('sapFunctional'), url: "/danismanlik/sap-fonksiyonel-danismanlik" },
+                { title: t('devConsulting'), url: "/danismanlik/gelistirme-danismanligi" },
+                { title: t('qualityMgmt'), url: "/danismanlik/kalite-yonetimi" },
+                { title: t('outsourcing'), url: "/danismanlik/diskaynak-hizmetleri" },
             ]
         },
         {
-            title: "PROJELER",
+            title: t('projects'),
             url: "/projeler",
             children: [
-                { title: "METODOLOJİ", url: "/projeler/metodoloji" },
-                { title: "REFERANSLAR", url: "/projeler/referanslar" },
+                { title: t('methodology'), url: "/projeler/metodoloji" },
+                { title: t('references'), url: "/projeler/referanslar" },
             ]
         },
         {
-            title: "TEKNOLOJİ",
+            title: t('technology'),
             url: "/teknoloji",
             children: [
                 { 
-                    title: "MİMARİ", 
+                    title: t('architecture'), 
                     url: "/teknoloji/mimari",
                     subChildren: [
-                        { title: "Modülerlik", url: "/teknoloji/mimari/modulerlik" },
-                        { title: "Tasarım Tabanlı", url: "/teknoloji/mimari/tasarim-tabanli" },
+                        { title: t('modularity'), url: "/teknoloji/mimari/modulerlik" },
+                        { title: t('designBased'), url: "/teknoloji/mimari/tasarim-tabanli" },
                     ]
                 },
-                { title: "İNOVASYON", url: "/teknoloji/inovasyon" },
+                { title: t('innovation'), url: "/teknoloji/inovasyon" },
                 { 
-                    title: "ARAŞTIRMA-GELİŞTİRME", 
+                    title: t('rd'), 
                     url: "/teknoloji/arastirma-gelistirme",
                     subChildren: [
-                        { title: "Modelleme ve Simulasyon", url: "/teknoloji/arastirma-gelistirme/modelleme-ve-simulasyon" },
+                        { title: t('modelingSimulation'), url: "/teknoloji/arastirma-gelistirme/modelleme-ve-simulasyon" },
                     ]
                 },
             ]
@@ -105,21 +105,21 @@ export default function Navbar() {
             title: t('news'), 
             url: "/haberler",
             children: [
-                { title: "enoca™'DAN SON HABERLER", url: "/haberler/enocadan-son-haberler" },
+                { title: t('latestNews'), url: "/haberler/enocadan-son-haberler" },
             ]
         },
         {
             title: t('corporate'),
             url: "/kurumsal",
             children: [
-                { title: "HAKKIMIZDA", url: "/kurumsal/hakkimizda" },
-                { title: "KARİYER", url: "/kariyer" },
-                { title: "YASAL BİLGİLER", url: "/kurumsal/yasal-bilgiler" },
-                { title: "BİLGİ GÜVENLİĞİ POLİTİKASI", url: "/bilgi-guvenligi-politikasi" },
-                { title: "KVKK", url: "/kisisel-verilerin-korunmasi-ve-islenmesi-politikasi" },
+                { title: t('aboutUs'), url: "/kurumsal/hakkimizda" },
+                { title: t('careers'), url: "/kariyer" },
+                { title: t('legalInfo'), url: "/kurumsal/yasal-bilgiler" },
+                { title: t('infosecPolicy'), url: "/bilgi-guvenligi-politikasi" },
+                { title: t('kvkk'), url: "/kisisel-verilerin-korunmasi-ve-islenmesi-politikasi" },
             ]
         },
-        { title: "İLETİŞİM", url: "/iletisim" },
+        { title: t('contact'), url: "/iletisim" },
     ];
 
     return (
@@ -138,8 +138,8 @@ export default function Navbar() {
                         </a>
                     </div>
                     <div className="flex items-center gap-6 font-medium tracking-wider">
-                        <Link href="/gizlilik" className="hover:text-white transition-colors uppercase">GİZLİLİK</Link>
-                        <Link href="/kullanim-kosullari" className="hover:text-white transition-colors uppercase">KULLANIM KOŞULLARI</Link>
+                        <Link href="/gizlilik" className="hover:text-white transition-colors uppercase">{t('privacy')}</Link>
+                        <Link href="/kullanim-kosullari" className="hover:text-white transition-colors uppercase">{t('terms')}</Link>
                         <div className="flex items-center gap-4 ml-4 border-l border-white/20 pl-4">
                             <a href="https://linkedin.com/company/enoca" target="_blank" rel="noreferrer" className="hover:text-white transition-colors" aria-label="LinkedIn">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg>
@@ -255,12 +255,12 @@ export default function Navbar() {
                                                 type="text" 
                                                 value={searchQuery}
                                                 onChange={(e) => setSearchQuery(e.target.value)}
-                                                placeholder="Ara..." 
+                                                placeholder={t('searchPlaceholder')} 
                                                 className="w-56 h-10 px-4 rounded-lg border border-border bg-transparent focus:ring-2 focus:ring-accent focus:border-transparent outline-none text-sm transition-all"
                                                 autoFocus={isSearchOpen}
                                             />
                                             <button type="submit" className="h-10 px-4 bg-accent text-white rounded-lg text-[13px] font-bold uppercase tracking-wider hover:bg-accent/90 transition-colors">
-                                                Ara
+                                                {t('searchBtn')}
                                             </button>
                                         </form>
                                     </div>

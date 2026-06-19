@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef, useCallback } from "react";
 import AdminHeader from "@/components/admin/AdminHeader";
 import ConfirmModal from "@/components/admin/ConfirmModal";
 import { adminApi, type ContentPage } from "@/lib/admin-api";
@@ -16,7 +16,7 @@ export default function IcerikPage() {
   const [saved, setSaved] = useState(false);
   const [deleteModal, setDeleteModal] = useState<{ open: boolean; id: number | null }>({ open: false, id: null });
   const [deleting, setDeleting] = useState(false);
-  const [isAdding, setIsAdding] = useState(false);
+  const editorRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     adminApi.getContentPages().then(p => { setPages(p); setLoading(false); });
@@ -52,7 +52,25 @@ export default function IcerikPage() {
     const created = await adminApi.createContentPage(newPage);
     setPages(ps => [...ps, created]);
     setSelected(created);
-    setIsAdding(false);
+  };
+
+
+  // Sayfa seçildiğinde editörü güncelle
+  useEffect(() => {
+    if (editorRef.current && selected) {
+      editorRef.current.innerHTML = selected.content;
+    }
+  }, [selected?.id]);
+
+  const execFormat = (cmd: string, value?: string) => {
+    editorRef.current?.focus();
+    document.execCommand(cmd, false, value);
+    // İçeriği state'e kaydet
+    setSelected(s => s ? { ...s, content: editorRef.current?.innerHTML ?? s.content } : s);
+  };
+
+  const handleEditorInput = () => {
+    setSelected(s => s ? { ...s, content: editorRef.current?.innerHTML ?? s.content } : s);
   };
 
   const inputCls = "w-full h-10 px-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-800 dark:text-white text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all";
@@ -138,26 +156,32 @@ export default function IcerikPage() {
                     </select>
                   </div>
                 </div>
-                {/* Rich Text Editör Simülasyonu */}
+                {/* Rich Text Editör */}
                 <div className="space-y-1.5">
                   <label className="text-xs font-semibold text-gray-600 dark:text-gray-400 uppercase tracking-wide">İçerik</label>
                   {/* Araç Çubuğu */}
-                  <div className="flex gap-1 p-2 bg-gray-50 dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-t-xl border-b-0">
-                    {["B", "I", "U"].map(f => (
-                      <button key={f} type="button" className="w-7 h-7 rounded font-bold text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors">{f}</button>
-                    ))}
+                  <div className="flex flex-wrap gap-1 p-2 bg-gray-50 dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-t-xl border-b-0">
+                    <button type="button" onMouseDown={e => { e.preventDefault(); execFormat("bold"); }} className="w-7 h-7 rounded font-bold text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors">B</button>
+                    <button type="button" onMouseDown={e => { e.preventDefault(); execFormat("italic"); }} className="w-7 h-7 rounded italic text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors">I</button>
+                    <button type="button" onMouseDown={e => { e.preventDefault(); execFormat("underline"); }} className="w-7 h-7 rounded underline text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors">U</button>
                     <div className="w-px h-7 bg-gray-300 dark:bg-gray-600 mx-1" />
-                    <button type="button" className="px-2 h-7 rounded text-xs text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors">H1</button>
-                    <button type="button" className="px-2 h-7 rounded text-xs text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors">H2</button>
+                    <button type="button" onMouseDown={e => { e.preventDefault(); execFormat("formatBlock", "h1"); }} className="px-2 h-7 rounded text-xs font-bold text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors">H1</button>
+                    <button type="button" onMouseDown={e => { e.preventDefault(); execFormat("formatBlock", "h2"); }} className="px-2 h-7 rounded text-xs font-bold text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors">H2</button>
+                    <button type="button" onMouseDown={e => { e.preventDefault(); execFormat("formatBlock", "p"); }} className="px-2 h-7 rounded text-xs text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors">P</button>
                     <div className="w-px h-7 bg-gray-300 dark:bg-gray-600 mx-1" />
-                    <button type="button" className="px-2 h-7 rounded text-xs text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors">Liste</button>
-                    <button type="button" className="px-2 h-7 rounded text-xs text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors">Link</button>
+                    <button type="button" onMouseDown={e => { e.preventDefault(); execFormat("insertUnorderedList"); }} className="px-2 h-7 rounded text-xs text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors">• Liste</button>
+                    <button type="button" onMouseDown={e => { e.preventDefault(); execFormat("insertOrderedList"); }} className="px-2 h-7 rounded text-xs text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors">1. Liste</button>
+                    <div className="w-px h-7 bg-gray-300 dark:bg-gray-600 mx-1" />
+                    <button type="button" onMouseDown={e => { e.preventDefault(); const url = prompt("URL giriniz:"); if (url) execFormat("createLink", url); }} className="px-2 h-7 rounded text-xs text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors">🔗 Link</button>
+                    <button type="button" onMouseDown={e => { e.preventDefault(); execFormat("removeFormat"); }} className="px-2 h-7 rounded text-xs text-red-500 hover:bg-red-50 dark:hover:bg-red-900/20 transition-colors">✕ Temizle</button>
                   </div>
-                  <textarea
-                    value={selected.content}
-                    onChange={e => setSelected(s => s ? { ...s, content: e.target.value } : s)}
-                    rows={16}
-                    className="w-full px-4 py-3 rounded-b-xl border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-800 dark:text-white text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all resize-none font-mono"
+                  <div
+                    ref={editorRef}
+                    contentEditable
+                    onInput={handleEditorInput}
+                    className="w-full min-h-[240px] px-4 py-3 rounded-b-xl border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-800 dark:text-white text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all overflow-y-auto prose prose-sm dark:prose-invert max-w-none"
+                    style={{ outline: "none" }}
+                    suppressContentEditableWarning
                   />
                 </div>
               </div>

@@ -4,6 +4,7 @@ import { NextIntlClientProvider } from 'next-intl';
 import { getMessages } from 'next-intl/server';
 import { notFound } from 'next/navigation';
 import { routing } from '@/i18n/routing';
+import Script from 'next/script';
 import '../../globals.css';
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter', display: 'swap' });
@@ -32,10 +33,15 @@ export default async function LocaleLayout({
 
   return (
     <html lang={locale} suppressHydrationWarning>
-      <head>
-        <script dangerouslySetInnerHTML={{ __html: `try{var t=localStorage.getItem('admin-theme');if(t==='dark')document.documentElement.classList.add('dark');}catch(e){}` }} />
-      </head>
+      <head />
       <body className={`${inter.variable} ${calistoga.variable} ${jetbrainsMono.variable} antialiased`}>
+        {/* Dark mode init — Script ile inject edilir, React render pipeline'ına girmez */}
+        <Script id="theme-init" strategy="beforeInteractive">{`
+          try {
+            var t = localStorage.getItem('admin-theme');
+            if (t === 'dark') document.documentElement.classList.add('dark');
+          } catch(e) {}
+        `}</Script>
         <NextIntlClientProvider messages={messages}>
           {children}
         </NextIntlClientProvider>

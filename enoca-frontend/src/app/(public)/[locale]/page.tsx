@@ -2,6 +2,7 @@ import { Link } from "@/i18n/routing";
 import { Button } from "@/components/ui/button";
 import HeroVisual from "@/components/HeroVisual";
 import PublicLayout from "@/components/PublicLayout";
+import HomePageContactForm from "@/components/HomePageContactForm";
 import { getTranslations } from "next-intl/server";
 
 // Kategorileri ve linkleri dinamik alıyoruz
@@ -19,7 +20,11 @@ async function getCategories() {
 
 export default async function Home() {
   const categories = await getCategories();
-  const t = await getTranslations('Hero');
+  const tHero = await getTranslations('Hero');
+  const tFeatures = await getTranslations('Features');
+  const tRefs = await getTranslations('References');
+  const tServices = await getTranslations('Services');
+  const tContact = await getTranslations('Contact');
 
   // Sabit referans listesi (siteden alınan)
   const references = [
@@ -42,28 +47,28 @@ export default async function Home() {
                   <span className="relative inline-flex rounded-full h-2 w-2 bg-accent"></span>
                 </span>
                 <span className="font-mono text-xs font-medium tracking-[0.15em] text-accent uppercase">
-                  ENOCA™ TEKNOLOJİ
+                  {tHero('badge')}
                 </span>
               </div>
 
               <h1 className="text-[3.5rem] leading-[1.05] sm:text-[4rem] lg:text-[5rem] font-black tracking-tighter text-foreground mb-4 font-display">
-                {t('title1')} <br className="hidden sm:block" />
+                {tHero('title1')} <br className="hidden sm:block" />
                 <span className="text-accent relative inline-block">
-                  {t('titleHighlight')}
+                  {tHero('titleHighlight')}
                   <svg className="absolute w-full h-3 -bottom-1 left-0 text-accent/20" viewBox="0 0 100 10" preserveAspectRatio="none"><path d="M0 5 Q 50 10 100 5" stroke="currentColor" strokeWidth="2" fill="none" /></svg>
                 </span>
               </h1>
               
               <p className="text-lg sm:text-xl text-foreground/60 max-w-lg leading-relaxed font-medium">
-                {t('subtitle')}
+                {tHero('subtitle')}
               </p>
 
               <div className="flex flex-col sm:flex-row gap-4 pt-4">
-                <Button size="lg" className="h-14 px-8 text-sm font-bold tracking-widest bg-accent hover:bg-accent/90 text-white rounded-xl shadow-xl shadow-accent/20 hover:shadow-2xl hover:shadow-accent/30 transition-all duration-300 hover:-translate-y-1">
-                  {t('btnPrimary')}
+                <Button asChild size="lg" className="h-14 px-8 text-sm font-bold tracking-widest bg-accent hover:bg-accent/90 text-white rounded-xl shadow-xl shadow-accent/20 hover:shadow-2xl hover:shadow-accent/30 transition-all duration-300 hover:-translate-y-1">
+                  <Link href="/cozumler">{tHero('btnPrimary')}</Link>
                 </Button>
-                <Button size="lg" variant="secondary" className="h-14 px-8 text-sm font-bold tracking-widest border-2 border-border/50 hover:bg-accent/5 hover:border-accent hover:text-accent rounded-xl transition-all duration-300">
-                  {t('btnSecondary')}
+                <Button asChild size="lg" variant="secondary" className="h-14 px-8 text-sm font-bold tracking-widest border-2 border-border/50 hover:bg-accent/5 hover:border-accent hover:text-accent rounded-xl transition-all duration-300">
+                  <Link href="/iletisim">{tHero('btnSecondary')}</Link>
                 </Button>
               </div>
             </div>
@@ -88,9 +93,9 @@ export default async function Home() {
               <div className="w-12 h-12 rounded-xl bg-accent/20 flex items-center justify-center text-accent">
                 <span className="text-xl font-bold font-mono">01</span>
               </div>
-              <h3 className="text-xl font-bold text-white">GELECEĞİN TİCARETİ</h3>
+              <h3 className="text-xl font-bold text-white">{tFeatures('01title')}</h3>
               <p className="text-muted-foreground text-sm leading-relaxed">
-                Özellikle bilişim alanında teknolojideki gelişmeler hızlıca şekillenmeye devam ediyor. Gün geçtikçe daha fazla insan bu gelişmelerden faydalanmaya başlıyor.
+                {tFeatures('01text')}
               </p>
             </div>
 
@@ -98,9 +103,9 @@ export default async function Home() {
               <div className="w-12 h-12 rounded-xl bg-accent/20 flex items-center justify-center text-accent">
                 <span className="text-xl font-bold font-mono">02</span>
               </div>
-              <h3 className="text-xl font-bold text-white">ÇOKLU TİCARET</h3>
+              <h3 className="text-xl font-bold text-white">{tFeatures('02title')}</h3>
               <p className="text-muted-foreground text-sm leading-relaxed">
-                SAP CX Hybris ile her yerde ticaret yapın. SAP CX Hybris Çoklu Ticaret Platformu çok kanallı, sağlam, üst düzey ölçeklenebilir bir yapı sunar.
+                {tFeatures('02text')}
               </p>
             </div>
 
@@ -108,9 +113,9 @@ export default async function Home() {
               <div className="w-12 h-12 rounded-xl bg-accent/20 flex items-center justify-center text-accent">
                 <span className="text-xl font-bold font-mono">03</span>
               </div>
-              <h3 className="text-xl font-bold text-white">ÇEVİK OLUN</h3>
+              <h3 className="text-xl font-bold text-white">{tFeatures('03title')}</h3>
               <p className="text-muted-foreground text-sm leading-relaxed">
-                "Çevik Geliştirme" birçok tekrarlı ve ilerleyen yazılım geliştirme metodları için birleştiricidir. Hız ve kaliteyi aynı anda yakalayın.
+                {tFeatures('03text')}
               </p>
             </div>
 
@@ -118,9 +123,9 @@ export default async function Home() {
               <div className="w-12 h-12 rounded-xl bg-accent/20 flex items-center justify-center text-accent">
                 <span className="text-xl font-bold font-mono">04</span>
               </div>
-              <h3 className="text-xl font-bold text-white">SİSTEM SAĞLIĞI</h3>
+              <h3 className="text-xl font-bold text-white">{tFeatures('04title')}</h3>
               <p className="text-muted-foreground text-sm leading-relaxed">
-                Sisteminizin düşük performansından hiç şikayet ettiniz mi? Bir sisteme çok para harcamak, doğrudan beklenen performansı sağlamaz. İzleme şarttır.
+                {tFeatures('04text')}
               </p>
             </div>
 
@@ -128,12 +133,11 @@ export default async function Home() {
         </div>
       </section>
 
-      {/* 3. REFERANSLAR (Yeni Eklenen Alan) */}
+      {/* 3. REFERANSLAR */}
       <section className="py-20 border-b border-border bg-background overflow-hidden relative">
          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center mb-10">
-             <h3 className="text-sm font-mono tracking-[0.2em] text-muted-foreground uppercase">GÜÇLÜ REFERANSLARIMIZ</h3>
+             <h3 className="text-sm font-mono tracking-[0.2em] text-muted-foreground uppercase">{tRefs('title')}</h3>
          </div>
-         {/* Basit text-based marquee / grid simulasyonu */}
          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="flex flex-wrap justify-center items-center gap-x-12 gap-y-8 opacity-60 grayscale hover:grayscale-0 transition-all duration-500">
                 {references.map((ref, idx) => (
@@ -151,10 +155,10 @@ export default async function Home() {
           
           <div className="text-center max-w-3xl mx-auto mb-16 space-y-4">
             <h2 className="text-4xl md:text-5xl font-display text-foreground">
-              Hizmetlerimiz & <span className="gradient-text">Çözümler</span>
+              {tServices('title')} <span className="gradient-text">{tServices('titleHighlight')}</span>
             </h2>
             <p className="text-lg text-muted-foreground">
-              Aşağıdaki yapı NestJS backend servisimizden anlık olarak beslenmektedir.
+              {tServices('subtitle')}
             </p>
           </div>
 
@@ -186,7 +190,7 @@ export default async function Home() {
             </div>
           ) : (
             <div className="text-center p-12 border border-dashed border-border rounded-2xl bg-muted/30">
-              <p className="text-muted-foreground">NestJS sunucusundan veri çekilemedi. Lütfen backend'i kontrol edin.</p>
+              <p className="text-muted-foreground">{tServices('noData')}</p>
             </div>
           )}
         </div>
@@ -199,47 +203,14 @@ export default async function Home() {
              
             <div className="text-center mb-10">
                 <h2 className="text-3xl md:text-4xl font-display text-foreground mb-4">
-                  Bize Ulaşın
+                  {tContact('title')}
                 </h2>
                 <p className="text-muted-foreground">
-                  Projeleriniz için danışmanlık hizmeti almak veya çözümlerimiz hakkında bilgi edinmek için formu doldurun.
+                  {tContact('subtitle')}
                 </p>
             </div>
             
-            <form className="space-y-6">
-               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                   <div className="space-y-2">
-                       <label className="text-sm font-medium text-foreground">Ad Soyad *</label>
-                       <input 
-                          type="text" 
-                          required 
-                          placeholder="Adınız Soyadınız" 
-                          className="w-full h-12 px-4 rounded-xl border border-border bg-transparent focus:ring-2 focus:ring-accent focus:border-transparent outline-none transition-all"
-                       />
-                   </div>
-                   <div className="space-y-2">
-                       <label className="text-sm font-medium text-foreground">Email *</label>
-                       <input 
-                          type="email" 
-                          required 
-                          placeholder="Mail adresiniz" 
-                          className="w-full h-12 px-4 rounded-xl border border-border bg-transparent focus:ring-2 focus:ring-accent focus:border-transparent outline-none transition-all"
-                       />
-                   </div>
-               </div>
-               <div className="space-y-2">
-                   <label className="text-sm font-medium text-foreground">Yorum veya Mesaj *</label>
-                   <textarea 
-                      required 
-                      rows={4}
-                      placeholder="Mesajınız..." 
-                      className="w-full px-4 py-3 rounded-xl border border-border bg-transparent focus:ring-2 focus:ring-accent focus:border-transparent outline-none transition-all resize-none"
-                   ></textarea>
-               </div>
-               <div className="pt-2 text-center">
-                   <Button size="lg" className="px-12 w-full md:w-auto">Gönder</Button>
-               </div>
-            </form>
+            <HomePageContactForm />
 
           </div>
         </div>

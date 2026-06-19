@@ -13,8 +13,7 @@ export default function JobApplicationForm({ jobId, jobTitle }: { jobId: number,
     e.preventDefault();
     setStatus("loading");
     try {
-      // In a real app, you would POST this to an API
-      // await fetch('/api/apply', { method: 'POST', body: JSON.stringify({ jobId, jobTitle, ...formData }) })
+      // Mock submission — replace with real API call
       await new Promise(resolve => setTimeout(resolve, 1000));
       setStatus("success");
     } catch (error) {
@@ -25,8 +24,8 @@ export default function JobApplicationForm({ jobId, jobTitle }: { jobId: number,
   if (status === "success") {
     return (
       <div className="bg-green-50 dark:bg-green-900/20 text-green-700 dark:text-green-400 p-6 rounded-xl text-center border border-green-200 dark:border-green-800">
-        <h3 className="font-bold text-lg mb-2">Başvurunuz Alındı!</h3>
-        <p>İlginiz için teşekkür ederiz. İnsan kaynakları ekibimiz başvurunuzu değerlendirip size dönüş yapacaktır.</p>
+        <h3 className="font-bold text-lg mb-2">{t('applicationReceived')}</h3>
+        <p>{t('applicationReceivedText')}</p>
       </div>
     );
   }
@@ -76,7 +75,7 @@ export default function JobApplicationForm({ jobId, jobTitle }: { jobId: number,
       </div>
       
       <Button disabled={status === "loading"} type="submit" className="w-full h-12 bg-blue-600 hover:bg-blue-700 text-white font-bold tracking-widest uppercase rounded-xl mt-4">
-        {status === "loading" ? "Gönderiliyor..." : t('submit')}
+        {status === "loading" ? t('submitting') : t('submit')}
       </Button>
     </form>
   );
