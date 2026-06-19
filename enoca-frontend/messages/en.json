@@ -6,7 +6,9 @@
     "projects": "Projects",
     "careers": "Careers",
     "contact": "Contact",
-    "admin": "Admin"
+    "admin": "Admin",
+    "news": "News",
+    "corporate": "Corporate"
   },
   "Hero": {
     "title1": "WE DO SAP CX",

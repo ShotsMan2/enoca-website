@@ -109,7 +109,7 @@ export default function Navbar() {
             ]
         },
         {
-            title: t('about'), // Or corporate
+            title: t('corporate'),
             url: "/kurumsal",
             children: [
                 { title: "HAKKIMIZDA", url: "/kurumsal/hakkimizda" },

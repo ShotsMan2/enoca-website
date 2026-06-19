@@ -6,7 +6,9 @@
     "projects": "Projeler",
     "careers": "Kariyer",
     "contact": "İletişim",
-    "admin": "Yönetici"
+    "admin": "Yönetici",
+    "news": "Haberler",
+    "corporate": "Kurumsal"
   },
   "Hero": {
     "title1": "WE DO SAP CX",
