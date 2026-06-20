@@ -49,6 +49,31 @@ export interface HeroSettings {
   description: string;
 }
 
+export interface HomepageFeature {
+  id: number;
+  number: string;
+  title: string;
+  text: string;
+}
+
+export interface HomepageCategoryLink {
+  id: string | number;
+  title: string;
+  url: string;
+}
+
+export interface HomepageCategory {
+  id: string | number;
+  name: string;
+  links: HomepageCategoryLink[];
+}
+
+export interface HomepageSettings {
+  features: HomepageFeature[];
+  references: string[];
+  categories: HomepageCategory[];
+}
+
 export interface ContentPage {
   id: number;
   menuTitle: string;
@@ -170,6 +195,14 @@ export const adminApi = {
   },
   async updateHeroSettings(data: HeroSettings): Promise<HeroSettings> {
     return postEntity('hero', data);
+  },
+
+  // Homepage Settings
+  async getHomepageSettings(): Promise<HomepageSettings> {
+    return fetchEntity('homepage');
+  },
+  async updateHomepageSettings(data: HomepageSettings): Promise<HomepageSettings> {
+    return postEntity('homepage', data);
   },
 
   // Content Pages

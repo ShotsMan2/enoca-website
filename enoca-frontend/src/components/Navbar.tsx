@@ -1,7 +1,7 @@
 "use client";
 
-import { useState } from 'react';
-import { ChevronDown, Mail, Phone, Search, X, Globe, Menu } from 'lucide-react';
+import { useState, useEffect } from 'react';
+import { ChevronDown, Mail, Phone, Search, X, Globe, Menu, Sun, Moon } from 'lucide-react';
 import { useTranslations, useLocale } from 'next-intl';
 import { Link, usePathname, useRouter } from '@/i18n/routing';
 import { SiteSettings, ContentPage } from '@/lib/admin-api';
@@ -10,6 +10,7 @@ export default function Navbar({ settings, pages = [] }: { settings?: SiteSettin
     const [isSearchOpen, setIsSearchOpen] = useState(false);
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const [searchQuery, setSearchQuery] = useState("");
+    const [isDark, setIsDark] = useState(false);
     const router = useRouter();
     const pathname = usePathname();
     const locale = useLocale();
@@ -22,6 +23,24 @@ export default function Navbar({ settings, pages = [] }: { settings?: SiteSettin
             router.push(`/arama?q=${encodeURIComponent(searchQuery.trim())}`);
             setIsSearchOpen(false);
             setSearchQuery("");
+        }
+    };
+
+    useEffect(() => {
+        const isDarkMode = document.documentElement.classList.contains('dark');
+        // eslint-disable-next-line react-hooks/set-state-in-effect
+        setIsDark(isDarkMode);
+    }, []);
+
+    const toggleTheme = () => {
+        const next = !isDark;
+        setIsDark(next);
+        if (next) {
+            document.documentElement.classList.add("dark");
+            localStorage.setItem("admin-theme", "dark");
+        } else {
+            document.documentElement.classList.remove("dark");
+            localStorage.setItem("admin-theme", "light");
         }
     };
 
@@ -293,6 +312,15 @@ export default function Navbar({ settings, pages = [] }: { settings?: SiteSettin
                                     </div>
                                 </div>
                                 
+                                {/* Theme Toggle */}
+                                <button 
+                                    onClick={toggleTheme}
+                                    className="ml-2 w-9 h-9 flex items-center justify-center rounded-full hover:bg-accent/10 text-foreground/80 hover:text-accent transition-colors"
+                                    title={isDark ? "Aydınlık Mod" : "Karanlık Mod"}
+                                >
+                                    {isDark ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
+                                </button>
+                                
                                 <div className="relative flex items-center justify-center ml-1">
                                     <button 
                                         onClick={() => setIsSearchOpen(!isSearchOpen)}
@@ -323,6 +351,12 @@ export default function Navbar({ settings, pages = [] }: { settings?: SiteSettin
 
                         {/* Mobile Menu Toggle */}
                         <div className="flex lg:hidden items-center gap-2">
+                            <button 
+                                onClick={toggleTheme}
+                                className="w-10 h-10 flex items-center justify-center rounded-lg hover:bg-accent/10 text-foreground/80 hover:text-accent transition-colors"
+                            >
+                                {isDark ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
+                            </button>
                             <button 
                                 onClick={() => { setIsSearchOpen(!isSearchOpen); setIsMobileMenuOpen(false); }}
                                 className="w-10 h-10 flex items-center justify-center rounded-lg hover:bg-accent/10 text-foreground/80 hover:text-accent transition-colors"

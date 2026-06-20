@@ -1,11 +1,15 @@
 "use client";
 
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState } from "react";
 import AdminHeader from "@/components/admin/AdminHeader";
 import ConfirmModal from "@/components/admin/ConfirmModal";
 import { adminApi, type ContentPage } from "@/lib/admin-api";
+import dynamic from "next/dynamic";
+import "react-quill/dist/quill.snow.css";
 
-const categories = ["Tümü", "Çözümler", "Danışmanlık", "Projeler", "Teknoloji", "Kurumsal"];
+const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
+
+const categories = ["Tümü", "Çözümler", "Danışmanlık", "Projeler", "Teknoloji", "Kurumsal", "Haberler"];
 
 export default function IcerikPage() {
   const [pages, setPages] = useState<ContentPage[]>([]);
@@ -16,7 +20,6 @@ export default function IcerikPage() {
   const [saved, setSaved] = useState(false);
   const [deleteModal, setDeleteModal] = useState<{ open: boolean; id: number | null }>({ open: false, id: null });
   const [deleting, setDeleting] = useState(false);
-  const editorRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     adminApi.getContentPages().then(p => { setPages(p); setLoading(false); });
@@ -54,25 +57,6 @@ export default function IcerikPage() {
     setSelected(created);
   };
 
-
-  // Sayfa seçildiğinde editörü güncelle
-  useEffect(() => {
-    if (editorRef.current && selected) {
-      editorRef.current.innerHTML = selected.content;
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [selected?.id]);
-
-  const execFormat = (cmd: string, value?: string) => {
-    editorRef.current?.focus();
-    document.execCommand(cmd, false, value);
-    // İçeriği state'e kaydet
-    setSelected(s => s ? { ...s, content: editorRef.current?.innerHTML ?? s.content } : s);
-  };
-
-  const handleEditorInput = () => {
-    setSelected(s => s ? { ...s, content: editorRef.current?.innerHTML ?? s.content } : s);
-  };
 
   const inputCls = "w-full h-10 px-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-800 dark:text-white text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all";
 
@@ -158,32 +142,25 @@ export default function IcerikPage() {
                   </div>
                 </div>
                 {/* Rich Text Editör */}
-                <div className="space-y-1.5">
+                <div className="space-y-1.5 pb-12">
                   <label className="text-xs font-semibold text-gray-600 dark:text-gray-400 uppercase tracking-wide">İçerik</label>
-                  {/* Araç Çubuğu */}
-                  <div className="flex flex-wrap gap-1 p-2 bg-gray-50 dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-t-xl border-b-0">
-                    <button type="button" onMouseDown={e => { e.preventDefault(); execFormat("bold"); }} className="w-7 h-7 rounded font-bold text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors">B</button>
-                    <button type="button" onMouseDown={e => { e.preventDefault(); execFormat("italic"); }} className="w-7 h-7 rounded italic text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors">I</button>
-                    <button type="button" onMouseDown={e => { e.preventDefault(); execFormat("underline"); }} className="w-7 h-7 rounded underline text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors">U</button>
-                    <div className="w-px h-7 bg-gray-300 dark:bg-gray-600 mx-1" />
-                    <button type="button" onMouseDown={e => { e.preventDefault(); execFormat("formatBlock", "h1"); }} className="px-2 h-7 rounded text-xs font-bold text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors">H1</button>
-                    <button type="button" onMouseDown={e => { e.preventDefault(); execFormat("formatBlock", "h2"); }} className="px-2 h-7 rounded text-xs font-bold text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors">H2</button>
-                    <button type="button" onMouseDown={e => { e.preventDefault(); execFormat("formatBlock", "p"); }} className="px-2 h-7 rounded text-xs text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors">P</button>
-                    <div className="w-px h-7 bg-gray-300 dark:bg-gray-600 mx-1" />
-                    <button type="button" onMouseDown={e => { e.preventDefault(); execFormat("insertUnorderedList"); }} className="px-2 h-7 rounded text-xs text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors">• Liste</button>
-                    <button type="button" onMouseDown={e => { e.preventDefault(); execFormat("insertOrderedList"); }} className="px-2 h-7 rounded text-xs text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors">1. Liste</button>
-                    <div className="w-px h-7 bg-gray-300 dark:bg-gray-600 mx-1" />
-                    <button type="button" onMouseDown={e => { e.preventDefault(); const url = prompt("URL giriniz:"); if (url) execFormat("createLink", url); }} className="px-2 h-7 rounded text-xs text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors">🔗 Link</button>
-                    <button type="button" onMouseDown={e => { e.preventDefault(); execFormat("removeFormat"); }} className="px-2 h-7 rounded text-xs text-red-500 hover:bg-red-50 dark:hover:bg-red-900/20 transition-colors">✕ Temizle</button>
+                  <div className="bg-white dark:bg-gray-800 rounded-lg overflow-hidden border border-gray-300 dark:border-gray-600">
+                    <ReactQuill 
+                      theme="snow" 
+                      value={selected.content} 
+                      onChange={(val: string) => setSelected(s => s ? { ...s, content: val } : s)} 
+                      className="h-[300px] text-gray-800 dark:text-white"
+                      modules={{
+                        toolbar: [
+                          [{ 'header': [1, 2, 3, false] }],
+                          ['bold', 'italic', 'underline', 'strike'],
+                          [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+                          ['link', 'image'],
+                          ['clean']
+                        ]
+                      }}
+                    />
                   </div>
-                  <div
-                    ref={editorRef}
-                    contentEditable
-                    onInput={handleEditorInput}
-                    className="w-full min-h-[240px] px-4 py-3 rounded-b-xl border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-800 dark:text-white text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all overflow-y-auto prose prose-sm dark:prose-invert max-w-none"
-                    style={{ outline: "none" }}
-                    suppressContentEditableWarning
-                  />
                 </div>
               </div>
             </div>

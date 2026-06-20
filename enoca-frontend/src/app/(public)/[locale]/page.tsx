@@ -4,40 +4,14 @@ import HeroVisual from "@/components/HeroVisual";
 import PublicLayout from "@/components/PublicLayout";
 import HomePageContactForm from "@/components/HomePageContactForm";
 import { getTranslations } from "next-intl/server";
+export const dynamic = 'force-dynamic';
 
-async function getCategories() {
-  return [
-    {
-      id: "1",
-      name: "SAP CX Hybris",
-      links: [
-        { id: "1-1", title: "SAP CX Hybris B2C E-Ticaret", url: "/cozumler/hybris-cozumleri/hybris-b2c-ticaret" },
-        { id: "1-2", title: "SAP CX Hybris B2B E-Ticaret", url: "/cozumler/hybris-cozumleri/hybris-b2b-ticaret" },
-      ]
-    },
-    {
-      id: "2",
-      name: "SAP Çözümleri",
-      links: [
-        { id: "2-1", title: "SAP Mobility", url: "/cozumler/sap-cozumleri/sap-mobility" },
-        { id: "2-2", title: "SAP HANA", url: "/cozumler/sap-cozumleri/sap-hana" },
-      ]
-    },
-    {
-      id: "3",
-      name: "Sistem İzleme",
-      links: [
-        { id: "3-1", title: "vFabric Hyperic", url: "/cozumler/sistem-izleme-cozumleri/vfabric-hyperic" },
-        { id: "3-2", title: "Nagios", url: "/cozumler/sistem-izleme-cozumleri/nagios" },
-      ]
-    }
-  ];
-}
+// getCategories() fonksiyonu kaldırıldı, db.json'dan okunacak.
 
 import { readDB } from '@/lib/db';
+import { HomepageFeature } from "@/lib/admin-api";
 
 export default async function Home() {
-  const categories = await getCategories();
   const db = await readDB();
   const heroSettings = db?.hero || {
     mainTitle: "WE DO SAP CX",
@@ -48,18 +22,21 @@ export default async function Home() {
     button2Text: "SAP CX Hybris B2B E-Ticaret",
     button2Url: "/cozumler/hybris-cozumleri/hybris-b2b-ticaret"
   };
+  
+  const homepage = db?.homepage || {
+    features: [],
+    references: [],
+    categories: []
+  };
+
+  const categories = homepage.categories;
+  const references = homepage.references;
+  const features = homepage.features;
+
   const tHero = await getTranslations('Hero');
-  const tFeatures = await getTranslations('Features');
   const tRefs = await getTranslations('References');
   const tServices = await getTranslations('Services');
   const tContact = await getTranslations('Contact');
-
-  // Sabit referans listesi (siteden alınan)
-  const references = [
-    "Adese", "AGT", "Avansas", "Carrefour", "EAE", "Ebebek", 
-    "G2M", "Gratis", "Hasçelik", "İpragaz", "İGA", "Koton", 
-    "LC Waikiki", "Nitori", "Penti", "Teknosa", "Turkcell", "Türk Telekom"
-  ];
 
   return (
     <PublicLayout>
@@ -117,45 +94,17 @@ export default async function Home() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
             
-            <div className="space-y-4">
-              <div className="w-12 h-12 rounded-xl bg-accent/20 flex items-center justify-center text-accent">
-                <span className="text-xl font-bold font-mono">01</span>
+            {features.map((feature: HomepageFeature, idx: number) => (
+              <div key={feature.id || idx} className="space-y-4">
+                <div className="w-12 h-12 rounded-xl bg-accent/20 flex items-center justify-center text-accent">
+                  <span className="text-xl font-bold font-mono">{feature.number}</span>
+                </div>
+                <h3 className="text-xl font-bold text-white">{feature.title}</h3>
+                <p className="text-muted-foreground text-sm leading-relaxed">
+                  {feature.text}
+                </p>
               </div>
-              <h3 className="text-xl font-bold text-white">{tFeatures('01title')}</h3>
-              <p className="text-muted-foreground text-sm leading-relaxed">
-                {tFeatures('01text')}
-              </p>
-            </div>
-
-            <div className="space-y-4">
-              <div className="w-12 h-12 rounded-xl bg-accent/20 flex items-center justify-center text-accent">
-                <span className="text-xl font-bold font-mono">02</span>
-              </div>
-              <h3 className="text-xl font-bold text-white">{tFeatures('02title')}</h3>
-              <p className="text-muted-foreground text-sm leading-relaxed">
-                {tFeatures('02text')}
-              </p>
-            </div>
-
-            <div className="space-y-4">
-              <div className="w-12 h-12 rounded-xl bg-accent/20 flex items-center justify-center text-accent">
-                <span className="text-xl font-bold font-mono">03</span>
-              </div>
-              <h3 className="text-xl font-bold text-white">{tFeatures('03title')}</h3>
-              <p className="text-muted-foreground text-sm leading-relaxed">
-                {tFeatures('03text')}
-              </p>
-            </div>
-
-            <div className="space-y-4">
-              <div className="w-12 h-12 rounded-xl bg-accent/20 flex items-center justify-center text-accent">
-                <span className="text-xl font-bold font-mono">04</span>
-              </div>
-              <h3 className="text-xl font-bold text-white">{tFeatures('04title')}</h3>
-              <p className="text-muted-foreground text-sm leading-relaxed">
-                {tFeatures('04text')}
-              </p>
-            </div>
+            ))}
 
           </div>
         </div>
@@ -168,7 +117,7 @@ export default async function Home() {
          </div>
          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="flex flex-wrap justify-center items-center gap-x-12 gap-y-8 opacity-60 grayscale hover:grayscale-0 transition-all duration-500">
-                {references.map((ref, idx) => (
+                {references.map((ref: string, idx: number) => (
                     <span key={idx} className="text-xl md:text-2xl font-bold font-display text-foreground">
                         {ref}
                     </span>

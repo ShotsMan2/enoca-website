@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+/* eslint-disable @next/next/no-img-element */
 import AdminHeader from "@/components/admin/AdminHeader";
 import ConfirmModal from "@/components/admin/ConfirmModal";
 import { adminApi, type NewsItem } from "@/lib/admin-api";
@@ -116,7 +117,6 @@ export default function HaberlerPage() {
                   <td className="px-6 py-4">
                     <div className="flex items-center gap-3">
                       <div className="w-10 h-10 rounded-lg overflow-hidden flex-shrink-0 bg-gray-100">
-                        {/* eslint-disable-next-line @next/next/no-img-element */}
                         <img src={item.imageUrl} alt="" className="w-full h-full object-cover" />
                       </div>
                       <div>
