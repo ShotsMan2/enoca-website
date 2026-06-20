@@ -10,6 +10,7 @@ import ParallaxWrapper from "@/components/ParallaxWrapper";
 import PageTransition from "@/components/PageTransition";
 import SpotlightCard from "@/components/SpotlightCard";
 import NetworkBackground from "@/components/NetworkBackground";
+import ProjectConfigurator from "@/components/ProjectConfigurator";
 import * as motion from "framer-motion/client";
 export const dynamic = 'force-dynamic';
 
@@ -216,7 +217,24 @@ export default async function Home() {
         </div>
       </section>
 
-      {/* 5. İLETİŞİM / CTA BÖLÜMÜ */}
+      {/* 5. PROJE KONFİGÜRATÖRÜ (B2B Aracı) */}
+      <section className="py-24 bg-foreground relative overflow-hidden">
+        <div className="absolute inset-0 bg-dot-pattern opacity-10" />
+        <div className="absolute top-0 right-0 w-96 h-96 bg-accent rounded-full blur-[150px] opacity-10" />
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <div className="text-center max-w-3xl mx-auto mb-12 space-y-4">
+            <h2 className="text-4xl md:text-5xl font-display text-background">
+              Projenizi <span className="text-accent">Şekillendirin</span>
+            </h2>
+            <p className="text-lg text-muted-foreground">
+              İhtiyaçlarınıza en uygun teknoloji yığınını ve çözüm mimarisini interaktif aracımızla saniyeler içinde oluşturun.
+            </p>
+          </div>
+          <ProjectConfigurator />
+        </div>
+      </section>
+
+      {/* 6. İLETİŞİM / CTA BÖLÜMÜ */}
       <section className="py-24 relative bg-muted/30">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="rounded-3xl bg-card border border-border p-8 md:p-12 shadow-accent-lg relative overflow-hidden">

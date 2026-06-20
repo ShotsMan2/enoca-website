@@ -159,7 +159,58 @@ export default function DashboardPage() {
           </div>
         </div>
 
-        {/* 3. Command Center (Sistem Sağlığı) */}
+        {/* 3. Microservices Mimari Haritası */}
+        <div className="bg-white dark:bg-gray-900 rounded-2xl border border-gray-200 dark:border-gray-700 p-6 mt-6 overflow-hidden relative group">
+          <h2 className="font-bold text-gray-800 dark:text-white flex items-center gap-2 mb-6 text-sm">
+            <Server className="w-4 h-4 text-indigo-500" />
+            Mikroservis Sistem Sağlığı (Canlı)
+          </h2>
+          <div className="relative w-full h-[300px] bg-gray-50 dark:bg-gray-950 rounded-xl border border-gray-100 dark:border-gray-800 flex items-center justify-center overflow-hidden">
+            <div className="absolute inset-0 bg-dot-pattern opacity-10" />
+            
+            <svg className="absolute inset-0 w-full h-full pointer-events-none" style={{ minWidth: 600 }}>
+              {/* Bağlantı Çizgileri */}
+              <path d="M 30% 50% L 50% 30%" stroke="currentColor" strokeWidth="2" fill="none" className="text-gray-200 dark:text-gray-800" strokeDasharray="4 4">
+                <animate attributeName="stroke-dashoffset" from="100" to="0" dur="2s" repeatCount="indefinite" />
+              </path>
+              <path d="M 30% 50% L 50% 70%" stroke="currentColor" strokeWidth="2" fill="none" className="text-gray-200 dark:text-gray-800" strokeDasharray="4 4">
+                <animate attributeName="stroke-dashoffset" from="100" to="0" dur="2.5s" repeatCount="indefinite" />
+              </path>
+              <path d="M 50% 30% L 70% 50%" stroke="currentColor" strokeWidth="2" fill="none" className="text-gray-200 dark:text-gray-800" strokeDasharray="4 4">
+                <animate attributeName="stroke-dashoffset" from="100" to="0" dur="1.5s" repeatCount="indefinite" />
+              </path>
+              <path d="M 50% 70% L 70% 50%" stroke="currentColor" strokeWidth="2" fill="none" className="text-gray-200 dark:text-gray-800" strokeDasharray="4 4">
+                <animate attributeName="stroke-dashoffset" from="100" to="0" dur="1.8s" repeatCount="indefinite" />
+              </path>
+
+              {/* Düğümler (Nodes) */}
+              <circle cx="30%" cy="50%" r="24" className="fill-white dark:fill-gray-900 stroke-emerald-500 stroke-[3px]" />
+              <text x="30%" y="50%" dy="40" textAnchor="middle" className="text-xs font-mono fill-gray-500 dark:fill-gray-400">API Gateway</text>
+
+              <circle cx="50%" cy="30%" r="20" className="fill-white dark:fill-gray-900 stroke-blue-500 stroke-[3px]" />
+              <text x="50%" y="30%" dy="-32" textAnchor="middle" className="text-xs font-mono fill-gray-500 dark:fill-gray-400">SAP ERP Core</text>
+
+              <circle cx="50%" cy="70%" r="20" className="fill-white dark:fill-gray-900 stroke-amber-500 stroke-[3px]" />
+              <text x="50%" y="70%" dy="40" textAnchor="middle" className="text-xs font-mono fill-gray-500 dark:fill-gray-400">HANA DB (Yükte)</text>
+
+              <circle cx="70%" cy="50%" r="24" className="fill-white dark:fill-gray-900 stroke-emerald-500 stroke-[3px]" />
+              <text x="70%" y="50%" dy="40" textAnchor="middle" className="text-xs font-mono fill-gray-500 dark:fill-gray-400">Hybris Storefront</text>
+              
+              {/* Ping Göstergeleri */}
+              <circle cx="30%" cy="50%" r="4" className="fill-emerald-500"><animate attributeName="opacity" values="1;0;1" dur="1.5s" repeatCount="indefinite"/></circle>
+              <circle cx="50%" cy="30%" r="4" className="fill-blue-500"><animate attributeName="opacity" values="1;0;1" dur="2s" repeatCount="indefinite"/></circle>
+              <circle cx="50%" cy="70%" r="4" className="fill-amber-500"><animate attributeName="opacity" values="1;0;1" dur="0.8s" repeatCount="indefinite"/></circle>
+              <circle cx="70%" cy="50%" r="4" className="fill-emerald-500"><animate attributeName="opacity" values="1;0;1" dur="1.2s" repeatCount="indefinite"/></circle>
+            </svg>
+            <div className="absolute top-4 right-4 flex gap-3 text-[10px] font-mono tracking-widest uppercase">
+              <span className="flex items-center gap-1"><span className="w-2 h-2 rounded-full bg-emerald-500"/> Sağlıklı</span>
+              <span className="flex items-center gap-1"><span className="w-2 h-2 rounded-full bg-amber-500"/> Yük Altında</span>
+              <span className="flex items-center gap-1"><span className="w-2 h-2 rounded-full bg-red-500"/> Çevrimdışı</span>
+            </div>
+          </div>
+        </div>
+
+        {/* 4. Command Center (Sistem Sağlığı) */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-6">
           {/* CPU Usage */}
           <div className="bg-white dark:bg-gray-900 rounded-2xl border border-gray-200 dark:border-gray-700 p-6 flex flex-col items-center text-center relative overflow-hidden group">
@@ -207,7 +258,7 @@ export default function DashboardPage() {
           </div>
         </div>
 
-        {/* 4. Bölüm: Aktivite Logları (Audit Trail) */}
+        {/* 5. Bölüm: Aktivite Logları (Audit Trail) */}
         <div className="bg-white dark:bg-gray-900 rounded-2xl border border-gray-200 dark:border-gray-700 overflow-hidden mt-6">
           <div className="flex items-center px-6 py-4 border-b border-gray-100 dark:border-gray-800">
             <h2 className="font-bold text-gray-800 dark:text-white flex items-center gap-2">
