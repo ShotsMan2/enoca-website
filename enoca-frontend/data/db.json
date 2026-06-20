@@ -560,6 +560,22 @@
             "url": "/cozumler/sistem-izleme-cozumleri/nagios"
           }
         ]
+      },
+      {
+        "id": "1781952498346",
+        "name": "elpriöo",
+        "links": [
+          {
+            "id": "1781952511758",
+            "title": "Yeni Link",
+            "url": "/"
+          },
+          {
+            "id": "1781952517190",
+            "title": "Yeni Link",
+            "url": "/"
+          }
+        ]
       }
     ]
   }

@@ -1,11 +1,19 @@
 "use client";
 
+import { useState } from 'react';
 import { Link } from '@/i18n/routing';
 import { useTranslations } from 'next-intl';
 import { SiteSettings } from '@/lib/admin-api';
 
 export default function Footer({ settings }: { settings?: SiteSettings }) {
     const t = useTranslations('Footer');
+    const [subscribed, setSubscribed] = useState(false);
+
+    const handleSubscribe = (e: React.FormEvent) => {
+        e.preventDefault();
+        setSubscribed(true);
+        setTimeout(() => setSubscribed(false), 3000);
+    };
 
     return (
         <footer className="bg-[#222222] text-[#aaaaaa] pt-16 pb-8 border-t-[6px] border-accent">
@@ -139,10 +147,16 @@ export default function Footer({ settings }: { settings?: SiteSettings }) {
                         <div className="flex flex-col w-full max-w-sm gap-2">
                             <h4 className="text-white text-sm font-bold tracking-wider uppercase mb-1">E-Bülten Kayıt</h4>
                             <p className="text-[11px] text-[#777777]">Sektörel gelişmelerden haberdar olmak için e-bültenimize kayıt olun.</p>
-                            <form className="flex mt-1" onSubmit={(e) => { e.preventDefault(); alert("Bülten aboneliğiniz alındı, teşekkürler!"); }}>
-                                <input type="email" required placeholder="E-posta adresiniz" className="flex-1 h-9 px-3 text-xs bg-[#333333] border border-[#444444] rounded-l-lg outline-none focus:border-accent text-white placeholder-gray-500 transition-colors" />
-                                <button type="submit" className="h-9 px-4 bg-accent text-white text-[11px] font-bold rounded-r-lg hover:bg-accent/90 transition-colors uppercase">Kayıt Ol</button>
-                            </form>
+                            {subscribed ? (
+                                <div className="mt-1 h-9 px-3 flex items-center bg-green-500/10 border border-green-500/20 text-green-500 text-xs rounded-lg">
+                                    Bülten aboneliğiniz alındı, teşekkürler!
+                                </div>
+                            ) : (
+                                <form className="flex mt-1" onSubmit={handleSubscribe}>
+                                    <input type="email" required placeholder="E-posta adresiniz" className="flex-1 h-9 px-3 text-xs bg-[#333333] border border-[#444444] rounded-l-lg outline-none focus:border-accent text-white placeholder-gray-500 transition-colors" />
+                                    <button type="submit" className="h-9 px-4 bg-accent text-white text-[11px] font-bold rounded-r-lg hover:bg-accent/90 transition-colors uppercase">Kayıt Ol</button>
+                                </form>
+                            )}
                         </div>
                         
                         <div className="flex flex-col items-center md:items-end gap-1 mt-6 lg:mt-0">
