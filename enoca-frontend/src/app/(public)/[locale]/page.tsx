@@ -8,6 +8,7 @@ import Marquee from "@/components/Marquee";
 import CountUp from "@/components/CountUp";
 import ParallaxWrapper from "@/components/ParallaxWrapper";
 import PageTransition from "@/components/PageTransition";
+import SpotlightCard from "@/components/SpotlightCard";
 export const dynamic = 'force-dynamic';
 
 // getCategories() fonksiyonu kaldırıldı, db.json'dan okunacak.
@@ -161,27 +162,27 @@ export default async function Home() {
           {categories.length > 0 ? (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {categories.map((cat: { id: string | number; name: string; links?: { id: string | number; url: string; title: string }[] }) => (
-                <div key={cat.id} className="group relative bg-card rounded-2xl border border-border p-8 shadow-md hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
+                <SpotlightCard key={cat.id} className="group p-8">
                   <div className="absolute top-0 right-0 p-8 opacity-0 group-hover:opacity-100 transition-opacity">
                     <div className="w-10 h-10 rounded-full bg-accent/10 flex items-center justify-center">
                       <span className="text-accent font-bold">→</span>
                     </div>
                   </div>
                   
-                  <h3 className="text-2xl font-bold text-foreground mb-4 uppercase">{cat.name}</h3>
-                  <div className="flex flex-col gap-3 mb-6">
+                  <h3 className="text-2xl font-bold text-foreground mb-4 uppercase relative z-10">{cat.name}</h3>
+                  <div className="flex flex-col gap-3 mb-6 relative z-10">
                     {cat.links?.map((link: { id: string | number; url: string; title: string }) => (
                       <Link 
                         key={link.id} 
                         href={link.url}
                         className="text-muted-foreground hover:text-accent font-medium transition-colors flex items-center gap-2"
                       >
-                        <span className="w-1.5 h-1.5 rounded-full bg-border group-hover:bg-accent/50" />
+                        <span className="w-1.5 h-1.5 rounded-full bg-border group-hover:bg-accent/50 transition-colors" />
                         {link.title}
                       </Link>
                     ))}
                   </div>
-                </div>
+                </SpotlightCard>
               ))}
             </div>
           ) : (

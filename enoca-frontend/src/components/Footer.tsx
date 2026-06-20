@@ -144,17 +144,18 @@ export default function Footer({ settings }: { settings?: SiteSettings }) {
                     </div>
                     
                     <div className="flex flex-col md:flex-row items-center md:items-end justify-between gap-6 w-full lg:w-auto">
-                        <div className="flex flex-col w-full max-w-sm gap-2">
+                        <div className="flex flex-col w-full max-w-sm gap-2 bg-white/5 p-5 rounded-2xl border border-white/10 relative overflow-hidden group">
+                            <div className="absolute inset-0 bg-gradient-to-r from-accent/0 via-accent/5 to-accent/0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000" />
                             <h4 className="text-white text-sm font-bold tracking-wider uppercase mb-1">E-Bülten Kayıt</h4>
-                            <p className="text-[11px] text-[#777777]">Sektörel gelişmelerden haberdar olmak için e-bültenimize kayıt olun.</p>
+                            <p className="text-[11px] text-[#999999]">Sektörel gelişmelerden haberdar olmak için e-bültenimize kayıt olun.</p>
                             {subscribed ? (
-                                <div className="mt-1 h-9 px-3 flex items-center bg-green-500/10 border border-green-500/20 text-green-500 text-xs rounded-lg">
+                                <div className="mt-2 h-10 px-3 flex items-center bg-green-500/20 border border-green-500/30 text-green-400 text-xs rounded-xl font-medium">
                                     Bülten aboneliğiniz alındı, teşekkürler!
                                 </div>
                             ) : (
-                                <form className="flex mt-1" onSubmit={handleSubscribe}>
-                                    <input type="email" required placeholder="E-posta adresiniz" className="flex-1 h-9 px-3 text-xs bg-[#333333] border border-[#444444] rounded-l-lg outline-none focus:border-accent text-white placeholder-gray-500 transition-colors" />
-                                    <button type="submit" className="h-9 px-4 bg-accent text-white text-[11px] font-bold rounded-r-lg hover:bg-accent/90 transition-colors uppercase">Kayıt Ol</button>
+                                <form className="flex mt-2 relative z-10" onSubmit={handleSubscribe}>
+                                    <input type="email" required placeholder="E-posta adresiniz" className="flex-1 h-10 px-4 text-xs bg-[#111111] border border-[#333333] rounded-l-xl outline-none focus:border-accent text-white placeholder-gray-600 transition-all focus:ring-2 focus:ring-accent/20" />
+                                    <button type="submit" className="h-10 px-5 bg-accent text-white text-[11px] font-bold rounded-r-xl hover:bg-accent/90 transition-colors uppercase shadow-lg shadow-accent/20">Kayıt Ol</button>
                                 </form>
                             )}
                         </div>

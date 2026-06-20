@@ -12,6 +12,8 @@ import NextTopLoader from 'nextjs-toploader';
 import FloatingWidget from '@/components/FloatingWidget';
 import ScrollToTop from '@/components/ScrollToTop';
 import CommandPalette from '@/components/CommandPalette';
+import CustomCursor from '@/components/CustomCursor';
+import ScrollProgress from '@/components/ScrollProgress';
 import '../../globals.css';
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter', display: 'swap' });
@@ -95,6 +97,8 @@ export default async function LocaleLayout({
           <FloatingWidget />
           <ScrollToTop />
           <CommandPalette />
+          <CustomCursor />
+          <ScrollProgress />
         </NextIntlClientProvider>
       </body>
     </html>

@@ -6,6 +6,7 @@ import AdminHeader from "@/components/admin/AdminHeader";
 import ConfirmModal from "@/components/admin/ConfirmModal";
 import { adminApi, type NewsItem } from "@/lib/admin-api";
 import { useToast } from "@/components/admin/ToastProvider";
+import FloatingInput from "@/components/FloatingInput";
 import { ArrowUpDown, Sparkles, Clock } from "lucide-react";
 
 const PAGE_SIZE = 5;
@@ -250,20 +251,20 @@ export default function HaberlerPage() {
               </div>
             </div>
             <form onSubmit={handleSave} className="p-6 space-y-4">
-              <div className="space-y-1.5"><label className="text-xs font-semibold text-gray-600 dark:text-gray-400 uppercase">Başlık *</label><input required value={formData.title} onChange={e => setFormData(f => ({ ...f, title: e.target.value }))} className={inputCls} /></div>
+              <FloatingInput label="Başlık *" required value={formData.title} onChange={e => setFormData(f => ({ ...f, title: e.target.value }))} />
               <div className="space-y-1.5">
-                <div className="flex items-center justify-between">
-                  <label className="text-xs font-semibold text-gray-600 dark:text-gray-400 uppercase">Özet</label>
+                <div className="flex items-center justify-between px-1">
+                  <label className="text-[10px] font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wider">Özet</label>
                   <span className="text-[10px] text-gray-400 flex items-center gap-1">
                     <Clock className="w-3 h-3" />
                     AI Tahmini: {Math.max(1, Math.ceil((formData.summary || "").trim().split(/\s+/).length / 200))} dk okuma
                   </span>
                 </div>
-                <textarea rows={2} value={formData.summary} onChange={e => setFormData(f => ({ ...f, summary: e.target.value }))} className="w-full px-4 py-3 rounded-xl border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-800 dark:text-white text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all resize-none" />
+                <textarea rows={2} value={formData.summary} onChange={e => setFormData(f => ({ ...f, summary: e.target.value }))} className="w-full px-4 py-3 rounded-xl border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-800 dark:text-white text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all resize-none" placeholder="Haber özetini girin..." />
               </div>
-              <div className="space-y-1.5"><label className="text-xs font-semibold text-gray-600 dark:text-gray-400 uppercase">Görsel URL</label><input type="url" value={formData.imageUrl} onChange={e => setFormData(f => ({ ...f, imageUrl: e.target.value }))} className={inputCls} placeholder="https://..." /></div>
+              <FloatingInput label="Görsel URL" type="url" value={formData.imageUrl} onChange={e => setFormData(f => ({ ...f, imageUrl: e.target.value }))} />
               <div className="grid grid-cols-2 gap-4">
-                <div className="space-y-1.5"><label className="text-xs font-semibold text-gray-600 dark:text-gray-400 uppercase">Yayın Tarihi</label><input type="date" value={formData.publishedAt} onChange={e => setFormData(f => ({ ...f, publishedAt: e.target.value }))} className={inputCls} /></div>
+                <FloatingInput label="Yayın Tarihi" type="date" value={formData.publishedAt} onChange={e => setFormData(f => ({ ...f, publishedAt: e.target.value }))} />
                 <div className="space-y-1.5"><label className="text-xs font-semibold text-gray-600 dark:text-gray-400 uppercase">Durum</label>
                   <select value={formData.status} onChange={e => setFormData(f => ({ ...f, status: e.target.value as "published" | "draft" }))} className={inputCls}>
                     <option value="draft">Taslak</option>
