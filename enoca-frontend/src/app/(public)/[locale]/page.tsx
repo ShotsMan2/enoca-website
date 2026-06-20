@@ -6,6 +6,7 @@ import HomePageContactForm from "@/components/HomePageContactForm";
 import { getTranslations } from "next-intl/server";
 import Marquee from "@/components/Marquee";
 import CountUp from "@/components/CountUp";
+import ParallaxWrapper from "@/components/ParallaxWrapper";
 export const dynamic = 'force-dynamic';
 
 // getCategories() fonksiyonu kaldırıldı, db.json'dan okunacak.
@@ -80,8 +81,10 @@ export default async function Home() {
               </div>
             </div>
 
-            <div className="relative hidden md:block">
-              <HeroVisual />
+            <div className="relative hidden md:block z-0">
+              <ParallaxWrapper speed={0.15}>
+                <HeroVisual />
+              </ParallaxWrapper>
             </div>
 
           </div>

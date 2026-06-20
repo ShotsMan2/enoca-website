@@ -1,7 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 import { readDB } from "@/lib/db";
 import { notFound } from "next/navigation";
-import { CalendarDays, ArrowLeft, Share2 } from "lucide-react";
+import { CalendarDays, ArrowLeft, Share2, ArrowRight } from "lucide-react";
 import PublicLayout from "@/components/PublicLayout";
 import { NewsItem } from "@/lib/admin-api";
 import { Link } from "@/i18n/routing";
@@ -22,16 +22,22 @@ export async function generateMetadata({ params }: { params: Promise<{ id: strin
   };
 }
 
-export default async function NewsDetailPage({ params }: { params: Promise<{ id: string, locale: string }> }) {
+export default async function HaberDetayPage({ params }: { params: Promise<{ id: string, locale: string }> }) {
   const { id } = await params;
-  const newsId = parseInt(id, 10);
   
   const db = await readDB();
-  const newsItem = db?.news?.find((n: NewsItem) => n.id === newsId && n.status === "published");
+  const allNews = db?.news || [];
+  const publishedNews = allNews.filter((n: NewsItem) => n.status === "published");
   
+  const newsItem = publishedNews.find((n: NewsItem) => n.id === Number(id));
+
   if (!newsItem) {
     notFound();
   }
+
+  // Find next news item
+  const currentIndex = publishedNews.findIndex((n: NewsItem) => n.id === Number(id));
+  const nextNews = currentIndex < publishedNews.length - 1 ? publishedNews[currentIndex + 1] : null;
 
   return (
     <PublicLayout>
@@ -99,6 +105,29 @@ export default async function NewsDetailPage({ params }: { params: Promise<{ id:
             <NewsClientFeatures title={newsItem.title} />
 
           </article>
+
+          {/* Sırada Okunacaklar Modülü */}
+          {nextNews && (
+            <div className="mt-24 pt-12 border-t border-border/50 animate-in fade-in slide-in-from-bottom-10 duration-1000">
+              <p className="text-sm font-bold text-accent tracking-widest uppercase mb-4">Sıradaki Haber</p>
+              <Link 
+                href={`/haberler/${nextNews.id}`}
+                className="group block p-8 sm:p-10 rounded-3xl bg-card border border-border hover:border-accent hover:shadow-2xl hover:shadow-accent/10 transition-all duration-500"
+              >
+                <div className="flex flex-col md:flex-row gap-8 items-center justify-between">
+                  <div className="flex-1 space-y-4">
+                    <h3 className="text-2xl sm:text-3xl font-bold text-foreground group-hover:text-accent transition-colors font-display leading-tight">
+                      {nextNews.title}
+                    </h3>
+                    <p className="text-muted-foreground line-clamp-2">{nextNews.summary}</p>
+                  </div>
+                  <div className="shrink-0 w-16 h-16 rounded-full bg-accent text-white flex items-center justify-center group-hover:translate-x-2 transition-transform duration-300 shadow-lg shadow-accent/20">
+                    <ArrowRight className="w-8 h-8" />
+                  </div>
+                </div>
+              </Link>
+            </div>
+          )}
 
         </div>
       </div>
