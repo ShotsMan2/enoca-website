@@ -3,11 +3,12 @@
 import { useEffect, useState } from "react";
 import AdminHeader from "@/components/admin/AdminHeader";
 import { adminApi, type SiteSettings } from "@/lib/admin-api";
+import { useToast } from "@/components/admin/ToastProvider";
 
 export default function AyarlarPage() {
   const [settings, setSettings] = useState<SiteSettings | null>(null);
   const [saving, setSaving] = useState(false);
-  const [saved, setSaved] = useState(false);
+  const { toast } = useToast();
 
   useEffect(() => {
     adminApi.getSiteSettings().then(setSettings);
@@ -19,8 +20,7 @@ export default function AyarlarPage() {
     setSaving(true);
     await adminApi.updateSiteSettings(settings);
     setSaving(false);
-    setSaved(true);
-    setTimeout(() => setSaved(false), 3000);
+    toast("Site ayarları başarıyla kaydedildi.");
   };
 
   const field = (label: string, key: keyof SiteSettings, type = "text", placeholder = "") => (
@@ -89,21 +89,15 @@ export default function AyarlarPage() {
             <button
               type="submit"
               disabled={saving}
-              className="px-6 py-2.5 bg-blue-600 hover:bg-blue-700 text-white text-sm font-bold rounded-xl transition-colors disabled:opacity-70 flex items-center gap-2"
+              className="px-6 py-2.5 bg-blue-600 hover:bg-blue-700 text-white text-sm font-bold rounded-xl transition-colors disabled:opacity-70 flex items-center gap-2 shadow-lg shadow-blue-500/20"
             >
               {saving ? (
                 <svg className="w-4 h-4 animate-spin" fill="none" viewBox="0 0 24 24"><circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" /><path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" /></svg>
               ) : (
                 <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" /></svg>
               )}
-              {saving ? "Kaydediliyor..." : "Kaydet"}
+              {saving ? "Kaydediliyor..." : "Ayarları Kaydet"}
             </button>
-            {saved && (
-              <span className="text-sm font-semibold text-green-600 dark:text-green-400 flex items-center gap-1.5">
-                <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}><path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" /></svg>
-                Başarıyla kaydedildi!
-              </span>
-            )}
           </div>
 
         </form>

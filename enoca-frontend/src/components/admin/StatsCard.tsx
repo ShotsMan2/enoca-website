@@ -7,6 +7,7 @@ interface StatsCardProps {
   positive?: boolean;
   icon: React.ReactNode;
   color: "blue" | "green" | "purple" | "orange";
+  sparklineData?: number[];
 }
 
 const colorMap = {
@@ -16,11 +17,36 @@ const colorMap = {
   orange: { bg: "bg-orange-50 dark:bg-orange-900/20",icon: "bg-orange-100 dark:bg-orange-900/40 text-orange-600 dark:text-orange-400",text: "text-orange-600 dark:text-orange-400"},
 };
 
-export default function StatsCard({ title, value, change, positive = true, icon, color }: StatsCardProps) {
+export default function StatsCard({ title, value, change, positive = true, icon, color, sparklineData }: StatsCardProps) {
   const c = colorMap[color];
+
+  // Sparkline hesaplama (basit line path)
+  const generateSparkline = () => {
+    if (!sparklineData || sparklineData.length === 0) return null;
+    const max = Math.max(...sparklineData);
+    const min = Math.min(...sparklineData);
+    const range = max - min || 1;
+    
+    const points = sparklineData.map((val, i) => {
+      const x = (i / (sparklineData.length - 1)) * 100;
+      const y = 100 - ((val - min) / range) * 100;
+      return `${x},${y}`;
+    }).join(" L");
+
+    return `M${points}`;
+  };
+
   return (
-    <div className={`rounded-2xl p-6 ${c.bg} border border-white/60 dark:border-gray-700/50 hover:shadow-lg transition-shadow`}>
-      <div className="flex items-center justify-between mb-4">
+    <div className={`group relative rounded-2xl p-6 ${c.bg} border border-white/60 dark:border-gray-700/50 hover:shadow-xl transition-all duration-300 overflow-hidden`}>
+      {/* Background Sparkline */}
+      {sparklineData && (
+        <svg className="absolute bottom-0 left-0 w-full h-1/2 opacity-20 group-hover:opacity-30 transition-opacity duration-300" preserveAspectRatio="none" viewBox="0 0 100 100">
+          <path d={generateSparkline() || ""} fill="none" stroke="currentColor" strokeWidth="3" className={`text-${color}-500`} vectorEffect="non-scaling-stroke" />
+          <path d={`${generateSparkline()} L100,100 L0,100 Z`} fill="currentColor" className={`text-${color}-500/20`} />
+        </svg>
+      )}
+
+      <div className="relative z-10 flex items-center justify-between mb-4">
         <span className={`w-12 h-12 rounded-xl flex items-center justify-center ${c.icon}`}>
           {icon}
         </span>
