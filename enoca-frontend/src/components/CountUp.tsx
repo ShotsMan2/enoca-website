@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useRef } from "react";
 import { motion, useInView, useSpring, useTransform } from "framer-motion";
 
 export default function CountUp({ end, suffix = "", duration = 2, title }: { end: number, suffix?: string, duration?: number, title: string }) {

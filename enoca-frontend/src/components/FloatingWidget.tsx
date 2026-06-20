@@ -19,8 +19,9 @@ export default function FloatingWidget() {
               <X className="w-4 h-4" />
             </button>
           </div>
-          <p className="text-sm text-gray-600 dark:text-gray-400 mb-4 leading-relaxed">
-            Merhaba! Dijital dönüşüm yolculuğunuzda size nasıl yardımcı olabiliriz?
+          <h3 className="font-bold text-gray-800 dark:text-white">Bize Ulaşın</h3>
+          <p className="text-sm text-gray-600 dark:text-gray-300 mb-4">
+            Nasıl yardımcı olabiliriz? Lütfen sorunuzu bırakın, size en kısa sürede dönüş yapacağız.
           </p>
           <a
             href="https://wa.me/908502217354"
@@ -29,7 +30,7 @@ export default function FloatingWidget() {
             className="flex items-center justify-center gap-2 w-full text-center bg-[#25D366] hover:bg-[#20bd5a] text-white font-bold py-2.5 rounded-xl transition-colors shadow-lg shadow-green-500/20 text-sm"
           >
             <MessageCircle className="w-4 h-4" />
-            WhatsApp'tan Yazın
+            WhatsApp&apos;tan Yazın
           </a>
         </div>
       )}

@@ -11,6 +11,13 @@ export interface Stats {
   weeklyVisitors: number;
 }
 
+export interface ActivityLog {
+  id: number;
+  action: string;
+  details: string;
+  timestamp: string;
+}
+
 export interface NewsItem {
   id: number;
   title: string;
@@ -129,6 +136,25 @@ async function postEntity(entity: string, data: unknown) {
 // ─── Servis Fonksiyonları ────────────────────────────────────
 
 export const adminApi = {
+  // Activity Logs
+  async getLogs(): Promise<ActivityLog[]> {
+    try {
+      return await fetchEntity('logs');
+    } catch {
+      return [];
+    }
+  },
+  async logAction(action: string, details: string): Promise<void> {
+    try {
+      const list = await fetchEntity('logs').catch(() => []);
+      const newId = list.length ? Math.max(...list.map((l: ActivityLog) => l.id)) + 1 : 1;
+      list.unshift({ id: newId, action, details, timestamp: new Date().toISOString() });
+      await postEntity('logs', list);
+    } catch (e) {
+      console.error("Log kaydı alınamadı", e);
+    }
+  },
+
   // Stats
   async getStats(): Promise<Stats> {
     return fetchEntity('stats');
@@ -144,6 +170,7 @@ export const adminApi = {
     const newItem = { ...data, id: newId };
     list.unshift(newItem);
     await postEntity('news', list);
+    await this.logAction("Haber Eklendi", `"${data.title}" başlıklı haber eklendi.`);
     return newItem;
   },
   async updateNews(data: NewsItem): Promise<NewsItem> {
@@ -151,12 +178,15 @@ export const adminApi = {
     const i = list.findIndex((n: NewsItem) => n.id === data.id);
     if (i !== -1) list[i] = data;
     await postEntity('news', list);
+    await this.logAction("Haber Güncellendi", `"${data.title}" başlıklı haber güncellendi.`);
     return data;
   },
   async deleteNews(id: number): Promise<void> {
     const list = await fetchEntity('news');
+    const item = list.find((n: NewsItem) => n.id === id);
     const filtered = list.filter((n: NewsItem) => n.id !== id);
     await postEntity('news', filtered);
+    if (item) await this.logAction("Haber Silindi", `"${item.title}" başlıklı haber silindi.`);
   },
 
   // Contact
@@ -186,7 +216,9 @@ export const adminApi = {
     return fetchEntity('settings');
   },
   async updateSiteSettings(data: SiteSettings): Promise<SiteSettings> {
-    return postEntity('settings', data);
+    const res = await postEntity('settings', data);
+    await this.logAction("Ayarlar Güncellendi", "Sistem genel ayarları güncellendi.");
+    return res;
   },
 
   // Hero Settings

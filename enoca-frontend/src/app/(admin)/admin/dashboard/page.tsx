@@ -3,14 +3,17 @@
 import { useEffect, useState } from "react";
 import AdminHeader from "@/components/admin/AdminHeader";
 import StatsCard from "@/components/admin/StatsCard";
-import { adminApi, type Stats, type NewsItem, type ContactMessage } from "@/lib/admin-api";
+import { adminApi, type Stats, type NewsItem, type ContactMessage, type ActivityLog } from "@/lib/admin-api";
 import Link from "next/link";
+import { Clock, TrendingUp, Users } from "lucide-react";
+import { TrafficChart, InteractionChart } from "@/components/admin/DashboardCharts";
 /* eslint-disable @next/next/no-img-element */
 
 export default function DashboardPage() {
   const [stats, setStats] = useState<Stats | null>(null);
   const [recentNews, setRecentNews] = useState<NewsItem[]>([]);
   const [recentMessages, setRecentMessages] = useState<ContactMessage[]>([]);
+  const [logs, setLogs] = useState<ActivityLog[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -18,10 +21,12 @@ export default function DashboardPage() {
       adminApi.getStats(),
       adminApi.getNews(),
       adminApi.getMessages(),
-    ]).then(([s, n, m]) => {
+      adminApi.getLogs()
+    ]).then(([s, n, m, l]) => {
       setStats(s);
       setRecentNews(n.slice(0, 4));
       setRecentMessages(m.slice(0, 5));
+      setLogs(l.slice(0, 10)); // Son 10 log
       setLoading(false);
     });
   }, []);
@@ -71,8 +76,24 @@ export default function DashboardPage() {
           />
         </div>
 
+        {/* Orta Bölüm: Grafikler */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-6">
+          <div className="bg-white dark:bg-gray-900 rounded-2xl border border-gray-200 dark:border-gray-700 p-6">
+            <h2 className="font-bold text-gray-800 dark:text-white mb-6 flex items-center gap-2">
+              <TrendingUp className="w-5 h-5 text-blue-600" /> Haftalık Ziyaretçi Analizi
+            </h2>
+            <TrafficChart />
+          </div>
+          <div className="bg-white dark:bg-gray-900 rounded-2xl border border-gray-200 dark:border-gray-700 p-6">
+            <h2 className="font-bold text-gray-800 dark:text-white mb-6 flex items-center gap-2">
+              <Users className="w-5 h-5 text-emerald-600" /> Etkileşim: Mesajlar vs Başvurular
+            </h2>
+            <InteractionChart />
+          </div>
+        </div>
+
         {/* Alt Bölüm: Son Haberler + Son Mesajlar */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-6">
 
           {/* Son Haberler */}
           <div className="bg-white dark:bg-gray-900 rounded-2xl border border-gray-200 dark:border-gray-700 overflow-hidden">
@@ -136,8 +157,48 @@ export default function DashboardPage() {
               ))}
             </div>
           </div>
-
         </div>
+
+        {/* 3. Bölüm: Aktivite Logları (Audit Trail) */}
+        <div className="bg-white dark:bg-gray-900 rounded-2xl border border-gray-200 dark:border-gray-700 overflow-hidden mt-6">
+          <div className="flex items-center px-6 py-4 border-b border-gray-100 dark:border-gray-800">
+            <h2 className="font-bold text-gray-800 dark:text-white flex items-center gap-2">
+              <Clock className="w-5 h-5 text-blue-600" /> Sistem Aktivite Logları (Audit Trail)
+            </h2>
+          </div>
+          <div className="p-6">
+            {loading ? (
+              <div className="animate-pulse flex gap-4">
+                <div className="w-4 h-full bg-gray-200 dark:bg-gray-700" />
+                <div className="flex-1 space-y-4">
+                  <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-1/4" />
+                  <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-1/2" />
+                </div>
+              </div>
+            ) : logs.length === 0 ? (
+              <p className="text-sm text-gray-500">Henüz kaydedilmiş bir aktivite bulunmuyor.</p>
+            ) : (
+              <div className="relative border-l border-gray-200 dark:border-gray-700 ml-3 space-y-8">
+                {logs.map((log) => (
+                  <div key={log.id} className="relative pl-6">
+                    {/* Timeline Node */}
+                    <span className="absolute -left-1.5 top-1.5 w-3 h-3 rounded-full bg-blue-500 ring-4 ring-white dark:ring-gray-900" />
+                    <div className="flex flex-col sm:flex-row sm:items-baseline gap-2 mb-1">
+                      <h3 className="text-sm font-bold text-gray-900 dark:text-white">{log.action}</h3>
+                      <time className="text-xs text-gray-500">
+                        {new Date(log.timestamp).toLocaleString("tr-TR")}
+                      </time>
+                    </div>
+                    <p className="text-sm text-gray-600 dark:text-gray-400">
+                      {log.details}
+                    </p>
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+        </div>
+
       </main>
     </>
   );

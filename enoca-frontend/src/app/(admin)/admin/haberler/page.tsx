@@ -6,7 +6,7 @@ import AdminHeader from "@/components/admin/AdminHeader";
 import ConfirmModal from "@/components/admin/ConfirmModal";
 import { adminApi, type NewsItem } from "@/lib/admin-api";
 import { useToast } from "@/components/admin/ToastProvider";
-import { ArrowUpDown } from "lucide-react";
+import { ArrowUpDown, Sparkles, Clock } from "lucide-react";
 
 const PAGE_SIZE = 5;
 
@@ -29,6 +29,7 @@ export default function HaberlerPage() {
   // Sorting state
   const [sortField, setSortField] = useState<"title" | "publishedAt">("publishedAt");
   const [sortOrder, setSortOrder] = useState<"asc" | "desc">("desc");
+  const [aiTranslating, setAiTranslating] = useState(false);
 
   const { toast } = useToast();
 
@@ -91,17 +92,38 @@ export default function HaberlerPage() {
   const handleSave = async (e: React.FormEvent) => {
     e.preventDefault();
     setSaving(true);
+    
+    // Okuma süresi hesaplama simulasyonu (WPM: 200)
+    const wordCount = formData.summary.trim().split(/\s+/).length;
+    const readingTime = Math.max(1, Math.ceil(wordCount / 200));
+    
     if (editItem) {
       const updated = await adminApi.updateNews({ ...formData, id: editItem.id });
       setNews(n => n.map(x => x.id === updated.id ? updated : x));
-      toast("Haber güncellendi.", "success");
+      toast(`Haber güncellendi. (Tahmini Okuma: ${readingTime} dk)`, "success");
     } else {
       const created = await adminApi.createNews(formData);
       setNews(n => [created, ...n]);
-      toast("Yeni haber eklendi.", "success");
+      toast(`Yeni haber eklendi. (Tahmini Okuma: ${readingTime} dk)`, "success");
     }
     setSaving(false);
     setShowForm(false);
+  };
+
+  const handleAITranslate = async () => {
+    setAiTranslating(true);
+    toast("Yapay zeka metinleri analiz ediyor...", "success");
+    
+    // Yapay Zeka Çeviri Simülasyonu
+    setTimeout(() => {
+      setFormData(f => ({
+        ...f,
+        title: f.title ? `[EN] ${f.title}` : "[EN] Translated Title",
+        summary: f.summary ? `[Auto-Translated via AI] ${f.summary}` : "This content has been automatically translated by AI to provide a global reading experience.",
+      }));
+      setAiTranslating(false);
+      toast("AI çevirisi başarıyla tamamlandı!", "success");
+    }, 1500);
   };
 
   const inputCls = "w-full h-11 px-4 rounded-xl border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-800 dark:text-white text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all";
@@ -210,12 +232,35 @@ export default function HaberlerPage() {
           <div className="absolute inset-0 bg-black/50 backdrop-blur-sm" onClick={() => setShowForm(false)} />
           <div className="relative bg-white dark:bg-gray-900 rounded-2xl shadow-2xl w-full max-w-lg border border-gray-200 dark:border-gray-700">
             <div className="flex items-center justify-between p-6 border-b border-gray-100 dark:border-gray-800">
-              <h3 className="font-bold text-gray-800 dark:text-white">{editItem ? "Haberi Düzenle" : "Yeni Haber Ekle"}</h3>
-              <button onClick={() => setShowForm(false)} className="w-8 h-8 rounded-lg flex items-center justify-center text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors">×</button>
+              <h3 className="font-bold text-gray-800 dark:text-white flex items-center gap-2">
+                {editItem ? "Haberi Düzenle" : "Yeni Haber Ekle"}
+              </h3>
+              <div className="flex items-center gap-2">
+                <button 
+                  onClick={handleAITranslate} 
+                  type="button"
+                  disabled={aiTranslating}
+                  className="px-3 py-1.5 bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 text-white text-xs font-bold rounded-lg transition-all shadow-lg shadow-purple-500/25 flex items-center gap-1.5 disabled:opacity-50"
+                  title="İçeriği Yapay Zeka ile İngilizceye Çevir"
+                >
+                  {aiTranslating ? <Sparkles className="w-3.5 h-3.5 animate-spin" /> : <Sparkles className="w-3.5 h-3.5" />}
+                  AI Çeviri
+                </button>
+                <button onClick={() => setShowForm(false)} className="w-8 h-8 rounded-lg flex items-center justify-center text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors">×</button>
+              </div>
             </div>
             <form onSubmit={handleSave} className="p-6 space-y-4">
               <div className="space-y-1.5"><label className="text-xs font-semibold text-gray-600 dark:text-gray-400 uppercase">Başlık *</label><input required value={formData.title} onChange={e => setFormData(f => ({ ...f, title: e.target.value }))} className={inputCls} /></div>
-              <div className="space-y-1.5"><label className="text-xs font-semibold text-gray-600 dark:text-gray-400 uppercase">Özet</label><textarea rows={2} value={formData.summary} onChange={e => setFormData(f => ({ ...f, summary: e.target.value }))} className="w-full px-4 py-3 rounded-xl border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-800 dark:text-white text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all resize-none" /></div>
+              <div className="space-y-1.5">
+                <div className="flex items-center justify-between">
+                  <label className="text-xs font-semibold text-gray-600 dark:text-gray-400 uppercase">Özet</label>
+                  <span className="text-[10px] text-gray-400 flex items-center gap-1">
+                    <Clock className="w-3 h-3" />
+                    AI Tahmini: {Math.max(1, Math.ceil((formData.summary || "").trim().split(/\s+/).length / 200))} dk okuma
+                  </span>
+                </div>
+                <textarea rows={2} value={formData.summary} onChange={e => setFormData(f => ({ ...f, summary: e.target.value }))} className="w-full px-4 py-3 rounded-xl border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-800 dark:text-white text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all resize-none" />
+              </div>
               <div className="space-y-1.5"><label className="text-xs font-semibold text-gray-600 dark:text-gray-400 uppercase">Görsel URL</label><input type="url" value={formData.imageUrl} onChange={e => setFormData(f => ({ ...f, imageUrl: e.target.value }))} className={inputCls} placeholder="https://..." /></div>
               <div className="grid grid-cols-2 gap-4">
                 <div className="space-y-1.5"><label className="text-xs font-semibold text-gray-600 dark:text-gray-400 uppercase">Yayın Tarihi</label><input type="date" value={formData.publishedAt} onChange={e => setFormData(f => ({ ...f, publishedAt: e.target.value }))} className={inputCls} /></div>
