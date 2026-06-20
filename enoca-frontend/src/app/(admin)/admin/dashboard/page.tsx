@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import AdminHeader from "@/components/admin/AdminHeader";
 import StatsCard from "@/components/admin/StatsCard";
 import { adminApi, type Stats, type NewsItem, type ContactMessage } from "@/lib/admin-api";
+import Link from "next/link";
 
 export default function DashboardPage() {
   const [stats, setStats] = useState<Stats | null>(null);
@@ -72,7 +73,7 @@ export default function DashboardPage() {
           <div className="bg-white dark:bg-gray-900 rounded-2xl border border-gray-200 dark:border-gray-700 overflow-hidden">
             <div className="flex items-center justify-between px-6 py-4 border-b border-gray-100 dark:border-gray-800">
               <h2 className="font-bold text-gray-800 dark:text-white">Son Haberler</h2>
-              <a href="/admin/haberler" className="text-xs font-semibold text-blue-600 hover:text-blue-700 transition-colors">Tümünü Gör →</a>
+              <Link href="/admin/haberler" className="text-xs font-semibold text-blue-600 hover:text-blue-700 transition-colors">Tümünü Gör →</Link>
             </div>
             <div className="divide-y divide-gray-100 dark:divide-gray-800">
               {loading ? (
@@ -88,6 +89,7 @@ export default function DashboardPage() {
               ) : recentNews.map(n => (
                 <div key={n.id} className="px-6 py-4 flex items-center gap-3 hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors">
                   <div className="w-10 h-10 rounded-xl overflow-hidden flex-shrink-0 bg-gray-100">
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img src={n.imageUrl} alt="" className="w-full h-full object-cover" />
                   </div>
                   <div className="flex-1 min-w-0">
@@ -106,7 +108,7 @@ export default function DashboardPage() {
           <div className="bg-white dark:bg-gray-900 rounded-2xl border border-gray-200 dark:border-gray-700 overflow-hidden">
             <div className="flex items-center justify-between px-6 py-4 border-b border-gray-100 dark:border-gray-800">
               <h2 className="font-bold text-gray-800 dark:text-white">Son Mesajlar</h2>
-              <a href="/admin/iletisim" className="text-xs font-semibold text-blue-600 hover:text-blue-700 transition-colors">Tümünü Gör →</a>
+              <Link href="/admin/iletisim" className="text-xs font-semibold text-blue-600 hover:text-blue-700 transition-colors">Tümünü Gör →</Link>
             </div>
             <div className="divide-y divide-gray-100 dark:divide-gray-800">
               {loading ? (

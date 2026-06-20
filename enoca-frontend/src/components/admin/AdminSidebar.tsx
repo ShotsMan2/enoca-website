@@ -61,6 +61,15 @@ const navItems = [
     ),
     badge: true,
   },
+  {
+    label: "Kariyer",
+    href: "/admin/kariyer",
+    icon: (
+      <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.8}>
+        <path strokeLinecap="round" strokeLinejoin="round" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+      </svg>
+    ),
+  },
 ];
 
 export default function AdminSidebar() {
@@ -140,9 +149,8 @@ export default function AdminSidebar() {
         })}
       </nav>
 
-      {/* Footer */}
       <div className={`p-4 border-t border-gray-200 dark:border-gray-700 flex-shrink-0 ${collapsed ? "flex justify-center" : ""}`}>
-        <Link
+        <a
           href="/"
           target="_blank"
           className="flex items-center gap-2 text-xs text-gray-500 hover:text-blue-600 transition-colors"
@@ -152,7 +160,7 @@ export default function AdminSidebar() {
             <path strokeLinecap="round" strokeLinejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
           </svg>
           {!collapsed && <span>Siteyi Görüntüle</span>}
-        </Link>
+        </a>
       </div>
     </aside>
   );

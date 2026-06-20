@@ -1,15 +1,20 @@
-import Link from "next/link";
+import { Link } from "@/i18n/routing";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft, ChevronRight } from "lucide-react";
+
+import { getTranslations } from "next-intl/server";
+import { readDB } from "@/lib/db";
+import { ContentPage } from "@/lib/admin-api";
+import PublicLayout from "@/components/PublicLayout";
 
 export default async function CatchAllPage({
     params
 }: {
-    params: Promise<{ slug: string[] }>
+    params: Promise<{ slug: string[], locale: string }>
 }) {
-    // Tüm iç içe URL kırılımlarını alıyoruz (Örn: ['cozumler', 'hybris', 'b2b-ticaret'])
     const resolvedParams = await params;
     const slugArray = resolvedParams.slug || [];
+    const t = await getTranslations('Page');
 
     // Son kırılımı sayfa başlığı yapıyoruz
     const pageTitle = slugArray.length > 0 
@@ -21,7 +26,12 @@ export default async function CatchAllPage({
         ? slugArray[0].replace(/-/g, ' ') 
         : 'ENOCA™';
 
+    const db = await readDB();
+    const currentSlug = "/" + slugArray.join("/");
+    const dynamicPage = db?.pages?.find((p: ContentPage) => p.slug === currentSlug && p.status === "published");
+
     return (
+        <PublicLayout>
         <div className="min-h-screen bg-background relative overflow-hidden">
             {/* Dekoratif Arka Plan Işıltısı */}
             <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-accent/5 rounded-full blur-[120px] -z-10" />
@@ -33,7 +43,7 @@ export default async function CatchAllPage({
                     <Button variant="ghost" size="sm" asChild className="pl-2 group">
                         <Link href="/">
                             <ArrowLeft className="w-4 h-4 mr-2 group-hover:-translate-x-1 transition-transform" />
-                            Ana Sayfaya Dön
+                            {t('backToHome')}
                         </Link>
                     </Button>
                 </div>
@@ -75,31 +85,37 @@ export default async function CatchAllPage({
                         {/* Subtle inner glow */}
                         <div className="absolute -bottom-20 -right-20 w-40 h-40 bg-accent/10 rounded-full blur-[50px] -z-10" />
                         
-                        <p className="text-lg md:text-xl text-muted-foreground leading-relaxed">
-                            Bu sayfa Next.js <strong>Catch-All Routing</strong> özelliği sayesinde veritabanından gelen URL'lerin uzunluğu fark etmeksizin dinamik olarak oluşturuldu. 
-                            Şu anda <span className="font-medium text-foreground capitalize">{pageTitle}</span> içeriğini görüntülüyorsunuz.
-                        </p>
-                        
-                        <div className="mt-10 pt-8 border-t border-border/50">
-                            <h3 className="text-xl font-bold text-foreground mb-6">Enoca Teknolojileri ve Mimarisi</h3>
-                            <ul className="space-y-4 text-muted-foreground">
-                                <li className="flex items-start gap-4">
-                                    <div className="w-8 h-8 rounded-full bg-accent/10 text-accent flex-shrink-0 flex items-center justify-center text-sm font-bold mt-0.5">✓</div>
-                                    <p>Her türlü derinliğe sahip menü ve sayfa (Örn: Çözümler &gt; SAP Çözümleri &gt; SAP HANA) 404 hatası vermeden bu şablona oturur.</p>
-                                </li>
-                                <li className="flex items-start gap-4">
-                                    <div className="w-8 h-8 rounded-full bg-accent/10 text-accent flex-shrink-0 flex items-center justify-center text-sm font-bold mt-0.5">✓</div>
-                                    <p>Admin panelinden eklenecek olan yeni alt menüler anında devreye girer.</p>
-                                </li>
-                                <li className="flex items-start gap-4">
-                                    <div className="w-8 h-8 rounded-full bg-accent/10 text-accent flex-shrink-0 flex items-center justify-center text-sm font-bold mt-0.5">✓</div>
-                                    <p>Minimalist Modern tasarım kuralları, tüm alt sayfalara global olarak yansır.</p>
-                                </li>
-                            </ul>
-                        </div>
+                        {dynamicPage ? (
+                            <div className="prose prose-lg dark:prose-invert max-w-none" dangerouslySetInnerHTML={{ __html: dynamicPage.content }} />
+                        ) : (
+                            <>
+                                <p className="text-lg md:text-xl text-muted-foreground leading-relaxed">
+                                    {t('catchAllDesc', { pageTitle })}
+                                </p>
+                                
+                                <div className="mt-10 pt-8 border-t border-border/50">
+                                    <h3 className="text-xl font-bold text-foreground mb-6">{t('techTitle')}</h3>
+                                    <ul className="space-y-4 text-muted-foreground">
+                                        <li className="flex items-start gap-4">
+                                            <div className="w-8 h-8 rounded-full bg-accent/10 text-accent flex-shrink-0 flex items-center justify-center text-sm font-bold mt-0.5">✓</div>
+                                            <p>{t('techPoint1')}</p>
+                                        </li>
+                                        <li className="flex items-start gap-4">
+                                            <div className="w-8 h-8 rounded-full bg-accent/10 text-accent flex-shrink-0 flex items-center justify-center text-sm font-bold mt-0.5">✓</div>
+                                            <p>{t('techPoint2')}</p>
+                                        </li>
+                                        <li className="flex items-start gap-4">
+                                            <div className="w-8 h-8 rounded-full bg-accent/10 text-accent flex-shrink-0 flex items-center justify-center text-sm font-bold mt-0.5">✓</div>
+                                            <p>{t('techPoint3')}</p>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </>
+                        )}
                     </div>
                 </div>
             </div>
         </div>
+    </PublicLayout>
     );
 }

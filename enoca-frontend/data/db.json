@@ -1,0 +1,270 @@
+{
+  "stats": {
+    "totalProjects": 42,
+    "pendingMessages": 8,
+    "activeNews": 12,
+    "weeklyVisitors": 3450
+  },
+  "news": [
+    {
+      "id": 1,
+      "title": "Enoca Yeni Nesil E-Ticaret Çözümlerini Duyurdu",
+      "summary": "B2B ve B2C e-ticaret altyapılarında devrim yaratacak yeni SAP CX modülleri tanıtıldı.",
+      "imageUrl": "https://picsum.photos/seed/news1/400/200",
+      "publishedAt": "2025-06-15",
+      "status": "published"
+    },
+    {
+      "id": 2,
+      "title": "Büyük Veri Analitiğinde Yeni Dönem",
+      "summary": "SAP HANA entegrasyonu ile şirketlerin veri işleme hızı %400 arttı.",
+      "imageUrl": "https://picsum.photos/seed/news2/400/200",
+      "publishedAt": "2025-06-10",
+      "status": "published"
+    },
+    {
+      "id": 3,
+      "title": "Yılın Teknoloji Partneri Ödülü",
+      "summary": "Enoca, bu yıl da inovasyon ve müşteri memnuniyeti alanında ödüle layık görüldü.",
+      "imageUrl": "https://picsum.photos/seed/news3/400/200",
+      "publishedAt": "2025-06-05",
+      "status": "published"
+    },
+    {
+      "id": 4,
+      "title": "Bulut Bilişim Semineri Tamamlandı",
+      "summary": "Sektör liderlerinin katılımıyla gerçekleşen seminer büyük ilgi gördü.",
+      "imageUrl": "https://picsum.photos/seed/news4/400/200",
+      "publishedAt": "2025-05-20",
+      "status": "published"
+    },
+    {
+      "id": 5,
+      "title": "Enoca 2025 Teknoloji Raporu Yayınlandı",
+      "summary": "Yıllık teknoloji trendleri raporumuz hazır.",
+      "imageUrl": "https://picsum.photos/seed/news5/400/200",
+      "publishedAt": "2025-05-15",
+      "status": "published"
+    },
+    {
+      "id": 6,
+      "title": "Kariyer Fırsatları: SAP Danışmanı Aranıyor",
+      "summary": "Yeni pozisyonlar için başvurular başladı.",
+      "imageUrl": "https://picsum.photos/seed/news6/400/200",
+      "publishedAt": "2025-05-10",
+      "status": "draft"
+    }
+  ],
+  "messages": [
+    {
+      "id": 1,
+      "name": "Ahmet Yılmaz",
+      "email": "ahmet@firma.com",
+      "message": "SAP CX Hybris çözümleriniz hakkında bilgi almak istiyorum. Firmamız için B2B e-ticaret platformu arıyoruz.",
+      "receivedAt": "2025-06-18T10:30:00Z",
+      "isRead": false
+    },
+    {
+      "id": 2,
+      "name": "Fatma Kaya",
+      "email": "fatma@sirket.com.tr",
+      "message": "Danışmanlık hizmetlerinizin fiyatlandırması hakkında bilgi alabilir miyim?",
+      "receivedAt": "2025-06-17T14:15:00Z",
+      "isRead": false
+    },
+    {
+      "id": 3,
+      "name": "Mehmet Demir",
+      "email": "m.demir@holding.com",
+      "message": "Referanslarınızı inceledim, benzer bir proje için görüşmek istiyorum.",
+      "receivedAt": "2025-06-16T09:00:00Z",
+      "isRead": true
+    },
+    {
+      "id": 4,
+      "name": "Zeynep Arslan",
+      "email": "zeynep@startup.io",
+      "message": "Küçük ölçekli bir işletme için SAP çözümleri uygun mudur?",
+      "receivedAt": "2025-06-15T16:45:00Z",
+      "isRead": true
+    },
+    {
+      "id": 5,
+      "name": "Can Öztürk",
+      "email": "can@teknoloji.com",
+      "message": "Sistem izleme çözümleriniz hakkında demo talep ediyorum.",
+      "receivedAt": "2025-06-14T11:20:00Z",
+      "isRead": true
+    },
+    {
+      "id": 6,
+      "name": "Elif Şahin",
+      "email": "elif@arge.net",
+      "message": "AR-GE departmanımız için yazılım desteği almak istiyoruz.",
+      "receivedAt": "2025-06-13T08:55:00Z",
+      "isRead": false
+    },
+    {
+      "id": 7,
+      "name": "Burak Güler",
+      "email": "b.guler@perakende.com",
+      "message": "Gratis ile yaptığınız projenin detaylarını öğrenebilir miyim?",
+      "receivedAt": "2025-06-12T13:10:00Z",
+      "isRead": false
+    }
+  ],
+  "settings": {
+    "email": "contact@enoca.com",
+    "phone": "+90 850 221 73 54",
+    "linkedinUrl": "https://linkedin.com/company/enoca",
+    "twitterUrl": "https://twitter.com/enoca_",
+    "privacyUrl": "/gizlilik",
+    "termsUrl": "/kullanim-kosullari"
+  },
+  "hero": {
+    "mainTitle": "WE DO SAP CX",
+    "highlightedWord": "HYBRIS",
+    "subtitle": "Experienced In SAP CX Hybris Delivery",
+    "description": "Enoca olarak SAP CX Hybris platformunda uzmanlaşmış danışmanlık ve geliştirme hizmetleri sunuyoruz.",
+    "button1Text": "SAP CX Hybris B2C E-Ticaret",
+    "button1Url": "/cozumler/hybris-cozumleri/hybris-b2c-ticaret",
+    "button2Text": "SAP CX Hybris B2B E-Ticaret",
+    "button2Url": "/cozumler/hybris-cozumleri/hybris-b2b-ticaret"
+  },
+  "pages": [
+    {
+      "id": 1,
+      "menuTitle": "SAP CX Hybris B2C E-Ticaret",
+      "slug": "/cozumler/hybris-cozumleri/hybris-b2c-ticaret",
+      "category": "Çözümler",
+      "content": "<h2>SAP CX Hybris B2C E-Ticaret</h2><p>Müşterilerinize benzersiz bir alışveriş deneyimi sunun. SAP CX Hybris B2C platformu ile esnek, ölçeklenebilir ve yüksek performanslı bir e-ticaret altyapısı kurun.</p>",
+      "status": "published",
+      "updatedAt": "2025-06-10"
+    },
+    {
+      "id": 2,
+      "menuTitle": "SAP CX Hybris B2B E-Ticaret",
+      "slug": "/cozumler/hybris-cozumleri/hybris-b2b-ticaret",
+      "category": "Çözümler",
+      "content": "<h2>SAP CX Hybris B2B E-Ticaret</h2><p>Kurumsal müşterileriniz için güçlü B2B e-ticaret çözümleri. Toplu sipariş, özel fiyatlandırma ve çoklu kullanıcı yönetimi özellikleriyle iş süreçlerinizi dijitalleştirin.</p>",
+      "status": "published",
+      "updatedAt": "2025-06-08"
+    },
+    {
+      "id": 3,
+      "menuTitle": "Metodoloji",
+      "slug": "/projeler/metodoloji",
+      "category": "Projeler",
+      "content": "<h2>Metodoloji</h2><p>Çevik geliştirme metodolojisi ile projelerinizi zamanında ve bütçe dahilinde teslim ediyoruz.</p>",
+      "status": "published",
+      "updatedAt": "2025-05-30"
+    },
+    {
+      "id": 4,
+      "menuTitle": "Hakkımızda",
+      "slug": "/kurumsal/hakkimizda",
+      "category": "Kurumsal",
+      "content": "<h2>Hakkımızda</h2><p>Enoca, 2013 yılından bu yana SAP teknolojileri alanında uzmanlaşmış bir teknoloji danışmanlığı firmasıdır. Selim efe</p>",
+      "status": "published",
+      "updatedAt": "2026-06-19T20:12:25.036Z"
+    },
+    {
+      "id": 5,
+      "menuTitle": "SAP HANA",
+      "slug": "/cozumler/sap-cozumleri/sap-hana",
+      "category": "Çözümler",
+      "content": "<h2>SAP HANA</h2><p>In-memory computing teknolojisi ile gerçek zamanlı veri analizi yapın.</p>",
+      "status": "draft",
+      "updatedAt": "2025-06-15"
+    },
+    {
+      "menuTitle": "efe",
+      "slug": "/cozumler/yeni-sayfa",
+      "category": "Çözümler",
+      "content": "<p>seilm efe uysaşl</p>",
+      "status": "published",
+      "updatedAt": "2026-06-19T20:41:25.583Z",
+      "id": 6
+    },
+    {
+      "menuTitle": "elprimo",
+      "slug": "/projeler/metoer",
+      "category": "Projeler",
+      "content": "<p>selim efe uysal</p>",
+      "status": "published",
+      "updatedAt": "2026-06-19T20:41:27.353Z",
+      "id": 7
+    }
+  ],
+  "jobs": [
+    {
+      "id": 1,
+      "title": "Frontend Developer (React/Next.js)",
+      "department": "Yazılım Geliştirme",
+      "location": "İstanbul (Hibrit)",
+      "type": "Tam Zamanlı",
+      "description": "Modern web teknolojileri ile kurumsal projelere arayüz geliştirecek takım arkadaşı arıyoruz.",
+      "requirements": [
+        "En az 3 yıl React tecrübesi",
+        "Next.js App Router bilgisi",
+        "TypeScript hakimiyeti",
+        "Tailwind CSS deneyimi"
+      ],
+      "status": "active",
+      "postedAt": "2025-06-15"
+    },
+    {
+      "id": 2,
+      "title": "SAP Hybris Danışmanı",
+      "department": "Danışmanlık",
+      "location": "Ankara (Uzaktan)",
+      "type": "Tam Zamanlı",
+      "description": "Büyük ölçekli e-ticaret projelerinde yer alacak deneyimli SAP Hybris danışmanı aranıyor.",
+      "requirements": [
+        "SAP Commerce Cloud tecrübesi",
+        "Java/Spring bilgisi",
+        "İyi derecede İngilizce"
+      ],
+      "status": "active",
+      "postedAt": "2025-06-10"
+    },
+    {
+      "id": 3,
+      "title": "UI/UX Designer",
+      "department": "Tasarım",
+      "location": "İstanbul (Ofis)",
+      "type": "Tam Zamanlı",
+      "description": "Kurumsal müşterilerimiz için yenilikçi kullanıcı deneyimleri tasarlayacak.",
+      "requirements": [
+        "Figma uzmanlığı",
+        "Kullanıcı testleri planlama",
+        "Portfolyo sunabilme"
+      ],
+      "status": "closed",
+      "postedAt": "2025-05-20"
+    }
+  ],
+  "applications": [
+    {
+      "id": 1,
+      "jobId": 1,
+      "jobTitle": "Frontend Developer",
+      "name": "Ali Veli",
+      "email": "ali@veli.com",
+      "phone": "0555 123 4567",
+      "portfolioUrl": "https://github.com/aliveli",
+      "status": "new",
+      "appliedAt": "2025-06-16T10:00:00Z"
+    },
+    {
+      "id": 2,
+      "jobId": 2,
+      "jobTitle": "SAP Hybris Danışmanı",
+      "name": "Ayşe Yılmaz",
+      "email": "ayse@yilmaz.com",
+      "phone": "0532 987 6543",
+      "status": "reviewed",
+      "appliedAt": "2025-06-11T14:30:00Z"
+    }
+  ]
+}

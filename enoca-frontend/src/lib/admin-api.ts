@@ -59,151 +59,183 @@ export interface ContentPage {
   updatedAt: string;
 }
 
-// ─── Mock Veriler ───────────────────────────────────────────
+export interface JobPosting {
+  id: number;
+  title: string;
+  department: string;
+  location: string;
+  type: string; // Tam Zamanlı, Yarı Zamanlı vs.
+  description: string;
+  requirements: string[];
+  status: "active" | "closed";
+  postedAt: string;
+}
 
-const mockStats: Stats = {
-  totalProjects: 48,
-  pendingMessages: 7,
-  activeNews: 12,
-  weeklyVisitors: 3240,
-};
+export interface JobApplication {
+  id: number;
+  jobId: number;
+  jobTitle: string;
+  name: string;
+  email: string;
+  phone: string;
+  portfolioUrl?: string;
+  status: "new" | "reviewed" | "rejected" | "accepted";
+  appliedAt: string;
+}
 
-let mockNews: NewsItem[] = [
-  { id: 1, title: "SAP CX Hybris B2C E-Ticaret Çözümümüz Güncellendi", summary: "Yeni versiyon ile performans %40 arttı.", imageUrl: "https://picsum.photos/seed/news1/400/200", publishedAt: "2025-06-10", status: "published" },
-  { id: 2, title: "Enoca, LC Waikiki Projesini Başarıyla Teslim Etti", summary: "Proje 6 ay süreyle başarıyla yürütüldü.", imageUrl: "https://picsum.photos/seed/news2/400/200", publishedAt: "2025-06-05", status: "published" },
-  { id: 3, title: "SAP HANA Entegrasyonu Hakkında Yeni Makale", summary: "In-memory computing avantajları anlatıldı.", imageUrl: "https://picsum.photos/seed/news3/400/200", publishedAt: "2025-05-28", status: "draft" },
-  { id: 4, title: "Adese AVM İle Stratejik Ortaklık", summary: "Yeni e-ticaret altyapısı kuruldu.", imageUrl: "https://picsum.photos/seed/news4/400/200", publishedAt: "2025-05-20", status: "published" },
-  { id: 5, title: "Enoca 2025 Teknoloji Raporu Yayınlandı", summary: "Yıllık teknoloji trendleri raporumuz hazır.", imageUrl: "https://picsum.photos/seed/news5/400/200", publishedAt: "2025-05-15", status: "published" },
-  { id: 6, title: "Kariyer Fırsatları: SAP Danışmanı Aranıyor", summary: "Yeni pozisyonlar için başvurular başladı.", imageUrl: "https://picsum.photos/seed/news6/400/200", publishedAt: "2025-05-10", status: "draft" },
-];
+// ─── API Helper Fonksiyonu ────────────────────────────────────
+async function fetchEntity(entity: string) {
+  const res = await fetch(`/api/admin/${entity}`);
+  if (!res.ok) throw new Error('API Hatası');
+  return res.json();
+}
 
-let mockMessages: ContactMessage[] = [
-  { id: 1, name: "Ahmet Yılmaz", email: "ahmet@firma.com", message: "SAP CX Hybris çözümleriniz hakkında bilgi almak istiyorum. Firmamız için B2B e-ticaret platformu arıyoruz.", receivedAt: "2025-06-18T10:30:00Z", isRead: false },
-  { id: 2, name: "Fatma Kaya", email: "fatma@sirket.com.tr", message: "Danışmanlık hizmetlerinizin fiyatlandırması hakkında bilgi alabilir miyim?", receivedAt: "2025-06-17T14:15:00Z", isRead: false },
-  { id: 3, name: "Mehmet Demir", email: "m.demir@holding.com", message: "Referanslarınızı inceledim, benzer bir proje için görüşmek istiyorum.", receivedAt: "2025-06-16T09:00:00Z", isRead: true },
-  { id: 4, name: "Zeynep Arslan", email: "zeynep@startup.io", message: "Küçük ölçekli bir işletme için SAP çözümleri uygun mudur?", receivedAt: "2025-06-15T16:45:00Z", isRead: true },
-  { id: 5, name: "Can Öztürk", email: "can@teknoloji.com", message: "Sistem izleme çözümleriniz hakkında demo talep ediyorum.", receivedAt: "2025-06-14T11:20:00Z", isRead: true },
-  { id: 6, name: "Elif Şahin", email: "elif@arge.net", message: "AR-GE departmanımız için yazılım desteği almak istiyoruz.", receivedAt: "2025-06-13T08:55:00Z", isRead: false },
-  { id: 7, name: "Burak Güler", email: "b.guler@perakende.com", message: "Gratis ile yaptığınız projenin detaylarını öğrenebilir miyim?", receivedAt: "2025-06-12T13:10:00Z", isRead: false },
-];
-
-let mockSiteSettings: SiteSettings = {
-  email: "contact@enoca.com",
-  phone: "+90 850 221 73 54",
-  linkedinUrl: "https://linkedin.com/company/enoca",
-  twitterUrl: "https://twitter.com/enoca_",
-  privacyUrl: "/gizlilik",
-  termsUrl: "/kullanim-kosullari",
-};
-
-let mockHeroSettings: HeroSettings = {
-  mainTitle: "WE DO SAP CX",
-  highlightedWord: "HYBRIS",
-  subtitle: "Experienced In SAP CX Hybris Delivery",
-  description: "Enoca olarak SAP CX Hybris platformunda uzmanlaşmış danışmanlık ve geliştirme hizmetleri sunuyoruz.",
-  button1Text: "SAP CX Hybris B2C E-Ticaret",
-  button1Url: "/cozumler/hybris-cozumleri/hybris-b2c-ticaret",
-  button2Text: "SAP CX Hybris B2B E-Ticaret",
-  button2Url: "/cozumler/hybris-cozumleri/hybris-b2b-ticaret",
-};
-
-let mockContentPages: ContentPage[] = [
-  { id: 1, menuTitle: "SAP CX Hybris B2C E-Ticaret", slug: "/cozumler/hybris-cozumleri/hybris-b2c-ticaret", category: "Çözümler", content: "<h2>SAP CX Hybris B2C E-Ticaret</h2><p>Müşterilerinize benzersiz bir alışveriş deneyimi sunun. SAP CX Hybris B2C platformu ile esnek, ölçeklenebilir ve yüksek performanslı bir e-ticaret altyapısı kurun.</p>", status: "published", updatedAt: "2025-06-10" },
-  { id: 2, menuTitle: "SAP CX Hybris B2B E-Ticaret", slug: "/cozumler/hybris-cozumleri/hybris-b2b-ticaret", category: "Çözümler", content: "<h2>SAP CX Hybris B2B E-Ticaret</h2><p>Kurumsal müşterileriniz için güçlü B2B e-ticaret çözümleri. Toplu sipariş, özel fiyatlandırma ve çoklu kullanıcı yönetimi özellikleriyle iş süreçlerinizi dijitalleştirin.</p>", status: "published", updatedAt: "2025-06-08" },
-  { id: 3, menuTitle: "Metodoloji", slug: "/projeler/metodoloji", category: "Projeler", content: "<h2>Metodoloji</h2><p>Çevik geliştirme metodolojisi ile projelerinizi zamanında ve bütçe dahilinde teslim ediyoruz.</p>", status: "published", updatedAt: "2025-05-30" },
-  { id: 4, menuTitle: "Hakkımızda", slug: "/kurumsal/hakkimizda", category: "Kurumsal", content: "<h2>Hakkımızda</h2><p>Enoca, 2013 yılından bu yana SAP teknolojileri alanında uzmanlaşmış bir teknoloji danışmanlığı firmasıdır.</p>", status: "published", updatedAt: "2025-05-25" },
-  { id: 5, menuTitle: "SAP HANA", slug: "/cozumler/sap-cozumleri/sap-hana", category: "Çözümler", content: "<h2>SAP HANA</h2><p>In-memory computing teknolojisi ile gerçek zamanlı veri analizi yapın.</p>", status: "draft", updatedAt: "2025-06-15" },
-];
+async function postEntity(entity: string, data: unknown) {
+  const res = await fetch(`/api/admin/${entity}`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(data),
+  });
+  if (!res.ok) throw new Error('API Hatası');
+  const result = await res.json();
+  return result.data;
+}
 
 // ─── Servis Fonksiyonları ────────────────────────────────────
 
 export const adminApi = {
   // Stats
   async getStats(): Promise<Stats> {
-    await delay(300);
-    return { ...mockStats };
+    return fetchEntity('stats');
   },
 
   // News
   async getNews(): Promise<NewsItem[]> {
-    await delay(400);
-    return [...mockNews];
+    return fetchEntity('news');
   },
   async createNews(data: Omit<NewsItem, "id">): Promise<NewsItem> {
-    await delay(500);
-    const newItem = { ...data, id: Date.now() };
-    mockNews = [newItem, ...mockNews];
+    const list = await fetchEntity('news');
+    const newId = list.length ? Math.max(...list.map((n: NewsItem) => n.id)) + 1 : 1;
+    const newItem = { ...data, id: newId };
+    list.unshift(newItem);
+    await postEntity('news', list);
     return newItem;
   },
-  async updateNews(id: number, data: Partial<NewsItem>): Promise<NewsItem> {
-    await delay(400);
-    mockNews = mockNews.map(n => n.id === id ? { ...n, ...data } : n);
-    return mockNews.find(n => n.id === id)!;
+  async updateNews(data: NewsItem): Promise<NewsItem> {
+    const list = await fetchEntity('news');
+    const i = list.findIndex((n: NewsItem) => n.id === data.id);
+    if (i !== -1) list[i] = data;
+    await postEntity('news', list);
+    return data;
   },
   async deleteNews(id: number): Promise<void> {
-    await delay(300);
-    mockNews = mockNews.filter(n => n.id !== id);
+    const list = await fetchEntity('news');
+    const filtered = list.filter((n: NewsItem) => n.id !== id);
+    await postEntity('news', filtered);
   },
 
-  // Messages
+  // Contact
   async getMessages(): Promise<ContactMessage[]> {
-    await delay(400);
-    return [...mockMessages];
+    return fetchEntity('messages');
+  },
+  async createMessage(data: Omit<ContactMessage, "id" | "receivedAt" | "isRead">): Promise<void> {
+    const list = await fetchEntity('messages');
+    const newId = list.length ? Math.max(...list.map((m: ContactMessage) => m.id)) + 1 : 1;
+    list.unshift({ ...data, id: newId, receivedAt: new Date().toISOString(), isRead: false });
+    await postEntity('messages', list);
   },
   async markAsRead(id: number): Promise<void> {
-    await delay(200);
-    mockMessages = mockMessages.map(m => m.id === id ? { ...m, isRead: true } : m);
+    const list = await fetchEntity('messages');
+    const msg = list.find((m: ContactMessage) => m.id === id);
+    if (msg) msg.isRead = true;
+    await postEntity('messages', list);
   },
   async deleteMessage(id: number): Promise<void> {
-    await delay(300);
-    mockMessages = mockMessages.filter(m => m.id !== id);
+    const list = await fetchEntity('messages');
+    const filtered = list.filter((m: ContactMessage) => m.id !== id);
+    await postEntity('messages', filtered);
   },
 
   // Site Settings
   async getSiteSettings(): Promise<SiteSettings> {
-    await delay(300);
-    return { ...mockSiteSettings };
+    return fetchEntity('settings');
   },
   async updateSiteSettings(data: SiteSettings): Promise<SiteSettings> {
-    await delay(500);
-    mockSiteSettings = { ...data };
-    return { ...mockSiteSettings };
+    return postEntity('settings', data);
   },
 
   // Hero Settings
   async getHeroSettings(): Promise<HeroSettings> {
-    await delay(300);
-    return { ...mockHeroSettings };
+    return fetchEntity('hero');
   },
   async updateHeroSettings(data: HeroSettings): Promise<HeroSettings> {
-    await delay(500);
-    mockHeroSettings = { ...data };
-    return { ...mockHeroSettings };
+    return postEntity('hero', data);
   },
 
   // Content Pages
   async getContentPages(): Promise<ContentPage[]> {
-    await delay(400);
-    return [...mockContentPages];
+    return fetchEntity('pages');
   },
-  async updateContentPage(id: number, data: Partial<ContentPage>): Promise<ContentPage> {
-    await delay(500);
-    mockContentPages = mockContentPages.map(p => p.id === id ? { ...p, ...data } : p);
-    return mockContentPages.find(p => p.id === id)!;
+  async createContentPage(data: Omit<ContentPage, "id" | "updatedAt">): Promise<ContentPage> {
+    const list = await fetchEntity('pages');
+    const newId = list.length ? Math.max(...list.map((p: ContentPage) => p.id)) + 1 : 1;
+    const newItem = { ...data, id: newId, updatedAt: new Date().toISOString() };
+    list.push(newItem);
+    await postEntity('pages', list);
+    return newItem;
   },
-  async createContentPage(data: Omit<ContentPage, "id">): Promise<ContentPage> {
-    await delay(500);
-    const newPage = { ...data, id: Date.now() };
-    mockContentPages = [...mockContentPages, newPage];
-    return newPage;
+  async updateContentPage(data: ContentPage): Promise<ContentPage> {
+    const list = await fetchEntity('pages');
+    const i = list.findIndex((p: ContentPage) => p.id === data.id);
+    if (i !== -1) list[i] = { ...data, updatedAt: new Date().toISOString() };
+    await postEntity('pages', list);
+    return data;
   },
   async deleteContentPage(id: number): Promise<void> {
-    await delay(300);
-    mockContentPages = mockContentPages.filter(p => p.id !== id);
+    const list = await fetchEntity('pages');
+    const filtered = list.filter((p: ContentPage) => p.id !== id);
+    await postEntity('pages', filtered);
   },
-};
 
-// ─── Yardımcı ────────────────────────────────────────────────
-function delay(ms: number) {
-  return new Promise(resolve => setTimeout(resolve, ms));
-}
+  // Jobs
+  async getJobs(): Promise<JobPosting[]> {
+    return fetchEntity('jobs');
+  },
+  async createJob(data: Omit<JobPosting, "id" | "postedAt">): Promise<JobPosting> {
+    const list = await fetchEntity('jobs');
+    const newId = list.length ? Math.max(...list.map((j: JobPosting) => j.id)) + 1 : 1;
+    const newItem = { ...data, id: newId, postedAt: new Date().toISOString().split("T")[0] };
+    list.unshift(newItem);
+    await postEntity('jobs', list);
+    return newItem;
+  },
+  async updateJob(data: JobPosting): Promise<JobPosting> {
+    const list = await fetchEntity('jobs');
+    const i = list.findIndex((j: JobPosting) => j.id === data.id);
+    if (i !== -1) list[i] = data;
+    await postEntity('jobs', list);
+    return data;
+  },
+  async deleteJob(id: number): Promise<void> {
+    const list = await fetchEntity('jobs');
+    const filtered = list.filter((j: JobPosting) => j.id !== id);
+    await postEntity('jobs', filtered);
+  },
+
+  // Applications
+  async getApplications(): Promise<JobApplication[]> {
+    return fetchEntity('applications');
+  },
+  async createApplication(data: Omit<JobApplication, "id" | "status" | "appliedAt">): Promise<void> {
+    const list = await fetchEntity('applications');
+    const newId = list.length ? Math.max(...list.map((a: JobApplication) => a.id)) + 1 : 1;
+    list.unshift({ ...data, id: newId, status: "new", appliedAt: new Date().toISOString() });
+    await postEntity('applications', list);
+  },
+  async updateApplicationStatus(id: number, status: JobApplication["status"]): Promise<void> {
+    const list = await fetchEntity('applications');
+    const app = list.find((a: JobApplication) => a.id === id);
+    if (app) app.status = status;
+    await postEntity('applications', list);
+  }
+};

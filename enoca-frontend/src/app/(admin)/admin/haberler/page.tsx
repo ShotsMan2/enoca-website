@@ -59,7 +59,7 @@ export default function HaberlerPage() {
     e.preventDefault();
     setSaving(true);
     if (editItem) {
-      const updated = await adminApi.updateNews(editItem.id, formData);
+      const updated = await adminApi.updateNews({ ...formData, id: editItem.id });
       setNews(n => n.map(x => x.id === updated.id ? updated : x));
     } else {
       const created = await adminApi.createNews(formData);
@@ -116,6 +116,7 @@ export default function HaberlerPage() {
                   <td className="px-6 py-4">
                     <div className="flex items-center gap-3">
                       <div className="w-10 h-10 rounded-lg overflow-hidden flex-shrink-0 bg-gray-100">
+                        {/* eslint-disable-next-line @next/next/no-img-element */}
                         <img src={item.imageUrl} alt="" className="w-full h-full object-cover" />
                       </div>
                       <div>
