@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
-import { Search, Bell, Sun, Moon, X, User, Settings, LogOut, ChevronDown, Check, Activity } from "lucide-react";
+import { Search, Bell, Sun, Moon, X, User, Settings, LogOut, ChevronDown, Check } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { adminApi } from "@/lib/admin-api";
 

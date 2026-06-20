@@ -7,7 +7,6 @@ import { Search, Filter, Calendar, Activity, Download } from "lucide-react";
 
 export default function LogsPage() {
   const [logs, setLogs] = useState<ActivityLog[]>([]);
-  const [filteredLogs, setFilteredLogs] = useState<ActivityLog[]>([]);
   const [loading, setLoading] = useState(true);
   
   // Filters
@@ -18,24 +17,23 @@ export default function LogsPage() {
   useEffect(() => {
     adminApi.getLogs().then(data => {
       setLogs(data);
-      setFilteredLogs(data);
       setLoading(false);
     });
   }, []);
 
-  useEffect(() => {
-    let result = logs;
+  const filteredLogs = logs.filter(l => {
+    let match = true;
     if (search) {
-      result = result.filter(l => l.action.toLowerCase().includes(search.toLowerCase()) || l.details.toLowerCase().includes(search.toLowerCase()));
+      match = match && (l.action.toLowerCase().includes(search.toLowerCase()) || l.details.toLowerCase().includes(search.toLowerCase()));
     }
     if (typeFilter !== "all") {
-      result = result.filter(l => l.action.includes(typeFilter)); // Basit filtreleme
+      match = match && l.action.includes(typeFilter);
     }
     if (dateFilter) {
-      result = result.filter(l => l.timestamp.startsWith(dateFilter));
+      match = match && l.timestamp.startsWith(dateFilter);
     }
-    setFilteredLogs(result);
-  }, [search, typeFilter, dateFilter, logs]);
+    return match;
+  });
 
   const handleExport = () => {
     const csvContent = "data:text/csv;charset=utf-8,ID,Tarih,Aksiyon,Detay\n" 
