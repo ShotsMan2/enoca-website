@@ -5,6 +5,7 @@ import { CalendarDays, ArrowLeft, Share2 } from "lucide-react";
 import PublicLayout from "@/components/PublicLayout";
 import { NewsItem } from "@/lib/admin-api";
 import { Link } from "@/i18n/routing";
+import NewsClientFeatures from "@/components/NewsClientFeatures";
 
 export const dynamic = 'force-dynamic';
 
@@ -93,6 +94,9 @@ export default async function NewsDetailPage({ params }: { params: Promise<{ id:
                 </button>
               </div>
             </div>
+
+            {/* Share & Scroll Features */}
+            <NewsClientFeatures title={newsItem.title} />
 
           </article>
 
