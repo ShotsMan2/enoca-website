@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
-import { Search, Home, Settings, FileText, Briefcase, Mail, Star, X } from "lucide-react";
+import { Search, Home, Settings, FileText, Briefcase, Mail, Star, X, Activity } from "lucide-react";
 
 type Action = {
   id: string;
@@ -14,6 +14,7 @@ type Action = {
 
 const actions: Action[] = [
   { id: "dashboard", title: "Dashboard", icon: <Home className="w-5 h-5" />, href: "/admin/dashboard", category: "Genel" },
+  { id: "analytics", title: "NOC Analytics", icon: <Activity className="w-5 h-5 text-blue-500" />, href: "/admin/analytics", category: "Sistem" },
   { id: "news", title: "Haberler & Blog", icon: <FileText className="w-5 h-5" />, href: "/admin/haberler", category: "İçerik" },
   { id: "career", title: "Kariyer", icon: <Briefcase className="w-5 h-5" />, href: "/admin/kariyer", category: "İçerik" },
   { id: "home-content", title: "Anasayfa İçerik", icon: <Star className="w-5 h-5" />, href: "/admin/anasayfa-icerik", category: "İçerik" },
@@ -36,8 +37,15 @@ export default function AdminCommandPalette() {
         setOpen(false);
       }
     };
+    const openPalette = () => setOpen(true);
+    
     document.addEventListener("keydown", down);
-    return () => document.removeEventListener("keydown", down);
+    window.addEventListener("open-admin-command-palette", openPalette);
+    
+    return () => {
+      document.removeEventListener("keydown", down);
+      window.removeEventListener("open-admin-command-palette", openPalette);
+    };
   }, []);
 
   if (!open) return null;

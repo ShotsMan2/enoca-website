@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import AdminSidebar from "@/components/admin/AdminSidebar";
 import AdminCommandPalette from "@/components/admin/AdminCommandPalette";
 import { ToastProvider } from "@/components/admin/ToastProvider";
+import AIAssistant from "@/components/admin/AIAssistant";
 import { ThemeProvider } from "next-themes";
 import Script from "next/script";
 import "../../globals.css";
@@ -33,6 +34,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
               </div>
             </div>
             <AdminCommandPalette />
+            <AIAssistant />
           </ToastProvider>
         </ThemeProvider>
       </body>

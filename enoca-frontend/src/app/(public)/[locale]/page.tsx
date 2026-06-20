@@ -1,6 +1,6 @@
 import { Link } from "@/i18n/routing";
 import { Button } from "@/components/ui/button";
-import HeroVisual from "@/components/HeroVisual";
+import GlobeVisual from "@/components/GlobeVisual";
 import PublicLayout from "@/components/PublicLayout";
 import HomePageContactForm from "@/components/HomePageContactForm";
 import { getTranslations } from "next-intl/server";
@@ -8,6 +8,11 @@ import Marquee from "@/components/Marquee";
 import CountUp from "@/components/CountUp";
 import ParallaxWrapper from "@/components/ParallaxWrapper";
 import PageTransition from "@/components/PageTransition";
+import SpotlightCard from "@/components/SpotlightCard";
+import NetworkBackground from "@/components/NetworkBackground";
+import ProjectConfigurator from "@/components/ProjectConfigurator";
+import ROICalculator from "@/components/ROICalculator";
+import * as motion from "framer-motion/client";
 export const dynamic = 'force-dynamic';
 
 // getCategories() fonksiyonu kaldırıldı, db.json'dan okunacak.
@@ -47,10 +52,16 @@ export default async function Home() {
       <PageTransition>
       {/* 1. KAHRAMAN BÖLÜMÜ (HERO) */}
       <section className="relative overflow-hidden pt-4 pb-20 lg:pt-6 lg:pb-28">
+        <NetworkBackground />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-[1.1fr_0.9fr] gap-12 items-center">
             
-            <div className="space-y-8 relative z-10">
+            <motion.div 
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, ease: "easeOut" }}
+              className="space-y-8 relative z-10"
+            >
               <div className="inline-flex items-center gap-3 rounded-full border border-accent/20 bg-accent/5 px-4 py-1.5">
                 <span className="relative flex h-2 w-2">
                   <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent opacity-75"></span>
@@ -81,11 +92,11 @@ export default async function Home() {
                   <Link href={heroSettings.button2Url || "/iletisim"}>{heroSettings.button2Text}</Link>
                 </Button>
               </div>
-            </div>
+            </motion.div>
 
             <div className="relative hidden md:block z-0">
               <ParallaxWrapper speed={0.15}>
-                <HeroVisual />
+                <GlobeVisual />
               </ParallaxWrapper>
             </div>
 
@@ -102,7 +113,14 @@ export default async function Home() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
             
             {features.map((feature: HomepageFeature, idx: number) => (
-              <div key={feature.id || idx} className="space-y-4">
+              <motion.div 
+                key={feature.id || idx} 
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-50px" }}
+                transition={{ duration: 0.5, delay: idx * 0.1 }}
+                className="space-y-4"
+              >
                 <div className="w-12 h-12 rounded-xl bg-accent/20 flex items-center justify-center text-accent">
                   <span className="text-xl font-bold font-mono">{feature.number}</span>
                 </div>
@@ -110,7 +128,7 @@ export default async function Home() {
                 <p className="text-muted-foreground text-sm leading-relaxed">
                   {feature.text}
                 </p>
-              </div>
+              </motion.div>
             ))}
 
           </div>
@@ -160,28 +178,36 @@ export default async function Home() {
 
           {categories.length > 0 ? (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {categories.map((cat: { id: string | number; name: string; links?: { id: string | number; url: string; title: string }[] }) => (
-                <div key={cat.id} className="group relative bg-card rounded-2xl border border-border p-8 shadow-md hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
+              {categories.map((cat: { id: string | number; name: string; links?: { id: string | number; url: string; title: string }[] }, idx: number) => (
+                <motion.div
+                  key={cat.id}
+                  initial={{ opacity: 0, scale: 0.95 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.4, delay: idx * 0.1 }}
+                >
+                <SpotlightCard className="group p-8 h-full">
                   <div className="absolute top-0 right-0 p-8 opacity-0 group-hover:opacity-100 transition-opacity">
                     <div className="w-10 h-10 rounded-full bg-accent/10 flex items-center justify-center">
                       <span className="text-accent font-bold">→</span>
                     </div>
                   </div>
                   
-                  <h3 className="text-2xl font-bold text-foreground mb-4 uppercase">{cat.name}</h3>
-                  <div className="flex flex-col gap-3 mb-6">
+                  <h3 className="text-2xl font-bold text-foreground mb-4 uppercase relative z-10">{cat.name}</h3>
+                  <div className="flex flex-col gap-3 mb-6 relative z-10">
                     {cat.links?.map((link: { id: string | number; url: string; title: string }) => (
                       <Link 
                         key={link.id} 
                         href={link.url}
                         className="text-muted-foreground hover:text-accent font-medium transition-colors flex items-center gap-2"
                       >
-                        <span className="w-1.5 h-1.5 rounded-full bg-border group-hover:bg-accent/50" />
+                        <span className="w-1.5 h-1.5 rounded-full bg-border group-hover:bg-accent/50 transition-colors" />
                         {link.title}
                       </Link>
                     ))}
                   </div>
-                </div>
+                </SpotlightCard>
+                </motion.div>
               ))}
             </div>
           ) : (
@@ -192,21 +218,71 @@ export default async function Home() {
         </div>
       </section>
 
-      {/* 5. İLETİŞİM / CTA BÖLÜMÜ */}
+      {/* 5. PROJE KONFİGÜRATÖRÜ (B2B Aracı) */}
+      <section className="py-24 bg-foreground relative overflow-hidden">
+        <div className="absolute inset-0 bg-dot-pattern opacity-10" />
+        <div className="absolute top-0 right-0 w-96 h-96 bg-accent rounded-full blur-[150px] opacity-10" />
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <div className="text-center max-w-3xl mx-auto mb-12 space-y-4">
+            <h2 className="text-4xl md:text-5xl font-display text-background">
+              Projenizi <span className="text-accent">Şekillendirin</span>
+            </h2>
+            <p className="text-lg text-muted-foreground">
+              İhtiyaçlarınıza en uygun teknoloji yığınını ve çözüm mimarisini interaktif aracımızla saniyeler içinde oluşturun.
+            </p>
+          </div>
+          <ProjectConfigurator />
+        </div>
+      </section>
+
+      {/* 5.5. B2B ROI HESAPLAYICI (V5 Özelliği) */}
+      <section className="py-24 bg-background relative border-t border-border">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <div className="text-center max-w-3xl mx-auto mb-12 space-y-4">
+            <h2 className="text-4xl md:text-5xl font-display text-foreground">
+              SAP CX Hybris <span className="text-blue-600">ROI Analizi</span>
+            </h2>
+            <p className="text-lg text-muted-foreground">
+              Mevcut altyapı maliyetlerinizi ve büyüme hedeflerinizi girerek SAP Commerce Cloud dönüşümünün size 5 yılda ne kadar tasarruf sağlayacağını anında öğrenin.
+            </p>
+          </div>
+          <ROICalculator />
+        </div>
+      </section>
+
+      {/* 6. İLETİŞİM / CTA BÖLÜMÜ */}
       <section className="py-24 relative bg-muted/30">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="rounded-3xl bg-card border border-border p-8 md:p-12 shadow-accent-lg relative overflow-hidden">
              
             <div className="text-center mb-10">
-                <h2 className="text-3xl md:text-4xl font-display text-foreground mb-4">
+                <motion.h2 
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  className="text-3xl md:text-4xl font-display text-foreground mb-4"
+                >
                   {tContact('title')}
-                </h2>
-                <p className="text-muted-foreground">
+                </motion.h2>
+                <motion.p 
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 0.1 }}
+                  className="text-muted-foreground"
+                >
                   {tContact('subtitle')}
-                </p>
+                </motion.p>
             </div>
             
-            <HomePageContactForm />
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.2 }}
+            >
+              <HomePageContactForm />
+            </motion.div>
 
           </div>
         </div>
