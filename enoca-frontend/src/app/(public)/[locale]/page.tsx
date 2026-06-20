@@ -9,6 +9,8 @@ import CountUp from "@/components/CountUp";
 import ParallaxWrapper from "@/components/ParallaxWrapper";
 import PageTransition from "@/components/PageTransition";
 import SpotlightCard from "@/components/SpotlightCard";
+import NetworkBackground from "@/components/NetworkBackground";
+import * as motion from "framer-motion/client";
 export const dynamic = 'force-dynamic';
 
 // getCategories() fonksiyonu kaldırıldı, db.json'dan okunacak.
@@ -48,10 +50,16 @@ export default async function Home() {
       <PageTransition>
       {/* 1. KAHRAMAN BÖLÜMÜ (HERO) */}
       <section className="relative overflow-hidden pt-4 pb-20 lg:pt-6 lg:pb-28">
+        <NetworkBackground />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-[1.1fr_0.9fr] gap-12 items-center">
             
-            <div className="space-y-8 relative z-10">
+            <motion.div 
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, ease: "easeOut" }}
+              className="space-y-8 relative z-10"
+            >
               <div className="inline-flex items-center gap-3 rounded-full border border-accent/20 bg-accent/5 px-4 py-1.5">
                 <span className="relative flex h-2 w-2">
                   <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent opacity-75"></span>
@@ -82,7 +90,7 @@ export default async function Home() {
                   <Link href={heroSettings.button2Url || "/iletisim"}>{heroSettings.button2Text}</Link>
                 </Button>
               </div>
-            </div>
+            </motion.div>
 
             <div className="relative hidden md:block z-0">
               <ParallaxWrapper speed={0.15}>
@@ -103,7 +111,14 @@ export default async function Home() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
             
             {features.map((feature: HomepageFeature, idx: number) => (
-              <div key={feature.id || idx} className="space-y-4">
+              <motion.div 
+                key={feature.id || idx} 
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-50px" }}
+                transition={{ duration: 0.5, delay: idx * 0.1 }}
+                className="space-y-4"
+              >
                 <div className="w-12 h-12 rounded-xl bg-accent/20 flex items-center justify-center text-accent">
                   <span className="text-xl font-bold font-mono">{feature.number}</span>
                 </div>
@@ -111,7 +126,7 @@ export default async function Home() {
                 <p className="text-muted-foreground text-sm leading-relaxed">
                   {feature.text}
                 </p>
-              </div>
+              </motion.div>
             ))}
 
           </div>
@@ -161,8 +176,15 @@ export default async function Home() {
 
           {categories.length > 0 ? (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {categories.map((cat: { id: string | number; name: string; links?: { id: string | number; url: string; title: string }[] }) => (
-                <SpotlightCard key={cat.id} className="group p-8">
+              {categories.map((cat: { id: string | number; name: string; links?: { id: string | number; url: string; title: string }[] }, idx: number) => (
+                <motion.div
+                  key={cat.id}
+                  initial={{ opacity: 0, scale: 0.95 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.4, delay: idx * 0.1 }}
+                >
+                <SpotlightCard className="group p-8 h-full">
                   <div className="absolute top-0 right-0 p-8 opacity-0 group-hover:opacity-100 transition-opacity">
                     <div className="w-10 h-10 rounded-full bg-accent/10 flex items-center justify-center">
                       <span className="text-accent font-bold">→</span>
@@ -183,6 +205,7 @@ export default async function Home() {
                     ))}
                   </div>
                 </SpotlightCard>
+                </motion.div>
               ))}
             </div>
           ) : (
@@ -199,15 +222,33 @@ export default async function Home() {
           <div className="rounded-3xl bg-card border border-border p-8 md:p-12 shadow-accent-lg relative overflow-hidden">
              
             <div className="text-center mb-10">
-                <h2 className="text-3xl md:text-4xl font-display text-foreground mb-4">
+                <motion.h2 
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  className="text-3xl md:text-4xl font-display text-foreground mb-4"
+                >
                   {tContact('title')}
-                </h2>
-                <p className="text-muted-foreground">
+                </motion.h2>
+                <motion.p 
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 0.1 }}
+                  className="text-muted-foreground"
+                >
                   {tContact('subtitle')}
-                </p>
+                </motion.p>
             </div>
             
-            <HomePageContactForm />
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.2 }}
+            >
+              <HomePageContactForm />
+            </motion.div>
 
           </div>
         </div>

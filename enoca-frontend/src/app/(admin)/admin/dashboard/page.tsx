@@ -5,7 +5,7 @@ import AdminHeader from "@/components/admin/AdminHeader";
 import StatsCard from "@/components/admin/StatsCard";
 import { adminApi, type Stats, type NewsItem, type ContactMessage, type ActivityLog } from "@/lib/admin-api";
 import Link from "next/link";
-import { Clock, TrendingUp, Users } from "lucide-react";
+import { Clock, TrendingUp, Users, Server, Cpu, HardDrive } from "lucide-react";
 import { TrafficChart, InteractionChart } from "@/components/admin/DashboardCharts";
 /* eslint-disable @next/next/no-img-element */
 
@@ -159,7 +159,55 @@ export default function DashboardPage() {
           </div>
         </div>
 
-        {/* 3. Bölüm: Aktivite Logları (Audit Trail) */}
+        {/* 3. Command Center (Sistem Sağlığı) */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-6">
+          {/* CPU Usage */}
+          <div className="bg-white dark:bg-gray-900 rounded-2xl border border-gray-200 dark:border-gray-700 p-6 flex flex-col items-center text-center relative overflow-hidden group">
+            <div className="absolute inset-0 bg-blue-500/5 opacity-0 group-hover:opacity-100 transition-opacity" />
+            <Cpu className="w-8 h-8 text-blue-500 mb-3" />
+            <h3 className="text-sm font-semibold text-gray-500 dark:text-gray-400">CPU Kullanımı</h3>
+            <div className="flex items-baseline gap-1 mt-1">
+              <span className="text-3xl font-bold text-gray-900 dark:text-white">24</span>
+              <span className="text-sm font-medium text-gray-500">%</span>
+            </div>
+            <div className="w-full bg-gray-100 dark:bg-gray-800 h-1.5 rounded-full mt-4 overflow-hidden">
+              <div className="bg-blue-500 h-full rounded-full w-[24%]" />
+            </div>
+            <p className="text-xs text-gray-400 mt-2">Normal Seviye</p>
+          </div>
+
+          {/* RAM Usage */}
+          <div className="bg-white dark:bg-gray-900 rounded-2xl border border-gray-200 dark:border-gray-700 p-6 flex flex-col items-center text-center relative overflow-hidden group">
+            <div className="absolute inset-0 bg-emerald-500/5 opacity-0 group-hover:opacity-100 transition-opacity" />
+            <HardDrive className="w-8 h-8 text-emerald-500 mb-3" />
+            <h3 className="text-sm font-semibold text-gray-500 dark:text-gray-400">RAM Kullanımı</h3>
+            <div className="flex items-baseline gap-1 mt-1">
+              <span className="text-3xl font-bold text-gray-900 dark:text-white">4.2</span>
+              <span className="text-sm font-medium text-gray-500">/ 16 GB</span>
+            </div>
+            <div className="w-full bg-gray-100 dark:bg-gray-800 h-1.5 rounded-full mt-4 overflow-hidden">
+              <div className="bg-emerald-500 h-full rounded-full w-[26%]" />
+            </div>
+            <p className="text-xs text-gray-400 mt-2">26% Dolu</p>
+          </div>
+
+          {/* Network I/O */}
+          <div className="bg-white dark:bg-gray-900 rounded-2xl border border-gray-200 dark:border-gray-700 p-6 flex flex-col items-center text-center relative overflow-hidden group">
+            <div className="absolute inset-0 bg-purple-500/5 opacity-0 group-hover:opacity-100 transition-opacity" />
+            <Server className="w-8 h-8 text-purple-500 mb-3" />
+            <h3 className="text-sm font-semibold text-gray-500 dark:text-gray-400">Ağ G/Ç (Network)</h3>
+            <div className="flex items-baseline gap-1 mt-1">
+              <span className="text-3xl font-bold text-gray-900 dark:text-white">12.8</span>
+              <span className="text-sm font-medium text-gray-500">MB/s</span>
+            </div>
+            <div className="w-full flex justify-between gap-4 mt-4 text-xs font-semibold">
+              <span className="text-emerald-500 flex items-center gap-1">↓ 8.2 MB/s</span>
+              <span className="text-blue-500 flex items-center gap-1">↑ 4.6 MB/s</span>
+            </div>
+          </div>
+        </div>
+
+        {/* 4. Bölüm: Aktivite Logları (Audit Trail) */}
         <div className="bg-white dark:bg-gray-900 rounded-2xl border border-gray-200 dark:border-gray-700 overflow-hidden mt-6">
           <div className="flex items-center px-6 py-4 border-b border-gray-100 dark:border-gray-800">
             <h2 className="font-bold text-gray-800 dark:text-white flex items-center gap-2">
