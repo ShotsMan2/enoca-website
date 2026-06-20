@@ -6,6 +6,7 @@ import { getMessages } from 'next-intl/server';
 import { notFound } from 'next/navigation';
 import { routing } from '@/i18n/routing';
 import Script from 'next/script';
+import SplashScreen from "@/components/SplashScreen";
 import CookieConsent from '@/components/CookieConsent';
 import NextTopLoader from 'nextjs-toploader';
 import FloatingWidget from '@/components/FloatingWidget';
@@ -85,7 +86,8 @@ export default async function LocaleLayout({
             if (t === 'dark') document.documentElement.classList.add('dark');
           } catch(e) {}
         `}</Script>
-        <NextIntlClientProvider messages={messages}>
+        <NextIntlClientProvider messages={messages} locale={locale}>
+          <SplashScreen />
           <NextTopLoader color="#0055FF" initialPosition={0.08} crawlSpeed={200} height={3} crawl={true} showSpinner={false} easing="ease" speed={200} shadow="0 0 10px #0055FF,0 0 5px #0055FF" />
           {children}
           <CookieConsent />

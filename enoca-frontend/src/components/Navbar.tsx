@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from 'react';
-import { ChevronDown, Mail, Phone, Search, X, Globe, Menu, Sun, Moon } from 'lucide-react';
+import { ChevronDown, Mail, Phone, Search, X, Globe, Menu, Sun, Moon, ArrowRight, LayoutGrid } from 'lucide-react';
 import { useTranslations, useLocale } from 'next-intl';
 import { Link, usePathname, useRouter } from '@/i18n/routing';
 import { SiteSettings, ContentPage } from '@/lib/admin-api';
@@ -270,8 +270,11 @@ export default function Navbar({ settings, pages = [] }: { settings?: SiteSettin
                                                         <div key={cIdx} className="group/sub relative">
                                                             <Link
                                                                 href={child.url}
-                                                                className="flex items-center px-4 py-3 text-[13px] font-semibold text-foreground/70 hover:text-accent hover:bg-accent/5 rounded-lg transition-colors duration-200"
+                                                                className="flex items-center gap-3 px-4 py-3 text-[13px] font-semibold text-foreground/70 hover:text-accent hover:bg-accent/5 rounded-lg transition-colors duration-200"
                                                             >
+                                                                <div className="w-6 h-6 rounded bg-accent/10 flex items-center justify-center shrink-0">
+                                                                    <LayoutGrid className="w-3.5 h-3.5 text-accent" />
+                                                                </div>
                                                                 <span className="flex-1 uppercase tracking-wide">{child.title}</span>
                                                                 {/* Eğer alt menünün de alt menüsü varsa minik ok çıkartıyoruz */}
                                                                 {child.subChildren && (
@@ -288,8 +291,9 @@ export default function Navbar({ settings, pages = [] }: { settings?: SiteSettin
                                                                                 <Link
                                                                                     key={sIdx}
                                                                                     href={sub.url}
-                                                                                    className="flex items-center px-4 py-3 text-[13px] font-semibold text-foreground/70 hover:text-accent hover:bg-accent/5 rounded-lg transition-colors duration-200"
+                                                                                    className="flex items-center gap-2 px-4 py-3 text-[13px] font-semibold text-foreground/70 hover:text-accent hover:bg-accent/5 rounded-lg transition-colors duration-200"
                                                                                 >
+                                                                                    <ArrowRight className="w-3 h-3 opacity-50" />
                                                                                     <span className="flex-1 uppercase tracking-wide">{sub.title}</span>
                                                                                 </Link>
                                                                             ))}
