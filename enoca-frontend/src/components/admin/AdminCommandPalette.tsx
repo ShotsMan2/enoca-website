@@ -36,8 +36,15 @@ export default function AdminCommandPalette() {
         setOpen(false);
       }
     };
+    const openPalette = () => setOpen(true);
+    
     document.addEventListener("keydown", down);
-    return () => document.removeEventListener("keydown", down);
+    window.addEventListener("open-admin-command-palette", openPalette);
+    
+    return () => {
+      document.removeEventListener("keydown", down);
+      window.removeEventListener("open-admin-command-palette", openPalette);
+    };
   }, []);
 
   if (!open) return null;

@@ -157,53 +157,16 @@ export default function AdminHeader({ title }: { title: string }) {
           </span>
         </div>
 
-        {/* Arama Kutusu */}
-        <div className="relative hidden md:block">
-          <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400 pointer-events-none" />
-          <input
-            ref={searchRef}
-            type="text"
-            value={search}
-            onChange={e => setSearch(e.target.value)}
-            onFocus={() => setSearchOpen(true)}
-            onBlur={() => setTimeout(() => setSearchOpen(false), 150)}
-            placeholder="Sayfada ara..."
-            className="pl-9 pr-8 py-2 text-sm bg-gray-100 dark:bg-gray-800 border border-transparent focus:border-blue-500 dark:focus:border-blue-500 focus:bg-white dark:focus:bg-gray-700 rounded-xl outline-none transition-all w-52 text-gray-700 dark:text-gray-300 placeholder-gray-400"
-          />
-          {search && (
-            <button
-              onClick={() => setSearch("")}
-              className="absolute right-2.5 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600"
-            >
-              <X className="w-3.5 h-3.5" />
-            </button>
-          )}
-
-          {/* Arama Sonuçları Dropdown */}
-          {searchOpen && search.length > 0 && (
-            <div className="absolute top-full left-0 mt-1 w-72 bg-white dark:bg-gray-800 rounded-xl shadow-xl border border-gray-200 dark:border-gray-700 overflow-hidden">
-              {Object.keys(SEARCH_ROUTES)
-                .filter(item => item.toLowerCase().includes(search.toLowerCase()))
-                .map((item, idx) => (
-                  <button
-                    key={idx}
-                    className="w-full flex items-center gap-3 px-4 py-3 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors text-left"
-                    onMouseDown={() => { 
-                      setSearch(""); 
-                      setSearchOpen(false); 
-                      router.push(SEARCH_ROUTES[item]); 
-                    }}
-                  >
-                    <Search className="w-4 h-4 text-gray-400 flex-shrink-0" />
-                    <span className="text-sm text-gray-700 dark:text-gray-200">{item}</span>
-                  </button>
-                ))}
-              {Object.keys(SEARCH_ROUTES).filter(item => item.toLowerCase().includes(search.toLowerCase())).length === 0 && (
-                <p className="px-4 py-3 text-sm text-gray-400 text-center">Sonuç bulunamadı</p>
-              )}
-            </div>
-          )}
-        </div>
+        {/* Arama Butonu (Global Cmd+K Tetikleyici) */}
+        <button
+          onClick={() => window.dispatchEvent(new CustomEvent('open-admin-command-palette'))}
+          className="hidden md:flex items-center gap-2 px-3 py-2 text-sm bg-gray-100 dark:bg-gray-800 border border-transparent hover:border-gray-300 dark:hover:border-gray-600 rounded-xl transition-all text-gray-500 dark:text-gray-400"
+          title="Sistemde Ara (Cmd+K)"
+        >
+          <Search className="w-4 h-4" />
+          <span className="font-medium mr-4">Arama yap...</span>
+          <kbd className="px-1.5 py-0.5 bg-gray-200 dark:bg-gray-700 rounded text-[10px] font-mono font-bold text-gray-500 dark:text-gray-300">⌘K</kbd>
+        </button>
 
         {/* Dark Mode Toggle */}
         <button

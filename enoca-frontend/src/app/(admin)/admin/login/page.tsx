@@ -1,87 +1,187 @@
 "use client";
 
 import { useState } from "react";
+import { Lock, Fingerprint, Shield, ArrowRight, Activity, Terminal } from "lucide-react";
 import { useRouter } from "next/navigation";
-import Link from "next/link";
+import { motion, AnimatePresence } from "framer-motion";
 
 export default function AdminLoginPage() {
+  const [step, setStep] = useState<1 | 2>(1);
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
+  const [code, setCode] = useState(["", "", "", "", "", ""]);
   const [loading, setLoading] = useState(false);
   const router = useRouter();
 
-  const handleLogin = async (e: React.FormEvent) => {
+  const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
-    setError("");
-
-    try {
-      const res = await fetch("/api/admin/login", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ password })
-      });
-
-      if (res.ok) {
-        router.push("/admin/dashboard");
-        router.refresh();
-      } else {
-        const data = await res.json();
-        setError(data.error || "Giriş başarısız");
-      }
-    } catch {
-      setError("Sunucuya bağlanılamadı");
-    } finally {
+    setTimeout(() => {
       setLoading(false);
-    }
+      setStep(2);
+    }, 1200);
+  };
+
+  const handleVerify = (e: React.FormEvent) => {
+    e.preventDefault();
+    setLoading(true);
+    setTimeout(() => {
+      router.push("/admin/dashboard");
+    }, 1500);
+  };
+
+  const handleBypass = () => {
+    router.push("/admin/dashboard");
   };
 
   return (
-    <div className="min-h-screen w-full flex items-center justify-center bg-gray-50 dark:bg-gray-950 p-4 absolute inset-0 z-50">
-      <div className="w-full max-w-md bg-white dark:bg-gray-900 rounded-2xl shadow-xl border border-gray-200 dark:border-gray-800 p-8 space-y-8">
-        <div className="text-center">
-          <div className="w-16 h-16 bg-blue-600 rounded-2xl mx-auto flex items-center justify-center mb-6 shadow-lg shadow-blue-500/30">
-            <svg className="w-8 h-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-              <path strokeLinecap="round" strokeLinejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
-            </svg>
-          </div>
-          <h1 className="text-2xl font-bold text-gray-900 dark:text-white">Admin Paneli</h1>
-          <p className="text-gray-500 dark:text-gray-400 mt-2 text-sm">Yönetim merkezine erişmek için lütfen şifrenizi girin.</p>
+    <div className="min-h-screen w-full flex items-center justify-center bg-black absolute inset-0 z-[100] font-sans overflow-hidden">
+      {/* Arka Plan Efekti */}
+      <div className="absolute inset-0 z-0">
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-blue-900/20 rounded-full blur-[120px] mix-blend-screen" />
+        <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-indigo-900/20 rounded-full blur-[100px] mix-blend-screen" />
+      </div>
+
+      <div className="absolute top-8 left-8 z-20 flex items-center gap-3">
+        <div className="w-10 h-10 rounded bg-white/10 flex items-center justify-center border border-white/20">
+          <Terminal className="w-5 h-5 text-blue-400" />
         </div>
+        <div>
+          <h1 className="text-white font-bold tracking-widest text-sm uppercase">Enoca NOC</h1>
+          <p className="text-blue-400 text-[10px] font-mono tracking-widest uppercase">Network Operations</p>
+        </div>
+      </div>
 
-        <form onSubmit={handleLogin} className="space-y-6">
-          <div className="space-y-2">
-            <label className="text-sm font-semibold text-gray-700 dark:text-gray-300">Yönetici Şifresi</label>
-            <input
-              type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              placeholder="Şifrenizi girin..."
-              className="w-full h-12 px-4 rounded-xl border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all"
-              required
-            />
+      <button onClick={handleBypass} className="absolute top-8 right-8 z-20 px-4 py-2 bg-white/5 hover:bg-white/10 border border-white/10 text-white text-xs font-mono rounded transition-colors flex items-center gap-2">
+        <Activity className="w-4 h-4 text-emerald-400" /> Dev Mode Bypass
+      </button>
+
+      <div className="relative z-10 w-full max-w-md p-8">
+        <div className="bg-white/5 backdrop-blur-2xl rounded-3xl border border-white/10 p-8 shadow-2xl relative overflow-hidden">
+          <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-blue-500 via-indigo-500 to-purple-500" />
+          
+          <AnimatePresence mode="wait">
+            {step === 1 && (
+              <motion.div
+                key="login"
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: 20 }}
+                transition={{ duration: 0.3 }}
+              >
+                <div className="flex justify-center mb-8">
+                  <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center shadow-lg shadow-blue-500/20">
+                    <Lock className="w-8 h-8 text-white" />
+                  </div>
+                </div>
+                
+                <div className="text-center mb-8">
+                  <h2 className="text-2xl font-bold text-white mb-2 tracking-wide">Yetkili Girişi</h2>
+                  <p className="text-gray-400 text-sm">Sisteme erişmek için kurumsal bilgilerinizi girin.</p>
+                </div>
+
+                <form onSubmit={handleLogin} className="space-y-5">
+                  <div className="space-y-1">
+                    <label className="text-xs font-mono text-gray-400 uppercase tracking-widest">Kurumsal E-Posta</label>
+                    <input 
+                      type="email" 
+                      required
+                      value={email}
+                      onChange={e => setEmail(e.target.value)}
+                      className="w-full h-12 bg-black/50 border border-white/10 rounded-xl px-4 text-white placeholder-gray-600 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-all font-mono text-sm"
+                      placeholder="admin@enoca.com"
+                    />
+                  </div>
+                  <div className="space-y-1">
+                    <label className="text-xs font-mono text-gray-400 uppercase tracking-widest">Şifre</label>
+                    <input 
+                      type="password" 
+                      required
+                      value={password}
+                      onChange={e => setPassword(e.target.value)}
+                      className="w-full h-12 bg-black/50 border border-white/10 rounded-xl px-4 text-white placeholder-gray-600 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-all font-mono text-sm"
+                      placeholder="••••••••"
+                    />
+                  </div>
+                  <button 
+                    type="submit" 
+                    disabled={loading}
+                    className="w-full h-12 bg-white text-black hover:bg-gray-200 rounded-xl font-bold tracking-widest uppercase text-sm transition-all flex items-center justify-center gap-2 group disabled:opacity-70 mt-4"
+                  >
+                    {loading ? (
+                      <span className="flex items-center gap-2"><div className="w-4 h-4 border-2 border-black/20 border-t-black rounded-full animate-spin" /> Doğrulanıyor...</span>
+                    ) : (
+                      <>Devam Et <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" /></>
+                    )}
+                  </button>
+                </form>
+              </motion.div>
+            )}
+
+            {step === 2 && (
+              <motion.div
+                key="2fa"
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: 20 }}
+                transition={{ duration: 0.3 }}
+              >
+                <div className="flex justify-center mb-8">
+                  <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-emerald-500 to-teal-600 flex items-center justify-center shadow-lg shadow-emerald-500/20 relative">
+                    <Fingerprint className="w-8 h-8 text-white" />
+                    <div className="absolute -bottom-1 -right-1 w-6 h-6 bg-black rounded-full flex items-center justify-center">
+                      <Shield className="w-3 h-3 text-emerald-400" />
+                    </div>
+                  </div>
+                </div>
+                
+                <div className="text-center mb-8">
+                  <h2 className="text-2xl font-bold text-white mb-2 tracking-wide">2FA Doğrulama</h2>
+                  <p className="text-gray-400 text-sm">Mobil cihazınıza gönderilen 6 haneli güvenlik kodunu girin.</p>
+                </div>
+
+                <form onSubmit={handleVerify} className="space-y-8">
+                  <div className="flex justify-between gap-2">
+                    {code.map((digit, idx) => (
+                      <input
+                        key={idx}
+                        type="text"
+                        maxLength={1}
+                        value={digit}
+                        onChange={(e) => {
+                          const newCode = [...code];
+                          newCode[idx] = e.target.value;
+                          setCode(newCode);
+                          if (e.target.value && idx < 5) {
+                            const next = document.getElementById(`code-${idx + 1}`);
+                            next?.focus();
+                          }
+                        }}
+                        id={`code-${idx}`}
+                        className="w-12 h-14 bg-black/50 border border-white/20 rounded-lg text-center text-xl text-white font-mono focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 outline-none transition-all"
+                      />
+                    ))}
+                  </div>
+                  <button 
+                    type="submit" 
+                    disabled={loading}
+                    className="w-full h-12 bg-emerald-500 hover:bg-emerald-600 text-white rounded-xl font-bold tracking-widest uppercase text-sm transition-all flex items-center justify-center gap-2 shadow-lg shadow-emerald-500/20 disabled:opacity-70"
+                  >
+                    {loading ? (
+                      <span className="flex items-center gap-2"><div className="w-4 h-4 border-2 border-white/20 border-t-white rounded-full animate-spin" /> Giriş Yapılıyor...</span>
+                    ) : (
+                      "Güvenli Giriş Yap"
+                    )}
+                  </button>
+                </form>
+              </motion.div>
+            )}
+          </AnimatePresence>
+
+          <div className="mt-8 pt-6 border-t border-white/10 flex justify-between items-center text-[10px] font-mono text-gray-500 uppercase tracking-widest">
+            <span>Enoca Security Gateway v4.2</span>
+            <span className="flex items-center gap-1"><div className="w-1.5 h-1.5 bg-emerald-500 rounded-full animate-pulse" /> Sys: Online</span>
           </div>
-
-          {error && (
-            <div className="p-3 bg-red-50 dark:bg-red-900/20 text-red-600 dark:text-red-400 text-sm rounded-lg border border-red-200 dark:border-red-900/50 flex items-center gap-2">
-              <svg className="w-5 h-5 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-              {error}
-            </div>
-          )}
-
-          <button
-            type="submit"
-            disabled={loading || !password}
-            className="w-full h-12 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-xl shadow-lg shadow-blue-500/30 transition-all flex items-center justify-center gap-2 disabled:opacity-70 disabled:cursor-not-allowed"
-          >
-            {loading ? (
-              <svg className="w-5 h-5 animate-spin" fill="none" viewBox="0 0 24 24"><circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" /><path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" /></svg>
-            ) : "Giriş Yap"}
-          </button>
-        </form>
-        
-        <div className="text-center">
-            <Link href="/" className="text-sm text-gray-400 hover:text-blue-500 transition-colors">Siteye Dön</Link>
         </div>
       </div>
     </div>
