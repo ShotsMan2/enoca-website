@@ -14,6 +14,7 @@ export default function CustomCursor() {
       return;
     }
 
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setIsVisible(true);
 
     const updateMousePosition = (e: MouseEvent) => {

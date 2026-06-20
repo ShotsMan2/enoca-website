@@ -32,18 +32,18 @@ export default function AdminCareersPage() {
   const [appDetail, setAppDetail] = useState<JobApplication | null>(null);
 
 
-  const fetchData = async () => {
-    setLoading(true);
-    try {
-      const [jobsData, appsData] = await Promise.all([adminApi.getJobs(), adminApi.getApplications()]);
-      setJobs(jobsData);
-      setApplications(appsData);
-    } catch (e) { console.error(e); }
-    finally { setLoading(false); }
-  };
-
-  // eslint-disable-next-line
-  useEffect(() => { fetchData(); }, []);
+  useEffect(() => {
+    const fetchInitialData = async () => {
+      setLoading(true);
+      try {
+        const [jobsData, appsData] = await Promise.all([adminApi.getJobs(), adminApi.getApplications()]);
+        setJobs(jobsData);
+        setApplications(appsData);
+      } catch (e) { console.error(e); }
+      finally { setLoading(false); }
+    };
+    fetchInitialData();
+  }, []);
 
   // --- İlan İşlemleri ---
   const openAddJob = () => { setJobForm(emptyJob); setJobModal({ open: true, item: null }); };

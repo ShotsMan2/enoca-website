@@ -11,6 +11,7 @@ export default function FloatingInput({ label, className = "", ...props }: Float
   const [hasValue, setHasValue] = useState(!!props.value || !!props.defaultValue);
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setHasValue(!!props.value || !!props.defaultValue);
   }, [props.value, props.defaultValue]);
 
