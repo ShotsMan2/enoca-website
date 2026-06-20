@@ -1,4 +1,5 @@
 import { Link } from "@/i18n/routing";
+export const dynamic = 'force-dynamic';
 import { Button } from "@/components/ui/button";
 import { ArrowLeft, ChevronRight } from "lucide-react";
 
@@ -29,6 +30,7 @@ export default async function CatchAllPage({
     const db = await readDB();
     const currentSlug = "/" + slugArray.join("/");
     const dynamicPage = db?.pages?.find((p: ContentPage) => p.slug === currentSlug && p.status === "published");
+    const subPages = db?.pages?.filter((p: ContentPage) => p.slug.startsWith(currentSlug + "/") && p.status === "published") || [];
 
     return (
         <PublicLayout>
@@ -87,6 +89,18 @@ export default async function CatchAllPage({
                         
                         {dynamicPage ? (
                             <div className="prose prose-lg dark:prose-invert max-w-none" dangerouslySetInnerHTML={{ __html: dynamicPage.content }} />
+                        ) : subPages.length > 0 ? (
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                {subPages.map((sub: ContentPage) => (
+                                    <Link key={sub.id} href={sub.slug} className="group p-6 bg-white dark:bg-gray-800 rounded-2xl border border-gray-100 dark:border-gray-700 hover:shadow-xl hover:-translate-y-1 transition-all">
+                                        <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2 group-hover:text-blue-600 transition-colors">{sub.menuTitle}</h3>
+                                        <p className="text-sm text-gray-500 line-clamp-2">{sub.content.replace(/<[^>]*>?/gm, '').substring(0, 120)}...</p>
+                                        <div className="mt-4 flex items-center text-sm font-semibold text-blue-600">
+                                            İncele <ChevronRight className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" />
+                                        </div>
+                                    </Link>
+                                ))}
+                            </div>
                         ) : (
                             <>
                                 <p className="text-lg md:text-xl text-muted-foreground leading-relaxed">

@@ -8,15 +8,27 @@ import { adminApi } from "@/lib/admin-api";
 export default function HomePageContactForm() {
     const tContact = useTranslations('Contact');
     const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
-    const [formData, setFormData] = useState({ name: "", email: "", message: "" });
+    const [formData, setFormData] = useState({ name: "", email: "", message: "", honeypot: "" });
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
+
+        // Spam Koruması: Bot bu alanı doldurduysa isteği arka plana gönderme
+        if (formData.honeypot) {
+            console.warn("Spam tespit edildi. Gönderim engellendi.");
+            setStatus("success"); // Bota başarı mesajı göstererek yanılttık
+            return;
+        }
+
         setStatus("loading");
         try {
-            await adminApi.createMessage(formData);
+            await adminApi.createMessage({
+                name: formData.name,
+                email: formData.email,
+                message: formData.message
+            });
             setStatus("success");
-            setFormData({ name: "", email: "", message: "" });
+            setFormData({ name: "", email: "", message: "", honeypot: "" });
         } catch {
             setStatus("error");
         }
@@ -58,6 +70,20 @@ export default function HomePageContactForm() {
                     />
                 </div>
             </div>
+            
+            {/* Honeypot Alanı: Botlar için görünmez ancak DOM'da mevcut */}
+            <div className="hidden" aria-hidden="true">
+                <label>Lütfen bu alanı boş bırakın</label>
+                <input 
+                    type="text" 
+                    name="contact_me_by_fax_only" 
+                    tabIndex={-1} 
+                    autoComplete="off"
+                    value={formData.honeypot}
+                    onChange={e => setFormData({ ...formData, honeypot: e.target.value })}
+                />
+            </div>
+
             <div className="space-y-2">
                 <label className="text-sm font-medium text-foreground">{tContact('message')}</label>
                 <textarea 

@@ -1,5 +1,6 @@
 import { readDB } from "@/lib/db";
 import { Link } from "@/i18n/routing";
+export const dynamic = 'force-dynamic';
 import { getTranslations } from "next-intl/server";
 import { Briefcase, MapPin } from "lucide-react";
 import PublicLayout from "@/components/PublicLayout";

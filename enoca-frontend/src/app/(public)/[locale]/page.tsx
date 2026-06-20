@@ -4,6 +4,7 @@ import HeroVisual from "@/components/HeroVisual";
 import PublicLayout from "@/components/PublicLayout";
 import HomePageContactForm from "@/components/HomePageContactForm";
 import { getTranslations } from "next-intl/server";
+export const dynamic = 'force-dynamic';
 
 // getCategories() fonksiyonu kaldırıldı, db.json'dan okunacak.
 

@@ -5,6 +5,7 @@ import AdminHeader from "@/components/admin/AdminHeader";
 import StatsCard from "@/components/admin/StatsCard";
 import { adminApi, type Stats, type NewsItem, type ContactMessage } from "@/lib/admin-api";
 import Link from "next/link";
+/* eslint-disable @next/next/no-img-element */
 
 export default function DashboardPage() {
   const [stats, setStats] = useState<Stats | null>(null);
@@ -89,7 +90,6 @@ export default function DashboardPage() {
               ) : recentNews.map(n => (
                 <div key={n.id} className="px-6 py-4 flex items-center gap-3 hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors">
                   <div className="w-10 h-10 rounded-xl overflow-hidden flex-shrink-0 bg-gray-100">
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img src={n.imageUrl} alt="" className="w-full h-full object-cover" />
                   </div>
                   <div className="flex-1 min-w-0">
