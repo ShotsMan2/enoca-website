@@ -5,7 +5,8 @@ import AdminHeader from "@/components/admin/AdminHeader";
 import StatsCard from "@/components/admin/StatsCard";
 import { adminApi, type Stats, type NewsItem, type ContactMessage, type ActivityLog } from "@/lib/admin-api";
 import Link from "next/link";
-import { Clock } from "lucide-react";
+import { Clock, TrendingUp, Users } from "lucide-react";
+import { TrafficChart, InteractionChart } from "@/components/admin/DashboardCharts";
 /* eslint-disable @next/next/no-img-element */
 
 export default function DashboardPage() {
@@ -75,8 +76,24 @@ export default function DashboardPage() {
           />
         </div>
 
+        {/* Orta Bölüm: Grafikler */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-6">
+          <div className="bg-white dark:bg-gray-900 rounded-2xl border border-gray-200 dark:border-gray-700 p-6">
+            <h2 className="font-bold text-gray-800 dark:text-white mb-6 flex items-center gap-2">
+              <TrendingUp className="w-5 h-5 text-blue-600" /> Haftalık Ziyaretçi Analizi
+            </h2>
+            <TrafficChart />
+          </div>
+          <div className="bg-white dark:bg-gray-900 rounded-2xl border border-gray-200 dark:border-gray-700 p-6">
+            <h2 className="font-bold text-gray-800 dark:text-white mb-6 flex items-center gap-2">
+              <Users className="w-5 h-5 text-emerald-600" /> Etkileşim: Mesajlar vs Başvurular
+            </h2>
+            <InteractionChart />
+          </div>
+        </div>
+
         {/* Alt Bölüm: Son Haberler + Son Mesajlar */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-6">
 
           {/* Son Haberler */}
           <div className="bg-white dark:bg-gray-900 rounded-2xl border border-gray-200 dark:border-gray-700 overflow-hidden">

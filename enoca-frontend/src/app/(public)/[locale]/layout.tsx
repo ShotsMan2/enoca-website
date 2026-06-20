@@ -11,6 +11,7 @@ import CookieConsent from '@/components/CookieConsent';
 import NextTopLoader from 'nextjs-toploader';
 import FloatingWidget from '@/components/FloatingWidget';
 import ScrollToTop from '@/components/ScrollToTop';
+import CommandPalette from '@/components/CommandPalette';
 import '../../globals.css';
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter', display: 'swap' });
@@ -93,6 +94,7 @@ export default async function LocaleLayout({
           <CookieConsent />
           <FloatingWidget />
           <ScrollToTop />
+          <CommandPalette />
         </NextIntlClientProvider>
       </body>
     </html>

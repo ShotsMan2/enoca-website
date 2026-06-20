@@ -7,6 +7,7 @@ import { getTranslations } from "next-intl/server";
 import { readDB } from "@/lib/db";
 import { ContentPage } from "@/lib/admin-api";
 import PublicLayout from "@/components/PublicLayout";
+import PageTransition from "@/components/PageTransition";
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string[], locale: string }> }) {
     const resolvedParams = await params;
@@ -47,6 +48,7 @@ export default async function CatchAllPage({
 
     return (
         <PublicLayout>
+        <PageTransition>
         <div className="min-h-screen bg-background relative overflow-hidden">
             {/* Dekoratif Arka Plan Işıltısı */}
             <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-accent/5 rounded-full blur-[120px] -z-10" />
@@ -143,6 +145,7 @@ export default async function CatchAllPage({
                 </div>
             </div>
         </div>
+        </PageTransition>
     </PublicLayout>
     );
 }

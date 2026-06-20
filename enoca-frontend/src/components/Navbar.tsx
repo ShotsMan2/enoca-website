@@ -5,27 +5,14 @@ import { ChevronDown, Mail, Phone, Search, X, Globe, Menu, Sun, Moon, ArrowRight
 import { useTranslations, useLocale } from 'next-intl';
 import { Link, usePathname, useRouter } from '@/i18n/routing';
 import { SiteSettings, ContentPage } from '@/lib/admin-api';
-import SearchModal from '@/components/SearchModal';
 
 export default function Navbar({ settings, pages = [] }: { settings?: SiteSettings, pages?: ContentPage[] }) {
-    const [isSearchOpen, setIsSearchOpen] = useState(false);
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const [isDark, setIsDark] = useState(false);
     const router = useRouter();
     const pathname = usePathname();
     const locale = useLocale();
     const t = useTranslations('Navbar');
-
-    useEffect(() => {
-        const handleCmdK = (e: KeyboardEvent) => {
-            if ((e.ctrlKey || e.metaKey) && e.key === "k") {
-                e.preventDefault();
-                setIsSearchOpen(true);
-            }
-        };
-        window.addEventListener("keydown", handleCmdK);
-        return () => window.removeEventListener("keydown", handleCmdK);
-    }, []);
 
     useEffect(() => {
         const isDarkMode = document.documentElement.classList.contains('dark');
@@ -251,11 +238,11 @@ export default function Navbar({ settings, pages = [] }: { settings?: SiteSettin
                                         )}
                                     </Link>
 
-                                    {/* Açılır Menü (1. Seviye) */}
+                                    {/* Açılır Menü (1. Seviye) / Mega Menü */}
                                     {item.children && (
-                                        <div className="absolute left-0 top-full pt-2 w-[280px] opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform origin-top-left group-hover:translate-y-0 translate-y-2 z-50">
-                                            <div className="bg-card rounded-xl border border-border/50 shadow-xl p-2 relative backdrop-blur-xl bg-white/95">
-                                                <div className="flex flex-col gap-1">
+                                        <div className="absolute left-0 top-full pt-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform origin-top-left group-hover:translate-y-0 translate-y-2 z-50">
+                                            <div className="bg-card rounded-2xl border border-border/50 shadow-2xl p-4 relative backdrop-blur-xl bg-white/95 flex gap-4 min-w-[320px]">
+                                                <div className="flex flex-col gap-1 w-[280px]">
                                                     {item.children.map((child: MenuItem, cIdx: number) => (
                                                         <div key={cIdx} className="group/sub relative">
                                                             <Link
@@ -294,6 +281,18 @@ export default function Navbar({ settings, pages = [] }: { settings?: SiteSettin
                                                         </div>
                                                     ))}
                                                 </div>
+                                                {/* Mega Menü Featured Card (İlk çocuk öğesi için örnek banner) */}
+                                                <div className="hidden md:flex flex-col justify-end w-[240px] p-5 rounded-xl bg-gradient-to-br from-accent/10 to-accent/5 border border-accent/10 overflow-hidden relative group/banner">
+                                                    <div className="absolute inset-0 bg-accent/5 opacity-0 group-hover/banner:opacity-100 transition-opacity" />
+                                                    <div className="relative z-10 mt-auto">
+                                                        <h4 className="text-sm font-bold text-foreground mb-1">{item.title} Gelişmeleri</h4>
+                                                        <p className="text-xs text-muted-foreground leading-relaxed mb-3">Enoca uzmanlığı ile kurumsal düzeyde dijital çözümleri keşfedin.</p>
+                                                        <Link href={item.url} className="text-xs font-bold text-accent hover:underline flex items-center gap-1">Daha Fazla Keşfet <ArrowRight className="w-3 h-3" /></Link>
+                                                    </div>
+                                                    <div className="absolute top-4 right-4 w-12 h-12 rounded-full bg-accent/20 flex items-center justify-center">
+                                                        <LayoutGrid className="w-5 h-5 text-accent opacity-70" />
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     )}
@@ -328,13 +327,13 @@ export default function Navbar({ settings, pages = [] }: { settings?: SiteSettin
                                 
                                 <div className="relative flex items-center justify-center ml-1">
                                     <button 
-                                        onClick={() => setIsSearchOpen(true)}
+                                        onClick={() => window.dispatchEvent(new CustomEvent('open-command-palette'))}
                                         className="flex items-center gap-2 px-3 h-9 rounded-lg hover:bg-accent/10 text-foreground/80 hover:text-accent transition-colors border border-transparent hover:border-accent/20"
-                                        title="Arama (Ctrl+K)"
+                                        title="Arama (Cmd+K)"
                                     >
                                         <Search className="w-4 h-4" />
                                         <span className="hidden xl:inline text-xs font-semibold opacity-70">Arama</span>
-                                        <kbd className="hidden xl:inline px-1.5 py-0.5 bg-muted rounded text-[10px] font-mono text-muted-foreground ml-1 font-semibold border border-border/50 shadow-sm">Ctrl K</kbd>
+                                        <kbd className="hidden xl:inline px-1.5 py-0.5 bg-muted rounded text-[10px] font-mono text-muted-foreground ml-1 font-semibold border border-border/50 shadow-sm">⌘K</kbd>
                                     </button>
                                 </div>
                             </div>
@@ -349,13 +348,13 @@ export default function Navbar({ settings, pages = [] }: { settings?: SiteSettin
                                 {isDark ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
                             </button>
                             <button 
-                                onClick={() => { setIsSearchOpen(!isSearchOpen); setIsMobileMenuOpen(false); }}
+                                onClick={() => { window.dispatchEvent(new CustomEvent('open-command-palette')); setIsMobileMenuOpen(false); }}
                                 className="w-10 h-10 flex items-center justify-center rounded-lg hover:bg-accent/10 text-foreground/80 hover:text-accent transition-colors"
                             >
                                 <Search className="w-5 h-5" />
                             </button>
                             <button 
-                                onClick={() => { setIsMobileMenuOpen(!isMobileMenuOpen); setIsSearchOpen(false); }}
+                                onClick={() => { setIsMobileMenuOpen(!isMobileMenuOpen); }}
                                 className="w-10 h-10 flex items-center justify-center rounded-lg hover:bg-accent/10 text-foreground/80 hover:text-accent transition-colors"
                             >
                                 {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
@@ -363,8 +362,6 @@ export default function Navbar({ settings, pages = [] }: { settings?: SiteSettin
                         </div>
                     </div>
                 </div>
-
-                <SearchModal isOpen={isSearchOpen} onClose={() => setIsSearchOpen(false)} />
 
                 {/* Mobile Menu Dropdown */}
                 {isMobileMenuOpen && (

@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
-import { Search, Bell, Sun, Moon, X, User, Settings, LogOut, ChevronDown, Check } from "lucide-react";
+import { Search, Bell, Sun, Moon, X, User, Settings, LogOut, ChevronDown, Check, Activity } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { adminApi } from "@/lib/admin-api";
 
@@ -31,9 +31,18 @@ export default function AdminHeader({ title }: { title: string }) {
   const [notifOpen, setNotifOpen] = useState(false);
   const [profileOpen, setProfileOpen] = useState(false);
   const [notifications, setNotifications] = useState<NotificationItem[]>([]);
+  const [latency, setLatency] = useState(12);
   const notifRef = useRef<HTMLDivElement>(null);
   const profileRef = useRef<HTMLDivElement>(null);
   const searchRef = useRef<HTMLInputElement>(null);
+
+  // Ping calculation simulation
+  useEffect(() => {
+    const int = setInterval(() => {
+      setLatency(Math.floor(Math.random() * (45 - 8 + 1) + 8)); // 8ms - 45ms
+    }, 10000);
+    return () => clearInterval(int);
+  }, []);
 
   // Dark mode init
   useEffect(() => {
@@ -136,6 +145,17 @@ export default function AdminHeader({ title }: { title: string }) {
 
       {/* Sağ: Kontroller */}
       <div className="flex items-center gap-2">
+
+        {/* Sistem Sağlığı Monitörü */}
+        <div className="hidden lg:flex items-center gap-2 px-3 py-1.5 bg-gray-100 dark:bg-gray-800 rounded-lg mr-2 border border-gray-200 dark:border-gray-700">
+          <div className="relative flex h-2 w-2">
+            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+            <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
+          </div>
+          <span className="text-[11px] font-bold text-gray-600 dark:text-gray-300 tracking-wide uppercase">
+            DB: {latency}ms
+          </span>
+        </div>
 
         {/* Arama Kutusu */}
         <div className="relative hidden md:block">

@@ -7,6 +7,7 @@ import { getTranslations } from "next-intl/server";
 import Marquee from "@/components/Marquee";
 import CountUp from "@/components/CountUp";
 import ParallaxWrapper from "@/components/ParallaxWrapper";
+import PageTransition from "@/components/PageTransition";
 export const dynamic = 'force-dynamic';
 
 // getCategories() fonksiyonu kaldırıldı, db.json'dan okunacak.
@@ -43,6 +44,7 @@ export default async function Home() {
 
   return (
     <PublicLayout>
+      <PageTransition>
       {/* 1. KAHRAMAN BÖLÜMÜ (HERO) */}
       <section className="relative overflow-hidden pt-4 pb-20 lg:pt-6 lg:pb-28">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -209,7 +211,7 @@ export default async function Home() {
           </div>
         </div>
       </section>
-
+      </PageTransition>
     </PublicLayout>
   );
 }
