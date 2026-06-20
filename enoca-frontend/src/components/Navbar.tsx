@@ -5,6 +5,7 @@ import { ChevronDown, Mail, Phone, Search, X, Globe, Menu, Sun, Moon } from 'luc
 import { useTranslations, useLocale } from 'next-intl';
 import { Link, usePathname, useRouter } from '@/i18n/routing';
 import { SiteSettings, ContentPage } from '@/lib/admin-api';
+import SearchModal from '@/components/SearchModal';
 
 export default function Navbar({ settings, pages = [] }: { settings?: SiteSettings, pages?: ContentPage[] }) {
     const [isSearchOpen, setIsSearchOpen] = useState(false);
@@ -19,12 +20,22 @@ export default function Navbar({ settings, pages = [] }: { settings?: SiteSettin
     const handleSearch = (e: React.FormEvent) => {
         e.preventDefault();
         if (searchQuery.trim()) {
-            // Arama sorgusunu rotaya aktarıyoruz
             router.push(`/arama?q=${encodeURIComponent(searchQuery.trim())}`);
             setIsSearchOpen(false);
             setSearchQuery("");
         }
     };
+
+    useEffect(() => {
+        const handleCmdK = (e: KeyboardEvent) => {
+            if ((e.ctrlKey || e.metaKey) && e.key === "k") {
+                e.preventDefault();
+                setIsSearchOpen(true);
+            }
+        };
+        window.addEventListener("keydown", handleCmdK);
+        return () => window.removeEventListener("keydown", handleCmdK);
+    }, []);
 
     useEffect(() => {
         const isDarkMode = document.documentElement.classList.contains('dark');
@@ -323,28 +334,14 @@ export default function Navbar({ settings, pages = [] }: { settings?: SiteSettin
                                 
                                 <div className="relative flex items-center justify-center ml-1">
                                     <button 
-                                        onClick={() => setIsSearchOpen(!isSearchOpen)}
-                                        className="w-9 h-9 flex items-center justify-center rounded-full hover:bg-accent/10 text-foreground/80 hover:text-accent transition-colors"
+                                        onClick={() => setIsSearchOpen(true)}
+                                        className="flex items-center gap-2 px-3 h-9 rounded-lg hover:bg-accent/10 text-foreground/80 hover:text-accent transition-colors border border-transparent hover:border-accent/20"
+                                        title="Arama (Ctrl+K)"
                                     >
-                                        {isSearchOpen ? <X className="w-4 h-4" /> : <Search className="w-4 h-4" />}
+                                        <Search className="w-4 h-4" />
+                                        <span className="hidden xl:inline text-xs font-semibold opacity-70">Arama</span>
+                                        <kbd className="hidden xl:inline px-1.5 py-0.5 bg-muted rounded text-[10px] font-mono text-muted-foreground ml-1 font-semibold border border-border/50 shadow-sm">Ctrl K</kbd>
                                     </button>
-                                    
-                                    {/* Arama Input Alanı (Açılır/Kapanır) */}
-                                    <div className={`absolute top-full right-0 mt-4 p-2 bg-white rounded-xl shadow-xl border border-border/50 transition-all duration-300 origin-top-right ${isSearchOpen ? 'opacity-100 scale-100 visible' : 'opacity-0 scale-95 invisible'}`}>
-                                        <form onSubmit={handleSearch} className="flex items-center gap-2">
-                                            <input 
-                                                type="text" 
-                                                value={searchQuery}
-                                                onChange={(e) => setSearchQuery(e.target.value)}
-                                                placeholder={t('searchPlaceholder')} 
-                                                className="w-56 h-10 px-4 rounded-lg border border-border bg-transparent focus:ring-2 focus:ring-accent focus:border-transparent outline-none text-sm transition-all"
-                                                autoFocus={isSearchOpen}
-                                            />
-                                            <button type="submit" className="h-10 px-4 bg-accent text-white rounded-lg text-[13px] font-bold uppercase tracking-wider hover:bg-accent/90 transition-colors">
-                                                {t('searchBtn')}
-                                            </button>
-                                        </form>
-                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -373,24 +370,7 @@ export default function Navbar({ settings, pages = [] }: { settings?: SiteSettin
                     </div>
                 </div>
 
-                {/* Mobile Search Dropdown */}
-                {isSearchOpen && (
-                    <div className="lg:hidden absolute top-full left-0 w-full bg-white border-b border-border p-4 shadow-xl">
-                        <form onSubmit={handleSearch} className="flex items-center gap-2">
-                            <input 
-                                type="text" 
-                                value={searchQuery}
-                                onChange={(e) => setSearchQuery(e.target.value)}
-                                placeholder={t('searchPlaceholder')} 
-                                className="flex-1 h-12 px-4 rounded-lg border border-border bg-gray-50 focus:ring-2 focus:ring-accent focus:border-transparent outline-none text-sm transition-all"
-                                autoFocus
-                            />
-                            <button type="submit" className="h-12 px-6 bg-accent text-white rounded-lg text-[13px] font-bold uppercase tracking-wider">
-                                {t('searchBtn')}
-                            </button>
-                        </form>
-                    </div>
-                )}
+                <SearchModal isOpen={isSearchOpen} onClose={() => setIsSearchOpen(false)} />
 
                 {/* Mobile Menu Dropdown */}
                 {isMobileMenuOpen && (

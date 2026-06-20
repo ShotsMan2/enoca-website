@@ -135,12 +135,23 @@ export default function Footer({ settings }: { settings?: SiteSettings }) {
                         <Link href={settings?.termsUrl || "/kullanim-kosullari"} className="hover:text-white transition-colors uppercase">{t('terms')}</Link>
                     </div>
                     
-                    <div className="flex flex-col items-center md:items-end gap-1">
-                        <div className="text-3xl font-display font-black tracking-tighter text-white opacity-40 grayscale hover:grayscale-0 transition-all duration-500">
-                            enoca<sup className="text-xs font-sans ml-0.5">&trade;</sup>
+                    <div className="flex flex-col md:flex-row items-center md:items-end justify-between gap-6 w-full lg:w-auto">
+                        <div className="flex flex-col w-full max-w-sm gap-2">
+                            <h4 className="text-white text-sm font-bold tracking-wider uppercase mb-1">E-Bülten Kayıt</h4>
+                            <p className="text-[11px] text-[#777777]">Sektörel gelişmelerden haberdar olmak için e-bültenimize kayıt olun.</p>
+                            <form className="flex mt-1" onSubmit={(e) => { e.preventDefault(); alert("Bülten aboneliğiniz alındı, teşekkürler!"); }}>
+                                <input type="email" required placeholder="E-posta adresiniz" className="flex-1 h-9 px-3 text-xs bg-[#333333] border border-[#444444] rounded-l-lg outline-none focus:border-accent text-white placeholder-gray-500 transition-colors" />
+                                <button type="submit" className="h-9 px-4 bg-accent text-white text-[11px] font-bold rounded-r-lg hover:bg-accent/90 transition-colors uppercase">Kayıt Ol</button>
+                            </form>
                         </div>
-                        <div className="text-[11px] font-medium tracking-wider text-[#777777]">
-                            {t('copyright')}
+                        
+                        <div className="flex flex-col items-center md:items-end gap-1 mt-6 lg:mt-0">
+                            <div className="text-3xl font-display font-black tracking-tighter text-white opacity-40 grayscale hover:grayscale-0 transition-all duration-500">
+                                enoca<sup className="text-xs font-sans ml-0.5">&trade;</sup>
+                            </div>
+                            <div className="text-[11px] font-medium tracking-wider text-[#777777]">
+                                {t('copyright')}
+                            </div>
                         </div>
                     </div>
 

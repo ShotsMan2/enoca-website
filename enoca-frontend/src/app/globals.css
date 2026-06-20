@@ -23,6 +23,13 @@
 
   --shadow-accent: 0 4px 14px rgba(0, 82, 255, 0.25);
   --shadow-accent-lg: 0 8px 24px rgba(0, 82, 255, 0.35);
+
+  --animate-marquee: marquee 30s linear infinite;
+
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to { transform: translateX(-100%); }
+  }
 }
 
 @layer base {

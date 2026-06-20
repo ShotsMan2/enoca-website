@@ -7,6 +7,9 @@ import { notFound } from 'next/navigation';
 import { routing } from '@/i18n/routing';
 import Script from 'next/script';
 import CookieConsent from '@/components/CookieConsent';
+import NextTopLoader from 'nextjs-toploader';
+import FloatingWidget from '@/components/FloatingWidget';
+import ScrollToTop from '@/components/ScrollToTop';
 import '../../globals.css';
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter', display: 'swap' });
@@ -83,8 +86,11 @@ export default async function LocaleLayout({
           } catch(e) {}
         `}</Script>
         <NextIntlClientProvider messages={messages}>
+          <NextTopLoader color="#0055FF" initialPosition={0.08} crawlSpeed={200} height={3} crawl={true} showSpinner={false} easing="ease" speed={200} shadow="0 0 10px #0055FF,0 0 5px #0055FF" />
           {children}
           <CookieConsent />
+          <FloatingWidget />
+          <ScrollToTop />
         </NextIntlClientProvider>
       </body>
     </html>
