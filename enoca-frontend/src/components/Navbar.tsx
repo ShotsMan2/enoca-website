@@ -5,31 +5,26 @@ import { ChevronDown, Mail, Phone, Search, X, Globe, Menu, Sun, Moon, ArrowRight
 import { useTranslations, useLocale } from 'next-intl';
 import { Link, usePathname, useRouter } from '@/i18n/routing';
 import { SiteSettings, ContentPage } from '@/lib/admin-api';
+import { useTheme } from 'next-themes';
 
 export default function Navbar({ settings, pages = [] }: { settings?: SiteSettings, pages?: ContentPage[] }) {
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-    const [isDark, setIsDark] = useState(false);
+    const { theme, setTheme, systemTheme } = useTheme();
+    const [mounted, setMounted] = useState(false);
     const router = useRouter();
     const pathname = usePathname();
     const locale = useLocale();
     const t = useTranslations('Navbar');
 
     useEffect(() => {
-        const isDarkMode = document.documentElement.classList.contains('dark');
         // eslint-disable-next-line react-hooks/set-state-in-effect
-        setIsDark(isDarkMode);
+        setMounted(true);
     }, []);
 
+    const isDarkMode = mounted && (theme === "dark" || (theme === "system" && systemTheme === "dark"));
+
     const toggleTheme = () => {
-        const next = !isDark;
-        setIsDark(next);
-        if (next) {
-            document.documentElement.classList.add("dark");
-            localStorage.setItem("admin-theme", "dark");
-        } else {
-            document.documentElement.classList.remove("dark");
-            localStorage.setItem("admin-theme", "light");
-        }
+        setTheme(isDarkMode ? "light" : "dark");
     };
 
     // Enoca.com'un orijinal menü yapısı
@@ -129,6 +124,8 @@ export default function Navbar({ settings, pages = [] }: { settings?: SiteSettin
             children: [
                 { title: t('aboutUs'), url: "/kurumsal/hakkimizda" },
                 { title: t('careers'), url: "/kariyer" },
+                { title: "Yatırımcı İlişkileri", url: "/yatirimci-iliskileri" },
+                { title: "Sistem Durumu", url: "/status" },
                 { title: t('legalInfo'), url: "/kurumsal/yasal-bilgiler" },
                 { title: t('infosecPolicy'), url: "/bilgi-guvenligi-politikasi" },
                 { title: t('kvkk'), url: "/kisisel-verilerin-korunmasi-ve-islenmesi-politikasi" },
@@ -320,9 +317,10 @@ export default function Navbar({ settings, pages = [] }: { settings?: SiteSettin
                                 <button 
                                     onClick={toggleTheme}
                                     className="ml-2 w-9 h-9 flex items-center justify-center rounded-full hover:bg-accent/10 text-foreground/80 hover:text-accent transition-colors"
-                                    title={isDark ? "Aydınlık Mod" : "Karanlık Mod"}
+                                    title={isDarkMode ? "Aydınlık Mod" : "Karanlık Mod"}
                                 >
-                                    {isDark ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
+                                    {mounted && (isDarkMode ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />)}
+                                    {!mounted && <div className="w-4 h-4" />}
                                 </button>
                                 
                                 <div className="relative flex items-center justify-center ml-1">
@@ -345,7 +343,8 @@ export default function Navbar({ settings, pages = [] }: { settings?: SiteSettin
                                 onClick={toggleTheme}
                                 className="w-10 h-10 flex items-center justify-center rounded-lg hover:bg-accent/10 text-foreground/80 hover:text-accent transition-colors"
                             >
-                                {isDark ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
+                                {mounted && (isDarkMode ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />)}
+                                {!mounted && <div className="w-5 h-5" />}
                             </button>
                             <button 
                                 onClick={() => { window.dispatchEvent(new CustomEvent('open-command-palette')); setIsMobileMenuOpen(false); }}

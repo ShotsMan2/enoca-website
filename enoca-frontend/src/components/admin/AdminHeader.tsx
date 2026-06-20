@@ -1,9 +1,10 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
-import { Search, Bell, Sun, Moon, X, User, Settings, LogOut, ChevronDown, Check } from "lucide-react";
+import { Search, Bell, Sun, Moon, User, Settings, LogOut, ChevronDown, Check } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { adminApi } from "@/lib/admin-api";
+import { useTheme } from "next-themes";
 
 type NotificationItem = {
   id: string;
@@ -13,28 +14,18 @@ type NotificationItem = {
   icon: string;
 };
 
-const SEARCH_ROUTES: Record<string, string> = {
-  "Dashboard": "/admin/dashboard",
-  "Site Ayarları": "/admin/ayarlar",
-  "Hero Yönetimi": "/admin/hero",
-  "İçerik / CMS": "/admin/icerik",
-  "Haberler": "/admin/haberler",
-  "Gelen Kutusu": "/admin/iletisim",
-  "Kariyer": "/admin/kariyer"
-};
+
 
 export default function AdminHeader({ title }: { title: string }) {
   const router = useRouter();
-  const [isDark, setIsDark] = useState(false);
-  const [search, setSearch] = useState("");
-  const [searchOpen, setSearchOpen] = useState(false);
+  const { theme, setTheme, systemTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
   const [notifOpen, setNotifOpen] = useState(false);
   const [profileOpen, setProfileOpen] = useState(false);
   const [notifications, setNotifications] = useState<NotificationItem[]>([]);
   const [latency, setLatency] = useState(12);
   const notifRef = useRef<HTMLDivElement>(null);
   const profileRef = useRef<HTMLDivElement>(null);
-  const searchRef = useRef<HTMLInputElement>(null);
 
   // Ping calculation simulation
   useEffect(() => {
@@ -44,14 +35,10 @@ export default function AdminHeader({ title }: { title: string }) {
     return () => clearInterval(int);
   }, []);
 
-  // Dark mode init
+  // Mounted check for hydration safety
   useEffect(() => {
-    const stored = localStorage.getItem("admin-theme");
-    if (stored === "dark") {
-      document.documentElement.classList.add("dark");
-      // eslint-disable-next-line
-      setIsDark(true);
-    }
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setMounted(true);
   }, []);
 
   // Fetch notifications
@@ -102,16 +89,10 @@ export default function AdminHeader({ title }: { title: string }) {
     return () => document.removeEventListener("mousedown", handleClick);
   }, []);
 
+  const isDarkMode = mounted && (theme === "dark" || (theme === "system" && systemTheme === "dark"));
+
   const toggleTheme = () => {
-    const next = !isDark;
-    setIsDark(next);
-    if (next) {
-      document.documentElement.classList.add("dark");
-      localStorage.setItem("admin-theme", "dark");
-    } else {
-      document.documentElement.classList.remove("dark");
-      localStorage.setItem("admin-theme", "light");
-    }
+    setTheme(isDarkMode ? "light" : "dark");
   };
 
   const unreadCount = notifications.filter(n => !n.read).length;
@@ -172,9 +153,10 @@ export default function AdminHeader({ title }: { title: string }) {
         <button
           onClick={toggleTheme}
           className="w-9 h-9 rounded-xl flex items-center justify-center bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors text-gray-600 dark:text-yellow-400"
-          title={isDark ? "Aydınlık Mod" : "Karanlık Mod"}
+          title={isDarkMode ? "Aydınlık Mod" : "Karanlık Mod"}
         >
-          {isDark ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
+          {mounted && (isDarkMode ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />)}
+          {!mounted && <div className="w-4 h-4" />}
         </button>
 
         {/* Bildirim */}

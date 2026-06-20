@@ -31,6 +31,7 @@ export default function HaberlerPage() {
   const [sortField, setSortField] = useState<"title" | "publishedAt">("publishedAt");
   const [sortOrder, setSortOrder] = useState<"asc" | "desc">("desc");
   const [aiTranslating, setAiTranslating] = useState(false);
+  const [aiGenerating, setAiGenerating] = useState(false);
 
   const { toast } = useToast();
 
@@ -125,6 +126,33 @@ export default function HaberlerPage() {
       setAiTranslating(false);
       toast("AI çevirisi başarıyla tamamlandı!", "success");
     }, 1500);
+  };
+
+  const handleAIGenerate = async () => {
+    if (!formData.title) {
+      toast("Lütfen önce bir başlık girin.", "error");
+      return;
+    }
+    
+    setAiGenerating(true);
+    toast("AI makaleyi oluşturuyor, lütfen bekleyin...", "success");
+
+    const simulatedArticle = `Bu makale yapay zeka tarafından otomatik oluşturulmuştur.\n\n"${formData.title}" konusunda Enoca'nın geliştirdiği en yeni teknolojiler ve yaklaşımlar, sektörde standartları yeniden belirliyor. Yapay zeka ve bulut tabanlı altyapımızla süreçleri optimize ederken, maliyet avantajı ve yüksek performans sağlıyoruz. Müşteri memnuniyeti odaklı vizyonumuzla 2025 hedeflerimize hızla ilerliyoruz.`;
+    
+    // Typewriter effect simulation
+    let currentText = "";
+    const words = simulatedArticle.split(" ");
+    
+    setFormData(f => ({ ...f, summary: "" }));
+    
+    for (let i = 0; i < words.length; i++) {
+      await new Promise(r => setTimeout(r, 40));
+      currentText += (i === 0 ? "" : " ") + words[i];
+      setFormData(f => ({ ...f, summary: currentText }));
+    }
+
+    setAiGenerating(false);
+    toast("AI makalesi başarıyla tamamlandı!", "success");
   };
 
   const inputCls = "w-full h-11 px-4 rounded-xl border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-800 dark:text-white text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all";
@@ -237,6 +265,16 @@ export default function HaberlerPage() {
                 {editItem ? "Haberi Düzenle" : "Yeni Haber Ekle"}
               </h3>
               <div className="flex items-center gap-2">
+                <button 
+                  onClick={handleAIGenerate} 
+                  type="button"
+                  disabled={aiGenerating}
+                  className="px-3 py-1.5 bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-600 hover:to-teal-700 text-white text-xs font-bold rounded-lg transition-all shadow-lg shadow-emerald-500/25 flex items-center gap-1.5 disabled:opacity-50"
+                  title="Başlığa Göre Yapay Zeka ile İçerik Üret"
+                >
+                  {aiGenerating ? <Sparkles className="w-3.5 h-3.5 animate-spin" /> : <Sparkles className="w-3.5 h-3.5" />}
+                  AI ile Yazdır
+                </button>
                 <button 
                   onClick={handleAITranslate} 
                   type="button"
