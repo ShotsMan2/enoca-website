@@ -94,6 +94,8 @@ export default function AdminSidebar() {
     });
   }, []);
 
+  if (pathname === '/admin/login') return null;
+
   return (
     <aside
       className={`relative flex flex-col h-screen bg-white dark:bg-gray-900 border-r border-gray-200 dark:border-gray-700 transition-all duration-300 ${collapsed ? "w-16" : "w-64"}`}

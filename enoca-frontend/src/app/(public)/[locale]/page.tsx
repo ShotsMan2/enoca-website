@@ -7,7 +7,6 @@ import { getTranslations } from "next-intl/server";
 
 // getCategories() fonksiyonu kaldırıldı, db.json'dan okunacak.
 
-import { getTranslations } from "next-intl/server";
 import { readDB } from '@/lib/db';
 import { HomepageFeature } from "@/lib/admin-api";
 

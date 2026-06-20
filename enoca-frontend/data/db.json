@@ -62,7 +62,7 @@
       "email": "ahmet@firma.com",
       "message": "SAP CX Hybris çözümleriniz hakkında bilgi almak istiyorum. Firmamız için B2B e-ticaret platformu arıyoruz.",
       "receivedAt": "2025-06-18T10:30:00Z",
-      "isRead": false
+      "isRead": true
     },
     {
       "id": 2,
