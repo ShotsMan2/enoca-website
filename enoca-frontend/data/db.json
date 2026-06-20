@@ -102,7 +102,7 @@
       "email": "elif@arge.net",
       "message": "AR-GE departmanımız için yazılım desteği almak istiyoruz.",
       "receivedAt": "2025-06-13T08:55:00Z",
-      "isRead": false
+      "isRead": true
     },
     {
       "id": 7,
@@ -110,7 +110,7 @@
       "email": "b.guler@perakende.com",
       "message": "Gratis ile yaptığınız projenin detaylarını öğrenebilir miyim?",
       "receivedAt": "2025-06-12T13:10:00Z",
-      "isRead": false
+      "isRead": true
     }
   ],
   "settings": {
@@ -176,15 +176,6 @@
       "content": "<h2>SAP HANA</h2><p>In-memory computing teknolojisi ile gerçek zamanlı veri analizi yapın.</p>",
       "status": "draft",
       "updatedAt": "2025-06-15"
-    },
-    {
-      "menuTitle": "efe",
-      "slug": "/cozumler/yeni-sayfa",
-      "category": "Çözümler",
-      "content": "<p>seilm efe uysaşl</p>",
-      "status": "published",
-      "updatedAt": "2026-06-19T20:41:25.583Z",
-      "id": 6
     },
     {
       "menuTitle": "elprimo",
@@ -392,6 +383,15 @@
       "content": "<h2>KVKK</h2><p>Bu sayfanın içeriğini admin panelinden güncelleyebilirsiniz.</p>",
       "status": "published",
       "updatedAt": "2026-06-20T08:18:48.070Z"
+    },
+    {
+      "menuTitle": "Yeni Sayfa",
+      "slug": "/yeni-sayfa",
+      "category": "Çözümler",
+      "content": "<p>İçeriği&nbsp;buraya&nbsp;yazın...asdadads</p>",
+      "status": "published",
+      "updatedAt": "2026-06-20T12:42:36.513Z",
+      "id": 30
     }
   ],
   "jobs": [

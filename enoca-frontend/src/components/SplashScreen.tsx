@@ -14,7 +14,7 @@ export default function SplashScreen() {
     
     // Eğer anasayfada ise ve henüz splash screen'i görmediyse (ve admin değilse)
     if (!hasSeenSplash && (pathname === "/" || pathname === "/en" || pathname === "/tr") && !pathname.includes("/admin")) {
-      setShow(true);
+      setTimeout(() => setShow(true), 0);
       
       // 2.2 saniye sonra fade-out başlat
       setTimeout(() => {

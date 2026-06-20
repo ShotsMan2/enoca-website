@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import AdminHeader from "@/components/admin/AdminHeader";
 import { adminApi, type SiteSettings } from "@/lib/admin-api";
 import { useToast } from "@/components/admin/ToastProvider";
+import { Download, Upload } from "lucide-react";
 
 export default function AyarlarPage() {
   const [settings, setSettings] = useState<SiteSettings | null>(null);
@@ -21,6 +22,38 @@ export default function AyarlarPage() {
     await adminApi.updateSiteSettings(settings);
     setSaving(false);
     toast("Site ayarları başarıyla kaydedildi.");
+  };
+
+  const handleExport = async () => {
+    try {
+      const res = await fetch("/api/admin/db.json");
+      if (!res.ok) throw new Error("Yedek alınamadı");
+      const data = await res.text();
+      const blob = new Blob([data], { type: "application/json" });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = `enoca-backup-${new Date().toISOString().split("T")[0]}.json`;
+      a.click();
+      toast("Sistem yedeği başarıyla indirildi.", "success");
+      await adminApi.logAction("Sistem Yedeği Alındı", "Tüm sistem veritabanı dışa aktarıldı.");
+    } catch {
+      toast("Yedek alınırken bir hata oluştu.", "error");
+    }
+  };
+
+  const handleImport = () => {
+    const input = document.createElement("input");
+    input.type = "file";
+    input.accept = ".json";
+    input.onchange = async () => {
+      const file = input.files?.[0];
+      if (!file) return;
+      toast("Sistem yedeği geri yükleniyor (Simülasyon)...", "success");
+      await adminApi.logAction("Sistem Yedeği Yüklendi", `${file.name} isimli dosyadan sistem geri yükleme tetiklendi.`);
+      // Gerçek senaryoda API'ye POST atılarak db güncellenir.
+    };
+    input.click();
   };
 
   const field = (label: string, key: keyof SiteSettings, type = "text", placeholder = "") => (
@@ -101,6 +134,28 @@ export default function AyarlarPage() {
           </div>
 
         </form>
+
+        <div className="mt-8 bg-red-50 dark:bg-red-900/10 border border-red-200 dark:border-red-900/50 rounded-2xl p-6 md:p-8">
+          <h2 className="text-lg font-bold text-red-600 dark:text-red-400 mb-2">Disaster Recovery (Sistem Yedekleme)</h2>
+          <p className="text-sm text-red-600/80 dark:text-red-400/80 mb-6">Tüm sistem veritabanını indirebilir veya daha önce aldığınız bir yedeği sisteme geri yükleyebilirsiniz. İçe aktarma işlemi mevcut tüm verilerinizi geçersiz kılar!</p>
+          <div className="flex flex-col sm:flex-row gap-4">
+            <button
+              onClick={handleExport}
+              type="button"
+              className="flex items-center justify-center gap-2 px-6 py-2.5 bg-white dark:bg-gray-800 text-red-600 border border-red-200 dark:border-red-800 hover:bg-red-50 dark:hover:bg-red-900/20 font-bold rounded-xl transition-colors shadow-sm"
+            >
+              <Download className="w-4 h-4" /> Sistemi Yedekle (Export)
+            </button>
+            <button
+              onClick={handleImport}
+              type="button"
+              className="flex items-center justify-center gap-2 px-6 py-2.5 bg-red-600 hover:bg-red-700 text-white font-bold rounded-xl transition-colors shadow-lg shadow-red-500/20"
+            >
+              <Upload className="w-4 h-4" /> Yedekten Dön (Import)
+            </button>
+          </div>
+        </div>
+
       </main>
     </>
   );

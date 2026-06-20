@@ -9,7 +9,7 @@ export default function NewsClientFeatures({ title }: { title: string }) {
   const [url, setUrl] = useState("");
 
   useEffect(() => {
-    setUrl(window.location.href);
+    setTimeout(() => setUrl(window.location.href), 0);
 
     const updateScroll = () => {
       const currentScrollY = window.scrollY;
@@ -27,14 +27,6 @@ export default function NewsClientFeatures({ title }: { title: string }) {
     navigator.clipboard.writeText(url);
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
-  };
-
-  const shareTwitter = () => {
-    window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(title)}&url=${encodeURIComponent(url)}`, '_blank');
-  };
-
-  const shareLinkedin = () => {
-    window.open(`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(url)}`, '_blank');
   };
 
   return (

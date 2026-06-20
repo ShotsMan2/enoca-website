@@ -16,11 +16,14 @@ export default function CookieConsent() {
   useEffect(() => {
     const consent = localStorage.getItem("cookie-consent-advanced");
     if (!consent) {
-      setShowBanner(true);
+      setTimeout(() => setShowBanner(true), 0);
     } else {
       try {
-        setPreferences(JSON.parse(consent));
-      } catch (e) {}
+        const parsed = JSON.parse(consent);
+        setTimeout(() => setPreferences(parsed), 0);
+      } catch {
+        // unused catch param removed
+      }
     }
   }, []);
 
@@ -50,7 +53,7 @@ export default function CookieConsent() {
               <h3 className="text-lg font-bold text-foreground mb-2">Gizlilik ve Çerez Politikası</h3>
               <p className="text-sm text-muted-foreground">
                 Sitemizde size en iyi deneyimi sunabilmek, site trafiğini analiz etmek ve içerikleri kişiselleştirmek için çerezler kullanıyoruz. 
-                Tüm çerezleri kabul edebilir veya "Ayarlar" butonuna tıklayarak tercihlerinizi yönetebilirsiniz.
+                Tüm çerezleri kabul edebilir veya &quot;Ayarlar&quot; butonuna tıklayarak tercihlerinizi yönetebilirsiniz.
               </p>
             </div>
             <div className="flex flex-col sm:flex-row items-center gap-3 w-full md:w-auto shrink-0">

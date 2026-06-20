@@ -5,9 +5,9 @@ import AdminHeader from "@/components/admin/AdminHeader";
 import ConfirmModal from "@/components/admin/ConfirmModal";
 import { adminApi, type ContentPage } from "@/lib/admin-api";
 import dynamic from "next/dynamic";
-import "react-quill/dist/quill.snow.css";
+import "react-quill-new/dist/quill.snow.css";
 
-const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
+const ReactQuill = dynamic(() => import("react-quill-new"), { ssr: false });
 
 const categories = ["Tümü", "Çözümler", "Danışmanlık", "Projeler", "Teknoloji", "Kurumsal", "Haberler"];
 

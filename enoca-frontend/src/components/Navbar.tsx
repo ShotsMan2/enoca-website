@@ -10,21 +10,11 @@ import SearchModal from '@/components/SearchModal';
 export default function Navbar({ settings, pages = [] }: { settings?: SiteSettings, pages?: ContentPage[] }) {
     const [isSearchOpen, setIsSearchOpen] = useState(false);
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-    const [searchQuery, setSearchQuery] = useState("");
     const [isDark, setIsDark] = useState(false);
     const router = useRouter();
     const pathname = usePathname();
     const locale = useLocale();
     const t = useTranslations('Navbar');
-
-    const handleSearch = (e: React.FormEvent) => {
-        e.preventDefault();
-        if (searchQuery.trim()) {
-            router.push(`/arama?q=${encodeURIComponent(searchQuery.trim())}`);
-            setIsSearchOpen(false);
-            setSearchQuery("");
-        }
-    };
 
     useEffect(() => {
         const handleCmdK = (e: KeyboardEvent) => {
