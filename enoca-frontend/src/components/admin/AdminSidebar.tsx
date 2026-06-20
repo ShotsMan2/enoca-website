@@ -98,7 +98,7 @@ export default function AdminSidebar() {
 
   return (
     <aside
-      className={`relative flex flex-col h-screen bg-white dark:bg-gray-900 border-r border-gray-200 dark:border-gray-700 transition-all duration-300 ${collapsed ? "w-16" : "w-64"}`}
+      className={`relative flex flex-col h-screen backdrop-blur-xl bg-white/70 dark:bg-gray-950/70 border-r border-border transition-all duration-300 z-50 ${collapsed ? "w-16" : "w-64"}`}
     >
       {/* Logo */}
       <div className="flex items-center justify-between h-16 px-4 border-b border-gray-200 dark:border-gray-700 flex-shrink-0">
@@ -139,16 +139,25 @@ export default function AdminSidebar() {
               key={item.href}
               href={item.href}
               title={collapsed ? item.label : undefined}
-              className={`group flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-semibold transition-all duration-200 relative ${
+              className={`group flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-semibold transition-all duration-300 ease-out relative overflow-hidden ${
                 isActive
-                  ? "bg-blue-600 text-white shadow-lg shadow-blue-600/25"
-                  : "text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 hover:text-gray-900 dark:hover:text-white"
+                  ? "text-white shadow-lg shadow-blue-500/20"
+                  : "text-muted-foreground hover:text-foreground"
               }`}
             >
-              <span className="flex-shrink-0">{item.icon}</span>
-              {!collapsed && <span className="flex-1">{item.label}</span>}
+              {/* Liquid Active Background */}
+              {isActive && (
+                <div className="absolute inset-0 bg-blue-600 rounded-xl" />
+              )}
+              {/* Liquid Hover Background (only for inactive) */}
+              {!isActive && (
+                <div className="absolute inset-0 bg-muted/0 group-hover:bg-muted/80 rounded-xl transition-colors duration-300" />
+              )}
+              
+              <span className="flex-shrink-0 relative z-10 transition-transform duration-300 group-hover:scale-110 group-hover:rotate-3">{item.icon}</span>
+              {!collapsed && <span className="flex-1 relative z-10">{item.label}</span>}
               {!collapsed && item.badge && unread > 0 && (
-                <span className="bg-red-500 text-white text-xs font-bold px-1.5 py-0.5 rounded-full min-w-[20px] text-center">
+                <span className="bg-red-500 text-white text-xs font-bold px-1.5 py-0.5 rounded-full min-w-[20px] text-center relative z-10 shadow-sm">
                   {unread}
                 </span>
               )}

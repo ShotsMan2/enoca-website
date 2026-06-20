@@ -4,6 +4,8 @@ import { useEffect, useState } from "react";
 import AdminHeader from "@/components/admin/AdminHeader";
 import ConfirmModal from "@/components/admin/ConfirmModal";
 import { adminApi, type ContactMessage } from "@/lib/admin-api";
+import { useToast } from "@/components/admin/ToastProvider";
+import { ArrowUpDown } from "lucide-react";
 
 export default function IletisimPage() {
   const [messages, setMessages] = useState<ContactMessage[]>([]);
@@ -12,16 +14,46 @@ export default function IletisimPage() {
   const [filter, setFilter] = useState<"all" | "unread" | "read">("all");
   const [deleteModal, setDeleteModal] = useState<{ open: boolean; id: number | null }>({ open: false, id: null });
   const [deleting, setDeleting] = useState(false);
+  const [search, setSearch] = useState("");
+  
+  const [sortField, setSortField] = useState<"name" | "receivedAt">("receivedAt");
+  const [sortOrder, setSortOrder] = useState<"asc" | "desc">("desc");
+
+  const { toast } = useToast();
 
   useEffect(() => {
     adminApi.getMessages().then(m => { setMessages(m); setLoading(false); });
   }, []);
 
   const filtered = messages.filter(m => {
-    if (filter === "unread") return !m.isRead;
-    if (filter === "read") return m.isRead;
-    return true;
+    const matchesSearch = m.name.toLowerCase().includes(search.toLowerCase()) || 
+                          m.email.toLowerCase().includes(search.toLowerCase()) || 
+                          m.message.toLowerCase().includes(search.toLowerCase());
+    if (filter === "unread") return !m.isRead && matchesSearch;
+    if (filter === "read") return m.isRead && matchesSearch;
+    return matchesSearch;
   });
+
+  const sorted = [...filtered].sort((a, b) => {
+    if (sortField === "receivedAt") {
+      const dateA = new Date(a.receivedAt).getTime();
+      const dateB = new Date(b.receivedAt).getTime();
+      return sortOrder === "asc" ? dateA - dateB : dateB - dateA;
+    } else {
+      return sortOrder === "asc" 
+        ? a.name.localeCompare(b.name) 
+        : b.name.localeCompare(a.name);
+    }
+  });
+
+  const toggleSort = (field: "name" | "receivedAt") => {
+    if (sortField === field) {
+      setSortOrder(sortOrder === "asc" ? "desc" : "asc");
+    } else {
+      setSortField(field);
+      setSortOrder("desc");
+    }
+  };
 
   const unreadCount = messages.filter(m => !m.isRead).length;
 
@@ -41,6 +73,7 @@ export default function IletisimPage() {
     if (selected?.id === deleteModal.id) setSelected(null);
     setDeleting(false);
     setDeleteModal({ open: false, id: null });
+    toast("Mesaj silindi.", "success");
   };
 
   return (
@@ -60,7 +93,17 @@ export default function IletisimPage() {
                     <span className="bg-blue-600 text-white text-xs font-bold px-1.5 py-0.5 rounded-full">{unreadCount}</span>
                   )}
                 </h2>
+                <div className="flex gap-2">
+                  <button onClick={() => toggleSort("name")} className="text-gray-400 hover:text-blue-600"><ArrowUpDown className="w-4 h-4" /></button>
+                </div>
               </div>
+              <input 
+                type="text" 
+                placeholder="Mesajlarda ara..." 
+                className="w-full mb-3 px-3 py-1.5 text-xs rounded-lg bg-gray-100 dark:bg-gray-800 border-none outline-none"
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
+              />
               <div className="flex gap-1">
                 {(["all", "unread", "read"] as const).map(f => (
                   <button key={f} onClick={() => setFilter(f)}
@@ -81,9 +124,9 @@ export default function IletisimPage() {
                     <div className="h-3 bg-gray-200 dark:bg-gray-700 rounded w-3/4" />
                   </div>
                 ))
-              ) : filtered.length === 0 ? (
+              ) : sorted.length === 0 ? (
                 <div className="flex items-center justify-center h-32 text-sm text-gray-400">Mesaj yok</div>
-              ) : filtered.map(msg => (
+              ) : sorted.map(msg => (
                 <button key={msg.id} onClick={() => handleSelect(msg)}
                   className={`w-full text-left p-4 hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors ${selected?.id === msg.id ? "bg-blue-50 dark:bg-blue-900/20" : ""} ${!msg.isRead ? "border-l-2 border-blue-500" : ""}`}>
                   <div className="flex items-start justify-between gap-2 mb-1">

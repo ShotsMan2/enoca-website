@@ -5,6 +5,8 @@ import { useEffect, useState } from "react";
 import AdminHeader from "@/components/admin/AdminHeader";
 import ConfirmModal from "@/components/admin/ConfirmModal";
 import { adminApi, type NewsItem } from "@/lib/admin-api";
+import { useToast } from "@/components/admin/ToastProvider";
+import { ArrowUpDown } from "lucide-react";
 
 const PAGE_SIZE = 5;
 
@@ -23,6 +25,12 @@ export default function HaberlerPage() {
   const [formData, setFormData] = useState<Omit<NewsItem, "id">>(emptyForm);
   const [showForm, setShowForm] = useState(false);
   const [saving, setSaving] = useState(false);
+  
+  // Sorting state
+  const [sortField, setSortField] = useState<"title" | "publishedAt">("publishedAt");
+  const [sortOrder, setSortOrder] = useState<"asc" | "desc">("desc");
+
+  const { toast } = useToast();
 
   useEffect(() => {
     adminApi.getNews().then(n => { setNews(n); setLoading(false); });
@@ -32,8 +40,31 @@ export default function HaberlerPage() {
     n.title.toLowerCase().includes(search.toLowerCase()) ||
     n.summary.toLowerCase().includes(search.toLowerCase())
   );
-  const totalPages = Math.ceil(filtered.length / PAGE_SIZE);
-  const paginated = filtered.slice((page - 1) * PAGE_SIZE, page * PAGE_SIZE);
+
+  // Apply Sort
+  const sorted = [...filtered].sort((a, b) => {
+    if (sortField === "publishedAt") {
+      const dateA = new Date(a.publishedAt).getTime();
+      const dateB = new Date(b.publishedAt).getTime();
+      return sortOrder === "asc" ? dateA - dateB : dateB - dateA;
+    } else {
+      return sortOrder === "asc" 
+        ? a.title.localeCompare(b.title) 
+        : b.title.localeCompare(a.title);
+    }
+  });
+
+  const totalPages = Math.ceil(sorted.length / PAGE_SIZE);
+  const paginated = sorted.slice((page - 1) * PAGE_SIZE, page * PAGE_SIZE);
+
+  const toggleSort = (field: "title" | "publishedAt") => {
+    if (sortField === field) {
+      setSortOrder(sortOrder === "asc" ? "desc" : "asc");
+    } else {
+      setSortField(field);
+      setSortOrder("desc");
+    }
+  };
 
   const handleDelete = async () => {
     if (!deleteModal.id) return;
@@ -42,6 +73,7 @@ export default function HaberlerPage() {
     setNews(n => n.filter(x => x.id !== deleteModal.id));
     setDeleting(false);
     setDeleteModal({ open: false, id: null });
+    toast("Haber başarıyla silindi.", "success");
   };
 
   const openEdit = (item: NewsItem) => {
@@ -62,9 +94,11 @@ export default function HaberlerPage() {
     if (editItem) {
       const updated = await adminApi.updateNews({ ...formData, id: editItem.id });
       setNews(n => n.map(x => x.id === updated.id ? updated : x));
+      toast("Haber güncellendi.", "success");
     } else {
       const created = await adminApi.createNews(formData);
       setNews(n => [created, ...n]);
+      toast("Yeni haber eklendi.", "success");
     }
     setSaving(false);
     setShowForm(false);
@@ -94,8 +128,16 @@ export default function HaberlerPage() {
           <table className="w-full">
             <thead className="bg-gray-50 dark:bg-gray-800">
               <tr>
-                <th className="text-left text-xs font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wider px-6 py-3">Haber</th>
-                <th className="text-left text-xs font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wider px-4 py-3 hidden md:table-cell">Tarih</th>
+                <th className="text-left px-6 py-3">
+                  <button onClick={() => toggleSort("title")} className="flex items-center gap-1 text-xs font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wider hover:text-blue-600 transition-colors">
+                    Haber <ArrowUpDown className="w-3 h-3" />
+                  </button>
+                </th>
+                <th className="text-left px-4 py-3 hidden md:table-cell">
+                  <button onClick={() => toggleSort("publishedAt")} className="flex items-center gap-1 text-xs font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wider hover:text-blue-600 transition-colors">
+                    Tarih <ArrowUpDown className="w-3 h-3" />
+                  </button>
+                </th>
                 <th className="text-left text-xs font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wider px-4 py-3">Durum</th>
                 <th className="text-right text-xs font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wider px-6 py-3">İşlem</th>
               </tr>
