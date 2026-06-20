@@ -8,6 +8,19 @@ import { readDB } from "@/lib/db";
 import { ContentPage } from "@/lib/admin-api";
 import PublicLayout from "@/components/PublicLayout";
 
+export async function generateMetadata({ params }: { params: Promise<{ slug: string[], locale: string }> }) {
+    const resolvedParams = await params;
+    const slugArray = resolvedParams.slug || [];
+    const pageTitle = slugArray.length > 0 
+        ? slugArray[slugArray.length - 1].replace(/-/g, ' ').toUpperCase()
+        : 'Sayfa';
+    
+    return {
+        title: `${pageTitle} | Enoca`,
+        description: `Enoca ${pageTitle} çözümleri ve hizmetleri hakkında detaylı bilgi.`,
+    };
+}
+
 export default async function CatchAllPage({
     params
 }: {

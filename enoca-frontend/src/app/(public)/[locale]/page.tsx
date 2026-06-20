@@ -4,6 +4,8 @@ import HeroVisual from "@/components/HeroVisual";
 import PublicLayout from "@/components/PublicLayout";
 import HomePageContactForm from "@/components/HomePageContactForm";
 import { getTranslations } from "next-intl/server";
+import Marquee from "@/components/Marquee";
+import CountUp from "@/components/CountUp";
 export const dynamic = 'force-dynamic';
 
 // getCategories() fonksiyonu kaldırıldı, db.json'dan okunacak.
@@ -110,20 +112,32 @@ export default async function Home() {
         </div>
       </section>
 
-      {/* 3. REFERANSLAR */}
+      {/* İSTATİSTİKLER (Yeni Kurumsal Alan) */}
+      <section className="py-16 bg-background relative z-20 border-b border-border">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8">
+            <CountUp end={15} suffix="+" title="Yıllık Tecrübe" />
+            <CountUp end={250} suffix="+" title="Başarılı Proje" />
+            <CountUp end={100} suffix="+" title="Uzman Ekip" />
+            <CountUp end={50} suffix="+" title="İş Ortağı" />
+          </div>
+        </div>
+      </section>
+
+      {/* 3. REFERANSLAR (Kayan Şerit - Marquee) */}
       <section className="py-20 border-b border-border bg-background overflow-hidden relative">
-         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center mb-10">
+         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center mb-6">
              <h3 className="text-sm font-mono tracking-[0.2em] text-muted-foreground uppercase">{tRefs('title')}</h3>
          </div>
-         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="flex flex-wrap justify-center items-center gap-x-12 gap-y-8 opacity-60 grayscale hover:grayscale-0 transition-all duration-500">
-                {references.map((ref: string, idx: number) => (
-                    <span key={idx} className="text-xl md:text-2xl font-bold font-display text-foreground">
+         <Marquee speed={40}>
+            {references.map((ref: string, idx: number) => (
+                <div key={idx} className="flex items-center justify-center px-8 opacity-50 grayscale hover:opacity-100 hover:grayscale-0 transition-all duration-300">
+                    <span className="text-2xl md:text-3xl font-bold font-display text-foreground whitespace-nowrap">
                         {ref}
                     </span>
-                ))}
-            </div>
-         </div>
+                </div>
+            ))}
+         </Marquee>
       </section>
 
       {/* 4. DİNAMİK KATEGORİLER (Backend'den Gelen Alan) */}

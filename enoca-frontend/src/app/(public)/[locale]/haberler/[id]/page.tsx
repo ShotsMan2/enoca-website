@@ -8,6 +8,19 @@ import { Link } from "@/i18n/routing";
 
 export const dynamic = 'force-dynamic';
 
+export async function generateMetadata({ params }: { params: Promise<{ id: string, locale: string }> }) {
+  const { id } = await params;
+  const db = await readDB();
+  const newsItem = db?.news?.find((n: NewsItem) => n.id === parseInt(id, 10) && n.status === "published");
+  
+  if (!newsItem) return { title: 'Haber Bulunamadı | Enoca' };
+  
+  return {
+    title: `${newsItem.title} | Enoca Haberler`,
+    description: newsItem.summary || `${newsItem.title} hakkında detaylar.`,
+  };
+}
+
 export default async function NewsDetailPage({ params }: { params: Promise<{ id: string, locale: string }> }) {
   const { id } = await params;
   const newsId = parseInt(id, 10);
