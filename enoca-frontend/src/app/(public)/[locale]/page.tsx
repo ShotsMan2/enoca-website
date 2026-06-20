@@ -1,6 +1,6 @@
 import { Link } from "@/i18n/routing";
 import { Button } from "@/components/ui/button";
-import HeroVisual from "@/components/HeroVisual";
+import GlobeVisual from "@/components/GlobeVisual";
 import PublicLayout from "@/components/PublicLayout";
 import HomePageContactForm from "@/components/HomePageContactForm";
 import { getTranslations } from "next-intl/server";
@@ -11,6 +11,7 @@ import PageTransition from "@/components/PageTransition";
 import SpotlightCard from "@/components/SpotlightCard";
 import NetworkBackground from "@/components/NetworkBackground";
 import ProjectConfigurator from "@/components/ProjectConfigurator";
+import ROICalculator from "@/components/ROICalculator";
 import * as motion from "framer-motion/client";
 export const dynamic = 'force-dynamic';
 
@@ -95,7 +96,7 @@ export default async function Home() {
 
             <div className="relative hidden md:block z-0">
               <ParallaxWrapper speed={0.15}>
-                <HeroVisual />
+                <GlobeVisual />
               </ParallaxWrapper>
             </div>
 
@@ -231,6 +232,21 @@ export default async function Home() {
             </p>
           </div>
           <ProjectConfigurator />
+        </div>
+      </section>
+
+      {/* 5.5. B2B ROI HESAPLAYICI (V5 Özelliği) */}
+      <section className="py-24 bg-background relative border-t border-border">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <div className="text-center max-w-3xl mx-auto mb-12 space-y-4">
+            <h2 className="text-4xl md:text-5xl font-display text-foreground">
+              SAP CX Hybris <span className="text-blue-600">ROI Analizi</span>
+            </h2>
+            <p className="text-lg text-muted-foreground">
+              Mevcut altyapı maliyetlerinizi ve büyüme hedeflerinizi girerek SAP Commerce Cloud dönüşümünün size 5 yılda ne kadar tasarruf sağlayacağını anında öğrenin.
+            </p>
+          </div>
+          <ROICalculator />
         </div>
       </section>
 
