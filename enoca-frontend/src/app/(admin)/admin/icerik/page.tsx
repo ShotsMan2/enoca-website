@@ -5,7 +5,7 @@ import AdminHeader from "@/components/admin/AdminHeader";
 import ConfirmModal from "@/components/admin/ConfirmModal";
 import { adminApi, type ContentPage } from "@/lib/admin-api";
 
-const categories = ["Tümü", "Çözümler", "Danışmanlık", "Projeler", "Teknoloji", "Kurumsal"];
+const categories = ["Tümü", "Çözümler", "Danışmanlık", "Projeler", "Teknoloji", "Kurumsal", "Haberler"];
 
 export default function IcerikPage() {
   const [pages, setPages] = useState<ContentPage[]>([]);

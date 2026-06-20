@@ -194,6 +194,204 @@
       "status": "published",
       "updatedAt": "2026-06-19T20:41:27.353Z",
       "id": 7
+    },
+    {
+      "id": 8,
+      "menuTitle": "SAP CX Hybris Mobil E-Ticaret",
+      "slug": "/cozumler/hybris-cozumleri/hybris-mobil-ticaret",
+      "category": "Çözümler",
+      "content": "<h2>SAP CX Hybris Mobil E-Ticaret</h2><p>Bu sayfanın içeriğini admin panelinden güncelleyebilirsiniz.</p>",
+      "status": "published",
+      "updatedAt": "2026-06-20T08:18:48.070Z"
+    },
+    {
+      "id": 9,
+      "menuTitle": "SAP CX Hybris MDM",
+      "slug": "/cozumler/hybris-cozumleri/hybris-mdm",
+      "category": "Çözümler",
+      "content": "<h2>SAP CX Hybris MDM</h2><p>Bu sayfanın içeriğini admin panelinden güncelleyebilirsiniz.</p>",
+      "status": "published",
+      "updatedAt": "2026-06-20T08:18:48.070Z"
+    },
+    {
+      "id": 10,
+      "menuTitle": "SAP Mobility",
+      "slug": "/cozumler/sap-cozumleri/sap-mobility",
+      "category": "Çözümler",
+      "content": "<h2>SAP Mobility</h2><p>Bu sayfanın içeriğini admin panelinden güncelleyebilirsiniz.</p>",
+      "status": "published",
+      "updatedAt": "2026-06-20T08:18:48.070Z"
+    },
+    {
+      "id": 11,
+      "menuTitle": "SAP Uygulama Yönetimi",
+      "slug": "/cozumler/sap-cozumleri/sap-uygulama-yonetimi",
+      "category": "Çözümler",
+      "content": "<h2>SAP Uygulama Yönetimi</h2><p>Bu sayfanın içeriğini admin panelinden güncelleyebilirsiniz.</p>",
+      "status": "published",
+      "updatedAt": "2026-06-20T08:18:48.070Z"
+    },
+    {
+      "id": 12,
+      "menuTitle": "SAP Bulut",
+      "slug": "/cozumler/sap-cozumleri/sap-bulut",
+      "category": "Çözümler",
+      "content": "<h2>SAP Bulut</h2><p>Bu sayfanın içeriğini admin panelinden güncelleyebilirsiniz.</p>",
+      "status": "published",
+      "updatedAt": "2026-06-20T08:18:48.070Z"
+    },
+    {
+      "id": 13,
+      "menuTitle": "vFabric Hyperic",
+      "slug": "/cozumler/sistem-izleme-cozumleri/vfabric-hyperic",
+      "category": "Çözümler",
+      "content": "<h2>vFabric Hyperic</h2><p>Bu sayfanın içeriğini admin panelinden güncelleyebilirsiniz.</p>",
+      "status": "published",
+      "updatedAt": "2026-06-20T08:18:48.070Z"
+    },
+    {
+      "id": 14,
+      "menuTitle": "Nagios",
+      "slug": "/cozumler/sistem-izleme-cozumleri/nagios",
+      "category": "Çözümler",
+      "content": "<h2>Nagios</h2><p>Bu sayfanın içeriğini admin panelinden güncelleyebilirsiniz.</p>",
+      "status": "published",
+      "updatedAt": "2026-06-20T08:18:48.070Z"
+    },
+    {
+      "id": 15,
+      "menuTitle": "Hybris Danışmanlığı",
+      "slug": "/danismanlik/hybris-danismanligi",
+      "category": "Danışmanlık",
+      "content": "<h2>Hybris Danışmanlığı</h2><p>Bu sayfanın içeriğini admin panelinden güncelleyebilirsiniz.</p>",
+      "status": "published",
+      "updatedAt": "2026-06-20T08:18:48.070Z"
+    },
+    {
+      "id": 16,
+      "menuTitle": "SAP Teknik Danışmanlık",
+      "slug": "/danismanlik/sap-teknik-danismanlik",
+      "category": "Danışmanlık",
+      "content": "<h2>SAP Teknik Danışmanlık</h2><p>Bu sayfanın içeriğini admin panelinden güncelleyebilirsiniz.</p>",
+      "status": "published",
+      "updatedAt": "2026-06-20T08:18:48.070Z"
+    },
+    {
+      "id": 17,
+      "menuTitle": "SAP Fonksiyonel Danışmanlık",
+      "slug": "/danismanlik/sap-fonksiyonel-danismanlik",
+      "category": "Danışmanlık",
+      "content": "<h2>SAP Fonksiyonel Danışmanlık</h2><p>Bu sayfanın içeriğini admin panelinden güncelleyebilirsiniz.</p>",
+      "status": "published",
+      "updatedAt": "2026-06-20T08:18:48.070Z"
+    },
+    {
+      "id": 18,
+      "menuTitle": "Geliştirme Danışmanlığı",
+      "slug": "/danismanlik/gelistirme-danismanligi",
+      "category": "Danışmanlık",
+      "content": "<h2>Geliştirme Danışmanlığı</h2><p>Bu sayfanın içeriğini admin panelinden güncelleyebilirsiniz.</p>",
+      "status": "published",
+      "updatedAt": "2026-06-20T08:18:48.070Z"
+    },
+    {
+      "id": 19,
+      "menuTitle": "Kalite Yönetimi",
+      "slug": "/danismanlik/kalite-yonetimi",
+      "category": "Danışmanlık",
+      "content": "<h2>Kalite Yönetimi</h2><p>Bu sayfanın içeriğini admin panelinden güncelleyebilirsiniz.</p>",
+      "status": "published",
+      "updatedAt": "2026-06-20T08:18:48.070Z"
+    },
+    {
+      "id": 20,
+      "menuTitle": "Dış Kaynak Hizmetleri",
+      "slug": "/danismanlik/diskaynak-hizmetleri",
+      "category": "Danışmanlık",
+      "content": "<h2>Dış Kaynak Hizmetleri</h2><p>Bu sayfanın içeriğini admin panelinden güncelleyebilirsiniz.</p>",
+      "status": "published",
+      "updatedAt": "2026-06-20T08:18:48.070Z"
+    },
+    {
+      "id": 21,
+      "menuTitle": "Mimari",
+      "slug": "/teknoloji/mimari",
+      "category": "Teknoloji",
+      "content": "<h2>Mimari</h2><p>Bu sayfanın içeriğini admin panelinden güncelleyebilirsiniz.</p>",
+      "status": "published",
+      "updatedAt": "2026-06-20T08:18:48.070Z"
+    },
+    {
+      "id": 22,
+      "menuTitle": "Modülerlik",
+      "slug": "/teknoloji/mimari/modulerlik",
+      "category": "Teknoloji",
+      "content": "<h2>Modülerlik</h2><p>Bu sayfanın içeriğini admin panelinden güncelleyebilirsiniz.</p>",
+      "status": "published",
+      "updatedAt": "2026-06-20T08:18:48.070Z"
+    },
+    {
+      "id": 23,
+      "menuTitle": "Tasarım Tabanlı",
+      "slug": "/teknoloji/mimari/tasarim-tabanli",
+      "category": "Teknoloji",
+      "content": "<h2>Tasarım Tabanlı</h2><p>Bu sayfanın içeriğini admin panelinden güncelleyebilirsiniz.</p>",
+      "status": "published",
+      "updatedAt": "2026-06-20T08:18:48.070Z"
+    },
+    {
+      "id": 24,
+      "menuTitle": "İnovasyon",
+      "slug": "/teknoloji/inovasyon",
+      "category": "Teknoloji",
+      "content": "<h2>İnovasyon</h2><p>Bu sayfanın içeriğini admin panelinden güncelleyebilirsiniz.</p>",
+      "status": "published",
+      "updatedAt": "2026-06-20T08:18:48.070Z"
+    },
+    {
+      "id": 25,
+      "menuTitle": "Araştırma Geliştirme",
+      "slug": "/teknoloji/arastirma-gelistirme",
+      "category": "Teknoloji",
+      "content": "<h2>Araştırma Geliştirme</h2><p>Bu sayfanın içeriğini admin panelinden güncelleyebilirsiniz.</p>",
+      "status": "published",
+      "updatedAt": "2026-06-20T08:18:48.070Z"
+    },
+    {
+      "id": 26,
+      "menuTitle": "Modelleme ve Simülasyon",
+      "slug": "/teknoloji/arastirma-gelistirme/modelleme-ve-simulasyon",
+      "category": "Teknoloji",
+      "content": "<h2>Modelleme ve Simülasyon</h2><p>Bu sayfanın içeriğini admin panelinden güncelleyebilirsiniz.</p>",
+      "status": "published",
+      "updatedAt": "2026-06-20T08:18:48.070Z"
+    },
+    {
+      "id": 27,
+      "menuTitle": "Yasal Bilgiler",
+      "slug": "/kurumsal/yasal-bilgiler",
+      "category": "Kurumsal",
+      "content": "<h2>Yasal Bilgiler</h2><p>Bu sayfanın içeriğini admin panelinden güncelleyebilirsiniz.</p>",
+      "status": "published",
+      "updatedAt": "2026-06-20T08:18:48.070Z"
+    },
+    {
+      "id": 28,
+      "menuTitle": "Bilgi Güvenliği Politikası",
+      "slug": "/bilgi-guvenligi-politikasi",
+      "category": "Kurumsal",
+      "content": "<h2>Bilgi Güvenliği Politikası</h2><p>Bu sayfanın içeriğini admin panelinden güncelleyebilirsiniz.</p>",
+      "status": "published",
+      "updatedAt": "2026-06-20T08:18:48.070Z"
+    },
+    {
+      "id": 29,
+      "menuTitle": "KVKK",
+      "slug": "/kisisel-verilerin-korunmasi-ve-islenmesi-politikasi",
+      "category": "Kurumsal",
+      "content": "<h2>KVKK</h2><p>Bu sayfanın içeriğini admin panelinden güncelleyebilirsiniz.</p>",
+      "status": "published",
+      "updatedAt": "2026-06-20T08:18:48.070Z"
     }
   ],
   "jobs": [
@@ -266,5 +464,103 @@
       "status": "reviewed",
       "appliedAt": "2025-06-11T14:30:00Z"
     }
-  ]
+  ],
+  "homepage": {
+    "features": [
+      {
+        "id": 1,
+        "number": "01",
+        "title": "Global Standartlarda Kalite",
+        "text": "Projenizin her aşamasında uluslararası yazılım geliştirme standartlarını ve best-practice'leri uyguluyoruz."
+      },
+      {
+        "id": 2,
+        "number": "02",
+        "title": "Ölçeklenebilir Mimari",
+        "text": "İşiniz büyüdükçe sizinle birlikte büyüyebilen, yüksek trafik ve yük altında sorunsuz çalışan sistemler tasarlıyoruz."
+      },
+      {
+        "id": 3,
+        "number": "03",
+        "title": "Çevik Geliştirme (Agile)",
+        "text": "Scrum ve Kanban metodolojileriyle şeffaf, hızlı ve geri bildirimlere anında yanıt verebilen bir süreç sunuyoruz."
+      },
+      {
+        "id": 4,
+        "number": "04",
+        "title": "7/24 Kesintisiz Destek",
+        "text": "Proje tesliminden sonra da yanınızdayız. Olası sorunlara karşı anında müdahale ediyor, sistemlerinizin ayakta kalmasını sağlıyoruz."
+      }
+    ],
+    "references": [
+      "Adese",
+      "AGT",
+      "Avansas",
+      "Carrefour",
+      "EAE",
+      "Ebebek",
+      "G2M",
+      "Gratis",
+      "Hasçelik",
+      "İpragaz",
+      "İGA",
+      "Koton",
+      "LC Waikiki",
+      "Nitori",
+      "Penti",
+      "Teknosa",
+      "Turkcell",
+      "Türk Telekom"
+    ],
+    "categories": [
+      {
+        "id": "1",
+        "name": "SAP CX Hybris",
+        "links": [
+          {
+            "id": "1-1",
+            "title": "SAP CX Hybris B2C E-Ticaret",
+            "url": "/cozumler/hybris-cozumleri/hybris-b2c-ticaret"
+          },
+          {
+            "id": "1-2",
+            "title": "SAP CX Hybris B2B E-Ticaret",
+            "url": "/cozumler/hybris-cozumleri/hybris-b2b-ticaret"
+          }
+        ]
+      },
+      {
+        "id": "2",
+        "name": "SAP Çözümleri",
+        "links": [
+          {
+            "id": "2-1",
+            "title": "SAP Mobility",
+            "url": "/cozumler/sap-cozumleri/sap-mobility"
+          },
+          {
+            "id": "2-2",
+            "title": "SAP HANA",
+            "url": "/cozumler/sap-cozumleri/sap-hana"
+          }
+        ]
+      },
+      {
+        "id": "3",
+        "name": "Sistem İzleme",
+        "links": [
+          {
+            "id": "3-1",
+            "title": "vFabric Hyperic",
+            "url": "/cozumler/sistem-izleme-cozumleri/vfabric-hyperic"
+          },
+          {
+            "id": "3-2",
+            "title": "Nagios",
+            "url": "/cozumler/sistem-izleme-cozumleri/nagios"
+          }
+        ]
+      }
+    ]
+  }
 }
