@@ -131,8 +131,6 @@ export default function Navbar({ settings, pages = [] }: { settings?: SiteSettin
             children: [
                 { title: t('aboutUs'), url: "/kurumsal/hakkimizda" },
                 { title: t('careers'), url: "/kariyer" },
-                { title: "Yatırımcı İlişkileri", url: "/yatirimci-iliskileri" },
-                { title: "Sistem Durumu", url: "/status" },
                 { title: t('legalInfo'), url: "/kurumsal/yasal-bilgiler" },
                 { title: t('infosecPolicy'), url: "/bilgi-guvenligi-politikasi" },
                 { title: t('kvkk'), url: "/kisisel-verilerin-korunmasi-ve-islenmesi-politikasi" },

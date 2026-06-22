@@ -25,33 +25,33 @@ export default function Footer({ settings }: { settings?: SiteSettings }) {
                     
                     {/* Sütun 1: ÇÖZÜMLER */}
                     <div className="space-y-4">
-                        <h4 className="text-foreground font-bold tracking-wider mb-6 text-sm"><Link href="/cozumler" className="hover:text-[#0f2256] dark:hover:text-accent transition-colors">{t('solutions')}</Link></h4>
+                        <h4 className="text-foreground font-bold tracking-wider mb-6 text-sm"><Link href="/cozumler" className="hover:text-accent dark:hover:text-accent transition-colors">{t('solutions')}</Link></h4>
                         <div className="space-y-3">
                             <div className="space-y-2">
-                                <Link href="/cozumler/hybris-cozumleri" className="block text-[13px] font-bold hover:text-[#0f2256] dark:hover:text-accent transition-colors">{t('hybrisSolutions')}</Link>
+                                <Link href="/cozumler/hybris-cozumleri" className="block text-[13px] font-bold hover:text-accent dark:hover:text-accent transition-colors">{t('hybrisSolutions')}</Link>
                                 <div className="space-y-1.5 pl-3 border-l border-white/10">
-                                    <Link href="/cozumler/hybris-cozumleri/hybris-b2c-ticaret" className="block text-xs hover:text-[#0f2256] dark:hover:text-accent transition-colors">{t('b2cEcommerce')}</Link>
-                                    <Link href="/cozumler/hybris-cozumleri/hybris-b2b-ticaret" className="block text-xs hover:text-[#0f2256] dark:hover:text-accent transition-colors">{t('b2bEcommerce')}</Link>
-                                    <Link href="/cozumler/hybris-cozumleri/hybris-mobil-ticaret" className="block text-xs hover:text-[#0f2256] dark:hover:text-accent transition-colors">{t('mobileEcommerce')}</Link>
-                                    <Link href="/cozumler/hybris-cozumleri/hybris-mdm" className="block text-xs hover:text-[#0f2256] dark:hover:text-accent transition-colors">{t('mdm')}</Link>
+                                    <Link href="/cozumler/hybris-cozumleri/hybris-b2c-ticaret" className="block text-xs hover:text-accent dark:hover:text-accent transition-colors">{t('b2cEcommerce')}</Link>
+                                    <Link href="/cozumler/hybris-cozumleri/hybris-b2b-ticaret" className="block text-xs hover:text-accent dark:hover:text-accent transition-colors">{t('b2bEcommerce')}</Link>
+                                    <Link href="/cozumler/hybris-cozumleri/hybris-mobil-ticaret" className="block text-xs hover:text-accent dark:hover:text-accent transition-colors">{t('mobileEcommerce')}</Link>
+                                    <Link href="/cozumler/hybris-cozumleri/hybris-mdm" className="block text-xs hover:text-accent dark:hover:text-accent transition-colors">{t('mdm')}</Link>
                                 </div>
                             </div>
 
                             <div className="space-y-2 pt-2">
-                                <Link href="/cozumler/sap-cozumleri" className="block text-[13px] font-bold hover:text-[#0f2256] dark:hover:text-accent transition-colors">{t('sapSolutions')}</Link>
+                                <Link href="/cozumler/sap-cozumleri" className="block text-[13px] font-bold hover:text-accent dark:hover:text-accent transition-colors">{t('sapSolutions')}</Link>
                                 <div className="space-y-1.5 pl-3 border-l border-white/10">
-                                    <Link href="/cozumler/sap-cozumleri/sap-mobility" className="block text-xs hover:text-[#0f2256] dark:hover:text-accent transition-colors">{t('sapMobility')}</Link>
-                                    <Link href="/cozumler/sap-cozumleri/sap-hana" className="block text-xs hover:text-[#0f2256] dark:hover:text-accent transition-colors">{t('sapHana')}</Link>
-                                    <Link href="/cozumler/sap-cozumleri/sap-uygulama-yonetimi" className="block text-xs hover:text-[#0f2256] dark:hover:text-accent transition-colors">{t('sapAppManagement')}</Link>
-                                    <Link href="/cozumler/sap-cozumleri/sap-bulut" className="block text-xs hover:text-[#0f2256] dark:hover:text-accent transition-colors">{t('sapCloud')}</Link>
+                                    <Link href="/cozumler/sap-cozumleri/sap-mobility" className="block text-xs hover:text-accent dark:hover:text-accent transition-colors">{t('sapMobility')}</Link>
+                                    <Link href="/cozumler/sap-cozumleri/sap-hana" className="block text-xs hover:text-accent dark:hover:text-accent transition-colors">{t('sapHana')}</Link>
+                                    <Link href="/cozumler/sap-cozumleri/sap-uygulama-yonetimi" className="block text-xs hover:text-accent dark:hover:text-accent transition-colors">{t('sapAppManagement')}</Link>
+                                    <Link href="/cozumler/sap-cozumleri/sap-bulut" className="block text-xs hover:text-accent dark:hover:text-accent transition-colors">{t('sapCloud')}</Link>
                                 </div>
                             </div>
 
                             <div className="space-y-2 pt-2">
-                                <Link href="/cozumler/sistem-izleme-cozumleri" className="block text-[13px] font-bold hover:text-[#0f2256] dark:hover:text-accent transition-colors">{t('monitoringSolutions')}</Link>
+                                <Link href="/cozumler/sistem-izleme-cozumleri" className="block text-[13px] font-bold hover:text-accent dark:hover:text-accent transition-colors">{t('monitoringSolutions')}</Link>
                                 <div className="space-y-1.5 pl-3 border-l border-white/10">
-                                    <Link href="/cozumler/sistem-izleme-cozumleri/vfabric-hyperic" className="block text-xs hover:text-[#0f2256] dark:hover:text-accent transition-colors">{t('vfabric')}</Link>
-                                    <Link href="/cozumler/sistem-izleme-cozumleri/nagios" className="block text-xs hover:text-[#0f2256] dark:hover:text-accent transition-colors">{t('nagios')}</Link>
+                                    <Link href="/cozumler/sistem-izleme-cozumleri/vfabric-hyperic" className="block text-xs hover:text-accent dark:hover:text-accent transition-colors">{t('vfabric')}</Link>
+                                    <Link href="/cozumler/sistem-izleme-cozumleri/nagios" className="block text-xs hover:text-accent dark:hover:text-accent transition-colors">{t('nagios')}</Link>
                                 </div>
                             </div>
                         </div>
