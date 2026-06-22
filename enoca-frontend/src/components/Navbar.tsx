@@ -187,20 +187,20 @@ export default function Navbar({ settings, pages = [] }: { settings?: SiteSettin
             <div className="bg-card/50 text-muted-foreground text-xs py-2 hidden lg:block relative z-20 border-b border-accent/10">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center">
                     <div className="flex items-center gap-6 font-medium tracking-wider">
-                            <a href={`mailto:${settings?.email || 'contact@enoca.com'}`} className="hover:text-white transition-colors flex items-center gap-1.5"><Mail className="w-3.5 h-3.5" />{settings?.email || 'contact@enoca.com'}</a>
-                            <a href={`tel:${settings?.phone || '+90 850 221 73 54'}`} className="hover:text-white transition-colors flex items-center gap-1.5"><Phone className="w-3.5 h-3.5" />{settings?.phone || '+90 850 221 73 54'}</a>
+                            <a href={`mailto:${settings?.email || 'contact@enoca.com'}`} className="hover:text-[#0f2256] transition-colors flex items-center gap-1.5"><Mail className="w-3.5 h-3.5" />{settings?.email || 'contact@enoca.com'}</a>
+                            <a href={`tel:${settings?.phone || '+90 850 221 73 54'}`} className="hover:text-[#0f2256] transition-colors flex items-center gap-1.5"><Phone className="w-3.5 h-3.5" />{settings?.phone || '+90 850 221 73 54'}</a>
                     </div>
                     <div className="flex items-center gap-6 font-medium tracking-wider">
-                        <Link href="/gizlilik" className="hover:text-white transition-colors uppercase">{t('privacy')}</Link>
-                        <Link href="/kullanim-kosullari" className="hover:text-white transition-colors uppercase">{t('terms')}</Link>
+                        <Link href="/gizlilik" className="hover:text-[#0f2256] transition-colors uppercase">{t('privacy')}</Link>
+                        <Link href="/kullanim-kosullari" className="hover:text-[#0f2256] transition-colors uppercase">{t('terms')}</Link>
                         <div className="flex items-center gap-4 ml-4 border-l border-white/20 pl-4">
                             {settings?.linkedinUrl && (
-                                <a href={settings.linkedinUrl} target="_blank" rel="noreferrer" className="hover:text-white transition-colors" aria-label="LinkedIn">
+                                <a href={settings.linkedinUrl} target="_blank" rel="noreferrer" className="hover:text-[#0f2256] transition-colors" aria-label="LinkedIn">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg>
                                 </a>
                             )}
                             {settings?.twitterUrl && (
-                                <a href={settings.twitterUrl} target="_blank" rel="noreferrer" className="hover:text-white transition-colors" aria-label="Twitter">
+                                <a href={settings.twitterUrl} target="_blank" rel="noreferrer" className="hover:text-[#0f2256] transition-colors" aria-label="Twitter">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"/></svg>
                                 </a>
                             )}
@@ -247,7 +247,9 @@ export default function Navbar({ settings, pages = [] }: { settings?: SiteSettin
                                                                 className="flex items-center gap-3 px-4 py-3 text-[13px] font-semibold text-foreground/70 hover:text-accent hover:bg-accent/5 rounded-lg transition-colors duration-200"
                                                             >
                                                                 <div className="w-6 h-6 rounded bg-accent/10 flex items-center justify-center shrink-0">
-                                                                    <LayoutGrid className="w-3.5 h-3.5 text-accent" />
+                                                                    <div className="w-[14px] h-[14px] bg-white flex items-center justify-center shadow-sm">
+                                                                        <div className="w-[8px] h-[8px] bg-[#0000ff]"></div>
+                                                                    </div>
                                                                 </div>
                                                                 <span className="flex-1 uppercase tracking-wide">{child.title}</span>
                                                                 {/* Eğer alt menünün de alt menüsü varsa minik ok çıkartıyoruz */}
@@ -287,7 +289,9 @@ export default function Navbar({ settings, pages = [] }: { settings?: SiteSettin
                                                         <Link href={item.url} className="text-xs font-bold text-accent hover:underline flex items-center gap-1">Daha Fazla Keşfet <ArrowRight className="w-3 h-3" /></Link>
                                                     </div>
                                                     <div className="absolute top-4 right-4 w-12 h-12 rounded-full bg-accent/20 flex items-center justify-center">
-                                                        <LayoutGrid className="w-5 h-5 text-accent opacity-70" />
+                                                        <div className="w-[20px] h-[20px] bg-white flex items-center justify-center shadow-sm opacity-90">
+                                                            <div className="w-[12px] h-[12px] bg-[#0000ff]"></div>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -296,20 +300,23 @@ export default function Navbar({ settings, pages = [] }: { settings?: SiteSettin
                                 </div>
                             ))}
                             
-                            {/* Türkçe (Dil Seçimi) ve Arama İkonu */}
-                            <div className="flex items-center gap-2 pl-4 ml-2 border-l border-border/50 h-8 relative group/lang">
-                                <button className="flex items-center gap-1.5 px-2 py-2 text-[13px] font-bold text-foreground/80 hover:text-accent transition-all duration-200 uppercase tracking-wide">
-                                    <Globe className="w-3.5 h-3.5 opacity-70" />
-                                    {locale === 'tr' ? 'TÜRKÇE' : 'ENGLISH'} 
-                                    <ChevronDown className="w-3.5 h-3.5 opacity-50 group-hover/lang:rotate-180 transition-transform duration-300" />
-                                </button>
+                            {/* Sağ Menü Alanı */}
+                            <div className="flex items-center gap-2 pl-4 ml-2 border-l border-border/50 h-8">
+                                {/* Dil Seçimi */}
+                                <div className="relative group/lang flex items-center h-full">
+                                    <button className="flex items-center gap-1.5 px-2 py-2 text-[13px] font-bold text-foreground/80 hover:text-accent transition-all duration-200 uppercase tracking-wide">
+                                        <Globe className="w-3.5 h-3.5 opacity-70" />
+                                        {locale === 'tr' ? 'TÜRKÇE' : 'ENGLISH'} 
+                                        <ChevronDown className="w-3.5 h-3.5 opacity-50 group-hover/lang:rotate-180 transition-transform duration-300" />
+                                    </button>
 
-                                {/* Dil Dropdown */}
-                                <div className="absolute top-full left-1/2 -translate-x-1/2 pt-2 opacity-0 invisible group-hover/lang:opacity-100 group-hover/lang:visible transition-all duration-300 z-50">
-                                    <div className="bg-card/95 backdrop-blur-xl rounded-none clip-chamfer border border-accent/30 shadow-glow-md overflow-hidden flex flex-col min-w-[120px]">
-                                        <button onClick={() => router.replace(pathname, {locale: 'tr'})} className={`px-4 py-2.5 text-xs font-bold uppercase text-left hover:bg-accent/10 transition-colors ${locale === 'tr' ? 'text-accent' : 'text-foreground/70'}`}>TÜRKÇE</button>
-                                        <div className="w-full h-px bg-accent/20" />
-                                        <button onClick={() => router.replace(pathname, {locale: 'en'})} className={`px-4 py-2.5 text-xs font-bold uppercase text-left hover:bg-accent/10 transition-colors ${locale === 'en' ? 'text-accent' : 'text-foreground/70'}`}>ENGLISH</button>
+                                    {/* Dil Dropdown */}
+                                    <div className="absolute top-full left-1/2 -translate-x-1/2 pt-2 opacity-0 invisible group-hover/lang:opacity-100 group-hover/lang:visible transition-all duration-300 z-50">
+                                        <div className="bg-card/95 backdrop-blur-xl rounded-none clip-chamfer border border-accent/30 shadow-glow-md overflow-hidden flex flex-col min-w-[120px]">
+                                            <button onClick={() => router.replace(pathname, {locale: 'tr'})} className={`px-4 py-2.5 text-xs font-bold uppercase text-left hover:bg-accent/10 transition-colors ${locale === 'tr' ? 'text-accent' : 'text-foreground/70'}`}>TÜRKÇE</button>
+                                            <div className="w-full h-px bg-accent/20" />
+                                            <button onClick={() => router.replace(pathname, {locale: 'en'})} className={`px-4 py-2.5 text-xs font-bold uppercase text-left hover:bg-accent/10 transition-colors ${locale === 'en' ? 'text-accent' : 'text-foreground/70'}`}>ENGLISH</button>
+                                        </div>
                                     </div>
                                 </div>
                                 

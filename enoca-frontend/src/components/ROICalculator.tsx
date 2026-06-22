@@ -3,8 +3,10 @@
 import { useState } from "react";
 import { Calculator, Download, ChevronRight, TrendingUp, Server, Zap, CheckCircle } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import { useTranslations } from "next-intl";
 
 export default function ROICalculator() {
+  const t = useTranslations('ROI');
   const [step, setStep] = useState(1);
   const [data, setData] = useState({
     users: 500,
@@ -47,8 +49,8 @@ export default function ROICalculator() {
             <Calculator className="w-6 h-6 text-blue-600 dark:text-blue-400" />
           </div>
           <div>
-            <h2 className="text-2xl font-bold text-gray-900 dark:text-white">Enterprise ROI / TCO Hesaplayıcı</h2>
-            <p className="text-gray-500 text-sm mt-1">SAP Commerce Cloud (Hybris) Dönüşüm Getirisi</p>
+            <h2 className="text-2xl font-bold text-gray-900 dark:text-white">{t('title')}</h2>
+            <p className="text-gray-500 text-sm mt-1">{t('desc')}</p>
           </div>
         </div>
 
@@ -64,7 +66,7 @@ export default function ROICalculator() {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                 <div className="space-y-2">
                   <label className="text-sm font-bold text-gray-700 dark:text-gray-300 flex items-center gap-2">
-                    <Server className="w-4 h-4 text-gray-400" /> Aylık Mevcut Altyapı Maliyeti ($)
+                    <Server className="w-4 h-4 text-gray-400" /> {t('costLabel')}
                   </label>
                   <input 
                     type="number" 
@@ -75,7 +77,7 @@ export default function ROICalculator() {
                 </div>
                 <div className="space-y-2">
                   <label className="text-sm font-bold text-gray-700 dark:text-gray-300 flex items-center gap-2">
-                    <TrendingUp className="w-4 h-4 text-gray-400" /> Yıllık Büyüme Beklentisi (%)
+                    <TrendingUp className="w-4 h-4 text-gray-400" /> {t('growthLabel')}
                   </label>
                   <div className="flex items-center gap-4">
                     <input 
@@ -102,7 +104,7 @@ export default function ROICalculator() {
                   </>
                 ) : (
                   <>
-                    <Zap className="w-5 h-5 text-yellow-300" /> Detaylı ROI Raporu Oluştur <ChevronRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                    <Zap className="w-5 h-5 text-yellow-300" /> {t('generateBtn')} <ChevronRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                   </>
                 )}
               </button>
@@ -118,16 +120,16 @@ export default function ROICalculator() {
             >
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                 <div className="bg-gradient-to-br from-green-50 to-emerald-50 dark:from-green-900/20 dark:to-emerald-900/10 p-6 rounded-2xl border border-green-100 dark:border-green-800/50">
-                  <p className="text-sm font-bold text-green-800 dark:text-green-400 mb-2">5 Yıllık Net Tasarruf</p>
+                  <p className="text-sm font-bold text-green-800 dark:text-green-400 mb-2">{t('savingsTitle')}</p>
                   <p className="text-3xl font-black text-green-600 dark:text-green-500">${results.savings.toLocaleString()}</p>
                 </div>
                 <div className="bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-blue-900/20 dark:to-indigo-900/10 p-6 rounded-2xl border border-blue-100 dark:border-blue-800/50">
-                  <p className="text-sm font-bold text-blue-800 dark:text-blue-400 mb-2">Yatırım Getirisi (ROI)</p>
+                  <p className="text-sm font-bold text-blue-800 dark:text-blue-400 mb-2">{t('roiTitle')}</p>
                   <p className="text-3xl font-black text-blue-600 dark:text-blue-500">%{results.roi}</p>
                 </div>
                 <div className="bg-gradient-to-br from-purple-50 to-fuchsia-50 dark:from-purple-900/20 dark:to-fuchsia-900/10 p-6 rounded-2xl border border-purple-100 dark:border-purple-800/50">
-                  <p className="text-sm font-bold text-purple-800 dark:text-purple-400 mb-2">Amortisman Süresi</p>
-                  <p className="text-3xl font-black text-purple-600 dark:text-purple-500">{results.payback} Ay</p>
+                  <p className="text-sm font-bold text-purple-800 dark:text-purple-400 mb-2">{t('paybackTitle')}</p>
+                  <p className="text-3xl font-black text-purple-600 dark:text-purple-500">{results.payback}</p>
                 </div>
               </div>
 
