@@ -8,6 +8,7 @@ import { readDB } from "@/lib/db";
 import { ContentPage } from "@/lib/admin-api";
 import PublicLayout from "@/components/PublicLayout";
 import PageTransition from "@/components/PageTransition";
+import BackButton from "@/components/BackButton";
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string[], locale: string }> }) {
     const resolvedParams = await params;
@@ -43,6 +44,7 @@ export default async function CatchAllPage({
             "Kalite Yönetimi": "Quality Management",
             "Dışkaynak Hizmetleri": "Outsourcing",
             "Dış Kaynak Hizmetleri": "Outsourcing",
+            "Çözümleri": "Solutions",
             "Çözümler": "Solutions",
             "Projeler": "Projects",
             "Teknoloji": "Technology",
@@ -106,7 +108,11 @@ export default async function CatchAllPage({
             "sap cx hybris mobil e ticaret": "SAP CX Hybris Mobile E-Commerce",
             "sap cx hybris b2c e ticaret": "SAP CX Hybris B2C E-Commerce",
             "sap cx hybris b2b e ticaret": "SAP CX Hybris B2B E-Commerce",
-            "enoca dan son haberler": "Latest News from Enoca"
+            "enoca dan son haberler": "Latest News from Enoca",
+            "gizlilik": "Privacy",
+            "Gizlilik": "Privacy",
+            "Kullanım Koşulları": "Terms of Use",
+            "kullanim kosullari": "Terms of Use"
         };
         
         let translated = text;
@@ -117,15 +123,59 @@ export default async function CatchAllPage({
         return translated;
     };
 
+    const formatSlugToTitle = (text: string) => {
+        if (!text) return text;
+        const dict: Record<string, string> = {
+            "arastirma gelistirme": "Araştırma & Geliştirme",
+            "bilgi guvenligi politikasi": "Bilgi Güvenliği Politikası",
+            "kisisel verilerin korunmasi ve islenmesi politikasi": "Kişisel Verilerin Korunması ve İşlenmesi Politikası",
+            "iletisim": "İletişim",
+            "mimari": "Mimari",
+            "inovasyon": "İnovasyon",
+            "modulerlik": "Modülerlik",
+            "tasarim tabanli": "Tasarım Tabanlı",
+            "modelleme ve simulasyon": "Modelleme ve Simülasyon",
+            "hybris danismanligi": "Hybris Danışmanlığı",
+            "sap teknik danismanlik": "SAP Teknik Danışmanlık",
+            "sap fonksiyonel danismanlik": "SAP Fonksiyonel Danışmanlık",
+            "gelistirme danismanligi": "Geliştirme Danışmanlığı",
+            "danismanlik": "Danışmanlık",
+            "kalite yonetimi": "Kalite Yönetimi",
+            "diskaynak hizmetleri": "Dış Kaynak Hizmetleri",
+            "cozumler": "Çözümler",
+            "projeler": "Projeler",
+            "teknoloji": "Teknoloji",
+            "kurumsal": "Kurumsal",
+            "haberler": "Haberler",
+            "metodoloji": "Metodoloji",
+            "referanslar": "Referanslar",
+            "hakkimizda": "Hakkımızda",
+            "kariyer": "Kariyer",
+            "yasal bilgiler": "Yasal Bilgiler",
+            "sap uygulama yonetimi": "SAP Uygulama Yönetimi",
+            "sap bulut": "SAP Bulut",
+            "sap cx hybris mobil e ticaret": "SAP CX Hybris Mobil E-Ticaret",
+            "sap cx hybris b2c e ticaret": "SAP CX Hybris B2C E-Ticaret",
+            "sap cx hybris b2b e ticaret": "SAP CX Hybris B2B E-Ticaret",
+            "enoca dan son haberler": "Enoca'dan Son Haberler",
+            "gizlilik": "Gizlilik",
+            "kullanim kosullari": "Kullanım Koşulları",
+            "hybris cozumleri": "Hybris Çözümleri",
+            "sap cozumleri": "SAP Çözümleri"
+        };
+        const lower = text.toLowerCase();
+        return dict[lower] || text;
+    };
+
     const db = await readDB();
     const currentSlug = "/" + slugArray.join("/");
     const dynamicPage = db?.pages?.find((p: ContentPage) => p.slug === currentSlug && p.status === "published");
     const subPages = db?.pages?.filter((p: ContentPage) => p.slug.startsWith(currentSlug + "/") && p.status === "published") || [];
 
-    const pageTitleRaw = dynamicPage?.menuTitle || (slugArray.length > 0 ? slugArray[slugArray.length - 1].replace(/-/g, ' ') : 'Sayfa');
+    const pageTitleRaw = dynamicPage?.menuTitle || formatSlugToTitle(slugArray.length > 0 ? slugArray[slugArray.length - 1].replace(/-/g, ' ') : 'Sayfa');
     const pageTitle = translateDB(pageTitleRaw);
 
-    const topCategoryRaw = dynamicPage?.category || (slugArray.length > 1 ? slugArray[0].replace(/-/g, ' ') : 'ENOCA™');
+    const topCategoryRaw = dynamicPage?.category || formatSlugToTitle(slugArray.length > 1 ? slugArray[0].replace(/-/g, ' ') : 'ENOCA™');
     const topCategory = translateDB(topCategoryRaw);
 
     return (
@@ -139,12 +189,7 @@ export default async function CatchAllPage({
                 
                 {/* Geri Dönüş Linki */}
                 <div className="mb-2">
-                    <Button variant="ghost" size="sm" asChild className="pl-2 group">
-                        <Link href="/">
-                            <ArrowLeft className="w-4 h-4 mr-2 group-hover:-translate-x-1 transition-transform" />
-                            {t('backToHome')}
-                        </Link>
-                    </Button>
+                    <BackButton />
                 </div>
 
                 <div className="flex flex-col items-start">

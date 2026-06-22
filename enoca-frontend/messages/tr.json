@@ -159,6 +159,7 @@
     "submitting": "Gönderiliyor..."
   },
   "Page": {
+    "back": "Geri Dön",
     "backToHome": "Ana Sayfaya Dön",
     "catchAllDesc": "Bu sayfa Next.js Catch-All Routing özelliği sayesinde dinamik olarak oluşturuldu. Şu anda {pageTitle} içeriğini görüntülüyorsunuz.",
     "techTitle": "Enoca Teknolojileri ve Mimarisi",

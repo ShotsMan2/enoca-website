@@ -159,6 +159,7 @@
     "submitting": "Submitting..."
   },
   "Page": {
+    "back": "Go Back",
     "backToHome": "Back to Home",
     "catchAllDesc": "This page was dynamically generated via Next.js Catch-All Routing regardless of URL depth. You are currently viewing {pageTitle}.",
     "techTitle": "Enoca Technologies & Architecture",
