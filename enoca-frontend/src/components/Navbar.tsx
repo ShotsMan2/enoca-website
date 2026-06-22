@@ -247,7 +247,9 @@ export default function Navbar({ settings, pages = [] }: { settings?: SiteSettin
                                                                 className="flex items-center gap-3 px-4 py-3 text-[13px] font-semibold text-foreground/70 hover:text-accent hover:bg-accent/5 rounded-lg transition-colors duration-200"
                                                             >
                                                                 <div className="w-6 h-6 rounded bg-accent/10 flex items-center justify-center shrink-0">
-                                                                    <div className="w-3.5 h-3.5 rounded-[2px] bg-accent text-white flex items-center justify-center font-bold text-[9px] leading-none tracking-tighter">e</div>
+                                                                    <div className="w-[14px] h-[14px] bg-white flex items-center justify-center shadow-sm">
+                                                                        <div className="w-[8px] h-[8px] bg-[#0000ff]"></div>
+                                                                    </div>
                                                                 </div>
                                                                 <span className="flex-1 uppercase tracking-wide">{child.title}</span>
                                                                 {/* Eğer alt menünün de alt menüsü varsa minik ok çıkartıyoruz */}
@@ -287,7 +289,9 @@ export default function Navbar({ settings, pages = [] }: { settings?: SiteSettin
                                                         <Link href={item.url} className="text-xs font-bold text-accent hover:underline flex items-center gap-1">Daha Fazla Keşfet <ArrowRight className="w-3 h-3" /></Link>
                                                     </div>
                                                     <div className="absolute top-4 right-4 w-12 h-12 rounded-full bg-accent/20 flex items-center justify-center">
-                                                        <div className="w-5 h-5 rounded-[3px] bg-accent text-white flex items-center justify-center font-bold text-[12px] leading-none tracking-tighter opacity-70">e</div>
+                                                        <div className="w-[20px] h-[20px] bg-white flex items-center justify-center shadow-sm opacity-90">
+                                                            <div className="w-[12px] h-[12px] bg-[#0000ff]"></div>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
