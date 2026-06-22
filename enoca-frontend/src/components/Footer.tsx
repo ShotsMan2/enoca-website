@@ -16,8 +16,9 @@ export default function Footer({ settings }: { settings?: SiteSettings }) {
     };
 
     return (
-        <footer className="bg-[#222222] text-[#aaaaaa] pt-16 pb-8 border-t-[6px] border-accent">
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <footer className="bg-card border-t border-accent/30 pt-16 pb-8 relative overflow-hidden">
+            <div className="absolute inset-0 bg-grid-pattern opacity-10 pointer-events-none" />
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
                 
                 {/* Footer Menu Grid */}
                 <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8 mb-16">
@@ -125,7 +126,7 @@ export default function Footer({ settings }: { settings?: SiteSettings }) {
                 </div>
 
                 {/* Alt Telif ve Kısayollar */}
-                <div className="border-t border-[#444444] pt-8 flex flex-col md:flex-row justify-between items-center gap-6">
+                <div className="border-t border-border/50 pt-8 flex flex-col md:flex-row justify-between items-center gap-6">
                     
                     <div className="flex items-center gap-6 text-[11px] md:text-xs font-bold tracking-wider">
                         {/* Sosyal İkonlar */}
@@ -139,23 +140,23 @@ export default function Footer({ settings }: { settings?: SiteSettings }) {
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"/></svg>
                             </a>
                         )}
-                        <Link href={settings?.privacyUrl || "/gizlilik"} className="hover:text-white transition-colors uppercase">{t('privacy')}</Link>
-                        <Link href={settings?.termsUrl || "/kullanim-kosullari"} className="hover:text-white transition-colors uppercase">{t('terms')}</Link>
+                        <Link href={settings?.privacyUrl || "/gizlilik"} className="text-muted-foreground hover:text-accent transition-colors uppercase">{t('privacy')}</Link>
+                        <Link href={settings?.termsUrl || "/kullanim-kosullari"} className="text-muted-foreground hover:text-accent transition-colors uppercase">{t('terms')}</Link>
                     </div>
                     
                     <div className="flex flex-col md:flex-row items-center md:items-end justify-between gap-6 w-full lg:w-auto">
-                        <div className="flex flex-col w-full max-w-sm gap-2 bg-white/5 p-5 rounded-2xl border border-white/10 relative overflow-hidden group">
+                        <div className="flex flex-col w-full max-w-sm gap-2 bg-background/50 p-5 rounded-none clip-chamfer border border-accent/20 shadow-glow-md relative overflow-hidden group">
                             <div className="absolute inset-0 bg-gradient-to-r from-accent/0 via-accent/5 to-accent/0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000" />
-                            <h4 className="text-white text-sm font-bold tracking-wider uppercase mb-1">E-Bülten Kayıt</h4>
-                            <p className="text-[11px] text-[#999999]">Sektörel gelişmelerden haberdar olmak için e-bültenimize kayıt olun.</p>
+                            <h4 className="text-foreground text-sm font-black tracking-widest uppercase mb-1 font-mono">E-Bülten Kayıt</h4>
+                            <p className="text-[11px] text-muted-foreground font-mono">Sektörel gelişmelerden haberdar olmak için e-bültenimize kayıt olun.</p>
                             {subscribed ? (
-                                <div className="mt-2 h-10 px-3 flex items-center bg-green-500/20 border border-green-500/30 text-green-400 text-xs rounded-xl font-medium">
+                                <div className="mt-2 h-10 px-3 flex items-center bg-accent/10 border border-accent/30 text-accent text-xs clip-chamfer font-mono font-medium">
                                     Bülten aboneliğiniz alındı, teşekkürler!
                                 </div>
                             ) : (
                                 <form className="flex mt-2 relative z-10" onSubmit={handleSubscribe}>
-                                    <input type="email" required placeholder="E-posta adresiniz" className="flex-1 h-10 px-4 text-xs bg-[#111111] border border-[#333333] rounded-l-xl outline-none focus:border-accent text-white placeholder-gray-600 transition-all focus:ring-2 focus:ring-accent/20" />
-                                    <button type="submit" className="h-10 px-5 bg-accent text-white text-[11px] font-bold rounded-r-xl hover:bg-accent/90 transition-colors uppercase shadow-lg shadow-accent/20">Kayıt Ol</button>
+                                    <input type="email" required placeholder="E-posta adresiniz" className="flex-1 h-10 px-4 text-xs bg-background border border-border outline-none focus:border-accent text-foreground font-mono placeholder-muted-foreground transition-all focus:ring-1 focus:ring-accent/50" />
+                                    <button type="submit" className="h-10 px-5 bg-accent text-accent-foreground text-[11px] font-black hover:bg-white transition-colors uppercase font-mono clip-chamfer ml-2 shadow-glow-sm">Kayıt Ol</button>
                                 </form>
                             )}
                         </div>
