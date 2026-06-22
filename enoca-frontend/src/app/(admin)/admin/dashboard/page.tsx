@@ -48,22 +48,22 @@ export default function DashboardPage() {
             icon={<svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.8}><path strokeLinecap="round" strokeLinejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" /></svg>}
           />
           <StatsCard
-            title="Bekleyen Mesaj"
-            value={loading ? "—" : stats!.pendingMessages}
-            change="3 yeni"
-            positive={false}
+            title="Aylık Tekrarlayan Gelir (MRR)"
+            value={loading ? "—" : "$124K"}
+            change="18%"
+            positive
             color="orange"
-            sparklineData={[5, 2, 8, 4, 10, 3, 6]}
-            icon={<svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.8}><path strokeLinecap="round" strokeLinejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg>}
+            sparklineData={[50, 60, 55, 80, 95, 110, 124]}
+            icon={<svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.8}><path strokeLinecap="round" strokeLinejoin="round" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>}
           />
           <StatsCard
-            title="Aktif Haber"
-            value={loading ? "—" : stats!.activeNews}
-            change="5%"
-            positive
+            title="Müşteri Edinme Maliyeti (CAC)"
+            value={loading ? "—" : "$450"}
+            change="12%"
+            positive={false}
             color="green"
-            sparklineData={[20, 22, 25, 24, 30, 28, 35]}
-            icon={<svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.8}><path strokeLinecap="round" strokeLinejoin="round" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z" /></svg>}
+            sparklineData={[400, 410, 390, 420, 435, 440, 450]}
+            icon={<svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.8}><path strokeLinecap="round" strokeLinejoin="round" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" /></svg>}
           />
           <StatsCard
             title="Haftalık Ziyaretçi"
@@ -260,10 +260,11 @@ export default function DashboardPage() {
 
         {/* 5. Bölüm: Aktivite Logları (Audit Trail) */}
         <div className="bg-white dark:bg-gray-900 rounded-2xl border border-gray-200 dark:border-gray-700 overflow-hidden mt-6">
-          <div className="flex items-center px-6 py-4 border-b border-gray-100 dark:border-gray-800">
+          <div className="flex items-center justify-between px-6 py-4 border-b border-gray-100 dark:border-gray-800">
             <h2 className="font-bold text-gray-800 dark:text-white flex items-center gap-2">
-              <Clock className="w-5 h-5 text-blue-600" /> Sistem Aktivite Logları (Audit Trail)
+              <Clock className="w-5 h-5 text-blue-600" /> Sistem Aktivite Logları
             </h2>
+            <Link href="/admin/audit" className="text-xs font-semibold text-blue-600 hover:text-blue-700 transition-colors">Tüm Denetim İzleri (Audit Logs) →</Link>
           </div>
           <div className="p-6">
             {loading ? (

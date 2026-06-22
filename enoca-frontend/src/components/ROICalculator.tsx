@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Calculator, Download, ChevronRight, TrendingUp, DollarSign, Server, Zap, CheckCircle } from "lucide-react";
+import { Calculator, Download, ChevronRight, TrendingUp, Server, Zap, CheckCircle } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
 export default function ROICalculator() {

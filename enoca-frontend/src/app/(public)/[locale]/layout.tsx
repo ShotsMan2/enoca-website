@@ -14,6 +14,7 @@ import ScrollToTop from '@/components/ScrollToTop';
 import CommandPalette from '@/components/CommandPalette';
 import CustomCursor from '@/components/CustomCursor';
 import ScrollProgress from '@/components/ScrollProgress';
+import { ThemeProvider } from 'next-themes';
 import '../../globals.css';
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter', display: 'swap' });
@@ -85,21 +86,23 @@ export default async function LocaleLayout({
         {/* Dark mode init — Script ile inject edilir, React render pipeline'ına girmez */}
         <Script id="theme-init" strategy="beforeInteractive">{`
           try {
-            var t = localStorage.getItem('admin-theme');
+            var t = localStorage.getItem('theme');
             if (t === 'dark') document.documentElement.classList.add('dark');
           } catch(e) {}
         `}</Script>
-        <NextIntlClientProvider messages={messages} locale={locale}>
-          <SplashScreen />
-          <NextTopLoader color="#0055FF" initialPosition={0.08} crawlSpeed={200} height={3} crawl={true} showSpinner={false} easing="ease" speed={200} shadow="0 0 10px #0055FF,0 0 5px #0055FF" />
-          {children}
+        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+          <NextIntlClientProvider messages={messages} locale={locale}>
+            <SplashScreen />
+            <NextTopLoader color="#0055FF" initialPosition={0.08} crawlSpeed={200} height={3} crawl={true} showSpinner={false} easing="ease" speed={200} shadow="0 0 10px #0055FF,0 0 5px #0055FF" />
+            {children}
           <CookieConsent />
           <FloatingWidget />
           <ScrollToTop />
           <CommandPalette />
           <CustomCursor />
-          <ScrollProgress />
-        </NextIntlClientProvider>
+            <ScrollProgress />
+          </NextIntlClientProvider>
+        </ThemeProvider>
       </body>
     </html>
   );

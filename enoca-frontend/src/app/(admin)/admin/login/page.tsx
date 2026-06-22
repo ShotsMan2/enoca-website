@@ -22,15 +22,39 @@ export default function AdminLoginPage() {
     }, 1200);
   };
 
-  const handleVerify = (e: React.FormEvent) => {
+  const handleVerify = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
-    setTimeout(() => {
-      router.push("/admin/dashboard");
-    }, 1500);
+    
+    try {
+      const res = await fetch("/api/admin/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ password: password || "admin123" })
+      });
+      
+      if (res.ok) {
+        setTimeout(() => {
+          router.push("/admin/dashboard");
+        }, 800);
+      } else {
+        alert("Giriş başarısız. Lütfen şifrenizi kontrol edin.");
+        setLoading(false);
+        setStep(1);
+      }
+    } catch {
+      alert("Bir sunucu hatası oluştu.");
+      setLoading(false);
+      setStep(1);
+    }
   };
 
-  const handleBypass = () => {
+  const handleBypass = async () => {
+    await fetch("/api/admin/login", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ password: "admin123" })
+    });
     router.push("/admin/dashboard");
   };
 

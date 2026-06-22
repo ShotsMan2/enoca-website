@@ -11,10 +11,12 @@ export default function AnalyticsPage() {
   const [serverLoad, setServerLoad] = useState<number[]>(Array(20).fill(30));
   const [activeUsers, setActiveUsers] = useState(124);
   const [logs, setLogs] = useState<string[]>([]);
-  const [bandwidth, setBandwidth] = useState<any[]>(Array(20).fill({ time: "0", upload: 50, download: 100 }));
+  const [bandwidth, setBandwidth] = useState<{ time: string; upload: number; download: number }[]>(
+    Array(20).fill({ time: "0", upload: 50, download: 100 })
+  );
 
-  // eslint-disable-next-line react-hooks/set-state-in-effect
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setMounted(true);
     
     const interval = setInterval(() => {

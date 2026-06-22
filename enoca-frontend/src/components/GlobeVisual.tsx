@@ -76,12 +76,12 @@ export default function GlobeVisual() {
       // Sort dots by Z index to draw back-to-front
       const projectedDots = dots.map(dot => {
         // Rotate Y
-        let rotX = dot.x * cosY - dot.z * sinY;
-        let rotZ = dot.z * cosY + dot.x * sinY;
+        const rotX = dot.x * cosY - dot.z * sinY;
+        const rotZ = dot.z * cosY + dot.x * sinY;
         
         // Rotate X
-        let finalY = dot.y * cosX - rotZ * sinX;
-        let finalZ = rotZ * cosX + dot.y * sinX;
+        const finalY = dot.y * cosX - rotZ * sinX;
+        const finalZ = rotZ * cosX + dot.y * sinX;
 
         // Perspective
         const scale = (radius + radius * 2) / (radius * 2 + finalZ);
