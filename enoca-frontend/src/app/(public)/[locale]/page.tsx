@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import nextDynamic from 'next/dynamic';
 import PublicLayout from "@/components/PublicLayout";
 import HomePageContactForm from "@/components/HomePageContactForm";
-import { getTranslations } from "next-intl/server";
+import { getTranslations, getLocale } from "next-intl/server";
 import ParallaxWrapper from "@/components/ParallaxWrapper";
 import PageTransition from "@/components/PageTransition";
 import SpotlightCard from "@/components/SpotlightCard";
@@ -23,6 +23,31 @@ import { readDB } from '@/lib/db';
 import { HomepageFeature } from "@/lib/admin-api";
 
 export default async function Home() {
+  const locale = await getLocale();
+  const translateDB = (text: string) => {
+    if (locale !== 'en') return text;
+    const dict: Record<string, string> = {
+      "SAP Çözümleri": "SAP Solutions",
+      "Sistem İzleme": "System Monitoring",
+      "SAP CX Hybris B2C E-Ticaret": "SAP CX Hybris B2C E-Commerce",
+      "SAP CX Hybris B2B E-Ticaret": "SAP CX Hybris B2B E-Commerce",
+      "Yeni Link": "New Link",
+      "Global Standartlarda Kalite": "Global Standard Quality",
+      "Projenizin her aşamasında uluslararası yazılım geliştirme standartlarını ve best-practice'leri uyguluyoruz.": "We apply international software development standards and best practices at every stage of your project.",
+      "Ölçeklenebilir Mimari": "Scalable Architecture",
+      "İşiniz büyüdükçe sizinle birlikte büyüyebilen, yüksek trafik ve yük altında sorunsuz çalışan sistemler tasarlıyoruz.": "We design systems that can grow with you as your business grows, working seamlessly under high traffic and load.",
+      "Çevik Geliştirme (Agile)": "Agile Development",
+      "Scrum ve Kanban metodolojileriyle şeffaf, hızlı ve geri bildirimlere anında yanıt verebilen bir süreç sunuyoruz.": "We offer a transparent, fast process that instantly responds to feedback with Scrum and Kanban methodologies.",
+      "7/24 Kesintisiz Destek": "24/7 Uninterrupted Support",
+      "Proje tesliminden sonra da yanınızdayız. Olası sorunlara karşı anında müdahale ediyor, sistemlerinizin ayakta kalmasını sağlıyoruz.": "We stand by you even after project delivery. We instantly intervene against possible problems and ensure your systems stay up.",
+      "Yıllık Tecrübe": "Years of Experience",
+      "Başarılı Proje": "Successful Projects",
+      "Uzman Ekip": "Expert Team",
+      "İş Ortağı": "Business Partners"
+    };
+    return dict[text] || text;
+  };
+
   const db = await readDB();
   const heroSettings = db?.hero || {
     mainTitle: "WE DO SAP CX",
@@ -91,10 +116,10 @@ export default async function Home() {
 
               <div className="flex flex-col sm:flex-row gap-4 pt-6">
                 <Button asChild size="lg" className="h-14 px-8 text-sm font-black tracking-widest bg-accent hover:bg-white text-accent-foreground hover:text-black rounded-none clip-chamfer shadow-glow-md hover:shadow-glow-lg transition-all duration-300">
-                  <Link href={heroSettings.button1Url || "/cozumler"}>{heroSettings.button1Text}</Link>
+                  <Link href={heroSettings.button1Url || "/cozumler"}>{translateDB(heroSettings.button1Text)}</Link>
                 </Button>
                 <Button asChild size="lg" variant="secondary" className="h-14 px-8 text-sm font-bold tracking-widest border border-accent/40 bg-transparent hover:bg-accent/10 text-accent rounded-none clip-chamfer transition-all duration-300">
-                  <Link href={heroSettings.button2Url || "/iletisim"}>{heroSettings.button2Text}</Link>
+                  <Link href={heroSettings.button2Url || "/iletisim"}>{translateDB(heroSettings.button2Text)}</Link>
                 </Button>
               </div>
             </motion.div>
@@ -136,9 +161,9 @@ export default async function Home() {
                 <div className="w-14 h-14 bg-accent/10 border border-accent/30 flex items-center justify-center text-accent clip-diagonal mb-6 shadow-glow-sm">
                   <span className="text-xl font-black font-mono">{feature.number}</span>
                 </div>
-                <h3 className="text-xl font-bold text-foreground mb-3">{feature.title}</h3>
+                <h3 className="text-xl font-bold text-foreground mb-3">{translateDB(feature.title)}</h3>
                 <p className="text-muted-foreground text-sm leading-relaxed font-mono">
-                  {feature.text}
+                  {translateDB(feature.text)}
                 </p>
               </motion.div>
             ))}
@@ -151,10 +176,10 @@ export default async function Home() {
       <section className="py-16 bg-background relative z-20 border-b border-border shadow-[0_10px_30px_rgba(0,0,0,0.5)]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8 divide-x divide-border">
-            <div className="text-center"><CountUp end={15} suffix="+" title="Yıllık Tecrübe" /></div>
-            <div className="text-center"><CountUp end={250} suffix="+" title="Başarılı Proje" /></div>
-            <div className="text-center"><CountUp end={100} suffix="+" title="Uzman Ekip" /></div>
-            <div className="text-center"><CountUp end={50} suffix="+" title="İş Ortağı" /></div>
+            <div className="text-center"><CountUp end={15} suffix="+" title={translateDB("Yıllık Tecrübe")} /></div>
+            <div className="text-center"><CountUp end={250} suffix="+" title={translateDB("Başarılı Proje")} /></div>
+            <div className="text-center"><CountUp end={100} suffix="+" title={translateDB("Uzman Ekip")} /></div>
+            <div className="text-center"><CountUp end={50} suffix="+" title={translateDB("İş Ortağı")} /></div>
           </div>
         </div>
       </section>
@@ -207,7 +232,7 @@ export default async function Home() {
                     </div>
                   </div>
                   
-                  <h3 className="text-2xl font-black text-foreground mb-6 uppercase tracking-wider relative z-10 font-mono border-b border-border/50 pb-4">{cat.name}</h3>
+                  <h3 className="text-2xl font-black text-foreground mb-6 uppercase tracking-wider relative z-10 font-mono border-b border-border/50 pb-4">{translateDB(cat.name)}</h3>
                   <div className="flex flex-col gap-3 mb-6 relative z-10">
                     {cat.links?.map((link: { id: string | number; url: string; title: string }) => (
                       <Link 
@@ -216,7 +241,7 @@ export default async function Home() {
                         className="text-muted-foreground hover:text-accent font-mono text-sm transition-colors flex items-center gap-2 group/link"
                       >
                         <span className="font-mono text-accent/50 group-hover/link:text-accent">&gt;</span>
-                        {link.title}
+                        {translateDB(link.title)}
                       </Link>
                     ))}
                   </div>
