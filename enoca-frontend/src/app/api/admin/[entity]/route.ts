@@ -7,6 +7,10 @@ export async function GET(request: Request, { params }: { params: Promise<{ enti
   
   if (!db) return NextResponse.json({ error: 'DB okunamadı' }, { status: 500 });
   
+  if (entity === 'backup') {
+    return NextResponse.json(db);
+  }
+  
   if (db[entity] !== undefined) {
     return NextResponse.json(db[entity]);
   }

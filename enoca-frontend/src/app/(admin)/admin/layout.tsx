@@ -25,7 +25,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
         <Script id="admin-theme-init" strategy="beforeInteractive">{`
           try{var t=localStorage.getItem('admin-theme');if(t==='dark')document.documentElement.classList.add('dark');}catch(e){}
         `}</Script>
-        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+        <ThemeProvider attribute="class" defaultTheme="system" enableSystem storageKey="admin-theme">
           <ToastProvider>
             <div className="flex h-screen overflow-hidden">
               <AdminSidebar />

@@ -26,7 +26,7 @@ export default function AyarlarPage() {
 
   const handleExport = async () => {
     try {
-      const res = await fetch("/api/admin/db.json");
+      const res = await fetch("/api/admin/backup");
       if (!res.ok) throw new Error("Yedek alınamadı");
       const data = await res.text();
       const blob = new Blob([data], { type: "application/json" });
