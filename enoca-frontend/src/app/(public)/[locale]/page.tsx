@@ -27,7 +27,7 @@ const realReferences = [
   { name: "Turkcell", image: "/references/turkcell.png", url: "https://www.turkcell.com.tr" },
   { name: "Trendyol", image: "/references/trendyol.png", url: "https://www.trendyol.com" },
   { name: "Türk Hava Yolları", image: "/references/thy.svg", url: "https://www.turkishairlines.com" },
-  { name: "Garanti BBVA", image: "/references/garanti.png", url: "https://www.garantibbva.com.tr" },
+  { name: "Garanti BBVA", image: "/references/garanti.svg", url: "https://www.garantibbva.com.tr" },
   { name: "Koç Holding", image: "/references/koc.png", url: "https://www.koc.com.tr" }
 ];
 
