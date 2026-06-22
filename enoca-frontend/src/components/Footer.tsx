@@ -59,44 +59,44 @@ export default function Footer({ settings }: { settings?: SiteSettings }) {
 
                     {/* Sütun 2: DANIŞMANLIK */}
                     <div className="space-y-4">
-                        <h4 className="text-foreground font-bold tracking-wider mb-6 text-sm"><Link href="/danismanlik" className="hover:text-[#0f2256] dark:hover:text-accent transition-colors">{t('consulting')}</Link></h4>
+                        <h4 className="text-foreground font-bold tracking-wider mb-6 text-sm"><Link href="/danismanlik" className="hover:text-accent dark:hover:text-accent transition-colors">{t('consulting')}</Link></h4>
                         <div className="space-y-2">
-                            <Link href="/danismanlik/hybris-danismanligi" className="block text-[13px] font-bold hover:text-[#0f2256] dark:hover:text-accent transition-colors">{t('hybrisConsulting')}</Link>
-                            <Link href="/danismanlik/sap-teknik-danismanlik" className="block text-[13px] font-bold hover:text-[#0f2256] dark:hover:text-accent transition-colors">{t('sapTechnical')}</Link>
-                            <Link href="/danismanlik/sap-fonksiyonel-danismanlik" className="block text-[13px] font-bold hover:text-[#0f2256] dark:hover:text-accent transition-colors">{t('sapFunctional')}</Link>
-                            <Link href="/danismanlik/gelistirme-danismanligi" className="block text-[13px] font-bold hover:text-[#0f2256] dark:hover:text-accent transition-colors">{t('developmentConsulting')}</Link>
-                            <Link href="/danismanlik/kalite-yonetimi" className="block text-[13px] font-bold hover:text-[#0f2256] dark:hover:text-accent transition-colors">{t('qualityManagement')}</Link>
-                            <Link href="/danismanlik/diskaynak-hizmetleri" className="block text-[13px] font-bold hover:text-[#0f2256] dark:hover:text-accent transition-colors">{t('outsourcing')}</Link>
+                            <Link href="/danismanlik/hybris-danismanligi" className="block text-[13px] font-bold hover:text-accent dark:hover:text-accent transition-colors">{t('hybrisConsulting')}</Link>
+                            <Link href="/danismanlik/sap-teknik-danismanlik" className="block text-[13px] font-bold hover:text-accent dark:hover:text-accent transition-colors">{t('sapTechnical')}</Link>
+                            <Link href="/danismanlik/sap-fonksiyonel-danismanlik" className="block text-[13px] font-bold hover:text-accent dark:hover:text-accent transition-colors">{t('sapFunctional')}</Link>
+                            <Link href="/danismanlik/gelistirme-danismanligi" className="block text-[13px] font-bold hover:text-accent dark:hover:text-accent transition-colors">{t('developmentConsulting')}</Link>
+                            <Link href="/danismanlik/kalite-yonetimi" className="block text-[13px] font-bold hover:text-accent dark:hover:text-accent transition-colors">{t('qualityManagement')}</Link>
+                            <Link href="/danismanlik/diskaynak-hizmetleri" className="block text-[13px] font-bold hover:text-accent dark:hover:text-accent transition-colors">{t('outsourcing')}</Link>
                         </div>
                     </div>
 
                     {/* Sütun 3: PROJELER */}
                     <div className="space-y-4">
-                        <h4 className="text-foreground font-bold tracking-wider mb-6 text-sm"><Link href="/projeler" className="hover:text-[#0f2256] dark:hover:text-accent transition-colors">{t('projects')}</Link></h4>
+                        <h4 className="text-foreground font-bold tracking-wider mb-6 text-sm"><Link href="/projeler" className="hover:text-accent dark:hover:text-accent transition-colors">{t('projects')}</Link></h4>
                         <div className="space-y-2">
-                            <Link href="/projeler/metodoloji" className="block text-[13px] font-bold hover:text-[#0f2256] dark:hover:text-accent transition-colors">{t('methodology')}</Link>
-                            <Link href="/projeler/referanslar" className="block text-[13px] font-bold hover:text-[#0f2256] dark:hover:text-accent transition-colors">{t('references')}</Link>
+                            <Link href="/projeler/metodoloji" className="block text-[13px] font-bold hover:text-accent dark:hover:text-accent transition-colors">{t('methodology')}</Link>
+                            <Link href="/projeler/referanslar" className="block text-[13px] font-bold hover:text-accent dark:hover:text-accent transition-colors">{t('references')}</Link>
                         </div>
                     </div>
 
                     {/* Sütun 4: TEKNOLOJİ */}
                     <div className="space-y-4">
-                        <h4 className="text-foreground font-bold tracking-wider mb-6 text-sm"><Link href="/teknoloji" className="hover:text-[#0f2256] dark:hover:text-accent transition-colors">{t('technology')}</Link></h4>
+                        <h4 className="text-foreground font-bold tracking-wider mb-6 text-sm"><Link href="/teknoloji" className="hover:text-accent dark:hover:text-accent transition-colors">{t('technology')}</Link></h4>
                         <div className="space-y-3">
                             <div className="space-y-2">
-                                <Link href="/teknoloji/mimari" className="block text-[13px] font-bold hover:text-[#0f2256] dark:hover:text-accent transition-colors">{t('architecture')}</Link>
+                                <Link href="/teknoloji/mimari" className="block text-[13px] font-bold hover:text-accent dark:hover:text-accent transition-colors">{t('architecture')}</Link>
                                 <div className="space-y-1.5 pl-3 border-l border-white/10">
-                                    <Link href="/teknoloji/mimari/modulerlik" className="block text-xs hover:text-[#0f2256] dark:hover:text-accent transition-colors">{t('modularity')}</Link>
-                                    <Link href="/teknoloji/mimari/tasarim-tabanli" className="block text-xs hover:text-[#0f2256] dark:hover:text-accent transition-colors">{t('designBased')}</Link>
+                                    <Link href="/teknoloji/mimari/modulerlik" className="block text-xs hover:text-accent dark:hover:text-accent transition-colors">{t('modularity')}</Link>
+                                    <Link href="/teknoloji/mimari/tasarim-tabanli" className="block text-xs hover:text-accent dark:hover:text-accent transition-colors">{t('designBased')}</Link>
                                 </div>
                             </div>
                             <div className="space-y-2 pt-2">
-                                <Link href="/teknoloji/inovasyon" className="block text-[13px] font-bold hover:text-[#0f2256] dark:hover:text-accent transition-colors">{t('innovation')}</Link>
+                                <Link href="/teknoloji/inovasyon" className="block text-[13px] font-bold hover:text-accent dark:hover:text-accent transition-colors">{t('innovation')}</Link>
                             </div>
                             <div className="space-y-2 pt-2">
-                                <Link href="/teknoloji/arastirma-gelistirme" className="block text-[13px] font-bold hover:text-[#0f2256] dark:hover:text-accent transition-colors">{t('rd')}</Link>
+                                <Link href="/teknoloji/arastirma-gelistirme" className="block text-[13px] font-bold hover:text-accent dark:hover:text-accent transition-colors">{t('rd')}</Link>
                                 <div className="space-y-1.5 pl-3 border-l border-white/10">
-                                    <Link href="/teknoloji/arastirma-gelistirme/modelleme-ve-simulasyon" className="block text-xs hover:text-[#0f2256] dark:hover:text-accent transition-colors">{t('modelingSimulation')}</Link>
+                                    <Link href="/teknoloji/arastirma-gelistirme/modelleme-ve-simulasyon" className="block text-xs hover:text-accent dark:hover:text-accent transition-colors">{t('modelingSimulation')}</Link>
                                 </div>
                             </div>
                         </div>
@@ -104,22 +104,22 @@ export default function Footer({ settings }: { settings?: SiteSettings }) {
 
                     {/* Sütun 5: HABERLER */}
                     <div className="space-y-4">
-                        <h4 className="text-foreground font-bold tracking-wider mb-6 text-sm"><Link href="/haberler" className="hover:text-[#0f2256] dark:hover:text-accent transition-colors">{t('news')}</Link></h4>
+                        <h4 className="text-foreground font-bold tracking-wider mb-6 text-sm"><Link href="/haberler" className="hover:text-accent dark:hover:text-accent transition-colors">{t('news')}</Link></h4>
                         <div className="space-y-2">
-                            <Link href="/haberler/enocadan-son-haberler" className="block text-[13px] font-bold hover:text-[#0f2256] dark:hover:text-accent transition-colors uppercase">{t('latestNews')}</Link>
+                            <Link href="/haberler/enocadan-son-haberler" className="block text-[13px] font-bold hover:text-accent dark:hover:text-accent transition-colors uppercase">{t('latestNews')}</Link>
                         </div>
                     </div>
 
                     {/* Sütun 6: KURUMSAL */}
                     <div className="space-y-4">
-                        <h4 className="text-foreground font-bold tracking-wider mb-6 text-sm"><Link href="/kurumsal" className="hover:text-[#0f2256] dark:hover:text-accent transition-colors">{t('corporate')}</Link></h4>
+                        <h4 className="text-foreground font-bold tracking-wider mb-6 text-sm"><Link href="/kurumsal" className="hover:text-accent dark:hover:text-accent transition-colors">{t('corporate')}</Link></h4>
                         <div className="space-y-2">
-                            <Link href="/kurumsal/hakkimizda" className="block text-[13px] font-bold hover:text-[#0f2256] dark:hover:text-accent transition-colors">{t('aboutUs')}</Link>
-                            <Link href="/kariyer" className="block text-[13px] font-bold hover:text-[#0f2256] dark:hover:text-accent transition-colors">{t('career')}</Link>
-                            <Link href="/kurumsal/yasal-bilgiler" className="block text-[13px] font-bold hover:text-[#0f2256] dark:hover:text-accent transition-colors">{t('legalInfo')}</Link>
-                            <Link href="/bilgi-guvenligi-politikasi" className="block text-[13px] font-bold hover:text-[#0f2256] dark:hover:text-accent transition-colors">{t('infosecPolicy')}</Link>
-                            <Link href="/kisisel-verilerin-korunmasi-ve-islenmesi-politikasi" className="block text-[13px] font-bold hover:text-[#0f2256] dark:hover:text-accent transition-colors leading-relaxed">{t('kvkk')}</Link>
-                            <Link href="/iletisim" className="block text-[13px] font-bold hover:text-[#0f2256] dark:hover:text-accent transition-colors">{t('contactUs')}</Link>
+                            <Link href="/kurumsal/hakkimizda" className="block text-[13px] font-bold hover:text-accent dark:hover:text-accent transition-colors">{t('aboutUs')}</Link>
+                            <Link href="/kariyer" className="block text-[13px] font-bold hover:text-accent dark:hover:text-accent transition-colors">{t('career')}</Link>
+                            <Link href="/kurumsal/yasal-bilgiler" className="block text-[13px] font-bold hover:text-accent dark:hover:text-accent transition-colors">{t('legalInfo')}</Link>
+                            <Link href="/bilgi-guvenligi-politikasi" className="block text-[13px] font-bold hover:text-accent dark:hover:text-accent transition-colors">{t('infosecPolicy')}</Link>
+                            <Link href="/kisisel-verilerin-korunmasi-ve-islenmesi-politikasi" className="block text-[13px] font-bold hover:text-accent dark:hover:text-accent transition-colors leading-relaxed">{t('kvkk')}</Link>
+                            <Link href="/iletisim" className="block text-[13px] font-bold hover:text-accent dark:hover:text-accent transition-colors">{t('contactUs')}</Link>
                         </div>
                     </div>
 
@@ -131,17 +131,17 @@ export default function Footer({ settings }: { settings?: SiteSettings }) {
                     <div className="flex items-center gap-6 text-[11px] md:text-xs font-bold tracking-wider">
                         {/* Sosyal İkonlar */}
                         {settings?.linkedinUrl && (
-                            <a href={settings.linkedinUrl} target="_blank" rel="noreferrer" className="flex items-center justify-center w-8 h-8 rounded-full bg-[#333333] hover:bg-[#0f2256] hover:text-white dark:hover:bg-accent dark:hover:text-white transition-all text-white" aria-label="LinkedIn">
+                            <a href={settings.linkedinUrl} target="_blank" rel="noreferrer" className="flex items-center justify-center w-8 h-8 rounded-full bg-[#333333] hover:bg-accent hover:text-white dark:hover:bg-accent dark:hover:text-white transition-all text-white" aria-label="LinkedIn">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
                             </a>
                         )}
                         {settings?.twitterUrl && (
-                            <a href={settings.twitterUrl} target="_blank" rel="noreferrer" className="flex items-center justify-center w-8 h-8 rounded-full bg-[#333333] hover:bg-[#0f2256] hover:text-white dark:hover:bg-accent dark:hover:text-white transition-all text-white" aria-label="X (Twitter)">
+                            <a href={settings.twitterUrl} target="_blank" rel="noreferrer" className="flex items-center justify-center w-8 h-8 rounded-full bg-[#333333] hover:bg-accent hover:text-white dark:hover:bg-accent dark:hover:text-white transition-all text-white" aria-label="X (Twitter)">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
                             </a>
                         )}
-                        <Link href={settings?.privacyUrl || "/gizlilik"} className="text-foreground hover:text-[#0f2256] dark:hover:text-accent transition-colors uppercase">{t('privacy')}</Link>
-                        <Link href={settings?.termsUrl || "/kullanim-kosullari"} className="text-foreground hover:text-[#0f2256] dark:hover:text-accent transition-colors uppercase">{t('terms')}</Link>
+                        <Link href={settings?.privacyUrl || "/gizlilik"} className="text-foreground hover:text-accent dark:hover:text-accent transition-colors uppercase">{t('privacy')}</Link>
+                        <Link href={settings?.termsUrl || "/kullanim-kosullari"} className="text-foreground hover:text-accent dark:hover:text-accent transition-colors uppercase">{t('terms')}</Link>
                     </div>
                     
                     <div className="flex flex-col md:flex-row items-center md:items-end justify-between gap-6 w-full lg:w-auto">
@@ -156,7 +156,7 @@ export default function Footer({ settings }: { settings?: SiteSettings }) {
                             ) : (
                                 <form className="flex mt-2 relative z-10" onSubmit={handleSubscribe}>
                                     <input type="email" required placeholder={t('newsletterEmail')} className="flex-1 h-10 px-4 text-xs bg-background border border-border outline-none focus:border-accent text-foreground font-mono placeholder-muted-foreground transition-all focus:ring-1 focus:ring-accent/50" />
-                                    <button type="submit" className="h-10 px-5 bg-accent text-accent-foreground text-[11px] font-black hover:bg-[#0f2256] hover:text-white dark:hover:bg-white dark:hover:text-black transition-colors uppercase font-mono clip-chamfer ml-2 shadow-glow-sm">{t('newsletterSubmit')}</button>
+                                    <button type="submit" className="h-10 px-5 bg-accent text-accent-foreground text-[11px] font-black hover:bg-accent hover:text-white dark:hover:bg-white dark:hover:text-black transition-colors uppercase font-mono clip-chamfer ml-2 shadow-glow-sm">{t('newsletterSubmit')}</button>
                                 </form>
                             )}
                         </div>
