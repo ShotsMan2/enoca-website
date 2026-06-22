@@ -29,22 +29,104 @@ export default async function CatchAllPage({
 }) {
     const resolvedParams = await params;
     const slugArray = resolvedParams.slug || [];
+    const locale = resolvedParams.locale || 'tr';
     const t = await getTranslations('Page');
 
-    // Son kırılımı sayfa başlığı yapıyoruz
-    const pageTitle = slugArray.length > 0 
-        ? slugArray[slugArray.length - 1].replace(/-/g, ' ') 
-        : 'Sayfa';
-
-    // Üst kategoriyi belirliyoruz (varsa)
-    const topCategory = slugArray.length > 1 
-        ? slugArray[0].replace(/-/g, ' ') 
-        : 'ENOCA™';
+    const translateDB = (text: string) => {
+        if (locale !== 'en' || !text) return text;
+        const dict: Record<string, string> = {
+            "Hybris Danışmanlığı": "Hybris Consulting",
+            "SAP Teknik Danışmanlık": "SAP Technical Consulting",
+            "SAP Fonksiyonel Danışmanlık": "SAP Functional Consulting",
+            "Geliştirme Danışmanlığı": "Development Consulting",
+            "Danışmanlık": "Consulting",
+            "Kalite Yönetimi": "Quality Management",
+            "Dışkaynak Hizmetleri": "Outsourcing",
+            "Dış Kaynak Hizmetleri": "Outsourcing",
+            "Çözümler": "Solutions",
+            "Projeler": "Projects",
+            "Teknoloji": "Technology",
+            "Kurumsal": "Corporate",
+            "Haberler": "News",
+            "Metodoloji": "Methodology",
+            "Referanslar": "References",
+            "Hakkımızda": "About Us",
+            "Kariyer": "Careers",
+            "Yasal Bilgiler": "Legal Information",
+            "Bilgi Güvenliği Politikası": "Information Security Policy",
+            "Kişisel Verilerin Korunması ve İşlenmesi Politikası": "KVKK Policy",
+            "KVKK": "KVKK Policy",
+            "İletişim": "Contact Us",
+            "Mimari": "Architecture",
+            "İnovasyon": "Innovation",
+            "Araştırma & Geliştirme": "R&D",
+            "Araştırma Geliştirme": "R&D",
+            "Modülerlik": "Modularity",
+            "Tasarım Tabanlı": "Design Based",
+            "Modelleme ve Simülasyon": "Modeling and Simulation",
+            "SAP Uygulama Yönetimi": "SAP Application Management",
+            "SAP Bulut": "SAP Cloud",
+            "SAP CX Hybris Mobil E-Ticaret": "SAP CX Hybris Mobile E-Commerce",
+            "SAP CX Hybris MDM": "SAP CX Hybris MDM",
+            "SAP CX Hybris B2C E-Ticaret": "SAP CX Hybris B2C E-Commerce",
+            "SAP CX Hybris B2B E-Ticaret": "SAP CX Hybris B2B E-Commerce",
+            "İncele": "View Details",
+            "Bu sayfanın içeriğini admin panelinden güncelleyebilirsiniz.": "You can update the content of this page from the admin panel.",
+            "Sayfa": "Page",
+            
+            // Slug & Unaccented Versions
+            "arastirma gelistirme": "R&D",
+            "bilgi guvenligi politikasi": "Information Security Policy",
+            "kisisel verilerin korunmasi ve islenmesi politikasi": "KVKK Policy",
+            "iletisim": "Contact Us",
+            "mimari": "Architecture",
+            "inovasyon": "Innovation",
+            "modulerlik": "Modularity",
+            "tasarim tabanli": "Design Based",
+            "modelleme ve simulasyon": "Modeling and Simulation",
+            "hybris danismanligi": "Hybris Consulting",
+            "sap teknik danismanlik": "SAP Technical Consulting",
+            "sap fonksiyonel danismanlik": "SAP Functional Consulting",
+            "gelistirme danismanligi": "Development Consulting",
+            "danismanlik": "Consulting",
+            "kalite yonetimi": "Quality Management",
+            "diskaynak hizmetleri": "Outsourcing",
+            "cozumler": "Solutions",
+            "projeler": "Projects",
+            "teknoloji": "Technology",
+            "kurumsal": "Corporate",
+            "haberler": "News",
+            "metodoloji": "Methodology",
+            "referanslar": "References",
+            "hakkimizda": "About Us",
+            "kariyer": "Careers",
+            "yasal bilgiler": "Legal Information",
+            "sap uygulama yonetimi": "SAP Application Management",
+            "sap bulut": "SAP Cloud",
+            "sap cx hybris mobil e ticaret": "SAP CX Hybris Mobile E-Commerce",
+            "sap cx hybris b2c e ticaret": "SAP CX Hybris B2C E-Commerce",
+            "sap cx hybris b2b e ticaret": "SAP CX Hybris B2B E-Commerce",
+            "enoca dan son haberler": "Latest News from Enoca"
+        };
+        
+        let translated = text;
+        const keys = Object.keys(dict).sort((a, b) => b.length - a.length);
+        for (const key of keys) {
+             translated = translated.replace(new RegExp(key, 'gi'), dict[key]);
+        }
+        return translated;
+    };
 
     const db = await readDB();
     const currentSlug = "/" + slugArray.join("/");
     const dynamicPage = db?.pages?.find((p: ContentPage) => p.slug === currentSlug && p.status === "published");
     const subPages = db?.pages?.filter((p: ContentPage) => p.slug.startsWith(currentSlug + "/") && p.status === "published") || [];
+
+    const pageTitleRaw = dynamicPage?.menuTitle || (slugArray.length > 0 ? slugArray[slugArray.length - 1].replace(/-/g, ' ') : 'Sayfa');
+    const pageTitle = translateDB(pageTitleRaw);
+
+    const topCategoryRaw = dynamicPage?.category || (slugArray.length > 1 ? slugArray[0].replace(/-/g, ' ') : 'ENOCA™');
+    const topCategory = translateDB(topCategoryRaw);
 
     return (
         <PublicLayout>
@@ -56,7 +138,7 @@ export default async function CatchAllPage({
             <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 pb-20 md:pt-12 md:pb-32">
                 
                 {/* Geri Dönüş Linki */}
-                <div className="mb-6">
+                <div className="mb-2">
                     <Button variant="ghost" size="sm" asChild className="pl-2 group">
                         <Link href="/">
                             <ArrowLeft className="w-4 h-4 mr-2 group-hover:-translate-x-1 transition-transform" />
@@ -83,7 +165,7 @@ export default async function CatchAllPage({
                             <div key={index} className="flex items-center gap-2">
                                 <ChevronRight className="w-4 h-4 text-muted-foreground/50" />
                                 <span className="text-sm font-medium text-muted-foreground uppercase tracking-wide">
-                                    {segment.replace(/-/g, ' ')}
+                                    {index === slugArray.length - 2 ? pageTitle : translateDB(segment.replace(/-/g, ' '))}
                                 </span>
                             </div>
                         ))}
@@ -103,15 +185,15 @@ export default async function CatchAllPage({
                         <div className="absolute -bottom-20 -right-20 w-40 h-40 bg-accent/10 rounded-full blur-[50px] -z-10" />
                         
                         {dynamicPage ? (
-                            <div className="prose prose-lg dark:prose-invert max-w-none" dangerouslySetInnerHTML={{ __html: dynamicPage.content }} />
+                            <div className="prose prose-lg dark:prose-invert max-w-none" dangerouslySetInnerHTML={{ __html: translateDB(dynamicPage.content) }} />
                         ) : subPages.length > 0 ? (
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                                 {subPages.map((sub: ContentPage) => (
                                     <Link key={sub.id} href={sub.slug} className="group p-6 bg-white dark:bg-gray-800 rounded-2xl border border-gray-100 dark:border-gray-700 hover:shadow-xl hover:-translate-y-1 transition-all">
-                                        <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2 group-hover:text-blue-600 transition-colors">{sub.menuTitle}</h3>
-                                        <p className="text-sm text-gray-500 line-clamp-2">{sub.content.replace(/<[^>]*>?/gm, '').substring(0, 120)}...</p>
+                                        <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2 group-hover:text-blue-600 transition-colors">{translateDB(sub.menuTitle)}</h3>
+                                        <p className="text-sm text-gray-500 line-clamp-2">{translateDB(sub.content).replace(/<[^>]*>?/gm, '').substring(0, 120)}...</p>
                                         <div className="mt-4 flex items-center text-sm font-semibold text-blue-600">
-                                            İncele <ChevronRight className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" />
+                                            {translateDB("İncele")} <ChevronRight className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" />
                                         </div>
                                     </Link>
                                 ))}

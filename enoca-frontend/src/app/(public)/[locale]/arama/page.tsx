@@ -18,6 +18,7 @@ export default async function SearchPage({
     
     // We don't have next-intl translations for SearchPage yet, so we use generic ones or fallback to Turkish
     const t = await getTranslations('Page').catch(() => null);
+    const tSearch = await getTranslations('SearchPage').catch(() => null);
 
     const db = await readDB();
     
@@ -52,7 +53,7 @@ export default async function SearchPage({
                     <Button variant="ghost" size="sm" asChild className="pl-2 group">
                         <Link href="/">
                             <ArrowLeft className="w-4 h-4 mr-2 group-hover:-translate-x-1 transition-transform" />
-                            {t?.('backToHome') || 'Anasayfaya Dön'}
+                            {tSearch?.('backToHome') || t?.('backToHome') || 'Anasayfaya Dön'}
                         </Link>
                     </Button>
                 </div>
@@ -61,10 +62,22 @@ export default async function SearchPage({
                     
                     <div className="relative mb-8">
                         <h1 className="text-4xl md:text-5xl font-display font-black uppercase tracking-tighter leading-tight text-foreground">
-                            Arama Sonuçları
+                            {tSearch?.('title') || 'Arama Sonuçları'}
                         </h1>
                         <p className="text-muted-foreground mt-3 text-lg">
-                            <span className="font-bold text-accent">&quot;{query}&quot;</span> için {totalResults} sonuç bulundu.
+                            {tSearch?.rich('resultsFound', { 
+                                count: totalResults,
+                                query: query,
+                                queryTag: (chunks) => <span className="font-bold text-accent">{chunks}</span>
+                            }) ? (
+                                tSearch.rich('resultsFound', { 
+                                    count: totalResults,
+                                    query: query,
+                                    queryTag: (chunks) => <span className="font-bold text-accent">{chunks}</span>
+                                })
+                            ) : (
+                                <><span className="font-bold text-accent">&quot;{query}&quot;</span> için {totalResults} sonuç bulundu.</>
+                            )}
                         </p>
                         <div className="w-24 h-1.5 bg-gradient-to-r from-accent to-transparent rounded-full mt-4"></div>
                     </div>
@@ -76,7 +89,7 @@ export default async function SearchPage({
                             <div className="space-y-4">
                                 <h2 className="text-xl font-bold flex items-center gap-2 border-b border-border pb-2">
                                     <FileText className="w-5 h-5 text-blue-500" />
-                                    Sayfalar ({pages.length})
+                                    {tSearch?.('pages') || 'Sayfalar'} ({pages.length})
                                 </h2>
                                 <div className="grid gap-4">
                                     {pages.map(p => (
@@ -102,7 +115,7 @@ export default async function SearchPage({
                             <div className="space-y-4 mt-4">
                                 <h2 className="text-xl font-bold flex items-center gap-2 border-b border-border pb-2">
                                     <Newspaper className="w-5 h-5 text-green-500" />
-                                    Haberler ({news.length})
+                                    {tSearch?.('news') || 'Haberler'} ({news.length})
                                 </h2>
                                 <div className="grid gap-4">
                                     {news.map(n => (
@@ -122,7 +135,7 @@ export default async function SearchPage({
                             <div className="space-y-4 mt-4">
                                 <h2 className="text-xl font-bold flex items-center gap-2 border-b border-border pb-2">
                                     <Briefcase className="w-5 h-5 text-purple-500" />
-                                    Kariyer İlanları ({jobs.length})
+                                    {tSearch?.('jobs') || 'Açık Pozisyonlar'} ({jobs.length})
                                 </h2>
                                 <div className="grid gap-4">
                                     {jobs.map(j => (

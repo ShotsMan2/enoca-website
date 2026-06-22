@@ -41,7 +41,11 @@
     "privacy": "GİZLİLİK",
     "terms": "KULLANIM KOŞULLARI",
     "searchPlaceholder": "Ara...",
-    "searchBtn": "ARA"
+    "searchBtn": "ARA",
+    "searchShort": "Arama",
+    "searchCmd": "Arama (Cmd+K)",
+    "lightMode": "Aydınlık Mod",
+    "darkMode": "Karanlık Mod"
   },
   "Hero": {
     "badge": "ENOCA™ TEKNOLOJİ",
@@ -79,7 +83,12 @@
     "emailPlaceholder": "Mail adresiniz",
     "message": "Yorum veya Mesaj *",
     "messagePlaceholder": "Mesajınız...",
-    "submit": "Gönder"
+    "submit": "Gönder",
+    "submitting": "Gönderiliyor...",
+    "successTitle": "Teşekkürler!",
+    "successMessage": "Mesajınız başarıyla alınmıştır. En kısa sürede size dönüş yapacağız.",
+    "newMsgBtn": "Yeni Mesaj Gönder",
+    "honeypotLabel": "Lütfen bu alanı boş bırakın"
   },
   "Footer": {
     "solutions": "ÇÖZÜMLER",
@@ -112,6 +121,21 @@
     "infosecPolicy": "BİLGİ GÜVENLİĞİ POLİTİKASI",
     "kvkk": "KİŞİSEL VERİLERİN KORUNMASI VE İŞLENMESİ POLİTİKASI",
     "contactUs": "İLETİŞİM",
+    "b2cEcommerce": "SAP CX Hybris B2C E-Ticaret",
+    "b2bEcommerce": "SAP CX Hybris B2B E-Ticaret",
+    "mobileEcommerce": "SAP CX Hybris Mobil E-Ticaret",
+    "mdm": "SAP CX Hybris MDM",
+    "sapMobility": "SAP Mobility",
+    "sapHana": "SAP HANA",
+    "sapAppManagement": "SAP Uygulama Yönetimi",
+    "sapCloud": "SAP Bulut",
+    "vfabric": "vFabric Hyperic",
+    "nagios": "Nagios",
+    "newsletterTitle": "E-Bülten Kayıt",
+    "newsletterDesc": "Sektörel gelişmelerden haberdar olmak için e-bültenimize kayıt olun.",
+    "newsletterSuccess": "Bülten aboneliğiniz alındı, teşekkürler!",
+    "newsletterEmail": "E-posta adresiniz",
+    "newsletterSubmit": "Kayıt Ol",
     "privacy": "GİZLİLİK",
     "terms": "KULLANIM KOŞULLARI",
     "copyright": "© 2013 - 2025 enoca™"
@@ -177,7 +201,30 @@
     "generateBtn": "Detaylı ROI Raporu Oluştur",
     "roiTitle": "Yatırım Getirisi (ROI)",
     "savingsTitle": "5 Yıllık Tahmini Tasarruf",
-    "paybackTitle": "Amortisman Süresi (Ay)"
+    "paybackTitle": "Amortisman Süresi (Ay)",
+    "expertAssessment": "Uzman Değerlendirmesi",
+    "expertPoint1": "Monolitik yapıdan modüler SAP Commerce Cloud mimarisine geçiş, <strong>yüksek büyüme oranı (%{growthRate})</strong> nedeniyle sunucu ölçeklendirme maliyetlerinizi %40 oranında düşürecektir.",
+    "expertPoint2": "İlk yatırım maliyeti yaklaşık <strong>{payback} ay</strong> içinde kendini amorti edecek ve sonrasında net kâra dönüşecektir.",
+    "downloadPdf": "PDF Raporu İndir",
+    "recalculate": "Yeniden Hesapla"
+  },
+  "FloatingWidget": {
+    "liveSupport": "Canlı Destek",
+    "contactUs": "Bize Ulaşın",
+    "helpMessage": "Nasıl yardımcı olabiliriz? Lütfen sorunuzu bırakın, size en kısa sürede dönüş yapacağız.",
+    "whatsappBtn": "WhatsApp'tan Yazın"
+  },
+  "SearchModal": {
+    "placeholder": "Aramak istediğiniz terimi yazın...",
+    "pressEnterText": "<query>&quot;{query}&quot;</query> için arama sonuçlarına gitmek için <kbd>Enter</kbd> tuşuna basın."
+  },
+  "SearchPage": {
+    "title": "Arama Sonuçları",
+    "resultsFound": "<queryTag>&quot;{query}&quot;</queryTag> için {count} sonuç bulundu.",
+    "pages": "Sayfalar",
+    "news": "Haberler",
+    "jobs": "Açık Pozisyonlar",
+    "backToHome": "Anasayfaya Dön"
   },
   "HomeMisc": {
     "configTitle": "Projenizi ",

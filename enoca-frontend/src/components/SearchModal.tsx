@@ -3,10 +3,12 @@
 import { useState, useEffect } from "react";
 import { Search, X } from "lucide-react";
 import { useRouter } from "next/navigation";
+import { useTranslations } from "next-intl";
 
 export default function SearchModal({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) {
   const [query, setQuery] = useState("");
   const router = useRouter();
+  const t = useTranslations('SearchModal');
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -42,7 +44,7 @@ export default function SearchModal({ isOpen, onClose }: { isOpen: boolean; onCl
           <input
             type="text"
             className="w-full h-16 px-4 bg-transparent border-none outline-none text-lg text-foreground placeholder:text-muted-foreground"
-            placeholder="Aramak istediğiniz terimi yazın..."
+            placeholder={t('placeholder')}
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             autoFocus
@@ -55,7 +57,10 @@ export default function SearchModal({ isOpen, onClose }: { isOpen: boolean; onCl
         {query.trim().length > 0 && (
           <div className="border-t border-border p-4 bg-muted/30">
             <p className="text-sm text-muted-foreground">
-              <span className="font-bold text-foreground">&quot;{query}&quot;</span> için arama sonuçlarına gitmek için <kbd className="px-2 py-1 bg-background border border-border rounded text-xs font-mono">Enter</kbd> tuşuna basın.
+              {t.rich('pressEnterText', {
+                query: (chunks) => <span className="font-bold text-foreground">{chunks}</span>,
+                kbd: (chunks) => <kbd className="px-2 py-1 bg-background border border-border rounded text-xs font-mono">{chunks}</kbd>
+              })}
             </p>
           </div>
         )}

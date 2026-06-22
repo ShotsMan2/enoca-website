@@ -37,9 +37,9 @@ export default function HomePageContactForm() {
     if (status === "success") {
         return (
             <div className="bg-green-50 dark:bg-green-900/20 text-green-700 dark:text-green-400 p-8 rounded-2xl text-center border border-green-200 dark:border-green-800">
-                <h3 className="text-2xl font-bold mb-2">Teşekkürler!</h3>
-                <p>Mesajınız başarıyla alınmıştır. En kısa sürede size dönüş yapacağız.</p>
-                <Button variant="secondary" className="mt-6" onClick={() => setStatus("idle")}>Yeni Mesaj Gönder</Button>
+                <h3 className="text-2xl font-bold mb-2">{tContact('successTitle')}</h3>
+                <p>{tContact('successMessage')}</p>
+                <Button variant="secondary" className="mt-6" onClick={() => setStatus("idle")}>{tContact('newMsgBtn')}</Button>
             </div>
         );
     }
@@ -73,7 +73,7 @@ export default function HomePageContactForm() {
             
             {/* Honeypot Alanı: Botlar için görünmez ancak DOM'da mevcut */}
             <div className="hidden" aria-hidden="true">
-                <label>Lütfen bu alanı boş bırakın</label>
+                <label>{tContact('honeypotLabel')}</label>
                 <input 
                     type="text" 
                     name="contact_me_by_fax_only" 
@@ -97,7 +97,7 @@ export default function HomePageContactForm() {
             </div>
             <div className="pt-2 text-center">
                 <Button size="lg" type="submit" disabled={status === "loading"} className="px-12 w-full md:w-auto">
-                    {status === "loading" ? "Gönderiliyor..." : tContact('submit')}
+                    {status === "loading" ? tContact('submitting') : tContact('submit')}
                 </Button>
             </div>
         </form>
