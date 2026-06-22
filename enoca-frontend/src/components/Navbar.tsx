@@ -33,11 +33,13 @@ export default function Navbar({ settings, pages = [] }: { settings?: SiteSettin
         url: string;
         children?: MenuItem[];
         subChildren?: { title: string; url: string }[];
+        bannerImage?: string;
     };
     const menuItems: MenuItem[] = [
         {
             title: t('services'),
             url: "/cozumler",
+            bannerImage: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=600&auto=format&fit=crop",
             children: [
                 { 
                     title: t('hybrisSolutions'), 
@@ -72,6 +74,7 @@ export default function Navbar({ settings, pages = [] }: { settings?: SiteSettin
         {
             title: t('consulting'),
             url: "/danismanlik",
+            bannerImage: "https://images.unsplash.com/photo-1552664730-d307ca884978?q=80&w=600&auto=format&fit=crop",
             children: [
                 { title: t('hybrisConsulting'), url: "/danismanlik/hybris-danismanligi" },
                 { title: t('sapTechnical'), url: "/danismanlik/sap-teknik-danismanlik" },
@@ -84,6 +87,7 @@ export default function Navbar({ settings, pages = [] }: { settings?: SiteSettin
         {
             title: t('projects'),
             url: "/projeler",
+            bannerImage: "https://images.unsplash.com/photo-1531403009284-440f080d1e12?q=80&w=600&auto=format&fit=crop",
             children: [
                 { title: t('methodology'), url: "/projeler/metodoloji" },
                 { title: t('references'), url: "/projeler/referanslar" },
@@ -92,6 +96,7 @@ export default function Navbar({ settings, pages = [] }: { settings?: SiteSettin
         {
             title: t('technology'),
             url: "/teknoloji",
+            bannerImage: "https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=600&auto=format&fit=crop",
             children: [
                 { 
                     title: t('architecture'), 
@@ -114,6 +119,7 @@ export default function Navbar({ settings, pages = [] }: { settings?: SiteSettin
         { 
             title: t('news'), 
             url: "/haberler",
+            bannerImage: "https://images.unsplash.com/photo-1504711434969-e33886168f5c?q=80&w=600&auto=format&fit=crop",
             children: [
                 { title: t('latestNews'), url: "/haberler/enocadan-son-haberler" },
             ]
@@ -121,6 +127,7 @@ export default function Navbar({ settings, pages = [] }: { settings?: SiteSettin
         {
             title: t('corporate'),
             url: "/kurumsal",
+            bannerImage: "https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=600&auto=format&fit=crop",
             children: [
                 { title: t('aboutUs'), url: "/kurumsal/hakkimizda" },
                 { title: t('careers'), url: "/kariyer" },
@@ -132,7 +139,6 @@ export default function Navbar({ settings, pages = [] }: { settings?: SiteSettin
             ]
         },
         { title: t('contact'), url: "/iletisim" },
-        { title: t('admin'), url: "/admin" },
     ];
 
     // DB'den gelen aktif sayfaları (eğer statik menüde yoksa) ilgili kategoriye ekliyoruz
@@ -187,21 +193,21 @@ export default function Navbar({ settings, pages = [] }: { settings?: SiteSettin
             <div className="bg-card/50 text-muted-foreground text-xs py-2 hidden lg:block relative z-20 border-b border-accent/10">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center">
                     <div className="flex items-center gap-6 font-medium tracking-wider">
-                            <a href={`mailto:${settings?.email || 'contact@enoca.com'}`} className="hover:text-[#0f2256] transition-colors flex items-center gap-1.5"><Mail className="w-3.5 h-3.5" />{settings?.email || 'contact@enoca.com'}</a>
-                            <a href={`tel:${settings?.phone || '+90 850 221 73 54'}`} className="hover:text-[#0f2256] transition-colors flex items-center gap-1.5"><Phone className="w-3.5 h-3.5" />{settings?.phone || '+90 850 221 73 54'}</a>
+                            <a href={`mailto:${settings?.email || 'contact@enoca.com'}`} className="hover:text-[#0f2256] dark:hover:text-accent transition-colors flex items-center gap-1.5"><Mail className="w-3.5 h-3.5" />{settings?.email || 'contact@enoca.com'}</a>
+                            <a href={`tel:${settings?.phone || '+90 850 221 73 54'}`} className="hover:text-[#0f2256] dark:hover:text-accent transition-colors flex items-center gap-1.5"><Phone className="w-3.5 h-3.5" />{settings?.phone || '+90 850 221 73 54'}</a>
                     </div>
                     <div className="flex items-center gap-6 font-medium tracking-wider">
-                        <Link href="/gizlilik" className="hover:text-[#0f2256] transition-colors uppercase">{t('privacy')}</Link>
-                        <Link href="/kullanim-kosullari" className="hover:text-[#0f2256] transition-colors uppercase">{t('terms')}</Link>
+                        <Link href="/gizlilik" className="hover:text-[#0f2256] dark:hover:text-accent transition-colors uppercase">{t('privacy')}</Link>
+                        <Link href="/kullanim-kosullari" className="hover:text-[#0f2256] dark:hover:text-accent transition-colors uppercase">{t('terms')}</Link>
                         <div className="flex items-center gap-4 ml-4 border-l border-white/20 pl-4">
                             {settings?.linkedinUrl && (
-                                <a href={settings.linkedinUrl} target="_blank" rel="noreferrer" className="hover:text-[#0f2256] transition-colors" aria-label="LinkedIn">
+                                <a href={settings.linkedinUrl} target="_blank" rel="noreferrer" className="hover:text-[#0f2256] dark:hover:text-accent transition-colors" aria-label="LinkedIn">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg>
                                 </a>
                             )}
                             {settings?.twitterUrl && (
-                                <a href={settings.twitterUrl} target="_blank" rel="noreferrer" className="hover:text-[#0f2256] transition-colors" aria-label="Twitter">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"/></svg>
+                                <a href={settings.twitterUrl} target="_blank" rel="noreferrer" className="hover:text-[#0f2256] dark:hover:text-accent transition-colors" aria-label="X (Twitter)">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
                                 </a>
                             )}
                         </div>
@@ -280,15 +286,22 @@ export default function Navbar({ settings, pages = [] }: { settings?: SiteSettin
                                                         </div>
                                                     ))}
                                                 </div>
-                                                {/* Mega Menü Featured Card (İlk çocuk öğesi için örnek banner) */}
-                                                <div className="hidden md:flex flex-col justify-end w-[240px] p-5 rounded-xl bg-gradient-to-br from-accent/10 to-accent/5 border border-accent/10 overflow-hidden relative group/banner">
-                                                    <div className="absolute inset-0 bg-accent/5 opacity-0 group-hover/banner:opacity-100 transition-opacity" />
+                                                {/* Mega Menü Featured Card */}
+                                                <div className="hidden md:flex flex-col justify-end w-[240px] p-5 rounded-xl bg-card border border-accent/10 overflow-hidden relative group/banner">
+                                                    {item.bannerImage ? (
+                                                        <>
+                                                            <img src={item.bannerImage} alt={item.title} className="absolute inset-0 w-full h-full object-cover opacity-60 group-hover/banner:scale-110 transition-transform duration-700" />
+                                                            <div className="absolute inset-0 bg-gradient-to-t from-background via-background/80 to-transparent z-0" />
+                                                        </>
+                                                    ) : (
+                                                        <div className="absolute inset-0 bg-gradient-to-br from-accent/10 to-accent/5 opacity-0 group-hover/banner:opacity-100 transition-opacity" />
+                                                    )}
                                                     <div className="relative z-10 mt-auto">
-                                                        <h4 className="text-sm font-bold text-foreground mb-1">{item.title} Gelişmeleri</h4>
-                                                        <p className="text-xs text-muted-foreground leading-relaxed mb-3">Enoca uzmanlığı ile kurumsal düzeyde dijital çözümleri keşfedin.</p>
-                                                        <Link href={item.url} className="text-xs font-bold text-accent hover:underline flex items-center gap-1">Daha Fazla Keşfet <ArrowRight className="w-3 h-3" /></Link>
+                                                        <h4 className="text-sm font-bold text-foreground mb-1 drop-shadow-sm">{item.title} {t('developments')}</h4>
+                                                        <p className="text-xs text-muted-foreground leading-relaxed mb-3 drop-shadow-sm">{t('discoverDesc')}</p>
+                                                        <Link href={item.url} className="text-xs font-bold text-accent hover:underline flex items-center gap-1 drop-shadow-sm">{t('discoverMore')} <ArrowRight className="w-3 h-3" /></Link>
                                                     </div>
-                                                    <div className="absolute top-4 right-4 w-12 h-12 rounded-full bg-accent/20 flex items-center justify-center">
+                                                    <div className="absolute top-4 right-4 w-12 h-12 rounded-full bg-background/50 backdrop-blur-sm border border-white/10 flex items-center justify-center z-10">
                                                         <div className="w-[20px] h-[20px] bg-white flex items-center justify-center shadow-sm opacity-90">
                                                             <div className="w-[12px] h-[12px] bg-[#0000ff]"></div>
                                                         </div>
@@ -324,7 +337,7 @@ export default function Navbar({ settings, pages = [] }: { settings?: SiteSettin
                                 <button 
                                     onClick={toggleTheme}
                                     className="ml-2 w-9 h-9 flex items-center justify-center rounded-full hover:bg-accent/10 text-foreground/80 hover:text-accent transition-colors"
-                                    title={isDarkMode ? "Aydınlık Mod" : "Karanlık Mod"}
+                                    title={isDarkMode ? t('lightMode') : t('darkMode')}
                                 >
                                     {mounted && (isDarkMode ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />)}
                                     {!mounted && <div className="w-4 h-4" />}
@@ -334,10 +347,10 @@ export default function Navbar({ settings, pages = [] }: { settings?: SiteSettin
                                     <button 
                                         onClick={() => window.dispatchEvent(new CustomEvent('open-command-palette'))}
                                         className="flex items-center gap-2 px-3 h-9 rounded-lg hover:bg-accent/10 text-foreground/80 hover:text-accent transition-colors border border-transparent hover:border-accent/20"
-                                        title="Arama (Cmd+K)"
+                                        title={t('searchCmd')}
                                     >
                                         <Search className="w-4 h-4" />
-                                        <span className="hidden xl:inline text-xs font-semibold opacity-70">Arama</span>
+                                        <span className="hidden xl:inline text-xs font-semibold opacity-70">{t('searchShort')}</span>
                                         <kbd className="hidden xl:inline px-1.5 py-0.5 bg-muted rounded text-[10px] font-mono text-muted-foreground ml-1 font-semibold border border-border/50 shadow-sm">⌘K</kbd>
                                     </button>
                                 </div>

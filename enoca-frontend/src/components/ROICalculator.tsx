@@ -134,28 +134,41 @@ export default function ROICalculator() {
               </div>
 
               <div className="bg-gray-50 dark:bg-gray-800/50 p-6 rounded-2xl border border-gray-100 dark:border-gray-800">
-                <h4 className="font-bold text-gray-900 dark:text-white mb-4">Uzman Değerlendirmesi</h4>
+                <h4 className="font-bold text-gray-900 dark:text-white mb-4">{t('expertAssessment')}</h4>
                 <ul className="space-y-3">
                   <li className="flex items-start gap-3">
                     <CheckCircle className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" />
-                    <p className="text-sm text-gray-600 dark:text-gray-300">Monolitik yapıdan modüler SAP Commerce Cloud mimarisine geçiş, <strong>yüksek büyüme oranı (%{data.growthRate})</strong> nedeniyle sunucu ölçeklendirme maliyetlerinizi %40 oranında düşürecektir.</p>
+                    <p className="text-sm text-gray-600 dark:text-gray-300">
+                      {t.rich('expertPoint1', { 
+                        growthRate: data.growthRate, 
+                        strong: (chunks) => <strong>{chunks}</strong> 
+                      })}
+                    </p>
                   </li>
                   <li className="flex items-start gap-3">
                     <CheckCircle className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" />
-                    <p className="text-sm text-gray-600 dark:text-gray-300">İlk yatırım maliyeti yaklaşık <strong>{results.payback} ay</strong> içinde kendini amorti edecek ve sonrasında net kâra dönüşecektir.</p>
+                    <p className="text-sm text-gray-600 dark:text-gray-300">
+                      {t.rich('expertPoint2', { 
+                        payback: results.payback, 
+                        strong: (chunks) => <strong>{chunks}</strong> 
+                      })}
+                    </p>
                   </li>
                 </ul>
               </div>
 
               <div className="flex flex-col sm:flex-row gap-4 pt-4 border-t border-gray-100 dark:border-gray-800">
-                <button className="px-6 py-3 bg-gray-900 dark:bg-white text-white dark:text-gray-900 rounded-xl font-bold flex items-center justify-center gap-2 hover:opacity-90 transition-opacity shadow-lg">
-                  <Download className="w-4 h-4" /> PDF Raporu İndir
+                <button 
+                  onClick={() => window.print()}
+                  className="px-6 py-3 bg-gray-900 dark:bg-white text-white dark:text-gray-900 rounded-xl font-bold flex items-center justify-center gap-2 hover:opacity-90 transition-opacity shadow-lg"
+                >
+                  <Download className="w-4 h-4" /> {t('downloadPdf')}
                 </button>
                 <button 
                   onClick={() => setStep(1)}
                   className="px-6 py-3 bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 rounded-xl font-bold hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
                 >
-                  Yeniden Hesapla
+                  {t('recalculate')}
                 </button>
               </div>
             </motion.div>

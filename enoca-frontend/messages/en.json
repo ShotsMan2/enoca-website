@@ -11,6 +11,9 @@
     "admin": "Admin",
     "news": "NEWS",
     "corporate": "CORPORATE",
+    "discoverMore": "Discover More",
+    "discoverDesc": "Discover enterprise-level digital solutions with Enoca expertise.",
+    "developments": "Developments",
     "hybrisSolutions": "SAP CX HYBRIS SOLUTIONS",
     "sapSolutions": "SAP SOLUTIONS",
     "monitoringSolutions": "SYSTEM MONITORING SOLUTIONS",
@@ -38,7 +41,11 @@
     "privacy": "PRIVACY",
     "terms": "TERMS OF USE",
     "searchPlaceholder": "Search...",
-    "searchBtn": "SEARCH"
+    "searchBtn": "SEARCH",
+    "searchShort": "Search",
+    "searchCmd": "Search (Cmd+K)",
+    "lightMode": "Light Mode",
+    "darkMode": "Dark Mode"
   },
   "Hero": {
     "badge": "ENOCA™ TECHNOLOGY",
@@ -76,7 +83,12 @@
     "emailPlaceholder": "Your email address",
     "message": "Comment or Message *",
     "messagePlaceholder": "Your message...",
-    "submit": "Send"
+    "submit": "Send",
+    "submitting": "Sending...",
+    "successTitle": "Thank you!",
+    "successMessage": "Your message has been successfully received. We will get back to you as soon as possible.",
+    "newMsgBtn": "Send New Message",
+    "honeypotLabel": "Please leave this field empty"
   },
   "Footer": {
     "solutions": "SOLUTIONS",
@@ -108,7 +120,22 @@
     "legalInfo": "LEGAL INFORMATION",
     "infosecPolicy": "INFORMATION SECURITY POLICY",
     "kvkk": "PERSONAL DATA PROTECTION AND PROCESSING POLICY",
-    "contactUs": "CONTACT",
+    "contactUs": "Contact Us",
+    "b2cEcommerce": "SAP CX Hybris B2C E-Commerce",
+    "b2bEcommerce": "SAP CX Hybris B2B E-Commerce",
+    "mobileEcommerce": "SAP CX Hybris Mobile E-Commerce",
+    "mdm": "SAP CX Hybris MDM",
+    "sapMobility": "SAP Mobility",
+    "sapHana": "SAP HANA",
+    "sapAppManagement": "SAP Application Management",
+    "sapCloud": "SAP Cloud",
+    "vfabric": "vFabric Hyperic",
+    "nagios": "Nagios",
+    "newsletterTitle": "Newsletter Registration",
+    "newsletterDesc": "Register to our newsletter to stay informed about sectoral developments.",
+    "newsletterSuccess": "Your newsletter subscription has been received, thank you!",
+    "newsletterEmail": "Your email address",
+    "newsletterSubmit": "Register",
     "privacy": "PRIVACY",
     "terms": "TERMS OF USE",
     "copyright": "© 2013 - 2025 enoca™"
@@ -132,6 +159,7 @@
     "submitting": "Submitting..."
   },
   "Page": {
+    "back": "Go Back",
     "backToHome": "Back to Home",
     "catchAllDesc": "This page was dynamically generated via Next.js Catch-All Routing regardless of URL depth. You are currently viewing {pageTitle}.",
     "techTitle": "Enoca Technologies & Architecture",
@@ -174,7 +202,30 @@
     "generateBtn": "Generate Detailed ROI Report",
     "roiTitle": "Return on Investment (ROI)",
     "savingsTitle": "5-Year Estimated Savings",
-    "paybackTitle": "Payback Period (Months)"
+    "paybackTitle": "Payback Period (Months)",
+    "expertAssessment": "Expert Assessment",
+    "expertPoint1": "Migration from monolithic architecture to modular SAP Commerce Cloud will reduce your server scaling costs by 40% due to the <strong>high growth rate ({growthRate}%)</strong>.",
+    "expertPoint2": "The initial investment cost will pay for itself in approximately <strong>{payback} months</strong> and will turn into net profit afterwards.",
+    "downloadPdf": "Download PDF Report",
+    "recalculate": "Recalculate"
+  },
+  "FloatingWidget": {
+    "liveSupport": "Live Support",
+    "contactUs": "Contact Us",
+    "helpMessage": "How can we help? Please leave your question, we will get back to you as soon as possible.",
+    "whatsappBtn": "Write on WhatsApp"
+  },
+  "SearchModal": {
+    "placeholder": "Type the term you want to search...",
+    "pressEnterText": "Press <kbd>Enter</kbd> to view search results for <query>&quot;{query}&quot;</query>."
+  },
+  "SearchPage": {
+    "title": "Search Results",
+    "resultsFound": "Found {count} results for <queryTag>&quot;{query}&quot;</queryTag>.",
+    "pages": "Pages",
+    "news": "News",
+    "jobs": "Job Openings",
+    "backToHome": "Back to Home"
   },
   "HomeMisc": {
     "configTitle": "Shape Your ",
