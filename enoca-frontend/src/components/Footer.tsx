@@ -28,30 +28,30 @@ export default function Footer({ settings }: { settings?: SiteSettings }) {
                         <h4 className="text-white font-bold tracking-wider mb-6 text-sm"><Link href="/cozumler">{t('solutions')}</Link></h4>
                         <div className="space-y-3">
                             <div className="space-y-2">
-                                <Link href="/cozumler/hybris-cozumleri" className="block text-[13px] font-bold hover:text-white transition-colors">{t('hybrisSolutions')}</Link>
+                                <Link href="/cozumler/hybris-cozumleri" className="block text-[13px] font-bold hover:text-[#0f2256] transition-colors">{t('hybrisSolutions')}</Link>
                                 <div className="space-y-1.5 pl-3 border-l border-white/10">
-                                    <Link href="/cozumler/hybris-cozumleri/hybris-b2c-ticaret" className="block text-xs hover:text-white transition-colors">SAP CX Hybris B2C E-Ticaret</Link>
-                                    <Link href="/cozumler/hybris-cozumleri/hybris-b2b-ticaret" className="block text-xs hover:text-white transition-colors">SAP CX Hybris B2B E-Ticaret</Link>
-                                    <Link href="/cozumler/hybris-cozumleri/hybris-mobil-ticaret" className="block text-xs hover:text-white transition-colors">SAP CX Hybris Mobil E-Ticaret</Link>
-                                    <Link href="/cozumler/hybris-cozumleri/hybris-mdm" className="block text-xs hover:text-white transition-colors">SAP CX Hybris MDM</Link>
+                                    <Link href="/cozumler/hybris-cozumleri/hybris-b2c-ticaret" className="block text-xs hover:text-[#0f2256] transition-colors">SAP CX Hybris B2C E-Ticaret</Link>
+                                    <Link href="/cozumler/hybris-cozumleri/hybris-b2b-ticaret" className="block text-xs hover:text-[#0f2256] transition-colors">SAP CX Hybris B2B E-Ticaret</Link>
+                                    <Link href="/cozumler/hybris-cozumleri/hybris-mobil-ticaret" className="block text-xs hover:text-[#0f2256] transition-colors">SAP CX Hybris Mobil E-Ticaret</Link>
+                                    <Link href="/cozumler/hybris-cozumleri/hybris-mdm" className="block text-xs hover:text-[#0f2256] transition-colors">SAP CX Hybris MDM</Link>
                                 </div>
                             </div>
 
                             <div className="space-y-2 pt-2">
-                                <Link href="/cozumler/sap-cozumleri" className="block text-[13px] font-bold hover:text-white transition-colors">{t('sapSolutions')}</Link>
+                                <Link href="/cozumler/sap-cozumleri" className="block text-[13px] font-bold hover:text-[#0f2256] transition-colors">{t('sapSolutions')}</Link>
                                 <div className="space-y-1.5 pl-3 border-l border-white/10">
-                                    <Link href="/cozumler/sap-cozumleri/sap-mobility" className="block text-xs hover:text-white transition-colors">SAP Mobility</Link>
-                                    <Link href="/cozumler/sap-cozumleri/sap-hana" className="block text-xs hover:text-white transition-colors">SAP HANA</Link>
-                                    <Link href="/cozumler/sap-cozumleri/sap-uygulama-yonetimi" className="block text-xs hover:text-white transition-colors">SAP Uygulama Yönetimi</Link>
-                                    <Link href="/cozumler/sap-cozumleri/sap-bulut" className="block text-xs hover:text-white transition-colors">SAP Bulut</Link>
+                                    <Link href="/cozumler/sap-cozumleri/sap-mobility" className="block text-xs hover:text-[#0f2256] transition-colors">SAP Mobility</Link>
+                                    <Link href="/cozumler/sap-cozumleri/sap-hana" className="block text-xs hover:text-[#0f2256] transition-colors">SAP HANA</Link>
+                                    <Link href="/cozumler/sap-cozumleri/sap-uygulama-yonetimi" className="block text-xs hover:text-[#0f2256] transition-colors">SAP Uygulama Yönetimi</Link>
+                                    <Link href="/cozumler/sap-cozumleri/sap-bulut" className="block text-xs hover:text-[#0f2256] transition-colors">SAP Bulut</Link>
                                 </div>
                             </div>
 
                             <div className="space-y-2 pt-2">
-                                <Link href="/cozumler/sistem-izleme-cozumleri" className="block text-[13px] font-bold hover:text-white transition-colors">{t('monitoringSolutions')}</Link>
+                                <Link href="/cozumler/sistem-izleme-cozumleri" className="block text-[13px] font-bold hover:text-[#0f2256] transition-colors">{t('monitoringSolutions')}</Link>
                                 <div className="space-y-1.5 pl-3 border-l border-white/10">
-                                    <Link href="/cozumler/sistem-izleme-cozumleri/vfabric-hyperic" className="block text-xs hover:text-white transition-colors">vFabric Hyperic</Link>
-                                    <Link href="/cozumler/sistem-izleme-cozumleri/nagios" className="block text-xs hover:text-white transition-colors">Nagios</Link>
+                                    <Link href="/cozumler/sistem-izleme-cozumleri/vfabric-hyperic" className="block text-xs hover:text-[#0f2256] transition-colors">vFabric Hyperic</Link>
+                                    <Link href="/cozumler/sistem-izleme-cozumleri/nagios" className="block text-xs hover:text-[#0f2256] transition-colors">Nagios</Link>
                                 </div>
                             </div>
                         </div>
@@ -61,12 +61,12 @@ export default function Footer({ settings }: { settings?: SiteSettings }) {
                     <div className="space-y-4">
                         <h4 className="text-white font-bold tracking-wider mb-6 text-sm"><Link href="/danismanlik">{t('consulting')}</Link></h4>
                         <div className="space-y-2">
-                            <Link href="/danismanlik/hybris-danismanligi" className="block text-[13px] font-bold hover:text-white transition-colors">{t('hybrisConsulting')}</Link>
-                            <Link href="/danismanlik/sap-teknik-danismanlik" className="block text-[13px] font-bold hover:text-white transition-colors">{t('sapTechnical')}</Link>
-                            <Link href="/danismanlik/sap-fonksiyonel-danismanlik" className="block text-[13px] font-bold hover:text-white transition-colors">{t('sapFunctional')}</Link>
-                            <Link href="/danismanlik/gelistirme-danismanligi" className="block text-[13px] font-bold hover:text-white transition-colors">{t('developmentConsulting')}</Link>
-                            <Link href="/danismanlik/kalite-yonetimi" className="block text-[13px] font-bold hover:text-white transition-colors">{t('qualityManagement')}</Link>
-                            <Link href="/danismanlik/diskaynak-hizmetleri" className="block text-[13px] font-bold hover:text-white transition-colors">{t('outsourcing')}</Link>
+                            <Link href="/danismanlik/hybris-danismanligi" className="block text-[13px] font-bold hover:text-[#0f2256] transition-colors">{t('hybrisConsulting')}</Link>
+                            <Link href="/danismanlik/sap-teknik-danismanlik" className="block text-[13px] font-bold hover:text-[#0f2256] transition-colors">{t('sapTechnical')}</Link>
+                            <Link href="/danismanlik/sap-fonksiyonel-danismanlik" className="block text-[13px] font-bold hover:text-[#0f2256] transition-colors">{t('sapFunctional')}</Link>
+                            <Link href="/danismanlik/gelistirme-danismanligi" className="block text-[13px] font-bold hover:text-[#0f2256] transition-colors">{t('developmentConsulting')}</Link>
+                            <Link href="/danismanlik/kalite-yonetimi" className="block text-[13px] font-bold hover:text-[#0f2256] transition-colors">{t('qualityManagement')}</Link>
+                            <Link href="/danismanlik/diskaynak-hizmetleri" className="block text-[13px] font-bold hover:text-[#0f2256] transition-colors">{t('outsourcing')}</Link>
                         </div>
                     </div>
 
@@ -74,8 +74,8 @@ export default function Footer({ settings }: { settings?: SiteSettings }) {
                     <div className="space-y-4">
                         <h4 className="text-white font-bold tracking-wider mb-6 text-sm"><Link href="/projeler">{t('projects')}</Link></h4>
                         <div className="space-y-2">
-                            <Link href="/projeler/metodoloji" className="block text-[13px] font-bold hover:text-white transition-colors">{t('methodology')}</Link>
-                            <Link href="/projeler/referanslar" className="block text-[13px] font-bold hover:text-white transition-colors">{t('references')}</Link>
+                            <Link href="/projeler/metodoloji" className="block text-[13px] font-bold hover:text-[#0f2256] transition-colors">{t('methodology')}</Link>
+                            <Link href="/projeler/referanslar" className="block text-[13px] font-bold hover:text-[#0f2256] transition-colors">{t('references')}</Link>
                         </div>
                     </div>
 
@@ -84,19 +84,19 @@ export default function Footer({ settings }: { settings?: SiteSettings }) {
                         <h4 className="text-white font-bold tracking-wider mb-6 text-sm"><Link href="/teknoloji">{t('technology')}</Link></h4>
                         <div className="space-y-3">
                             <div className="space-y-2">
-                                <Link href="/teknoloji/mimari" className="block text-[13px] font-bold hover:text-white transition-colors">{t('architecture')}</Link>
+                                <Link href="/teknoloji/mimari" className="block text-[13px] font-bold hover:text-[#0f2256] transition-colors">{t('architecture')}</Link>
                                 <div className="space-y-1.5 pl-3 border-l border-white/10">
-                                    <Link href="/teknoloji/mimari/modulerlik" className="block text-xs hover:text-white transition-colors">{t('modularity')}</Link>
-                                    <Link href="/teknoloji/mimari/tasarim-tabanli" className="block text-xs hover:text-white transition-colors">{t('designBased')}</Link>
+                                    <Link href="/teknoloji/mimari/modulerlik" className="block text-xs hover:text-[#0f2256] transition-colors">{t('modularity')}</Link>
+                                    <Link href="/teknoloji/mimari/tasarim-tabanli" className="block text-xs hover:text-[#0f2256] transition-colors">{t('designBased')}</Link>
                                 </div>
                             </div>
                             <div className="space-y-2 pt-2">
-                                <Link href="/teknoloji/inovasyon" className="block text-[13px] font-bold hover:text-white transition-colors">{t('innovation')}</Link>
+                                <Link href="/teknoloji/inovasyon" className="block text-[13px] font-bold hover:text-[#0f2256] transition-colors">{t('innovation')}</Link>
                             </div>
                             <div className="space-y-2 pt-2">
-                                <Link href="/teknoloji/arastirma-gelistirme" className="block text-[13px] font-bold hover:text-white transition-colors">{t('rd')}</Link>
+                                <Link href="/teknoloji/arastirma-gelistirme" className="block text-[13px] font-bold hover:text-[#0f2256] transition-colors">{t('rd')}</Link>
                                 <div className="space-y-1.5 pl-3 border-l border-white/10">
-                                    <Link href="/teknoloji/arastirma-gelistirme/modelleme-ve-simulasyon" className="block text-xs hover:text-white transition-colors">{t('modelingSimulation')}</Link>
+                                    <Link href="/teknoloji/arastirma-gelistirme/modelleme-ve-simulasyon" className="block text-xs hover:text-[#0f2256] transition-colors">{t('modelingSimulation')}</Link>
                                 </div>
                             </div>
                         </div>
@@ -106,7 +106,7 @@ export default function Footer({ settings }: { settings?: SiteSettings }) {
                     <div className="space-y-4">
                         <h4 className="text-white font-bold tracking-wider mb-6 text-sm"><Link href="/haberler">{t('news')}</Link></h4>
                         <div className="space-y-2">
-                            <Link href="/haberler/enocadan-son-haberler" className="block text-[13px] font-bold hover:text-white transition-colors uppercase">{t('latestNews')}</Link>
+                            <Link href="/haberler/enocadan-son-haberler" className="block text-[13px] font-bold hover:text-[#0f2256] transition-colors uppercase">{t('latestNews')}</Link>
                         </div>
                     </div>
 
@@ -114,12 +114,12 @@ export default function Footer({ settings }: { settings?: SiteSettings }) {
                     <div className="space-y-4">
                         <h4 className="text-white font-bold tracking-wider mb-6 text-sm"><Link href="/kurumsal">{t('corporate')}</Link></h4>
                         <div className="space-y-2">
-                            <Link href="/kurumsal/hakkimizda" className="block text-[13px] font-bold hover:text-white transition-colors">{t('aboutUs')}</Link>
-                            <Link href="/kariyer" className="block text-[13px] font-bold hover:text-white transition-colors">{t('career')}</Link>
-                            <Link href="/kurumsal/yasal-bilgiler" className="block text-[13px] font-bold hover:text-white transition-colors">{t('legalInfo')}</Link>
-                            <Link href="/bilgi-guvenligi-politikasi" className="block text-[13px] font-bold hover:text-white transition-colors">{t('infosecPolicy')}</Link>
-                            <Link href="/kisisel-verilerin-korunmasi-ve-islenmesi-politikasi" className="block text-[13px] font-bold hover:text-white transition-colors leading-relaxed">{t('kvkk')}</Link>
-                            <Link href="/iletisim" className="block text-[13px] font-bold hover:text-white transition-colors">{t('contactUs')}</Link>
+                            <Link href="/kurumsal/hakkimizda" className="block text-[13px] font-bold hover:text-[#0f2256] transition-colors">{t('aboutUs')}</Link>
+                            <Link href="/kariyer" className="block text-[13px] font-bold hover:text-[#0f2256] transition-colors">{t('career')}</Link>
+                            <Link href="/kurumsal/yasal-bilgiler" className="block text-[13px] font-bold hover:text-[#0f2256] transition-colors">{t('legalInfo')}</Link>
+                            <Link href="/bilgi-guvenligi-politikasi" className="block text-[13px] font-bold hover:text-[#0f2256] transition-colors">{t('infosecPolicy')}</Link>
+                            <Link href="/kisisel-verilerin-korunmasi-ve-islenmesi-politikasi" className="block text-[13px] font-bold hover:text-[#0f2256] transition-colors leading-relaxed">{t('kvkk')}</Link>
+                            <Link href="/iletisim" className="block text-[13px] font-bold hover:text-[#0f2256] transition-colors">{t('contactUs')}</Link>
                         </div>
                     </div>
 
@@ -131,17 +131,17 @@ export default function Footer({ settings }: { settings?: SiteSettings }) {
                     <div className="flex items-center gap-6 text-[11px] md:text-xs font-bold tracking-wider">
                         {/* Sosyal İkonlar */}
                         {settings?.linkedinUrl && (
-                            <a href={settings.linkedinUrl} target="_blank" rel="noreferrer" className="flex items-center justify-center w-8 h-8 rounded-full bg-[#333333] hover:bg-accent hover:text-white transition-all text-white" aria-label="LinkedIn">
+                            <a href={settings.linkedinUrl} target="_blank" rel="noreferrer" className="flex items-center justify-center w-8 h-8 rounded-full bg-[#333333] hover:bg-accent hover:text-[#0f2256] transition-all text-white" aria-label="LinkedIn">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
                             </a>
                         )}
                         {settings?.twitterUrl && (
-                            <a href={settings.twitterUrl} target="_blank" rel="noreferrer" className="flex items-center justify-center w-8 h-8 rounded-full bg-[#333333] hover:bg-accent hover:text-white transition-all text-white" aria-label="Twitter">
+                            <a href={settings.twitterUrl} target="_blank" rel="noreferrer" className="flex items-center justify-center w-8 h-8 rounded-full bg-[#333333] hover:bg-accent hover:text-[#0f2256] transition-all text-white" aria-label="Twitter">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"/></svg>
                             </a>
                         )}
-                        <Link href={settings?.privacyUrl || "/gizlilik"} className="text-muted-foreground hover:text-accent transition-colors uppercase">{t('privacy')}</Link>
-                        <Link href={settings?.termsUrl || "/kullanim-kosullari"} className="text-muted-foreground hover:text-accent transition-colors uppercase">{t('terms')}</Link>
+                        <Link href={settings?.privacyUrl || "/gizlilik"} className="text-muted-foreground hover:text-[#0f2256] transition-colors uppercase">{t('privacy')}</Link>
+                        <Link href={settings?.termsUrl || "/kullanim-kosullari"} className="text-muted-foreground hover:text-[#0f2256] transition-colors uppercase">{t('terms')}</Link>
                     </div>
                     
                     <div className="flex flex-col md:flex-row items-center md:items-end justify-between gap-6 w-full lg:w-auto">

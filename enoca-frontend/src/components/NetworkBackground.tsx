@@ -17,21 +17,27 @@ export default function NetworkBackground() {
     let animationFrameId: number;
 
     const resize = () => {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
+      if (canvas.parentElement) {
+        canvas.width = canvas.parentElement.offsetWidth;
+        canvas.height = canvas.parentElement.offsetHeight;
+      } else {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+      }
     };
 
     const init = () => {
       resize();
       particles = [];
-      const particleCount = Math.floor((window.innerWidth * window.innerHeight) / 12000);
+      const particleCount = Math.floor((canvas.width * canvas.height) / 12000);
       for (let i = 0; i < particleCount; i++) {
+        const pRadius = Math.random() * 1.5 + 0.5;
         particles.push({
-          x: Math.random() * canvas.width,
-          y: Math.random() * canvas.height,
+          x: pRadius + Math.random() * (canvas.width - pRadius * 2),
+          y: pRadius + Math.random() * (canvas.height - pRadius * 2),
           vx: (Math.random() - 0.5) * 0.5,
           vy: (Math.random() - 0.5) * 0.5,
-          radius: Math.random() * 1.5 + 0.5,
+          radius: pRadius,
         });
       }
     };
@@ -47,8 +53,22 @@ export default function NetworkBackground() {
         p.x += p.vx;
         p.y += p.vy;
 
-        if (p.x < 0 || p.x > canvas.width) p.vx *= -1;
-        if (p.y < 0 || p.y > canvas.height) p.vy *= -1;
+        // Ensure particles stay entirely within the canvas by accounting for their radius
+        if (p.x < p.radius) {
+          p.x = p.radius;
+          p.vx *= -1;
+        } else if (p.x > canvas.width - p.radius) {
+          p.x = canvas.width - p.radius;
+          p.vx *= -1;
+        }
+
+        if (p.y < p.radius) {
+          p.y = p.radius;
+          p.vy *= -1;
+        } else if (p.y > canvas.height - p.radius) {
+          p.y = canvas.height - p.radius;
+          p.vy *= -1;
+        }
 
         ctx.beginPath();
         ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
@@ -78,9 +98,26 @@ export default function NetworkBackground() {
     init();
     draw();
 
-    window.addEventListener("resize", init);
+    let resizeObserver: ResizeObserver;
+    if (canvas.parentElement) {
+      resizeObserver = new ResizeObserver(() => {
+        // Prevent continuous rapid re-init on minor sub-pixel changes by checking if size actually changed significantly
+        if (
+          Math.abs(canvas.width - canvas.parentElement!.offsetWidth) > 2 ||
+          Math.abs(canvas.height - canvas.parentElement!.offsetHeight) > 2
+        ) {
+          init();
+        }
+      });
+      resizeObserver.observe(canvas.parentElement);
+    } else {
+      window.addEventListener("resize", init);
+    }
 
     return () => {
+      if (resizeObserver && canvas.parentElement) {
+        resizeObserver.unobserve(canvas.parentElement);
+      }
       window.removeEventListener("resize", init);
       cancelAnimationFrame(animationFrameId);
     };

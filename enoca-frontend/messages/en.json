@@ -138,5 +138,50 @@
     "techPoint1": "Any menu or page at any depth (e.g., Solutions > SAP Solutions > SAP HANA) renders with this template without 404 errors.",
     "techPoint2": "New sub-menus added via the admin panel will go live instantly.",
     "techPoint3": "Minimalist Modern design rules are applied globally to all sub-pages."
+  },
+  "Configurator": {
+    "titleBadge": "Project Configurator",
+    "title": "Determine Your Needs",
+    "sizeLabel": "What is your company size?",
+    "sizeStartup": "STARTUP / SMB",
+    "sizeStartupDesc": "1-50 Employees",
+    "sizeMid": "MID-MARKET",
+    "sizeMidDesc": "51-500 Employees",
+    "sizeEnterprise": "ENTERPRISE",
+    "sizeEnterpriseDesc": "500+ Employees",
+    "sizeGlobal": "GLOBAL / MULTINATIONAL",
+    "sizeGlobalDesc": "International operations",
+    "goalLabel": "What is your primary technology goal?",
+    "goalEcommerce": "B2B/B2C E-Commerce Transformation",
+    "goalMigration": "Cloud / On-Premise Migration",
+    "goalMonitoring": "System Monitoring & Automation",
+    "goalSupport": "24/7 Technical Support & Maintenance",
+    "techLabel": "Technologies you want to use:",
+    "techWeb": "Web Portals",
+    "techMobile": "Mobile Apps",
+    "techAPI": "API Integrations",
+    "techAnalytics": "Data Analytics",
+    "resultTitle": "Recommended Technology Stack",
+    "resetBtn": "START OVER",
+    "contactBtn": "SPEAK WITH PROJECT MANAGER",
+    "nextBtn": "Continue"
+  },
+  "ROI": {
+    "title": "Enterprise ROI / TCO Calculator",
+    "desc": "Estimated savings for SAP Commerce Cloud (Hybris) migration",
+    "costLabel": "Monthly Current Infrastructure Cost ($)",
+    "growthLabel": "Annual Growth Expectation (%)",
+    "generateBtn": "Generate Detailed ROI Report",
+    "roiTitle": "Return on Investment (ROI)",
+    "savingsTitle": "5-Year Estimated Savings",
+    "paybackTitle": "Payback Period (Months)"
+  },
+  "HomeMisc": {
+    "configTitle": "Shape Your ",
+    "configHighlight": "Project",
+    "configDesc": "Create the most suitable technology stack and solution architecture for your needs in seconds with our interactive tool.",
+    "roiTitle": "SAP CX Hybris ",
+    "roiHighlight": "ROI Analysis",
+    "roiDesc": "Enter your current infrastructure costs and growth goals to instantly learn how much SAP Commerce Cloud transformation will save you in 5 years."
   }
 }

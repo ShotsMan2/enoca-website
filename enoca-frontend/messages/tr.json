@@ -137,6 +137,51 @@
     "techTitle": "Enoca Teknolojileri ve Mimarisi",
     "techPoint1": "Her türlü derinliğe sahip menü ve sayfa (Örn: Çözümler > SAP Çözümleri > SAP HANA) 404 hatası vermeden bu şablona oturur.",
     "techPoint2": "Admin panelinden eklenecek olan yeni alt menüler anında devreye girer.",
-    "techPoint3": "Minimalist Modern tasarım kuralları, tüm alt sayfalara global olarak yansır."
+    "techPoint3": "Minimalist Modern tasarım kuralları global olarak tüm alt sayfalara uygulanır."
+  },
+  "Configurator": {
+    "titleBadge": "Proje Konfigüratörü",
+    "title": "İhtiyaçlarınızı Belirleyin",
+    "sizeLabel": "Şirket büyüklüğünüz nedir?",
+    "sizeStartup": "GİRİŞİM / KOBİ",
+    "sizeStartupDesc": "1-50 Çalışan",
+    "sizeMid": "ORTA ÖLÇEKLİ",
+    "sizeMidDesc": "51-500 Çalışan",
+    "sizeEnterprise": "ENTERPRISE",
+    "sizeEnterpriseDesc": "500+ Çalışan",
+    "sizeGlobal": "GLOBAL / ÇOK ULUSLU",
+    "sizeGlobalDesc": "Uluslararası operasyonlar",
+    "goalLabel": "Birincil teknoloji hedefiniz nedir?",
+    "goalEcommerce": "B2B/B2C E-Ticaret Dönüşümü",
+    "goalMigration": "Bulut / On-Premise Göçü",
+    "goalMonitoring": "Sistem İzleme & Otomasyon",
+    "goalSupport": "7/24 Teknik Destek & Bakım",
+    "techLabel": "Kullanmak istediğiniz teknolojiler:",
+    "techWeb": "Web Portalları",
+    "techMobile": "Mobil Uygulama",
+    "techAPI": "API Entegrasyonları",
+    "techAnalytics": "Veri Analitiği",
+    "resultTitle": "Tavsiye Edilen Teknoloji Yığını",
+    "resetBtn": "YENİDEN BAŞLA",
+    "contactBtn": "PROJE YÖNETİCİSİYLE GÖRÜŞ",
+    "nextBtn": "Devam Et"
+  },
+  "ROI": {
+    "title": "Enterprise ROI / TCO Hesaplayıcı",
+    "desc": "SAP Commerce Cloud (Hybris) geçişi tahmini tasarruf",
+    "costLabel": "Aylık Mevcut Altyapı Maliyeti ($)",
+    "growthLabel": "Yıllık Büyüme Beklentisi (%)",
+    "generateBtn": "Detaylı ROI Raporu Oluştur",
+    "roiTitle": "Yatırım Getirisi (ROI)",
+    "savingsTitle": "5 Yıllık Tahmini Tasarruf",
+    "paybackTitle": "Amortisman Süresi (Ay)"
+  },
+  "HomeMisc": {
+    "configTitle": "Projenizi ",
+    "configHighlight": "Şekillendirin",
+    "configDesc": "İhtiyaçlarınıza en uygun teknoloji yığınını ve çözüm mimarisini interaktif aracımızla saniyeler içinde oluşturun.",
+    "roiTitle": "SAP CX Hybris ",
+    "roiHighlight": "ROI Analizi",
+    "roiDesc": "Mevcut altyapı maliyetlerinizi ve büyüme hedeflerinizi girerek SAP Commerce Cloud dönüşümünün size 5 yılda ne kadar tasarruf sağlayacağını anında öğrenin."
   }
 }

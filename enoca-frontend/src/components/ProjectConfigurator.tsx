@@ -5,9 +5,10 @@ import { motion, AnimatePresence } from "framer-motion";
 import { CheckCircle, Server, Cloud, Shield, ChevronRight, Activity, Database, Smartphone } from "lucide-react";
 
 import { useConfiguratorStore } from "@/store/configuratorStore";
-
+import { useTranslations } from "next-intl";
 
 export default function ProjectConfigurator() {
+  const t = useTranslations('Configurator');
   const { step, selections, nextStep, setCompanySize, setPrimaryGoal, toggleTech, reset } = useConfiguratorStore();
   const [mounted, setMounted] = useState(false);
 
@@ -46,8 +47,8 @@ export default function ProjectConfigurator() {
 
       <div className="p-8 md:p-12">
         <div className="mb-8">
-          <h2 className="text-sm font-mono tracking-widest text-accent font-bold uppercase mb-2">Proje Konfigüratörü</h2>
-          <h3 className="text-2xl md:text-3xl font-black text-foreground uppercase font-mono">İhtiyaçlarınızı Belirleyin</h3>
+          <h2 className="text-sm font-mono tracking-widest text-accent font-bold uppercase mb-2">{t('titleBadge')}</h2>
+          <h3 className="text-2xl md:text-3xl font-black text-foreground uppercase font-mono">{t('title')}</h3>
         </div>
 
         <div className="relative min-h-[300px]">
@@ -60,13 +61,13 @@ export default function ProjectConfigurator() {
                 exit={{ opacity: 0, x: -20 }}
                 className="space-y-6"
               >
-                <p className="text-muted-foreground font-mono">Şirket büyüklüğünüz nedir?</p>
+                <h4 className="text-lg font-bold text-foreground mb-4">{t('sizeLabel')}</h4>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   {[
-                    { id: "startup", title: "Girişim / KOBİ", desc: "1-50 Çalışan" },
-                    { id: "mid", title: "Orta Ölçekli", desc: "51-500 Çalışan" },
-                    { id: "enterprise", title: "Enterprise", desc: "500+ Çalışan" },
-                    { id: "global", title: "Global / Çok Uluslu", desc: "Birden fazla ülkede operasyon" }
+                    { id: "startup", title: t('sizeStartup'), desc: t('sizeStartupDesc') },
+                    { id: "mid", title: t('sizeMid'), desc: t('sizeMidDesc') },
+                    { id: "enterprise", title: t('sizeEnterprise'), desc: t('sizeEnterpriseDesc') },
+                    { id: "global", title: t('sizeGlobal'), desc: t('sizeGlobalDesc') }
                   ].map((opt) => (
                     <button
                       key={opt.id}
@@ -92,12 +93,13 @@ export default function ProjectConfigurator() {
                 exit={{ opacity: 0, x: -20 }}
                 className="space-y-6"
               >
-                <p className="text-muted-foreground font-mono">Ana hedefiniz nedir?</p>
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <h4 className="text-lg font-bold text-foreground mb-4">{t('goalLabel')}</h4>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   {[
-                    { id: "ecommerce", title: "E-Ticaret Dönüşümü", icon: <Database className="w-6 h-6 mb-3" /> },
-                    { id: "migration", title: "Bulut Mimari & Göç", icon: <Cloud className="w-6 h-6 mb-3" /> },
-                    { id: "monitoring", title: "Sistem İzleme & Güvenlik", icon: <Shield className="w-6 h-6 mb-3" /> }
+                    { id: "ecommerce", title: t('goalEcommerce'), icon: <Activity className="w-5 h-5" /> },
+                    { id: "migration", title: t('goalMigration'), icon: <Server className="w-5 h-5" /> },
+                    { id: "monitoring", title: t('goalMonitoring'), icon: <Activity className="w-5 h-5" /> },
+                    { id: "support", title: t('goalSupport'), icon: <Shield className="w-5 h-5" /> }
                   ].map((opt) => (
                     <button
                       key={opt.id}
@@ -107,7 +109,7 @@ export default function ProjectConfigurator() {
                       }}
                       className="p-6 clip-chamfer border-2 text-left border-border bg-background hover:border-accent/50 transition-all flex flex-col items-start hover:shadow-glow-sm group"
                     >
-                      <div className="text-muted-foreground group-hover:text-accent transition-colors">{opt.icon}</div>
+                      <div className="text-muted-foreground group-hover:text-accent transition-colors mb-2">{opt.icon}</div>
                       <h4 className="text-sm font-bold text-foreground leading-tight uppercase font-mono">{opt.title}</h4>
                     </button>
                   ))}
@@ -123,12 +125,13 @@ export default function ProjectConfigurator() {
                 exit={{ opacity: 0, x: -20 }}
                 className="space-y-6"
               >
-                <p className="text-muted-foreground font-mono">Odaklanmak istediğiniz teknolojiler (Çoklu Seçim):</p>
-                <div className="grid grid-cols-2 gap-4">
+                <h4 className="text-lg font-bold text-foreground mb-4">{t('techLabel')}</h4>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   {[
-                    { id: "mobile", title: "Mobil Uygulamalar", icon: <Smartphone className="w-5 h-5" /> },
-                    { id: "analytics", title: "Veri Analitiği (HANA)", icon: <Activity className="w-5 h-5" /> },
-                    { id: "api", title: "API Gateway", icon: <Server className="w-5 h-5" /> }
+                    { id: "web", title: t('techWeb'), icon: <Cloud className="w-5 h-5" /> },
+                    { id: "mobile", title: t('techMobile'), icon: <Smartphone className="w-5 h-5" /> },
+                    { id: "api", title: t('techAPI'), icon: <Database className="w-5 h-5" /> },
+                    { id: "analytics", title: t('techAnalytics'), icon: <Activity className="w-5 h-5" /> }
                   ].map((opt) => {
                     const isSelected = selections.preferredTech.includes(opt.id);
                     return (
@@ -145,48 +148,55 @@ export default function ProjectConfigurator() {
                     );
                   })}
                 </div>
-                <div className="flex justify-end mt-8">
-                  <button onClick={nextStep} className="px-6 py-3 bg-accent hover:bg-white text-accent-foreground font-black uppercase tracking-wider clip-chamfer flex items-center gap-2 transition-colors shadow-glow-sm">
-                    Sonuçları Gör <ChevronRight className="w-4 h-4" />
-                  </button>
-                </div>
               </motion.div>
             )}
 
             {step === 4 && (
               <motion.div
                 key="step4"
-                initial={{ opacity: 0, scale: 0.95 }}
-                animate={{ opacity: 1, scale: 1 }}
-                className="text-center"
+                initial={{ opacity: 0, x: 20 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: -20 }}
+                className="space-y-8"
               >
-                <div className="w-16 h-16 bg-accent/10 border border-accent flex items-center justify-center mx-auto mb-6 clip-diagonal shadow-glow-md">
-                  <CheckCircle className="w-8 h-8 text-accent" />
+                <div className="bg-accent/10 border border-accent/20 p-6 rounded-lg text-center">
+                  <CheckCircle className="w-16 h-16 text-accent mx-auto mb-4" />
+                  <h4 className="text-xl font-black text-foreground uppercase tracking-wide mb-4">{t('resultTitle')}</h4>
+                  <div className="flex flex-wrap justify-center gap-3">
+                    {calculateRecommendation().map((rec, idx) => (
+                      <span key={idx} className="bg-background text-accent px-4 py-2 rounded font-mono text-sm border border-accent/30 shadow-glow-sm">
+                        {rec}
+                      </span>
+                    ))}
+                  </div>
                 </div>
-                <h3 className="text-2xl font-black text-foreground uppercase tracking-widest font-mono mb-2">Önerilen Çözüm Mimariniz</h3>
-                <p className="text-muted-foreground font-mono mb-8">Verdiğiniz bilgilere dayanarak sizin için en uygun teknoloji yığınını oluşturduk:</p>
-                
-                <div className="bg-background clip-chamfer p-6 text-left space-y-3 mb-8 border border-border shadow-inner">
-                  {calculateRecommendation().map((rec, i) => (
-                    <div key={i} className="flex items-center gap-3">
-                      <div className="w-2 h-2 bg-accent shadow-glow-sm rounded-none" />
-                      <span className="font-bold text-foreground font-mono uppercase">{rec}</span>
-                    </div>
-                  ))}
-                </div>
-
-                <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                  <button className="px-8 py-3.5 bg-accent text-accent-foreground font-black uppercase tracking-widest clip-chamfer hover:bg-white transition-colors shadow-glow-md">
-                    Detaylı Rapor İste
+                <div className="flex flex-col sm:flex-row gap-4 justify-center mt-8">
+                  <button 
+                    onClick={reset}
+                    className="px-6 py-3 border border-border text-foreground rounded hover:bg-muted font-bold tracking-wide transition-colors"
+                  >
+                    {t('resetBtn')}
                   </button>
-                  <button onClick={reset} className="px-8 py-3.5 bg-transparent border border-accent/40 text-accent font-bold uppercase tracking-widest clip-chamfer hover:bg-accent/10 transition-colors">
-                    Yeniden Başla
+                  <button className="px-6 py-3 bg-accent text-accent-foreground font-bold rounded hover:bg-accent/90 tracking-wide shadow-glow-sm transition-all flex items-center justify-center gap-2 group">
+                    {t('contactBtn')} <ChevronRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                   </button>
                 </div>
               </motion.div>
             )}
           </AnimatePresence>
         </div>
+
+        {/* Navigation Buttons */}
+        {step < 4 && (
+          <div className="mt-10 flex justify-end">
+            <button 
+              onClick={nextStep}
+              className="px-8 py-3 bg-accent text-accent-foreground font-bold rounded hover:bg-accent/90 tracking-wide shadow-glow-sm transition-all flex items-center gap-2 group"
+            >
+              {t('nextBtn')} <ChevronRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+            </button>
+          </div>
+        )}
       </div>
     </div>
   );
