@@ -182,9 +182,9 @@ export default function Navbar({ settings, pages = [] }: { settings?: SiteSettin
     });
 
     return (
-        <header className="w-full flex flex-col z-50 sticky top-0">
+        <header className="w-full flex flex-col z-50 sticky top-0 bg-background/80 backdrop-blur-xl border-b border-accent/20 shadow-glow-sm">
             {/* Üst Bilgi Çubuğu (Top Bar) */}
-            <div className="bg-[#222222] text-[#aaaaaa] text-xs py-2 hidden lg:block relative z-20">
+            <div className="bg-card/50 text-muted-foreground text-xs py-2 hidden lg:block relative z-20 border-b border-accent/10">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center">
                     <div className="flex items-center gap-6 font-medium tracking-wider">
                             <a href={`mailto:${settings?.email || 'contact@enoca.com'}`} className="hover:text-white transition-colors flex items-center gap-1.5"><Mail className="w-3.5 h-3.5" />{settings?.email || 'contact@enoca.com'}</a>
@@ -210,7 +210,7 @@ export default function Navbar({ settings, pages = [] }: { settings?: SiteSettin
             </div>
 
             {/* Ana Menü Çubuğu */}
-            <nav className="w-full backdrop-blur-xl bg-white/95 border-b border-border/40 shadow-sm transition-all relative z-10">
+            <nav className="w-full transition-all relative z-10">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="flex justify-between h-[88px] items-center">
                         
@@ -238,7 +238,7 @@ export default function Navbar({ settings, pages = [] }: { settings?: SiteSettin
                                     {/* Açılır Menü (1. Seviye) / Mega Menü */}
                                     {item.children && (
                                         <div className="absolute left-0 top-full pt-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform origin-top-left group-hover:translate-y-0 translate-y-2 z-50">
-                                            <div className="bg-card rounded-2xl border border-border/50 shadow-2xl p-4 relative backdrop-blur-xl bg-white/95 flex gap-4 min-w-[320px]">
+                                            <div className="bg-card/95 backdrop-blur-xl rounded-none clip-chamfer border border-accent/30 shadow-glow-lg p-4 relative flex gap-4 min-w-[320px]">
                                                 <div className="flex flex-col gap-1 w-[280px]">
                                                     {item.children.map((child: MenuItem, cIdx: number) => (
                                                         <div key={cIdx} className="group/sub relative">
@@ -259,7 +259,7 @@ export default function Navbar({ settings, pages = [] }: { settings?: SiteSettin
                                                             {/* Yana Açılan İç İçe Menü (2. Seviye) */}
                                                             {child.subChildren && (
                                                                 <div className="absolute left-full top-0 pl-1 w-[280px] opacity-0 invisible group-hover/sub:opacity-100 group-hover/sub:visible transition-all duration-300 transform origin-top-left group-hover/sub:translate-x-0 -translate-x-2 z-[60]">
-                                                                    <div className="bg-card rounded-xl border border-border/50 shadow-xl p-2 relative backdrop-blur-xl bg-white/95">
+                                                                    <div className="bg-card/95 backdrop-blur-xl rounded-none clip-chamfer border border-accent/30 shadow-glow-md p-2 relative">
                                                                         <div className="flex flex-col gap-1">
                                                                             {child.subChildren.map((sub: { title: string; url: string }, sIdx: number) => (
                                                                                 <Link
@@ -306,10 +306,10 @@ export default function Navbar({ settings, pages = [] }: { settings?: SiteSettin
 
                                 {/* Dil Dropdown */}
                                 <div className="absolute top-full left-1/2 -translate-x-1/2 pt-2 opacity-0 invisible group-hover/lang:opacity-100 group-hover/lang:visible transition-all duration-300 z-50">
-                                    <div className="bg-white rounded-xl shadow-xl border border-border/50 overflow-hidden flex flex-col min-w-[120px]">
-                                        <button onClick={() => router.replace(pathname, {locale: 'tr'})} className={`px-4 py-2.5 text-xs font-bold uppercase text-left hover:bg-gray-50 transition-colors ${locale === 'tr' ? 'text-accent' : 'text-gray-600'}`}>TÜRKÇE</button>
-                                        <div className="w-full h-px bg-gray-100" />
-                                        <button onClick={() => router.replace(pathname, {locale: 'en'})} className={`px-4 py-2.5 text-xs font-bold uppercase text-left hover:bg-gray-50 transition-colors ${locale === 'en' ? 'text-accent' : 'text-gray-600'}`}>ENGLISH</button>
+                                    <div className="bg-card/95 backdrop-blur-xl rounded-none clip-chamfer border border-accent/30 shadow-glow-md overflow-hidden flex flex-col min-w-[120px]">
+                                        <button onClick={() => router.replace(pathname, {locale: 'tr'})} className={`px-4 py-2.5 text-xs font-bold uppercase text-left hover:bg-accent/10 transition-colors ${locale === 'tr' ? 'text-accent' : 'text-foreground/70'}`}>TÜRKÇE</button>
+                                        <div className="w-full h-px bg-accent/20" />
+                                        <button onClick={() => router.replace(pathname, {locale: 'en'})} className={`px-4 py-2.5 text-xs font-bold uppercase text-left hover:bg-accent/10 transition-colors ${locale === 'en' ? 'text-accent' : 'text-foreground/70'}`}>ENGLISH</button>
                                     </div>
                                 </div>
                                 
@@ -364,13 +364,13 @@ export default function Navbar({ settings, pages = [] }: { settings?: SiteSettin
 
                 {/* Mobile Menu Dropdown */}
                 {isMobileMenuOpen && (
-                    <div className="lg:hidden absolute top-full left-0 w-full bg-white border-b border-border shadow-xl max-h-[calc(100vh-88px)] overflow-y-auto">
+                    <div className="lg:hidden absolute top-full left-0 w-full bg-background border-b border-accent/20 shadow-2xl max-h-[calc(100vh-88px)] overflow-y-auto">
                         <div className="flex flex-col p-4 gap-2">
                             {/* Language Switcher Mobile */}
-                            <div className="flex justify-center gap-4 py-4 border-b border-gray-100 mb-2">
-                                <button onClick={() => { router.replace(pathname, {locale: 'tr'}); setIsMobileMenuOpen(false); }} className={`text-sm font-bold uppercase ${locale === 'tr' ? 'text-accent' : 'text-gray-500'}`}>TR</button>
-                                <span className="text-gray-300">|</span>
-                                <button onClick={() => { router.replace(pathname, {locale: 'en'}); setIsMobileMenuOpen(false); }} className={`text-sm font-bold uppercase ${locale === 'en' ? 'text-accent' : 'text-gray-500'}`}>EN</button>
+                            <div className="flex justify-center gap-4 py-4 border-b border-border/50 mb-2">
+                                <button onClick={() => { router.replace(pathname, {locale: 'tr'}); setIsMobileMenuOpen(false); }} className={`text-sm font-bold uppercase ${locale === 'tr' ? 'text-accent' : 'text-muted-foreground'}`}>TR</button>
+                                <span className="text-border">|</span>
+                                <button onClick={() => { router.replace(pathname, {locale: 'en'}); setIsMobileMenuOpen(false); }} className={`text-sm font-bold uppercase ${locale === 'en' ? 'text-accent' : 'text-muted-foreground'}`}>EN</button>
                             </div>
                             
                             {menuItems.map((item, idx) => (
@@ -378,18 +378,18 @@ export default function Navbar({ settings, pages = [] }: { settings?: SiteSettin
                                     <Link 
                                         href={item.url} 
                                         onClick={() => setIsMobileMenuOpen(false)}
-                                        className="py-3 px-4 text-sm font-bold text-gray-800 hover:text-accent hover:bg-gray-50 rounded-lg"
+                                        className="py-3 px-4 text-sm font-bold text-foreground hover:text-accent hover:bg-accent/10 rounded-none clip-chamfer"
                                     >
                                         {item.title}
                                     </Link>
                                     {item.children && (
-                                        <div className="flex flex-col pl-6 border-l-2 border-gray-100 ml-4 mb-2 mt-1 gap-1">
+                                        <div className="flex flex-col pl-6 border-l-2 border-accent/20 ml-4 mb-2 mt-1 gap-1">
                                             {item.children.map((child: MenuItem, cIdx: number) => (
                                                 <Link 
                                                     key={cIdx} 
                                                     href={child.url}
                                                     onClick={() => setIsMobileMenuOpen(false)}
-                                                    className="py-2 text-[13px] font-semibold text-gray-600 hover:text-accent"
+                                                    className="py-2 text-[13px] font-semibold text-muted-foreground hover:text-accent"
                                                 >
                                                     {child.title}
                                                 </Link>
