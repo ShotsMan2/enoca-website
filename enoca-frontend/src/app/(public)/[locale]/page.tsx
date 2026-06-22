@@ -23,12 +23,12 @@ import { readDB } from '@/lib/db';
 import { HomepageFeature } from "@/lib/admin-api";
 
 const realReferences = [
-  { name: "Akbank", image: "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/Akbank_logo.svg/1200px-Akbank_logo.svg.png", url: "https://www.akbank.com" },
-  { name: "Turkcell", image: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Turkcell_logo.svg/1024px-Turkcell_logo.svg.png", url: "https://www.turkcell.com.tr" },
-  { name: "Trendyol", image: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4e/Trendyol_logo.svg/2560px-Trendyol_logo.svg.png", url: "https://www.trendyol.com" },
-  { name: "Türk Hava Yolları", image: "https://upload.wikimedia.org/wikipedia/commons/thumb/0/00/Turkish_Airlines_logo_2019_compact.svg/1200px-Turkish_Airlines_logo_2019_compact.svg.png", url: "https://www.turkishairlines.com" },
-  { name: "Garanti BBVA", image: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/52/Garanti_BBVA_logo.svg/2560px-Garanti_BBVA_logo.svg.png", url: "https://www.garantibbva.com.tr" },
-  { name: "Koç Holding", image: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/85/Ko%C3%A7_Holding_logo.svg/1200px-Ko%C3%A7_Holding_logo.svg.png", url: "https://www.koc.com.tr" }
+  { name: "Akbank", image: "/references/akbank.png", url: "https://www.akbank.com" },
+  { name: "Turkcell", image: "/references/turkcell.png", url: "https://www.turkcell.com.tr" },
+  { name: "Trendyol", image: "/references/trendyol.png", url: "https://www.trendyol.com" },
+  { name: "Türk Hava Yolları", image: "/references/thy.svg", url: "https://www.turkishairlines.com" },
+  { name: "Garanti BBVA", image: "/references/garanti.png", url: "https://www.garantibbva.com.tr" },
+  { name: "Koç Holding", image: "/references/koc.png", url: "https://www.koc.com.tr" }
 ];
 
 export default async function Home() {

@@ -33,11 +33,13 @@ export default function Navbar({ settings, pages = [] }: { settings?: SiteSettin
         url: string;
         children?: MenuItem[];
         subChildren?: { title: string; url: string }[];
+        bannerImage?: string;
     };
     const menuItems: MenuItem[] = [
         {
             title: t('services'),
             url: "/cozumler",
+            bannerImage: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=600&auto=format&fit=crop",
             children: [
                 { 
                     title: t('hybrisSolutions'), 
@@ -72,6 +74,7 @@ export default function Navbar({ settings, pages = [] }: { settings?: SiteSettin
         {
             title: t('consulting'),
             url: "/danismanlik",
+            bannerImage: "https://images.unsplash.com/photo-1552664730-d307ca884978?q=80&w=600&auto=format&fit=crop",
             children: [
                 { title: t('hybrisConsulting'), url: "/danismanlik/hybris-danismanligi" },
                 { title: t('sapTechnical'), url: "/danismanlik/sap-teknik-danismanlik" },
@@ -84,6 +87,7 @@ export default function Navbar({ settings, pages = [] }: { settings?: SiteSettin
         {
             title: t('projects'),
             url: "/projeler",
+            bannerImage: "https://images.unsplash.com/photo-1531403009284-440f080d1e12?q=80&w=600&auto=format&fit=crop",
             children: [
                 { title: t('methodology'), url: "/projeler/metodoloji" },
                 { title: t('references'), url: "/projeler/referanslar" },
@@ -92,6 +96,7 @@ export default function Navbar({ settings, pages = [] }: { settings?: SiteSettin
         {
             title: t('technology'),
             url: "/teknoloji",
+            bannerImage: "https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=600&auto=format&fit=crop",
             children: [
                 { 
                     title: t('architecture'), 
@@ -114,6 +119,7 @@ export default function Navbar({ settings, pages = [] }: { settings?: SiteSettin
         { 
             title: t('news'), 
             url: "/haberler",
+            bannerImage: "https://images.unsplash.com/photo-1504711434969-e33886168f5c?q=80&w=600&auto=format&fit=crop",
             children: [
                 { title: t('latestNews'), url: "/haberler/enocadan-son-haberler" },
             ]
@@ -121,6 +127,7 @@ export default function Navbar({ settings, pages = [] }: { settings?: SiteSettin
         {
             title: t('corporate'),
             url: "/kurumsal",
+            bannerImage: "https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=600&auto=format&fit=crop",
             children: [
                 { title: t('aboutUs'), url: "/kurumsal/hakkimizda" },
                 { title: t('careers'), url: "/kariyer" },
@@ -280,15 +287,22 @@ export default function Navbar({ settings, pages = [] }: { settings?: SiteSettin
                                                         </div>
                                                     ))}
                                                 </div>
-                                                {/* Mega Menü Featured Card (İlk çocuk öğesi için örnek banner) */}
-                                                <div className="hidden md:flex flex-col justify-end w-[240px] p-5 rounded-xl bg-gradient-to-br from-accent/10 to-accent/5 border border-accent/10 overflow-hidden relative group/banner">
-                                                    <div className="absolute inset-0 bg-accent/5 opacity-0 group-hover/banner:opacity-100 transition-opacity" />
+                                                {/* Mega Menü Featured Card */}
+                                                <div className="hidden md:flex flex-col justify-end w-[240px] p-5 rounded-xl bg-card border border-accent/10 overflow-hidden relative group/banner">
+                                                    {item.bannerImage ? (
+                                                        <>
+                                                            <img src={item.bannerImage} alt={item.title} className="absolute inset-0 w-full h-full object-cover opacity-60 group-hover/banner:scale-110 transition-transform duration-700" />
+                                                            <div className="absolute inset-0 bg-gradient-to-t from-background via-background/80 to-transparent z-0" />
+                                                        </>
+                                                    ) : (
+                                                        <div className="absolute inset-0 bg-gradient-to-br from-accent/10 to-accent/5 opacity-0 group-hover/banner:opacity-100 transition-opacity" />
+                                                    )}
                                                     <div className="relative z-10 mt-auto">
-                                                        <h4 className="text-sm font-bold text-foreground mb-1">{item.title} Gelişmeleri</h4>
-                                                        <p className="text-xs text-muted-foreground leading-relaxed mb-3">Enoca uzmanlığı ile kurumsal düzeyde dijital çözümleri keşfedin.</p>
-                                                        <Link href={item.url} className="text-xs font-bold text-accent hover:underline flex items-center gap-1">Daha Fazla Keşfet <ArrowRight className="w-3 h-3" /></Link>
+                                                        <h4 className="text-sm font-bold text-foreground mb-1 drop-shadow-sm">{item.title} {t('developments')}</h4>
+                                                        <p className="text-xs text-muted-foreground leading-relaxed mb-3 drop-shadow-sm">{t('discoverDesc')}</p>
+                                                        <Link href={item.url} className="text-xs font-bold text-accent hover:underline flex items-center gap-1 drop-shadow-sm">{t('discoverMore')} <ArrowRight className="w-3 h-3" /></Link>
                                                     </div>
-                                                    <div className="absolute top-4 right-4 w-12 h-12 rounded-full bg-accent/20 flex items-center justify-center">
+                                                    <div className="absolute top-4 right-4 w-12 h-12 rounded-full bg-background/50 backdrop-blur-sm border border-white/10 flex items-center justify-center z-10">
                                                         <div className="w-[20px] h-[20px] bg-white flex items-center justify-center shadow-sm opacity-90">
                                                             <div className="w-[12px] h-[12px] bg-[#0000ff]"></div>
                                                         </div>
