@@ -1,18 +1,20 @@
 import { Link } from "@/i18n/routing";
 import { Button } from "@/components/ui/button";
-import GlobeVisual from "@/components/GlobeVisual";
+import nextDynamic from 'next/dynamic';
 import PublicLayout from "@/components/PublicLayout";
 import HomePageContactForm from "@/components/HomePageContactForm";
 import { getTranslations } from "next-intl/server";
-import Marquee from "@/components/Marquee";
-import CountUp from "@/components/CountUp";
 import ParallaxWrapper from "@/components/ParallaxWrapper";
 import PageTransition from "@/components/PageTransition";
 import SpotlightCard from "@/components/SpotlightCard";
-import NetworkBackground from "@/components/NetworkBackground";
+import * as motion from "framer-motion/client";
+import GlobeVisual from "@/components/GlobeVisual";
 import ProjectConfigurator from "@/components/ProjectConfigurator";
 import ROICalculator from "@/components/ROICalculator";
-import * as motion from "framer-motion/client";
+import NetworkBackground from "@/components/NetworkBackground";
+import Marquee from "@/components/Marquee";
+import CountUp from "@/components/CountUp";
+
 export const dynamic = 'force-dynamic';
 
 // getCategories() fonksiyonu kaldırıldı, db.json'dan okunacak.

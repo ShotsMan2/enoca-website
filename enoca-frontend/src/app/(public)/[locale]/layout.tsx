@@ -14,6 +14,7 @@ import ScrollToTop from '@/components/ScrollToTop';
 import CommandPalette from '@/components/CommandPalette';
 import CustomCursor from '@/components/CustomCursor';
 import ScrollProgress from '@/components/ScrollProgress';
+import JsonLd from '@/components/JsonLd';
 import { ThemeProvider } from 'next-themes';
 import '../../globals.css';
 
@@ -81,7 +82,9 @@ export default async function LocaleLayout({
 
   return (
     <html lang={locale} suppressHydrationWarning>
-      <head />
+      <head>
+        <JsonLd />
+      </head>
       <body className={`${inter.variable} ${calistoga.variable} ${jetbrainsMono.variable} antialiased`}>
         {/* Dark mode init — Script ile inject edilir, React render pipeline'ına girmez */}
         <Script id="theme-init" strategy="beforeInteractive">{`
