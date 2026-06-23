@@ -74,9 +74,9 @@ export default function Marquee({ children, speed = 30, showControls = false }: 
           <button 
             onClick={() => setIsPlaying(!isPlaying)}
             className="w-12 h-12 flex items-center justify-center bg-card border border-border text-foreground hover:bg-accent hover:text-white transition-colors cursor-pointer rounded-sm"
-            aria-label={isPlaying ? "Duraklat" : "Oynat"}
+            aria-label={isPlaying && !isHovered ? "Duraklat" : "Oynat"}
           >
-            {isPlaying ? <Pause className="w-5 h-5" /> : <Play className="w-5 h-5 ml-1" />}
+            {isPlaying && !isHovered ? <Pause className="w-5 h-5" /> : <Play className="w-5 h-5 ml-1" />}
           </button>
           
           <div className="flex gap-3">
