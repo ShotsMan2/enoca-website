@@ -5,6 +5,7 @@ import PageTransition from "@/components/PageTransition";
 import { XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, AreaChart, Area } from "recharts";
 import { Leaf, TrendingUp, Users, ShieldCheck, Download, ArrowRight } from "lucide-react";
 import * as motion from "framer-motion/client";
+import { useTranslations } from "next-intl";
 
 const financialData = [
   { year: "2020", revenue: 45, profit: 12 },
@@ -15,15 +16,16 @@ const financialData = [
   { year: "2025", revenue: 230, profit: 78 }
 ];
 
-const esgData = [
-  { metric: "Karbon Nötr (%)", val: 85 },
-  { metric: "Kadın Çalışan (%)", val: 42 },
-  { metric: "Yenilenebilir Enerji", val: 100 },
-  { metric: "Eğitim Yatırımı", val: 75 }
-];
-
 export default function YatirimciClient() {
+  const t = useTranslations('InvestorRelations');
   const [mounted, setMounted] = useState(false);
+
+  const esgData = [
+    { metric: t('esgMetric1'), val: 85 },
+    { metric: t('esgMetric2'), val: 42 },
+    { metric: t('esgMetric3'), val: 100 },
+    { metric: t('esgMetric4'), val: 75 }
+  ];
 
   useEffect(() => {
     // eslint-disable-next-line react-hooks/set-state-in-effect
@@ -41,29 +43,29 @@ export default function YatirimciClient() {
           
           <div className="max-w-3xl mb-16">
             <div className="inline-flex items-center gap-2 px-3 py-1 bg-accent/10 text-accent rounded-full text-xs font-bold uppercase tracking-widest mb-6 border border-accent/20">
-              <TrendingUp className="w-4 h-4" /> Büyüme & Sürdürülebilirlik
+              <TrendingUp className="w-4 h-4" /> {t('tag')}
             </div>
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-display font-black text-foreground mb-6 leading-tight">
-              Geleceğe <span className="text-accent">Sürdürülebilir</span> Yatırım
+              {t('title1')}<span className="text-accent">{t('title2')}</span>{t('title3')}
             </h1>
             <p className="text-lg text-muted-foreground leading-relaxed">
-              Enoca olarak sadece finansal büyümeye değil; doğaya, insana ve etik yönetişime odaklanıyoruz. Kurumsal değerlerimiz ve vizyonumuzla yarının teknolojilerini bugünden inşa ediyoruz.
+              {t('desc')}
             </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
-            <StatCard icon={<TrendingUp className="w-6 h-6 text-blue-500" />} title="Yıllık Büyüme (CAGR)" value="%45+" desc="Son 5 Yıl Ortalaması" />
-            <StatCard icon={<Leaf className="w-6 h-6 text-green-500" />} title="Karbon Ayak İzi" value="Net Zero" desc="2025 İtibariyle" />
-            <StatCard icon={<Users className="w-6 h-6 text-purple-500" />} title="Ar-Ge İstihdamı" value="450+" desc="Uzman Mühendis" />
-            <StatCard icon={<ShieldCheck className="w-6 h-6 text-emerald-500" />} title="Yönetişim Notu" value="A+" desc="Bağımsız Denetim" />
+            <StatCard icon={<TrendingUp className="w-6 h-6 text-blue-500" />} title={t('stat1Title')} value="%45+" desc={t('stat1Desc')} />
+            <StatCard icon={<Leaf className="w-6 h-6 text-green-500" />} title={t('stat2Title')} value="Net Zero" desc={t('stat2Desc')} />
+            <StatCard icon={<Users className="w-6 h-6 text-purple-500" />} title={t('stat3Title')} value="450+" desc={t('stat3Desc')} />
+            <StatCard icon={<ShieldCheck className="w-6 h-6 text-emerald-500" />} title={t('stat4Title')} value="A+" desc={t('stat4Desc')} />
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-16">
             <div className="bg-card border border-border rounded-3xl p-8 shadow-sm">
               <div className="flex items-center justify-between mb-8">
                 <div>
-                  <h3 className="text-2xl font-bold text-foreground mb-1">Finansal Performans</h3>
-                  <p className="text-sm text-muted-foreground">Milyon USD ($) Bazında Gelir ve Kâr</p>
+                  <h3 className="text-2xl font-bold text-foreground mb-1">{t('financeTitle')}</h3>
+                  <p className="text-sm text-muted-foreground">{t('financeDesc')}</p>
                 </div>
                 <button className="p-2 bg-muted rounded-xl hover:bg-accent hover:text-white transition-colors text-muted-foreground">
                   <Download className="w-5 h-5" />
@@ -89,8 +91,8 @@ export default function YatirimciClient() {
                       contentStyle={{ backgroundColor: 'var(--card)', borderColor: 'var(--border)', borderRadius: '0.75rem', color: 'var(--foreground)' }}
                       itemStyle={{ fontWeight: 'bold' }}
                     />
-                    <Area type="monotone" dataKey="revenue" stroke="#3B82F6" strokeWidth={3} fillOpacity={1} fill="url(#colorRev)" name="Ciro ($M)" />
-                    <Area type="monotone" dataKey="profit" stroke="#10B981" strokeWidth={3} fillOpacity={1} fill="url(#colorProf)" name="Net Kâr ($M)" />
+                    <Area type="monotone" dataKey="revenue" stroke="#3B82F6" strokeWidth={3} fillOpacity={1} fill="url(#colorRev)" name={t('chartRev')} />
+                    <Area type="monotone" dataKey="profit" stroke="#10B981" strokeWidth={3} fillOpacity={1} fill="url(#colorProf)" name={t('chartProf')} />
                   </AreaChart>
                 </ResponsiveContainer>
               </div>
@@ -98,8 +100,8 @@ export default function YatirimciClient() {
 
             <div className="bg-card border border-border rounded-3xl p-8 shadow-sm flex flex-col justify-between">
               <div>
-                <h3 className="text-2xl font-bold text-foreground mb-1">ESG (Çevresel & Sosyal) Metrikleri</h3>
-                <p className="text-sm text-muted-foreground mb-8">Kurumsal sürdürülebilirlik hedeflerimizdeki ilerleme</p>
+                <h3 className="text-2xl font-bold text-foreground mb-1">{t('esgTitle')}</h3>
+                <p className="text-sm text-muted-foreground mb-8">{t('esgDesc')}</p>
                 
                 <div className="space-y-6">
                   {esgData.map((item, i) => (
@@ -123,28 +125,28 @@ export default function YatirimciClient() {
               </div>
 
               <div className="mt-8 pt-6 border-t border-border">
-                <button className="flex items-center gap-2 text-accent font-bold hover:underline">
-                  2025 ESG Raporunu İndir <ArrowRight className="w-4 h-4" />
+                <button onClick={() => window.print()} className="flex items-center gap-2 text-accent font-bold hover:underline">
+                  {t('esgDownload')} <ArrowRight className="w-4 h-4" />
                 </button>
               </div>
             </div>
           </div>
 
-          <div className="bg-foreground text-background rounded-3xl p-8 md:p-12">
-            <h3 className="text-2xl font-bold mb-8">Finansal Raporlar & Sunumlar</h3>
+          <div className="bg-card border border-border rounded-3xl p-8 md:p-12 shadow-sm">
+            <h3 className="text-2xl font-bold mb-8 text-foreground">{t('reportsTitle')}</h3>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               {[
-                { title: "2024 4. Çeyrek Finansal Sonuçları", type: "PDF", size: "2.4 MB" },
-                { title: "Yatırımcı Sunumu - Q4 2024", type: "PPTX", size: "15.1 MB" },
-                { title: "Kurumsal Yönetişim İlkeleri", type: "PDF", size: "1.2 MB" },
+                { title: t('report1'), type: "PDF", size: "2.4 MB" },
+                { title: t('report2'), type: "PPTX", size: "15.1 MB" },
+                { title: t('report3'), type: "PDF", size: "1.2 MB" },
               ].map((doc, idx) => (
-                <div key={idx} className="p-6 border border-gray-700 rounded-2xl hover:bg-gray-800 transition-colors group cursor-pointer">
+                <div onClick={() => window.print()} key={idx} className="p-6 border border-border rounded-2xl bg-muted/30 hover:bg-muted transition-colors group cursor-pointer shadow-sm hover:shadow-md">
                   <div className="flex items-center justify-between mb-4">
-                    <span className="px-2.5 py-1 bg-gray-800 text-gray-300 text-xs font-bold rounded-lg">{doc.type}</span>
-                    <Download className="w-5 h-5 text-gray-500 group-hover:text-white transition-colors" />
+                    <span className="px-2.5 py-1 bg-background border border-border text-muted-foreground text-xs font-bold rounded-lg">{doc.type}</span>
+                    <Download className="w-5 h-5 text-muted-foreground group-hover:text-accent transition-colors" />
                   </div>
-                  <h4 className="font-bold text-lg mb-2">{doc.title}</h4>
-                  <p className="text-sm text-gray-400">{doc.size}</p>
+                  <h4 className="font-bold text-lg mb-2 text-foreground">{doc.title}</h4>
+                  <p className="text-sm text-muted-foreground">{doc.size}</p>
                 </div>
               ))}
             </div>
