@@ -45,9 +45,9 @@ export default function Navbar({ settings, pages = [] }: { settings?: SiteSettin
                     title: t('hybrisSolutions'), 
                     url: "/cozumler/hybris-cozumleri",
                     subChildren: [
-                        { title: "SAP CX Hybris B2C E-Ticaret", url: "/cozumler/hybris-cozumleri/hybris-b2c-ticaret" },
-                        { title: "SAP CX Hybris B2B E-Ticaret", url: "/cozumler/hybris-cozumleri/hybris-b2b-ticaret" },
-                        { title: "SAP CX Hybris Mobil E-Ticaret", url: "/cozumler/hybris-cozumleri/hybris-mobil-ticaret" },
+                        { title: locale === 'en' ? "SAP CX Hybris B2C E-Commerce" : "SAP CX Hybris B2C E-Ticaret", url: "/cozumler/hybris-cozumleri/hybris-b2c-ticaret" },
+                        { title: locale === 'en' ? "SAP CX Hybris B2B E-Commerce" : "SAP CX Hybris B2B E-Ticaret", url: "/cozumler/hybris-cozumleri/hybris-b2b-ticaret" },
+                        { title: locale === 'en' ? "SAP CX Hybris Mobile E-Commerce" : "SAP CX Hybris Mobil E-Ticaret", url: "/cozumler/hybris-cozumleri/hybris-mobil-ticaret" },
                         { title: "SAP CX Hybris MDM", url: "/cozumler/hybris-cozumleri/hybris-mdm" },
                     ]
                 },
@@ -176,11 +176,11 @@ export default function Navbar({ settings, pages = [] }: { settings?: SiteSettin
 
             if (categoryItem) {
                 if (!categoryItem.children) categoryItem.children = [];
-                categoryItem.children.push({ title: page.menuTitle, url: page.slug });
+                categoryItem.children.push({ title: locale === 'en' && page.menuTitleEn ? page.menuTitleEn : page.menuTitle, url: page.slug });
             } else {
                 // Eğer kategori de bulunamazsa ana menüye ekleyelim (Admin hariç)
                 const adminIndex = menuItems.findIndex(i => i.url === "/admin");
-                menuItems.splice(adminIndex !== -1 ? adminIndex : menuItems.length, 0, { title: page.menuTitle, url: page.slug });
+                menuItems.splice(adminIndex !== -1 ? adminIndex : menuItems.length, 0, { title: locale === 'en' && page.menuTitleEn ? page.menuTitleEn : page.menuTitle, url: page.slug });
             }
         }
     });
@@ -243,7 +243,7 @@ export default function Navbar({ settings, pages = [] }: { settings?: SiteSettin
                                     {/* Açılır Menü (1. Seviye) / Mega Menü */}
                                     {item.children && (
                                         <div className="absolute left-0 top-full pt-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform origin-top-left group-hover:translate-y-0 translate-y-2 z-50">
-                                            <div className="bg-card/95 backdrop-blur-xl rounded-none clip-chamfer border border-accent/30 shadow-glow-lg p-4 relative flex gap-4 min-w-[320px]">
+                                            <div className="bg-card/95 backdrop-blur-xl rounded-xl border border-accent/30 shadow-glow-lg p-4 relative flex gap-4 min-w-[320px]">
                                                 <div className="flex flex-col gap-1 w-[280px]">
                                                     {item.children.map((child: MenuItem, cIdx: number) => (
                                                         <div key={cIdx} className="group/sub relative">
@@ -265,7 +265,7 @@ export default function Navbar({ settings, pages = [] }: { settings?: SiteSettin
                                                             
                                                             {/* Yana Açılan İç İçe Menü (2. Seviye) */}
                                                             {child.subChildren && (
-                                                                <div className="absolute left-full top-0 pl-1 w-[280px] opacity-0 invisible group-hover/sub:opacity-100 group-hover/sub:visible transition-all duration-300 transform origin-top-left group-hover/sub:translate-x-0 -translate-x-2 z-[60]">
+                                                                <div className="absolute left-full top-0 pl-1 w-max min-w-[280px] opacity-0 invisible group-hover/sub:opacity-100 group-hover/sub:visible transition-all duration-300 transform origin-top-left group-hover/sub:translate-x-0 -translate-x-2 z-[60]">
                                                                     <div className="bg-card/95 backdrop-blur-xl rounded-none clip-chamfer border border-accent/30 shadow-glow-md p-2 relative">
                                                                         <div className="flex flex-col gap-1">
                                                                             {child.subChildren.map((sub: { title: string; url: string }, sIdx: number) => (
@@ -274,8 +274,8 @@ export default function Navbar({ settings, pages = [] }: { settings?: SiteSettin
                                                                                     href={sub.url}
                                                                                     className="flex items-center gap-2 px-4 py-3 text-[13px] font-semibold text-foreground/70 hover:text-accent hover:bg-accent/5 rounded-lg transition-colors duration-200"
                                                                                 >
-                                                                                    <ArrowRight className="w-3 h-3 opacity-50" />
-                                                                                    <span className="flex-1 uppercase tracking-wide">{sub.title}</span>
+                                                                                    <ArrowRight className="w-3 h-3 opacity-50 shrink-0" />
+                                                                                    <span className="flex-1 uppercase tracking-wide whitespace-nowrap">{sub.title}</span>
                                                                                 </Link>
                                                                             ))}
                                                                         </div>

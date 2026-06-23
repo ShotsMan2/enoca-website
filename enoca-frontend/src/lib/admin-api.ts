@@ -84,9 +84,11 @@ export interface HomepageSettings {
 export interface ContentPage {
   id: number;
   menuTitle: string;
+  menuTitleEn?: string;
   slug: string;
   category: string;
   content: string;
+  contentEn?: string;
   status: "published" | "draft";
   updatedAt: string;
 }

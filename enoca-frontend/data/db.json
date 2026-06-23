@@ -147,7 +147,8 @@
       "category": "Çözümler",
       "content": "<h2>SAP CX Hybris B2C E-Ticaret</h2><p>Müşterilerinize benzersiz bir alışveriş deneyimi sunun. SAP CX Hybris B2C platformu ile esnek, ölçeklenebilir ve yüksek performanslı bir e-ticaret altyapısı kurun.</p>",
       "status": "published",
-      "updatedAt": "2025-06-10"
+      "updatedAt": "2025-06-10",
+      "menuTitleEn": "SAP CX Hybris B2C E-Commerce"
     },
     {
       "id": 2,
@@ -156,7 +157,8 @@
       "category": "Çözümler",
       "content": "<h2>SAP CX Hybris B2B E-Ticaret</h2><p>Kurumsal müşterileriniz için güçlü B2B e-ticaret çözümleri. Toplu sipariş, özel fiyatlandırma ve çoklu kullanıcı yönetimi özellikleriyle iş süreçlerinizi dijitalleştirin.</p>",
       "status": "published",
-      "updatedAt": "2025-06-08"
+      "updatedAt": "2025-06-08",
+      "menuTitleEn": "SAP CX Hybris B2B E-Commerce"
     },
     {
       "id": 3,
@@ -201,7 +203,8 @@
       "category": "Çözümler",
       "content": "<h2>SAP CX Hybris Mobil E-Ticaret</h2><p>Bu sayfanın içeriğini admin panelinden güncelleyebilirsiniz.</p>",
       "status": "published",
-      "updatedAt": "2026-06-20T08:18:48.070Z"
+      "updatedAt": "2026-06-20T08:18:48.070Z",
+      "menuTitleEn": "SAP CX Hybris Mobile E-Commerce"
     },
     {
       "id": 9,
@@ -210,7 +213,8 @@
       "category": "Çözümler",
       "content": "<h2>SAP CX Hybris MDM</h2><p>Bu sayfanın içeriğini admin panelinden güncelleyebilirsiniz.</p>",
       "status": "published",
-      "updatedAt": "2026-06-20T08:18:48.070Z"
+      "updatedAt": "2026-06-20T08:18:48.070Z",
+      "menuTitleEn": "SAP CX Hybris MDM"
     },
     {
       "id": 10,
@@ -399,7 +403,8 @@
       "content": "<p>İçeriği&nbsp;buraya&nbsp;yazın...asdadads</p>",
       "status": "published",
       "updatedAt": "2026-06-20T12:42:36.513Z",
-      "id": 30
+      "id": 30,
+      "menuTitleEn": "New Page"
     }
   ],
   "jobs": [

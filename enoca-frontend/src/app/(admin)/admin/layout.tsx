@@ -21,10 +21,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
     <html lang="tr" suppressHydrationWarning>
       <head />
       <body className={`${inter.className} antialiased min-h-screen bg-gray-50 dark:bg-gray-950 font-sans selection:bg-blue-500/30`}>
-        {/* Dark mode init */}
-        <Script id="admin-theme-init" strategy="beforeInteractive">{`
-          try{var t=localStorage.getItem('admin-theme');if(t==='dark')document.documentElement.classList.add('dark');}catch(e){}
-        `}</Script>
+
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem storageKey="admin-theme">
           <ToastProvider>
             <div className="flex h-screen overflow-hidden">
