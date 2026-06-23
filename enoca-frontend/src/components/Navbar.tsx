@@ -285,8 +285,9 @@ export default function Navbar({ settings, pages = [] }: { settings?: SiteSettin
                                                         </div>
                                                     ))}
                                                 </div>
-                                                {/* Mega Menü Featured Card */}
-                                                <div className="hidden md:flex flex-col justify-end w-[240px] p-5 rounded-xl bg-card border border-accent/10 overflow-hidden relative group/banner">
+                                                {/* Mega Menü Featured Card (Sadece yeterli sayıda eleman varsa göster ki boşluk oluşmasın) */}
+                                                {item.children.length >= 3 && (
+                                                    <div className="hidden md:flex flex-col justify-end w-[240px] p-5 rounded-xl bg-card border border-accent/10 overflow-hidden relative group/banner">
                                                     {item.bannerImage ? (
                                                         <>
                                                             <img src={item.bannerImage} alt={item.title} className="absolute inset-0 w-full h-full object-cover opacity-60 group-hover/banner:scale-110 transition-transform duration-700" />
@@ -305,7 +306,8 @@ export default function Navbar({ settings, pages = [] }: { settings?: SiteSettin
                                                             <div className="w-[14px] h-[14px] bg-accent rounded"></div>
                                                         </div>
                                                     </div>
-                                                </div>
+                                                    </div>
+                                                )}
                                             </div>
                                         </div>
                                     )}

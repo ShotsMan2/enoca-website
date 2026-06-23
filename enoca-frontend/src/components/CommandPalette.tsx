@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "@/i18n/routing";
 import { Search, X, Briefcase, FileText, Send, Newspaper, LayoutGrid } from "lucide-react";
+import { AnimatePresence, motion } from "framer-motion";
 
 export default function CommandPalette() {
   const [open, setOpen] = useState(false);
@@ -37,18 +38,28 @@ export default function CommandPalette() {
     { title: "Hakkımızda", icon: <FileText className="w-4 h-4" />, href: "/hakkimizda" },
   ].filter(item => item.title.toLowerCase().includes(query.toLowerCase()));
 
-  if (!open) return null;
-
   return (
-    <div className="fixed inset-0 z-[100] flex items-start justify-center pt-20 px-4">
-      {/* Arkaplan Blur */}
-      <div 
-        className="absolute inset-0 bg-background/80 backdrop-blur-sm transition-opacity"
-        onClick={() => setOpen(false)}
-      />
-      
-      {/* Modal */}
-      <div className="relative bg-card w-full max-w-xl rounded-2xl shadow-2xl border border-border overflow-hidden animate-in fade-in zoom-in-95 duration-200">
+    <AnimatePresence>
+      {open && (
+        <div className="fixed inset-0 z-[100] flex items-start justify-center pt-20 px-4">
+          {/* Arkaplan Blur */}
+          <motion.div 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.2 }}
+            className="absolute inset-0 bg-background/80 backdrop-blur-md"
+            onClick={() => setOpen(false)}
+          />
+          
+          {/* Modal */}
+          <motion.div 
+            initial={{ opacity: 0, scale: 0.95, y: -20 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            exit={{ opacity: 0, scale: 0.95, y: -10 }}
+            transition={{ type: "spring", damping: 25, stiffness: 300 }}
+            className="relative bg-card w-full max-w-2xl rounded-2xl shadow-[0_0_50px_-12px_rgba(0,0,0,0.5)] border border-border overflow-hidden ring-1 ring-white/10"
+          >
         
         {/* Search Input */}
         <div className="flex items-center px-4 border-b border-border">
@@ -102,7 +113,9 @@ export default function CommandPalette() {
           </div>
         </div>
 
-      </div>
-    </div>
+          </motion.div>
+        </div>
+      )}
+    </AnimatePresence>
   );
 }
