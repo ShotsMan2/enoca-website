@@ -186,8 +186,8 @@ export default function Navbar({ settings, pages = [] }: { settings?: SiteSettin
     });
 
     return (
-        <header className="w-full left-0 right-0 flex flex-col z-50 sticky top-0 bg-background/80 backdrop-blur-xl border-b border-accent/20 shadow-glow-sm">
-            {/* Üst Bilgi Çubuğu (Top Bar) */}
+        <>
+            {/* Üst Bilgi Çubuğu (Top Bar) - Sabit değil, kaydırılınca yukarı gider */}
             <div className="bg-card/50 text-muted-foreground text-xs py-2 hidden lg:block relative z-20 border-b border-accent/10">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center">
                     <div className="flex items-center gap-6 font-medium tracking-wider">
@@ -213,13 +213,14 @@ export default function Navbar({ settings, pages = [] }: { settings?: SiteSettin
                 </div>
             </div>
 
-            {/* Ana Menü Çubuğu */}
-            <nav className="w-full transition-all relative z-10">
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <div className="flex justify-between h-[88px] items-center">
+            {/* Ana Menü Çubuğu - Yapışkan (Sticky) */}
+            <header className="w-full sticky top-0 z-50 bg-background/80 backdrop-blur-xl border-b border-accent/20 shadow-glow-sm transition-all">
+                <nav className="w-full relative z-10">
+                    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+                        <div className="flex justify-between h-[88px] items-center">
                         
                         {/* Logo Alanı */}
-                        <div className="flex-shrink-0 flex items-center">
+                        <div className="flex-shrink-0 flex items-center -ml-4 lg:-ml-10 xl:-ml-14 -mt-1 lg:-mt-2">
                             <Link href="/" className="group flex items-center gap-2">
                                 <div className="flex items-center text-[2rem] font-display font-black tracking-tighter text-accent group-hover:opacity-80 transition-opacity">
                                     <span className="w-3.5 h-3.5 bg-accent mr-1.5 rounded-sm"></span>
@@ -419,7 +420,8 @@ export default function Navbar({ settings, pages = [] }: { settings?: SiteSettin
                         </div>
                     </div>
                 )}
-            </nav>
-        </header>
+                </nav>
+            </header>
+        </>
     );
 }
