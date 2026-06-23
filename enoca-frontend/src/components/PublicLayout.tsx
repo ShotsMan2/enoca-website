@@ -13,7 +13,7 @@ export default async function PublicLayout({ children }: { children: React.React
   };
 
   return (
-    <div className="min-h-screen flex flex-col w-full overflow-hidden">
+    <div className="min-h-screen flex flex-col w-full overflow-clip">
       <Navbar settings={settings} pages={db?.pages || []} />
       <main className="flex-grow w-full">
         {children}
