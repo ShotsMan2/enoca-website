@@ -186,7 +186,7 @@ export default function Navbar({ settings, pages = [] }: { settings?: SiteSettin
     });
 
     return (
-        <header className="w-full flex flex-col z-50 sticky top-0 bg-background/80 backdrop-blur-xl border-b border-accent/20 shadow-glow-sm">
+        <header className="w-full left-0 right-0 flex flex-col z-50 sticky top-0 bg-background/80 backdrop-blur-xl border-b border-accent/20 shadow-glow-sm">
             {/* Üst Bilgi Çubuğu (Top Bar) */}
             <div className="bg-card/50 text-muted-foreground text-xs py-2 hidden lg:block relative z-20 border-b border-accent/10">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center">

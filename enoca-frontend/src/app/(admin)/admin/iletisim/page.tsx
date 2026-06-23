@@ -79,24 +79,11 @@ export default function IletisimPage() {
   return (
     <>
       <AdminHeader title="Gelen Kutusu" />
-      <main className="flex-1 overflow-hidden p-6">
+      <main className="flex-1 overflow-hidden p-6 flex flex-col">
         
-        {/* Toolbar - Toplu İşlemler / Dışa Aktar */}
-        <div className="flex items-center justify-between mb-4 bg-white dark:bg-gray-900 p-3 rounded-xl border border-gray-200 dark:border-gray-700">
-          <div className="flex items-center gap-3">
-            <span className="text-sm font-semibold text-gray-500 dark:text-gray-400 pl-2">Tablo Araçları:</span>
-          </div>
-          <div className="flex items-center gap-2">
-            <button className="px-3 py-1.5 text-xs font-semibold bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-lg transition-colors flex items-center gap-1.5 border border-transparent hover:border-gray-300 dark:hover:border-gray-600">
-              <FileText className="w-3.5 h-3.5" /> PDF İndir
-            </button>
-            <button className="px-3 py-1.5 text-xs font-semibold bg-green-50 hover:bg-green-100 dark:bg-green-900/20 dark:hover:bg-green-900/40 text-green-700 dark:text-green-400 rounded-lg transition-colors flex items-center gap-1.5 border border-green-200 dark:border-green-800">
-              <Download className="w-3.5 h-3.5" /> Excel Dışa Aktar
-            </button>
-          </div>
-        </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-[360px_1fr] gap-6 h-full max-h-[calc(100vh-11rem)]">
+
+        <div className="grid grid-cols-1 lg:grid-cols-[360px_1fr] gap-6 flex-1 min-h-0">
 
           {/* Sol: Mesaj Listesi */}
           <div className="bg-white dark:bg-gray-900 rounded-2xl border border-gray-200 dark:border-gray-700 flex flex-col overflow-hidden">

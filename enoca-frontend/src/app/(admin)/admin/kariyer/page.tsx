@@ -161,7 +161,7 @@ export default function AdminCareersPage() {
                       </div>
                       <div className="pt-3 border-t border-gray-100 dark:border-gray-700 flex justify-between items-center text-xs text-gray-400">
                         <span>İlan: {new Date(job.postedAt).toLocaleDateString("tr-TR")}</span>
-                        <button onClick={() => openEditJob(job)} className="text-blue-600 hover:text-blue-700 font-semibold">Düzenle →</button>
+
                       </div>
                     </div>
                   ))}

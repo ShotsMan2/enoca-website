@@ -88,7 +88,7 @@ export default async function ContactPage() {
               </div>
 
               {/* İletişim Formu */}
-              <div className="lg:col-span-2 bg-white dark:bg-gray-900 rounded-3xl shadow-xl border border-gray-100 dark:border-gray-800 overflow-hidden">
+              <div className="lg:col-span-2 bg-white dark:bg-gray-900 rounded-3xl shadow-xl border border-gray-100 dark:border-gray-800 overflow-hidden p-8">
                 <HomePageContactForm />
               </div>
 

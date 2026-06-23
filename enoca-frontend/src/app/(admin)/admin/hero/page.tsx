@@ -38,10 +38,7 @@ export default function HeroPage() {
                 <label className="text-sm font-semibold text-gray-700 dark:text-gray-300">Ana Başlık</label>
                 <input type="text" value={hero?.mainTitle ?? ""} onChange={e => setHero(h => h ? { ...h, mainTitle: e.target.value } : h)} className={inputCls} placeholder="WE DO SAP CX" />
               </div>
-              <div className="space-y-1.5">
-                <label className="text-sm font-semibold text-gray-700 dark:text-gray-300">Vurgulanan Kelime (Mavi)</label>
-                <input type="text" value={hero?.highlightedWord ?? ""} onChange={e => setHero(h => h ? { ...h, highlightedWord: e.target.value } : h)} className={inputCls} placeholder="HYBRIS" />
-              </div>
+
               <div className="space-y-1.5">
                 <label className="text-sm font-semibold text-gray-700 dark:text-gray-300">Alt Başlık</label>
                 <input type="text" value={hero?.subtitle ?? ""} onChange={e => setHero(h => h ? { ...h, subtitle: e.target.value } : h)} className={inputCls} placeholder="Experienced In SAP CX Hybris Delivery" />
@@ -96,8 +93,7 @@ export default function HeroPage() {
               </div>
               <div>
                 <h1 className="text-3xl font-black text-gray-800 dark:text-white tracking-tight leading-tight">
-                  {hero?.mainTitle || "WE DO SAP CX"} <br />
-                  <span className="text-blue-600">{hero?.highlightedWord || "HYBRIS"}</span>
+                  {hero?.mainTitle || "WE DO SAP CX"}
                 </h1>
               </div>
               <p className="text-sm text-gray-500 dark:text-gray-400">{hero?.subtitle || "Experienced In SAP CX Hybris Delivery"}</p>
