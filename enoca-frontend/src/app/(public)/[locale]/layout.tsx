@@ -9,7 +9,7 @@ import Script from 'next/script';
 import SplashScreen from "@/components/SplashScreen";
 import CookieConsent from '@/components/CookieConsent';
 import NextTopLoader from 'nextjs-toploader';
-import FloatingWidget from '@/components/FloatingWidget';
+import PublicAIAssistant from '@/components/PublicAIAssistant';
 import ScrollToTop from '@/components/ScrollToTop';
 import CommandPalette from '@/components/CommandPalette';
 import CustomCursor from '@/components/CustomCursor';
@@ -79,7 +79,7 @@ export default async function LocaleLayout({
       <NextTopLoader color="#0055FF" initialPosition={0.08} crawlSpeed={200} height={3} crawl={true} showSpinner={false} easing="ease" speed={200} shadow="0 0 10px #0055FF,0 0 5px #0055FF" />
       {children}
       <CookieConsent />
-      <FloatingWidget />
+      <PublicAIAssistant />
       <ScrollToTop />
       <CommandPalette />
       <CustomCursor />

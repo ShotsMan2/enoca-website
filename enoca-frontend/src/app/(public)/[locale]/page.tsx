@@ -148,29 +148,81 @@ export default async function Home() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             
-            {features.map((feature: HomepageFeature, idx: number) => (
+            {features.map((feature: HomepageFeature, idx: number) => {
+              const featureImages = [
+                "https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=600&auto=format&fit=crop",
+                "https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=600&auto=format&fit=crop",
+                "https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=600&auto=format&fit=crop",
+                "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=600&auto=format&fit=crop"
+              ];
+              const bgImg = featureImages[idx % featureImages.length];
+
+              return (
               <motion.div 
                 key={feature.id || idx} 
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-50px" }}
                 transition={{ duration: 0.5, delay: idx * 0.1 }}
-                className="group relative bg-background border border-border clip-chamfer hover:border-accent/50 transition-colors duration-500"
+                className="group relative w-full h-[450px] overflow-hidden rounded-xl bg-gray-900 border border-border shadow-lg"
               >
-                <Link href="/cozumler" className="block p-8 h-full">
-                  <div className="absolute top-0 left-0 w-8 h-8 border-t-2 border-l-2 border-accent/0 group-hover:border-accent transition-all duration-500" />
-                  <div className="absolute bottom-0 right-0 w-8 h-8 border-b-2 border-r-2 border-accent/0 group-hover:border-accent transition-all duration-500" />
-                  
-                  <div className="w-14 h-14 bg-accent/10 border border-accent/30 flex items-center justify-center text-accent clip-diagonal mb-6 shadow-glow-sm">
-                    <span className="text-xl font-black font-mono">{feature.number}</span>
+                {/* Background Image */}
+                <img 
+                  src={bgImg} 
+                  alt={feature.title} 
+                  className="absolute inset-0 w-full h-full object-cover opacity-60 transition-transform duration-700 group-hover:scale-105" 
+                />
+                
+                {/* Overlay that appears on hover */}
+                <div className="absolute inset-0 bg-background/70 backdrop-blur-xl opacity-0 group-hover:opacity-100 transition-all duration-500 translate-y-full group-hover:translate-y-0" />
+                
+                <Link 
+                  href="/cozumler" 
+                  className="absolute inset-0 z-10 flex flex-col p-8"
+                  aria-label={`${translateDB(feature.title)} Expand`}
+                  data-barba-transition=""
+                  data-analytics-asset-id={`card-feature-${idx}`}
+                  data-cs-override-id={`card-feature-${idx}`}
+                  data-analytics-asset-pos={idx + 1}
+                  data-cmp-data-layer={JSON.stringify({
+                    [`tile-grid-card-${idx + 1}`]: {
+                      "xdm:linkURL": "/cozumler",
+                      "analytics-link-name": translateDB(feature.title),
+                      "analytics-link-type": "engagement",
+                      "analytics-engagement": "true",
+                      "analytics-module-name": `feature card button-${idx + 1}`,
+                      "analytics-template-zone": "block-tilegrid"
+                    }
+                  })}
+                >
+                  {/* Top: Category and Title */}
+                  <div className="flex flex-col transition-colors duration-500">
+                    <span className="text-xs font-bold tracking-[0.2em] text-white/70 group-hover:text-accent mb-4 uppercase">
+                      {locale === 'en' ? 'FEATURE' : 'ÖZELLİK'} {feature.number}
+                    </span>
+                    <h3 className="text-2xl font-bold text-white group-hover:text-foreground transition-colors duration-500 leading-tight">
+                      {translateDB(feature.title)}
+                    </h3>
                   </div>
-                  <h3 className="text-xl font-bold text-foreground mb-3">{translateDB(feature.title)}</h3>
-                  <p className="text-muted-foreground text-sm leading-relaxed font-mono">
-                    {translateDB(feature.text)}
-                  </p>
+                  
+                  {/* Bottom: Description and CTA */}
+                  <div className="mt-auto flex flex-col justify-end transform translate-y-8 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500 delay-100">
+                    <p className="text-muted-foreground text-base leading-relaxed mb-8">
+                      {translateDB(feature.text)}
+                    </p>
+                    
+                    <div className="flex items-center justify-end text-sm font-bold text-foreground">
+                      <span className="flex items-center gap-2 group-hover:text-accent transition-colors">
+                        {locale === 'en' ? 'Expand' : 'Daha Fazla Keşfet'} 
+                        <svg className="w-4 h-4 transition-transform group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                        </svg>
+                      </span>
+                    </div>
+                  </div>
                 </Link>
               </motion.div>
-            ))}
+            )})}
 
           </div>
         </div>
@@ -193,7 +245,7 @@ export default async function Home() {
          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center mb-6">
              <h3 className="text-sm font-mono tracking-[0.2em] text-muted-foreground uppercase">{tRefs('title')}</h3>
          </div>
-         <Marquee speed={40}>
+         <Marquee speed={40} showControls={true}>
             {realReferences.map((ref, idx: number) => (
                 <a key={idx} href={ref.url} target="_blank" rel="noopener noreferrer" className="flex flex-col items-center justify-center px-8 opacity-50 grayscale hover:opacity-100 hover:grayscale-0 transition-all duration-300 gap-4 group cursor-pointer">
                     <div className="w-40 h-20 bg-white/5 rounded-xl border border-border flex items-center justify-center p-4 group-hover:border-accent/50 transition-colors">
