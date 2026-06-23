@@ -122,10 +122,7 @@ export default async function Home() {
             </div>
 
             <h1 className="text-[3.5rem] leading-[1.05] sm:text-[4.5rem] lg:text-[6rem] font-black tracking-tighter text-foreground mb-4 font-display drop-shadow-2xl max-w-4xl">
-              {heroSettings.mainTitle} <br className="hidden sm:block" />
-              <span className="text-foreground relative inline-block">
-                {heroSettings.highlightedWord}
-              </span>
+              {heroSettings.mainTitle}
             </h1>
             
             <p className="text-lg sm:text-xl text-muted-foreground max-w-2xl leading-relaxed font-mono">

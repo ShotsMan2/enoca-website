@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { CheckCircle, Server, Cloud, Shield, ChevronRight, Activity, Database, Smartphone } from "lucide-react";
+import { Link } from "@/i18n/routing";
 
 import { useConfiguratorStore } from "@/store/configuratorStore";
 import { useTranslations } from "next-intl";
@@ -177,9 +178,9 @@ export default function ProjectConfigurator() {
                   >
                     {t('resetBtn')}
                   </button>
-                  <button className="px-6 py-3 bg-accent text-accent-foreground font-bold rounded hover:bg-accent/90 tracking-wide shadow-glow-sm transition-all flex items-center justify-center gap-2 group">
+                  <Link href="/iletisim" className="px-6 py-3 bg-accent text-accent-foreground font-bold rounded hover:bg-accent/90 tracking-wide shadow-glow-sm transition-all flex items-center justify-center gap-2 group">
                     {t('contactBtn')} <ChevronRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-                  </button>
+                  </Link>
                 </div>
               </motion.div>
             )}

@@ -81,11 +81,11 @@ export default async function LocaleLayout({
   const messages = await getMessages();
 
   return (
-    <html lang={locale} suppressHydrationWarning>
+    <html lang={locale} suppressHydrationWarning className="overflow-x-hidden">
       <head>
         <JsonLd />
       </head>
-      <body className={`${inter.variable} ${calistoga.variable} ${jetbrainsMono.variable} antialiased`}>
+      <body className={`${inter.variable} ${calistoga.variable} ${jetbrainsMono.variable} antialiased overflow-x-hidden`}>
         {/* Dark mode init — Script ile inject edilir, React render pipeline'ına girmez */}
         <Script id="theme-init" strategy="beforeInteractive">{`
           try {

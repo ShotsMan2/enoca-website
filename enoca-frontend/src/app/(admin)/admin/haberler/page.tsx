@@ -113,19 +113,34 @@ export default function HaberlerPage() {
   };
 
   const handleAITranslate = async () => {
-    setAiTranslating(true);
-    toast("Yapay zeka metinleri analiz ediyor...", "success");
+    if (!formData.summary) {
+      toast("Lütfen çevrilecek bir özet girin veya AI ile oluşturun.", "error");
+      return;
+    }
     
-    // Yapay Zeka Çeviri Simülasyonu
-    setTimeout(() => {
-      setFormData(f => ({
-        ...f,
-        title: f.title ? `[EN] ${f.title}` : "[EN] Translated Title",
-        summary: f.summary ? `[Auto-Translated via AI] ${f.summary}` : "This content has been automatically translated by AI to provide a global reading experience.",
-      }));
-      setAiTranslating(false);
-      toast("AI çevirisi başarıyla tamamlandı!", "success");
-    }, 1500);
+    setAiTranslating(true);
+    toast("Yapay zeka metinleri çeviriyor...", "success");
+    
+    // Basit bir İngilizce çeviri simülasyonu
+    const simulatedTranslation = `This article has been automatically translated by AI.\n\nEnoca's latest technologies and approaches regarding "${formData.title.replace('[EN] ', '')}" are redefining standards in the industry. While optimizing processes with our AI and cloud-based infrastructure, we provide cost advantages and high performance. With our customer satisfaction-oriented vision, we are rapidly moving towards our 2025 goals.`;
+    
+    let currentText = "";
+    const words = simulatedTranslation.split(" ");
+    
+    setFormData(f => ({ 
+      ...f, 
+      title: f.title.startsWith("[EN]") ? f.title : `[EN] ${f.title}`,
+      summary: "" 
+    }));
+    
+    for (let i = 0; i < words.length; i++) {
+      await new Promise(r => setTimeout(r, 40));
+      currentText += (i === 0 ? "" : " ") + words[i];
+      setFormData(f => ({ ...f, summary: currentText }));
+    }
+
+    setAiTranslating(false);
+    toast("AI çevirisi başarıyla tamamlandı!", "success");
   };
 
   const handleAIGenerate = async () => {
@@ -268,7 +283,7 @@ export default function HaberlerPage() {
                 <button 
                   onClick={handleAIGenerate} 
                   type="button"
-                  disabled={aiGenerating}
+                  disabled={aiGenerating || aiTranslating}
                   className="px-3 py-1.5 bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-600 hover:to-teal-700 text-white text-xs font-bold rounded-lg transition-all shadow-lg shadow-emerald-500/25 flex items-center gap-1.5 disabled:opacity-50"
                   title="Başlığa Göre Yapay Zeka ile İçerik Üret"
                 >
@@ -278,7 +293,7 @@ export default function HaberlerPage() {
                 <button 
                   onClick={handleAITranslate} 
                   type="button"
-                  disabled={aiTranslating}
+                  disabled={aiGenerating || aiTranslating}
                   className="px-3 py-1.5 bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 text-white text-xs font-bold rounded-lg transition-all shadow-lg shadow-purple-500/25 flex items-center gap-1.5 disabled:opacity-50"
                   title="İçeriği Yapay Zeka ile İngilizceye Çevir"
                 >

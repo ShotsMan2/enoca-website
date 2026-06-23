@@ -226,14 +226,8 @@ export default function AdminHeader({ title }: { title: string }) {
 
           {profileOpen && (
             <div className="absolute right-0 top-full mt-2 w-52 bg-white dark:bg-gray-800 rounded-2xl shadow-2xl border border-gray-200 dark:border-gray-700 overflow-hidden">
-              <div className="px-4 py-3 border-b border-gray-100 dark:border-gray-700">
-                <p className="text-sm font-bold text-gray-900 dark:text-white">Admin Kullanıcı</p>
-                <p className="text-xs text-gray-400 mt-0.5">admin@enoca.com</p>
-              </div>
+
               <div className="py-1.5">
-                <button onClick={() => { setProfileOpen(false); router.push("/admin/ayarlar"); }} className="w-full flex items-center gap-3 px-4 py-2.5 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
-                  <User className="w-4 h-4 text-gray-400" /> Profil Bilgileri
-                </button>
                 <button onClick={() => { setProfileOpen(false); router.push("/admin/ayarlar"); }} className="w-full flex items-center gap-3 px-4 py-2.5 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
                   <Settings className="w-4 h-4 text-gray-400" /> Hesap Ayarları
                 </button>
