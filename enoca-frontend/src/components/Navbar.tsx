@@ -121,7 +121,7 @@ export default function Navbar({ settings, pages = [] }: { settings?: SiteSettin
             url: "/haberler",
             bannerImage: "https://images.unsplash.com/photo-1504711434969-e33886168f5c?q=80&w=600&auto=format&fit=crop",
             children: [
-                { title: t('latestNews'), url: "/haberler/enocadan-son-haberler" },
+                { title: t('latestNews'), url: "/haberler" },
             ]
         },
         {
@@ -252,7 +252,7 @@ export default function Navbar({ settings, pages = [] }: { settings?: SiteSettin
                                                             >
                                                                 <div className="w-6 h-6 rounded bg-accent/10 flex items-center justify-center shrink-0">
                                                                     <div className="w-[14px] h-[14px] bg-white flex items-center justify-center shadow-sm">
-                                                                        <div className="w-[8px] h-[8px] bg-[#0000ff]"></div>
+                                                                        <div className="w-[10px] h-[10px] bg-accent rounded-sm"></div>
                                                                     </div>
                                                                 </div>
                                                                 <span className="flex-1 uppercase tracking-wide">{child.title}</span>
@@ -301,7 +301,7 @@ export default function Navbar({ settings, pages = [] }: { settings?: SiteSettin
                                                     </div>
                                                     <div className="absolute top-4 right-4 w-12 h-12 rounded-full bg-background/50 backdrop-blur-sm border border-white/10 flex items-center justify-center z-10">
                                                         <div className="w-[20px] h-[20px] bg-white flex items-center justify-center shadow-sm opacity-90">
-                                                            <div className="w-[12px] h-[12px] bg-[#0000ff]"></div>
+                                                            <div className="w-[14px] h-[14px] bg-accent rounded"></div>
                                                         </div>
                                                     </div>
                                                 </div>
