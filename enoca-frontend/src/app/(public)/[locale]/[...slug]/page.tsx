@@ -218,7 +218,7 @@ export default async function CatchAllPage({
 
                     {/* Başlık */}
                     <div className="relative mb-12">
-                        <h1 className="text-5xl md:text-6xl lg:text-7xl font-display font-black uppercase tracking-tighter leading-tight bg-gradient-to-r from-[#0055FF] via-[#0077FF] to-[#00AAFF] bg-clip-text text-transparent drop-shadow-sm pb-1">
+                        <h1 className="text-5xl md:text-6xl lg:text-7xl font-display font-black uppercase tracking-tighter leading-tight bg-gradient-to-r from-[#0055FF] via-[#0077FF] to-[#00AAFF] bg-clip-text text-transparent drop-shadow-sm pb-1 pr-2">
                             {pageTitle}
                         </h1>
                         <div className="w-24 h-1.5 bg-gradient-to-r from-accent to-transparent rounded-full mt-4"></div>

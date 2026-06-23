@@ -121,7 +121,7 @@ export default async function Home() {
               </span>
             </div>
 
-            <h1 className="text-[3.5rem] leading-[1.05] sm:text-[4.5rem] lg:text-[6rem] font-black tracking-tighter text-foreground mb-4 font-display drop-shadow-2xl max-w-4xl">
+            <h1 className="text-[3.5rem] leading-[1.05] sm:text-[4.5rem] lg:text-[6rem] font-black tracking-tighter text-foreground mb-4 font-display drop-shadow-2xl max-w-4xl pr-2">
               {heroSettings.mainTitle}
             </h1>
             
@@ -278,7 +278,7 @@ export default async function Home() {
               {tMisc('configDesc')}
             </p>
           </div>
-          <div className="bg-background border border-border p-8 clip-chamfer relative shadow-glow-lg">
+          <div className="relative">
              <ProjectConfigurator />
           </div>
         </div>
@@ -296,7 +296,7 @@ export default async function Home() {
               {tMisc('roiDesc')}
             </p>
           </div>
-          <div className="bg-card border border-border p-8 clip-chamfer relative shadow-glow-lg">
+          <div className="relative">
             <ROICalculator />
           </div>
         </div>
