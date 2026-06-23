@@ -170,7 +170,25 @@ export default async function CatchAllPage({
     const db = await readDB();
     const currentSlug = "/" + slugArray.join("/");
     const dynamicPage = db?.pages?.find((p: ContentPage) => p.slug === currentSlug && p.status === "published");
-    const subPages = db?.pages?.filter((p: ContentPage) => p.slug.startsWith(currentSlug + "/") && p.status === "published") || [];
+    let subPages = db?.pages?.filter((p: ContentPage) => p.slug.startsWith(currentSlug + "/") && p.status === "published") || [];
+
+    if (currentSlug === "/kurumsal") {
+        const extraPages = db?.pages?.filter((p: ContentPage) => 
+            p.slug === "/bilgi-guvenligi-politikasi" || 
+            p.slug === "/kisisel-verilerin-korunmasi-ve-islenmesi-politikasi"
+        ) || [];
+        
+        subPages = [...subPages, ...extraPages];
+        
+        subPages.push({
+            id: 999,
+            menuTitle: "Kariyer",
+            slug: "/kariyer",
+            category: "Kurumsal",
+            content: "Enoca ekibine katılmak ve kariyer fırsatlarını incelemek için kariyer sayfamızı ziyaret edin.",
+            status: "published"
+        } as ContentPage);
+    }
 
     const pageTitleRaw = dynamicPage?.menuTitle || formatSlugToTitle(slugArray.length > 0 ? slugArray[slugArray.length - 1].replace(/-/g, ' ') : 'Sayfa');
     const pageTitle = translateDB(pageTitleRaw);

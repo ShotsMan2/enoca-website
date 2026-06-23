@@ -7,14 +7,6 @@
   },
   "news": [
     {
-      "title": "[EN] kajdas",
-      "summary": "Bu makale yapay zeka tarafından otomatik oluşturulmuştur.\n\n\"[EN] kajdas\" konusunda Enoca'nın geliştirdiği en yeni teknolojiler ve yaklaşımlar, sektörde standartları yeniden belirliyor. Yapay zeka ve bulut tabanlı altyapımızla süreçleri optimize ederken, maliyet avantajı ve yüksek performans sağlıyoruz. Müşteri memnuniyeti odaklı vizyonumuzla 2025 hedeflerimize hızla ilerliyoruz.",
-      "imageUrl": "https://bakikaracay.com/fotograf-makinesi-objektif-isik-kamera/",
-      "publishedAt": "2026-06-23",
-      "status": "published",
-      "id": 7
-    },
-    {
       "id": 1,
       "title": "Enoca Yeni Nesil E-Ticaret Çözümlerini Duyurdu",
       "summary": "B2B ve B2C e-ticaret altyapılarında devrim yaratacak yeni SAP CX modülleri tanıtıldı.",
@@ -145,9 +137,9 @@
       "menuTitle": "SAP CX Hybris B2C E-Ticaret",
       "slug": "/cozumler/hybris-cozumleri/hybris-b2c-ticaret",
       "category": "Çözümler",
-      "content": "<h2>SAP CX Hybris B2C E-Ticaret</h2><p>Müşterilerinize benzersiz bir alışveriş deneyimi sunun. SAP CX Hybris B2C platformu ile esnek, ölçeklenebilir ve yüksek performanslı bir e-ticaret altyapısı kurun.</p>",
+      "content": "<h2>SAP&nbsp;CX&nbsp;Hybris&nbsp;B2C&nbsp;E-Ticaret</h2><p>Müşterilerinize&nbsp;benzersiz&nbsp;bir&nbsp;alışveriş&nbsp;deneyimi&nbsp;sunun.&nbsp;SAP&nbsp;CX&nbsp;Hybris&nbsp;B2C&nbsp;platformu&nbsp;ile&nbsp;esnek,&nbsp;ölçeklenebilir&nbsp;ve&nbsp;yüksek&nbsp;performanslı&nbsp;bir&nbsp;e-ticaret&nbsp;altyapısı&nbsp;kurun.</p>",
       "status": "published",
-      "updatedAt": "2025-06-10",
+      "updatedAt": "2026-06-23T12:56:06.126Z",
       "menuTitleEn": "SAP CX Hybris B2C E-Commerce"
     },
     {
@@ -184,17 +176,8 @@
       "slug": "/cozumler/sap-cozumleri/sap-hana",
       "category": "Çözümler",
       "content": "<h2>SAP HANA</h2><p>In-memory computing teknolojisi ile gerçek zamanlı veri analizi yapın.</p>",
-      "status": "draft",
-      "updatedAt": "2025-06-15"
-    },
-    {
-      "menuTitle": "elprimo",
-      "slug": "/projeler/metoer",
-      "category": "Projeler",
-      "content": "<p>selim efe uysal</p>",
       "status": "published",
-      "updatedAt": "2026-06-19T20:41:27.353Z",
-      "id": 7
+      "updatedAt": "2025-06-15"
     },
     {
       "id": 8,
@@ -397,14 +380,22 @@
       "updatedAt": "2026-06-20T08:18:48.070Z"
     },
     {
+      "id": 30,
+      "menuTitle": "Referanslar",
+      "slug": "/projeler/referanslar",
+      "category": "Projeler",
+      "content": "<h2>Referanslar</h2><p>Birlikte çalıştığımız değerli markalar ve başarı hikayelerimiz.</p>",
+      "status": "published",
+      "updatedAt": "2026-06-23"
+    },
+    {
       "menuTitle": "Yeni Sayfa",
       "slug": "/yeni-sayfa",
       "category": "Çözümler",
-      "content": "<p>İçeriği&nbsp;buraya&nbsp;yazın...asdadads</p>",
+      "content": "<p>İçeriği&nbsp;buraya&nbsp;yazın...</p>",
       "status": "published",
-      "updatedAt": "2026-06-20T12:42:36.513Z",
-      "id": 30,
-      "menuTitleEn": "New Page"
+      "updatedAt": "2026-06-23T12:54:26.911Z",
+      "id": 31
     }
   ],
   "jobs": [
@@ -454,6 +445,18 @@
     }
   ],
   "applications": [
+    {
+      "jobId": 1,
+      "jobTitle": "Frontend Developer (React/Next.js)",
+      "name": "sadsa",
+      "email": "sda@sad.co",
+      "phone": "322121",
+      "portfolioUrl": "http://localhost:3001/tr/kariyer/1",
+      "cvFileName": "Ödev 9 (Sıralama Algoritmaları) (5).pdf",
+      "id": 4,
+      "status": "reviewed",
+      "appliedAt": "2026-06-23T13:45:08.644Z"
+    },
     {
       "jobId": 1,
       "jobTitle": "Frontend Developer (React/Next.js)",
@@ -586,6 +589,12 @@
     ]
   },
   "logs": [
+    {
+      "id": 6,
+      "action": "Haber Silindi",
+      "details": "\"[EN] kajdas\" başlıklı haber silindi.",
+      "timestamp": "2026-06-23T12:27:40.408Z"
+    },
     {
       "id": 5,
       "action": "Ayarlar Güncellendi",

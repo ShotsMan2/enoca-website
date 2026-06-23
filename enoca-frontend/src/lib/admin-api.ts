@@ -113,6 +113,7 @@ export interface JobApplication {
   email: string;
   phone: string;
   portfolioUrl?: string;
+  cvFileName?: string;
   status: "new" | "reviewed" | "rejected" | "accepted";
   appliedAt: string;
 }

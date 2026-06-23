@@ -118,11 +118,7 @@ export default function Navbar({ settings, pages = [] }: { settings?: SiteSettin
         },
         { 
             title: t('news'), 
-            url: "/haberler",
-            bannerImage: "https://images.unsplash.com/photo-1504711434969-e33886168f5c?q=80&w=600&auto=format&fit=crop",
-            children: [
-                { title: t('latestNews'), url: "/haberler" },
-            ]
+            url: "/haberler"
         },
         {
             title: t('corporate'),
