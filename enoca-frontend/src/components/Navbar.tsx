@@ -220,11 +220,16 @@ export default function Navbar({ settings, pages = [] }: { settings?: SiteSettin
                         <div className="flex justify-between h-[88px] items-center">
                         
                         {/* Logo Alanı */}
-                        <div className="flex-shrink-0 flex items-center -ml-4 lg:-ml-10 xl:-ml-14 -mt-1 lg:-mt-2">
+                        <div className="flex-shrink-0 flex items-center -ml-4 lg:-ml-10 xl:-ml-14 -mt-1 lg:-mt-2 min-w-[40px]">
                             <Link href="/" className="group flex items-center gap-2">
-                                <div className="flex items-center text-[2rem] font-display font-black tracking-tighter text-accent group-hover:opacity-80 transition-opacity">
-                                    <span className="w-3.5 h-3.5 bg-accent mr-1.5 rounded-sm"></span>
-                                    enoca<sup className="text-sm font-sans ml-0.5">&trade;</sup>
+                                <div className="flex items-center text-[2rem] font-display font-black tracking-tighter text-accent transition-opacity">
+                                    {/* Sadece İkon (Default: Büyük, Sağ-Aşağı; Hover: Küçük, Yerinde) */}
+                                    <span className="w-8 h-8 bg-accent rounded-sm shrink-0 transition-all duration-500 ease-[cubic-bezier(0.19,1,0.22,1)] translate-x-3 translate-y-0 group-hover:translate-x-0 group-hover:translate-y-0 group-hover:w-3.5 group-hover:h-3.5 group-hover:mr-1.5"></span>
+                                    
+                                    {/* Yazı (Hover'da Açılır) */}
+                                    <div className="overflow-hidden whitespace-nowrap transition-all duration-500 ease-[cubic-bezier(0.19,1,0.22,1)] max-w-0 opacity-0 group-hover:max-w-[200px] group-hover:opacity-100 flex items-center">
+                                        enoca<sup className="text-sm font-sans ml-0.5">&trade;</sup>
+                                    </div>
                                 </div>
                             </Link>
                         </div>
