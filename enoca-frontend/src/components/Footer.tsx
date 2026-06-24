@@ -2,11 +2,12 @@
 
 import { useState } from 'react';
 import { Link } from '@/i18n/routing';
-import { useTranslations } from 'next-intl';
-import { SiteSettings } from '@/lib/admin-api';
+import { useTranslations, useLocale } from 'next-intl';
+import { SiteSettings, ContentPage } from '@/lib/admin-api';
 
-export default function Footer({ settings }: { settings?: SiteSettings }) {
+export default function Footer({ settings, pages = [] }: { settings?: SiteSettings, pages?: ContentPage[] }) {
     const t = useTranslations('Footer');
+    const locale = useLocale();
     const [subscribed, setSubscribed] = useState(false);
 
     const handleSubscribe = (e: React.FormEvent) => {
@@ -15,6 +16,149 @@ export default function Footer({ settings }: { settings?: SiteSettings }) {
         setTimeout(() => setSubscribed(false), 3000);
     };
 
+    type MenuItem = {
+        title: string;
+        url: string;
+        children?: MenuItem[];
+        subChildren?: { title: string; url: string }[];
+    };
+    const menuItems: MenuItem[] = [
+        {
+            title: t('solutions'),
+            url: "/cozumler",
+            children: [
+                { 
+                    title: t('hybrisSolutions'), 
+                    url: "/cozumler/hybris-cozumleri",
+                    subChildren: [
+                        { title: t('b2cEcommerce'), url: "/cozumler/hybris-cozumleri/hybris-b2c-ticaret" },
+                        { title: t('b2bEcommerce'), url: "/cozumler/hybris-cozumleri/hybris-b2b-ticaret" },
+                        { title: t('mobileEcommerce'), url: "/cozumler/hybris-cozumleri/hybris-mobil-ticaret" },
+                        { title: t('mdm'), url: "/cozumler/hybris-cozumleri/hybris-mdm" },
+                    ]
+                },
+                { 
+                    title: t('sapSolutions'), 
+                    url: "/cozumler/sap-cozumleri",
+                    subChildren: [
+                        { title: t('sapMobility'), url: "/cozumler/sap-cozumleri/sap-mobility" },
+                        { title: t('sapHana'), url: "/cozumler/sap-cozumleri/sap-hana" },
+                        { title: t('sapAppManagement'), url: "/cozumler/sap-cozumleri/sap-uygulama-yonetimi" },
+                        { title: t('sapCloud'), url: "/cozumler/sap-cozumleri/sap-bulut" },
+                    ]
+                },
+                { 
+                    title: t('monitoringSolutions'), 
+                    url: "/cozumler/sistem-izleme-cozumleri",
+                    subChildren: [
+                        { title: t('vfabric'), url: "/cozumler/sistem-izleme-cozumleri/vfabric-hyperic" },
+                        { title: t('nagios'), url: "/cozumler/sistem-izleme-cozumleri/nagios" },
+                    ]
+                },
+            ]
+        },
+        {
+            title: t('consulting'),
+            url: "/danismanlik",
+            children: [
+                { title: t('hybrisConsulting'), url: "/danismanlik/hybris-danismanligi" },
+                { title: t('sapTechnical'), url: "/danismanlik/sap-teknik-danismanlik" },
+                { title: t('sapFunctional'), url: "/danismanlik/sap-fonksiyonel-danismanlik" },
+                { title: t('developmentConsulting'), url: "/danismanlik/gelistirme-danismanligi" },
+                { title: t('qualityManagement'), url: "/danismanlik/kalite-yonetimi" },
+                { title: t('outsourcing'), url: "/danismanlik/diskaynak-hizmetleri" },
+            ]
+        },
+        {
+            title: t('projects'),
+            url: "/projeler",
+            children: [
+                { title: t('methodology'), url: "/projeler/metodoloji" },
+                { title: t('references'), url: "/projeler/referanslar" },
+            ]
+        },
+        {
+            title: t('technology'),
+            url: "/teknoloji",
+            children: [
+                { 
+                    title: t('architecture'), 
+                    url: "/teknoloji/mimari",
+                    subChildren: [
+                        { title: t('modularity'), url: "/teknoloji/mimari/modulerlik" },
+                        { title: t('designBased'), url: "/teknoloji/mimari/tasarim-tabanli" },
+                    ]
+                },
+                { title: t('innovation'), url: "/teknoloji/inovasyon" },
+                { 
+                    title: t('rd'), 
+                    url: "/teknoloji/arastirma-gelistirme",
+                    subChildren: [
+                        { title: t('modelingSimulation'), url: "/teknoloji/arastirma-gelistirme/modelleme-ve-simulasyon" },
+                    ]
+                },
+            ]
+        },
+        { 
+            title: t('news'), 
+            url: "/haberler",
+            children: [
+                { title: t('latestNews'), url: "/haberler/enocadan-son-haberler" }
+            ]
+        },
+        {
+            title: t('corporate'),
+            url: "/kurumsal",
+            children: [
+                { title: t('aboutUs'), url: "/kurumsal/hakkimizda" },
+                { title: t('career'), url: "/kariyer" },
+                { title: t('legalInfo'), url: "/kurumsal/yasal-bilgiler" },
+                { title: t('infosecPolicy'), url: "/bilgi-guvenligi-politikasi" },
+                { title: t('kvkk'), url: "/kisisel-verilerin-korunmasi-ve-islenmesi-politikasi" },
+                { title: t('contactUs'), url: "/iletisim" },
+            ]
+        }
+    ];
+
+    const activePages = pages.filter(p => p.status === "published");
+    activePages.forEach(page => {
+        let exists = false;
+        for (const item of menuItems) {
+            if (item.url === page.slug) exists = true;
+            if (item.children) {
+                for (const child of item.children) {
+                    if (child.url === page.slug) exists = true;
+                    if (child.subChildren) {
+                        for (const sub of child.subChildren) {
+                            if (sub.url === page.slug) exists = true;
+                        }
+                    }
+                }
+            }
+        }
+        
+        if (!exists) {
+            const categoryUrlMap: Record<string, string> = {
+                "Çözümler": "/cozumler",
+                "Danışmanlık": "/danismanlik",
+                "Projeler": "/projeler",
+                "Teknoloji": "/teknoloji",
+                "Kurumsal": "/kurumsal",
+                "Haberler": "/haberler"
+            };
+            const mappedUrl = categoryUrlMap[page.category];
+            const categoryItem = menuItems.find(item => 
+                (mappedUrl && item.url === mappedUrl) || 
+                item.title.toUpperCase() === page.category.toUpperCase()
+            );
+
+            if (categoryItem) {
+                if (!categoryItem.children) categoryItem.children = [];
+                categoryItem.children.push({ title: locale === 'en' && page.menuTitleEn ? page.menuTitleEn : page.menuTitle, url: page.slug });
+            }
+        }
+    });
+
     return (
         <footer className="bg-card border-t border-accent/30 pt-16 pb-8 relative overflow-hidden">
             <div className="absolute inset-0 bg-grid-pattern opacity-10 pointer-events-none" />
@@ -22,107 +166,31 @@ export default function Footer({ settings }: { settings?: SiteSettings }) {
                 
                 {/* Footer Menu Grid */}
                 <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8 mb-16">
-                    
-                    {/* Sütun 1: ÇÖZÜMLER */}
-                    <div className="space-y-4">
-                        <h4 className="text-foreground font-bold tracking-wider mb-6 text-sm"><Link href="/cozumler" className="hover:text-accent dark:hover:text-accent transition-colors">{t('solutions')}</Link></h4>
-                        <div className="space-y-3">
-                            <div className="space-y-2">
-                                <Link href="/cozumler/hybris-cozumleri" className="block text-[13px] font-bold hover:text-accent dark:hover:text-accent transition-colors">{t('hybrisSolutions')}</Link>
-                                <div className="space-y-1.5 pl-3 border-l border-white/10">
-                                    <Link href="/cozumler/hybris-cozumleri/hybris-b2c-ticaret" className="block text-xs hover:text-accent dark:hover:text-accent transition-colors">{t('b2cEcommerce')}</Link>
-                                    <Link href="/cozumler/hybris-cozumleri/hybris-b2b-ticaret" className="block text-xs hover:text-accent dark:hover:text-accent transition-colors">{t('b2bEcommerce')}</Link>
-                                    <Link href="/cozumler/hybris-cozumleri/hybris-mobil-ticaret" className="block text-xs hover:text-accent dark:hover:text-accent transition-colors">{t('mobileEcommerce')}</Link>
-                                    <Link href="/cozumler/hybris-cozumleri/hybris-mdm" className="block text-xs hover:text-accent dark:hover:text-accent transition-colors">{t('mdm')}</Link>
-                                </div>
-                            </div>
-
-                            <div className="space-y-2 pt-2">
-                                <Link href="/cozumler/sap-cozumleri" className="block text-[13px] font-bold hover:text-accent dark:hover:text-accent transition-colors">{t('sapSolutions')}</Link>
-                                <div className="space-y-1.5 pl-3 border-l border-white/10">
-                                    <Link href="/cozumler/sap-cozumleri/sap-mobility" className="block text-xs hover:text-accent dark:hover:text-accent transition-colors">{t('sapMobility')}</Link>
-                                    <Link href="/cozumler/sap-cozumleri/sap-hana" className="block text-xs hover:text-accent dark:hover:text-accent transition-colors">{t('sapHana')}</Link>
-                                    <Link href="/cozumler/sap-cozumleri/sap-uygulama-yonetimi" className="block text-xs hover:text-accent dark:hover:text-accent transition-colors">{t('sapAppManagement')}</Link>
-                                    <Link href="/cozumler/sap-cozumleri/sap-bulut" className="block text-xs hover:text-accent dark:hover:text-accent transition-colors">{t('sapCloud')}</Link>
-                                </div>
-                            </div>
-
-                            <div className="space-y-2 pt-2">
-                                <Link href="/cozumler/sistem-izleme-cozumleri" className="block text-[13px] font-bold hover:text-accent dark:hover:text-accent transition-colors">{t('monitoringSolutions')}</Link>
-                                <div className="space-y-1.5 pl-3 border-l border-white/10">
-                                    <Link href="/cozumler/sistem-izleme-cozumleri/vfabric-hyperic" className="block text-xs hover:text-accent dark:hover:text-accent transition-colors">{t('vfabric')}</Link>
-                                    <Link href="/cozumler/sistem-izleme-cozumleri/nagios" className="block text-xs hover:text-accent dark:hover:text-accent transition-colors">{t('nagios')}</Link>
-                                </div>
+                    {menuItems.map((col, idx) => (
+                        <div key={idx} className="space-y-4">
+                            <h4 className="text-foreground font-bold tracking-wider mb-6 text-sm uppercase">
+                                <Link href={col.url} className="hover:text-accent dark:hover:text-accent transition-colors">{col.title}</Link>
+                            </h4>
+                            <div className="space-y-3">
+                                {col.children?.map((child, cIdx) => (
+                                    <div key={cIdx} className={cIdx > 0 && child.subChildren ? "pt-2 space-y-2" : "space-y-2"}>
+                                        <Link href={child.url} className={`block text-[13px] font-bold hover:text-accent dark:hover:text-accent transition-colors ${!child.subChildren && "leading-relaxed"}`}>
+                                            {child.title}
+                                        </Link>
+                                        {child.subChildren && child.subChildren.length > 0 && (
+                                            <div className="space-y-1.5 pl-3 border-l border-white/10 mt-1">
+                                                {child.subChildren.map((sub, sIdx) => (
+                                                    <Link key={sIdx} href={sub.url} className="block text-xs hover:text-accent dark:hover:text-accent transition-colors">
+                                                        {sub.title}
+                                                    </Link>
+                                                ))}
+                                            </div>
+                                        )}
+                                    </div>
+                                ))}
                             </div>
                         </div>
-                    </div>
-
-                    {/* Sütun 2: DANIŞMANLIK */}
-                    <div className="space-y-4">
-                        <h4 className="text-foreground font-bold tracking-wider mb-6 text-sm"><Link href="/danismanlik" className="hover:text-accent dark:hover:text-accent transition-colors">{t('consulting')}</Link></h4>
-                        <div className="space-y-2">
-                            <Link href="/danismanlik/hybris-danismanligi" className="block text-[13px] font-bold hover:text-accent dark:hover:text-accent transition-colors">{t('hybrisConsulting')}</Link>
-                            <Link href="/danismanlik/sap-teknik-danismanlik" className="block text-[13px] font-bold hover:text-accent dark:hover:text-accent transition-colors">{t('sapTechnical')}</Link>
-                            <Link href="/danismanlik/sap-fonksiyonel-danismanlik" className="block text-[13px] font-bold hover:text-accent dark:hover:text-accent transition-colors">{t('sapFunctional')}</Link>
-                            <Link href="/danismanlik/gelistirme-danismanligi" className="block text-[13px] font-bold hover:text-accent dark:hover:text-accent transition-colors">{t('developmentConsulting')}</Link>
-                            <Link href="/danismanlik/kalite-yonetimi" className="block text-[13px] font-bold hover:text-accent dark:hover:text-accent transition-colors">{t('qualityManagement')}</Link>
-                            <Link href="/danismanlik/diskaynak-hizmetleri" className="block text-[13px] font-bold hover:text-accent dark:hover:text-accent transition-colors">{t('outsourcing')}</Link>
-                        </div>
-                    </div>
-
-                    {/* Sütun 3: PROJELER */}
-                    <div className="space-y-4">
-                        <h4 className="text-foreground font-bold tracking-wider mb-6 text-sm"><Link href="/projeler" className="hover:text-accent dark:hover:text-accent transition-colors">{t('projects')}</Link></h4>
-                        <div className="space-y-2">
-                            <Link href="/projeler/metodoloji" className="block text-[13px] font-bold hover:text-accent dark:hover:text-accent transition-colors">{t('methodology')}</Link>
-                            <Link href="/projeler/referanslar" className="block text-[13px] font-bold hover:text-accent dark:hover:text-accent transition-colors">{t('references')}</Link>
-                        </div>
-                    </div>
-
-                    {/* Sütun 4: TEKNOLOJİ */}
-                    <div className="space-y-4">
-                        <h4 className="text-foreground font-bold tracking-wider mb-6 text-sm"><Link href="/teknoloji" className="hover:text-accent dark:hover:text-accent transition-colors">{t('technology')}</Link></h4>
-                        <div className="space-y-3">
-                            <div className="space-y-2">
-                                <Link href="/teknoloji/mimari" className="block text-[13px] font-bold hover:text-accent dark:hover:text-accent transition-colors">{t('architecture')}</Link>
-                                <div className="space-y-1.5 pl-3 border-l border-white/10">
-                                    <Link href="/teknoloji/mimari/modulerlik" className="block text-xs hover:text-accent dark:hover:text-accent transition-colors">{t('modularity')}</Link>
-                                    <Link href="/teknoloji/mimari/tasarim-tabanli" className="block text-xs hover:text-accent dark:hover:text-accent transition-colors">{t('designBased')}</Link>
-                                </div>
-                            </div>
-                            <div className="space-y-2 pt-2">
-                                <Link href="/teknoloji/inovasyon" className="block text-[13px] font-bold hover:text-accent dark:hover:text-accent transition-colors">{t('innovation')}</Link>
-                            </div>
-                            <div className="space-y-2 pt-2">
-                                <Link href="/teknoloji/arastirma-gelistirme" className="block text-[13px] font-bold hover:text-accent dark:hover:text-accent transition-colors">{t('rd')}</Link>
-                                <div className="space-y-1.5 pl-3 border-l border-white/10">
-                                    <Link href="/teknoloji/arastirma-gelistirme/modelleme-ve-simulasyon" className="block text-xs hover:text-accent dark:hover:text-accent transition-colors">{t('modelingSimulation')}</Link>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    {/* Sütun 5: HABERLER */}
-                    <div className="space-y-4">
-                        <h4 className="text-foreground font-bold tracking-wider mb-6 text-sm"><Link href="/haberler" className="hover:text-accent dark:hover:text-accent transition-colors">{t('news')}</Link></h4>
-                        <div className="space-y-2">
-                            <Link href="/haberler/enocadan-son-haberler" className="block text-[13px] font-bold hover:text-accent dark:hover:text-accent transition-colors uppercase">{t('latestNews')}</Link>
-                        </div>
-                    </div>
-
-                    {/* Sütun 6: KURUMSAL */}
-                    <div className="space-y-4">
-                        <h4 className="text-foreground font-bold tracking-wider mb-6 text-sm"><Link href="/kurumsal" className="hover:text-accent dark:hover:text-accent transition-colors">{t('corporate')}</Link></h4>
-                        <div className="space-y-2">
-                            <Link href="/kurumsal/hakkimizda" className="block text-[13px] font-bold hover:text-accent dark:hover:text-accent transition-colors">{t('aboutUs')}</Link>
-                            <Link href="/kariyer" className="block text-[13px] font-bold hover:text-accent dark:hover:text-accent transition-colors">{t('career')}</Link>
-                            <Link href="/kurumsal/yasal-bilgiler" className="block text-[13px] font-bold hover:text-accent dark:hover:text-accent transition-colors">{t('legalInfo')}</Link>
-                            <Link href="/bilgi-guvenligi-politikasi" className="block text-[13px] font-bold hover:text-accent dark:hover:text-accent transition-colors">{t('infosecPolicy')}</Link>
-                            <Link href="/kisisel-verilerin-korunmasi-ve-islenmesi-politikasi" className="block text-[13px] font-bold hover:text-accent dark:hover:text-accent transition-colors leading-relaxed">{t('kvkk')}</Link>
-                            <Link href="/iletisim" className="block text-[13px] font-bold hover:text-accent dark:hover:text-accent transition-colors">{t('contactUs')}</Link>
-                        </div>
-                    </div>
-
+                    ))}
                 </div>
 
                 {/* Alt Telif ve Kısayollar */}

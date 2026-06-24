@@ -16,6 +16,16 @@ export default function JobApplicationForm({ jobId, jobTitle }: { jobId: number,
     e.preventDefault();
     setStatus("loading");
     try {
+      let cvBase64: string | undefined = undefined;
+      if (cvFile) {
+        cvBase64 = await new Promise((resolve, reject) => {
+          const reader = new FileReader();
+          reader.onload = () => resolve((reader.result as string).split(',')[1]);
+          reader.onerror = error => reject(error);
+          reader.readAsDataURL(cvFile);
+        });
+      }
+
       await adminApi.createApplication({
         jobId: jobId,
         jobTitle: jobTitle,
@@ -23,7 +33,8 @@ export default function JobApplicationForm({ jobId, jobTitle }: { jobId: number,
         email: formData.email,
         phone: formData.phone,
         portfolioUrl: formData.portfolioUrl || undefined,
-        cvFileName: cvFile ? cvFile.name : undefined
+        cvFileName: cvFile ? cvFile.name : undefined,
+        cvFileBase64: cvBase64
       });
       setStatus("success");
     } catch {

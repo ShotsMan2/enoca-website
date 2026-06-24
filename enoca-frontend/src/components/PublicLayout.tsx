@@ -18,7 +18,7 @@ export default async function PublicLayout({ children }: { children: React.React
       <main className="flex-grow w-full">
         {children}
       </main>
-      <Footer settings={settings} />
+      <Footer settings={settings} pages={db?.pages || []} />
     </div>
   );
 }
