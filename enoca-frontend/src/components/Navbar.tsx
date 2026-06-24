@@ -213,10 +213,12 @@ export default function Navbar({ settings, pages = [] }: { settings?: SiteSettin
             <header className="w-full sticky top-0 z-50 bg-background/80 backdrop-blur-xl border-b border-accent/20 shadow-glow-sm transition-all">
                 <nav className="w-full relative z-10">
                     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
-                        <div className="flex justify-between h-[88px] items-center">
+                        <div className="flex justify-between h-[88px] items-center w-full">
                         
-                        {/* Logo Alanı */}
-                        <div className="flex-shrink-0 flex items-center -ml-4 lg:-ml-10 xl:-ml-14 -mt-1 lg:-mt-2 min-w-[40px]">
+                        {/* Sol Grup (Logo ve Menü) */}
+                        <div className="flex items-center">
+                            {/* Logo Alanı */}
+                            <div className="flex-shrink-0 flex items-center -ml-4 lg:-ml-10 xl:-ml-14 -mt-1 lg:-mt-2 min-w-[40px]">
                             <Link href="/" className="flex items-center gap-2 -translate-x-6">
                                 <div className="flex items-center text-[2.5rem] leading-none font-display font-black tracking-tighter text-accent">
                                     <span className="w-5 h-5 bg-accent rounded-sm shrink-0 mr-2 translate-y-1"></span>
@@ -225,10 +227,10 @@ export default function Navbar({ settings, pages = [] }: { settings?: SiteSettin
                                     </div>
                                 </div>
                             </Link>
-                        </div>
+                            </div>
 
-                        {/* Menü Linkleri */}
-                        <div className="hidden lg:flex items-center space-x-0.5 xl:space-x-1">
+                            {/* Menü Linkleri */}
+                            <div className="hidden lg:flex items-center justify-center space-x-0.5 xl:space-x-1 lg:ml-8 xl:ml-12">
                             {menuItems.map((item, idx) => (
                                 <div key={idx} className="group relative">
                                     <Link href={item.url} className="flex items-center gap-1 px-3 py-2 rounded-lg text-[13px] font-bold text-foreground/80 hover:text-accent transition-all duration-200 uppercase tracking-wide">
@@ -311,9 +313,11 @@ export default function Navbar({ settings, pages = [] }: { settings?: SiteSettin
                                     )}
                                 </div>
                             ))}
+                            </div>
+                        </div>
                             
-                            {/* Sağ Menü Alanı */}
-                            <div className="flex items-center gap-2 pl-4 ml-2 border-l border-border/50 h-8">
+                        {/* Sağ Menü Alanı */}
+                        <div className="hidden lg:flex flex-shrink-0 justify-end items-center gap-2 h-8 absolute right-4 sm:right-6 lg:right-8">
                                 {/* Dil Seçimi */}
                                 <div className="relative group/lang flex items-center h-full">
                                     <button className="flex items-center gap-1.5 px-2 py-2 text-[13px] font-bold text-foreground/80 hover:text-accent transition-all duration-200 uppercase tracking-wide">
@@ -354,10 +358,9 @@ export default function Navbar({ settings, pages = [] }: { settings?: SiteSettin
                                     </button>
                                 </div>
                             </div>
-                        </div>
 
                         {/* Mobile Menu Toggle */}
-                        <div className="flex lg:hidden items-center gap-2">
+                        <div className="flex lg:hidden flex-shrink-0 justify-end items-center gap-2">
                             <button 
                                 onClick={toggleTheme}
                                 className="w-10 h-10 flex items-center justify-center rounded-lg hover:bg-accent/10 text-foreground/80 hover:text-accent transition-colors"

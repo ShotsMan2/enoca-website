@@ -114,20 +114,21 @@ export default function ROICalculator() {
           {step === 2 && (
             <motion.div
               key="step2"
+              id="roi-calculator-content"
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
-              className="space-y-8"
+              className="space-y-8 bg-white dark:bg-gray-900 p-2 rounded-xl"
             >
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                <div className="bg-gradient-to-br from-green-50 to-emerald-50 dark:from-green-900/20 dark:to-emerald-900/10 p-6 rounded-2xl border border-green-100 dark:border-green-800/50">
+                <div className="bg-green-50 dark:bg-green-900/20 p-6 rounded-2xl border border-green-100 dark:border-green-800/50">
                   <p className="text-sm font-bold text-green-800 dark:text-green-400 mb-2">{t('savingsTitle')}</p>
                   <p className="text-3xl font-black text-green-600 dark:text-green-500">${results.savings.toLocaleString()}</p>
                 </div>
-                <div className="bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-blue-900/20 dark:to-indigo-900/10 p-6 rounded-2xl border border-blue-100 dark:border-blue-800/50">
+                <div className="bg-blue-50 dark:bg-blue-900/20 p-6 rounded-2xl border border-blue-100 dark:border-blue-800/50">
                   <p className="text-sm font-bold text-blue-800 dark:text-blue-400 mb-2">{t('roiTitle')}</p>
                   <p className="text-3xl font-black text-blue-600 dark:text-blue-500">%{results.roi}</p>
                 </div>
-                <div className="bg-gradient-to-br from-purple-50 to-fuchsia-50 dark:from-purple-900/20 dark:to-fuchsia-900/10 p-6 rounded-2xl border border-purple-100 dark:border-purple-800/50">
+                <div className="bg-purple-50 dark:bg-purple-900/20 p-6 rounded-2xl border border-purple-100 dark:border-purple-800/50">
                   <p className="text-sm font-bold text-purple-800 dark:text-purple-400 mb-2">{t('paybackTitle')}</p>
                   <p className="text-3xl font-black text-purple-600 dark:text-purple-500">{results.payback}</p>
                 </div>
@@ -157,9 +158,37 @@ export default function ROICalculator() {
                 </ul>
               </div>
 
-              <div className="flex flex-col sm:flex-row gap-4 pt-4 border-t border-gray-100 dark:border-gray-800">
+              <div className="flex flex-col sm:flex-row gap-4 pt-4 border-t border-gray-100 dark:border-gray-800" data-html2canvas-ignore="true">
                 <button 
-                  onClick={() => window.print()}
+                  onClick={async () => {
+                    try {
+                      const htmlToImage = await import('html-to-image');
+                      const { jsPDF } = await import('jspdf');
+                      const element = document.getElementById('roi-calculator-content');
+                      if (!element) return;
+                      
+                      const dataUrl = await htmlToImage.toPng(element, { 
+                          quality: 1.0,
+                          pixelRatio: 2,
+                          filter: (node) => {
+                              if (node instanceof Element && node.hasAttribute('data-html2canvas-ignore')) {
+                                  return false;
+                              }
+                              return true;
+                          }
+                      });
+                      
+                      const pdf = new jsPDF('p', 'mm', 'a4');
+                      const pdfWidth = pdf.internal.pageSize.getWidth();
+                      const pdfHeight = (element.offsetHeight * pdfWidth) / element.offsetWidth;
+                      
+                      pdf.addImage(dataUrl, 'PNG', 10, 10, pdfWidth - 20, (pdfWidth - 20) * (element.offsetHeight / element.offsetWidth));
+                      pdf.save('Enterprise-ROI-TCO-Raporu.pdf');
+                    } catch (error) {
+                      console.error("PDF generation failed:", error);
+                      window.print();
+                    }
+                  }}
                   className="px-6 py-3 bg-gray-900 dark:bg-white text-white dark:text-gray-900 rounded-xl font-bold flex items-center justify-center gap-2 hover:opacity-90 transition-opacity shadow-lg"
                 >
                   <Download className="w-4 h-4" /> {t('downloadPdf')}
