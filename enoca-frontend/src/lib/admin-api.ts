@@ -306,5 +306,21 @@ export const adminApi = {
     const app = list.find((a: JobApplication) => a.id === id);
     if (app) app.status = status;
     await postEntity('applications', list);
+  },
+
+  // Email
+  async sendEmail(to: string, subject: string, message: string): Promise<void> {
+    const res = await fetch('/api/admin/send-email', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ to, subject, message }),
+    });
+    
+    const data = await res.json();
+    if (!res.ok) {
+      throw new Error(data.details || data.error || "E-posta gönderilemedi");
+    }
+    
+    await this.logAction("E-posta Gönderildi", `"${to}" adresine e-posta gönderildi.`);
   }
 };

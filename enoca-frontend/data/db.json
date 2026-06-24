@@ -57,6 +57,14 @@
   ],
   "messages": [
     {
+      "name": "Selşm ef",
+      "email": "uysalselimefe@gmail.com",
+      "message": "sadsaddsa",
+      "id": 10,
+      "receivedAt": "2026-06-24T09:21:38.258Z",
+      "isRead": true
+    },
+    {
       "name": "sadasdsa",
       "email": "sadsad@sadsa.com",
       "message": "sadsadsadsadsadsadsa\nsadsad",
@@ -457,6 +465,27 @@
     {
       "jobId": 1,
       "jobTitle": "Frontend Developer (React/Next.js)",
+      "name": "sdsad",
+      "email": "sadsad@sdadsa.co",
+      "phone": "2323",
+      "id": 8,
+      "status": "new",
+      "appliedAt": "2026-06-24T09:48:32.621Z"
+    },
+    {
+      "jobId": 1,
+      "jobTitle": "Frontend Developer (React/Next.js)",
+      "name": "sadsadsa",
+      "email": "uysalselimefe@gmail.com",
+      "phone": "43243243",
+      "portfolioUrl": "http://localhost:3001/en/kariyer/1",
+      "id": 7,
+      "status": "new",
+      "appliedAt": "2026-06-24T09:48:02.041Z"
+    },
+    {
+      "jobId": 1,
+      "jobTitle": "Frontend Developer (React/Next.js)",
       "name": "dsadsa",
       "email": "sdsad@dasd.com",
       "phone": "34324243",
@@ -623,6 +652,24 @@
     ]
   },
   "logs": [
+    {
+      "id": 9,
+      "action": "E-posta Gönderildi",
+      "details": "\"uysalselimefe@gmail.com\" adresine e-posta gönderildi.",
+      "timestamp": "2026-06-24T09:46:37.145Z"
+    },
+    {
+      "id": 8,
+      "action": "E-posta Gönderildi",
+      "details": "\"uysalselimefe@gmail.com\" adresine e-posta gönderildi.",
+      "timestamp": "2026-06-24T09:45:16.776Z"
+    },
+    {
+      "id": 7,
+      "action": "E-posta Gönderildi",
+      "details": "\"uysalselimefe@gmail.com\" adresine e-posta gönderildi.",
+      "timestamp": "2026-06-24T09:21:56.506Z"
+    },
     {
       "id": 6,
       "action": "Haber Silindi",

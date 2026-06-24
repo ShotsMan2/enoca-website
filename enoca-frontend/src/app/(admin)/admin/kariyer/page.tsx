@@ -5,6 +5,7 @@ import { adminApi, JobPosting, JobApplication } from "@/lib/admin-api";
 import { Plus, Search, MapPin, Briefcase, Trash2, Edit, X, ExternalLink, FileText } from "lucide-react";
 import AdminHeader from "@/components/admin/AdminHeader";
 import ConfirmModal from "@/components/admin/ConfirmModal";
+import EmailModal from "@/components/admin/EmailModal";
 
 const emptyJob: Omit<JobPosting, "id"> = {
   title: "", department: "", type: "full-time", location: "İstanbul",
@@ -30,6 +31,9 @@ export default function AdminCareersPage() {
 
   // Başvuru detay modal
   const [appDetail, setAppDetail] = useState<JobApplication | null>(null);
+
+  // Email modal
+  const [emailModal, setEmailModal] = useState<{ open: boolean; to: string; subject: string }>({ open: false, to: "", subject: "" });
 
   const handleDownloadCV = (app: JobApplication) => {
     // Valid minimal PDF base64 string as fallback for old test records
@@ -222,8 +226,8 @@ export default function AdminCareersPage() {
                           </td>
                           <td className="px-6 py-4 text-gray-600 dark:text-gray-300">{app.jobTitle}</td>
                           <td className="px-6 py-4 hidden md:table-cell">
-                            <div className="flex flex-col gap-0.5 text-xs text-gray-500">
-                              <a href={`mailto:${app.email}`} className="hover:text-blue-600 transition-colors">{app.email}</a>
+                            <div className="flex flex-col gap-0.5 mt-2 text-xs text-gray-500 dark:text-gray-400">
+                              <a href="#" onClick={(e) => { e.preventDefault(); setEmailModal({ open: true, to: app.email, subject: `İş Başvurunuz: ${app.jobTitle}` }); }} className="hover:text-blue-600 transition-colors">{app.email}</a>
                               <span>{app.phone}</span>
                               {app.portfolioUrl && <a href={app.portfolioUrl} target="_blank" rel="noreferrer" className="text-blue-500 hover:underline flex items-center gap-1"><ExternalLink className="w-3 h-3" />Portfolyo</a>}
                               {app.cvFileName && <a href="#" onClick={(e) => { e.preventDefault(); handleDownloadCV(app); }} className="text-blue-500 hover:underline flex items-center gap-1 mt-0.5"><FileText className="w-3 h-3" />{app.cvFileName}</a>}
@@ -338,7 +342,7 @@ export default function AdminCareersPage() {
                 </div>
               </div>
               <div className="space-y-2 text-sm">
-                <div className="flex items-center gap-2 text-gray-600 dark:text-gray-300"><span className="text-gray-400 w-20 text-xs font-semibold uppercase">E-posta</span><a href={`mailto:${appDetail.email}`} className="text-blue-600 hover:underline">{appDetail.email}</a></div>
+                <div className="flex items-center gap-2 text-gray-600 dark:text-gray-300"><span className="text-gray-400 w-20 text-xs font-semibold uppercase">E-posta</span><a href="#" onClick={(e) => { e.preventDefault(); setEmailModal({ open: true, to: appDetail.email, subject: `İş Başvurunuz: ${appDetail.jobTitle}` }); }} className="text-blue-600 hover:underline">{appDetail.email}</a></div>
                 <div className="flex items-center gap-2 text-gray-600 dark:text-gray-300"><span className="text-gray-400 w-20 text-xs font-semibold uppercase">Telefon</span><a href={`tel:${appDetail.phone}`} className="hover:text-blue-600">{appDetail.phone}</a></div>
                 {appDetail.portfolioUrl && <div className="flex items-center gap-2"><span className="text-gray-400 w-20 text-xs font-semibold uppercase">Portfolyo</span><a href={appDetail.portfolioUrl} target="_blank" rel="noreferrer" className="text-blue-500 hover:underline flex items-center gap-1"><ExternalLink className="w-3 h-3" />Görüntüle</a></div>}
                 {appDetail.cvFileName && <div className="flex items-center gap-2"><span className="text-gray-400 w-20 text-xs font-semibold uppercase">CV (PDF)</span><a href="#" onClick={(e) => { e.preventDefault(); handleDownloadCV(appDetail); }} className="text-blue-500 hover:underline flex items-center gap-1 font-medium"><FileText className="w-4 h-4" />{appDetail.cvFileName} (İndir)</a></div>}
@@ -356,7 +360,7 @@ export default function AdminCareersPage() {
                 </div>
               </div>
               <div className="flex gap-2 pt-2">
-                <a href={`mailto:${appDetail.email}`} className="flex-1 py-2.5 text-center rounded-xl bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold transition-colors">E-posta Gönder</a>
+                <button onClick={() => setEmailModal({ open: true, to: appDetail.email, subject: `İş Başvurunuz: ${appDetail.jobTitle}` })} className="flex-1 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold transition-colors">E-posta Gönder</button>
                 <button onClick={() => setAppDetail(null)} className="flex-1 py-2.5 rounded-xl border border-gray-300 dark:border-gray-600 text-sm font-semibold text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors">Kapat</button>
               </div>
             </div>
@@ -370,6 +374,13 @@ export default function AdminCareersPage() {
         onConfirm={handleDeleteJob}
         onCancel={() => setDeleteModal({ open: false, id: null, type: "job" })}
         isLoading={deleting}
+      />
+
+      <EmailModal 
+        isOpen={emailModal.open} 
+        onClose={() => setEmailModal({ open: false, to: "", subject: "" })} 
+        toEmail={emailModal.to} 
+        defaultSubject={emailModal.subject} 
       />
     </>
   );
