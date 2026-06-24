@@ -114,6 +114,7 @@ export interface JobApplication {
   phone: string;
   portfolioUrl?: string;
   cvFileName?: string;
+  cvFileBase64?: string;
   status: "new" | "reviewed" | "rejected" | "accepted";
   appliedAt: string;
 }
