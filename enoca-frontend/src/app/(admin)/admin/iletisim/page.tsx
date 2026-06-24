@@ -6,6 +6,7 @@ import ConfirmModal from "@/components/admin/ConfirmModal";
 import { adminApi, type ContactMessage } from "@/lib/admin-api";
 import { useToast } from "@/components/admin/ToastProvider";
 import { ArrowUpDown, Download, FileText } from "lucide-react";
+import EmailModal from "@/components/admin/EmailModal";
 
 export default function IletisimPage() {
   const [messages, setMessages] = useState<ContactMessage[]>([]);
@@ -13,6 +14,7 @@ export default function IletisimPage() {
   const [loading, setLoading] = useState(true);
   const [filter, setFilter] = useState<"all" | "unread" | "read">("all");
   const [deleteModal, setDeleteModal] = useState<{ open: boolean; id: number | null }>({ open: false, id: null });
+  const [emailModal, setEmailModal] = useState<{ open: boolean; to: string; subject: string }>({ open: false, to: "", subject: "" });
   const [deleting, setDeleting] = useState(false);
   const [search, setSearch] = useState("");
   
@@ -139,7 +141,7 @@ export default function IletisimPage() {
                       </div>
                       <div>
                         <p className={`text-sm font-semibold leading-none ${!msg.isRead ? "text-gray-900 dark:text-white" : "text-gray-700 dark:text-gray-300"}`}>{msg.name}</p>
-                        <p className="text-xs text-gray-400 mt-0.5">{msg.email}</p>
+                        <a href="#" onClick={(e) => { e.preventDefault(); e.stopPropagation(); setEmailModal({ open: true, to: msg.email, subject: `Yanıt: İletişim Mesajınız` }); }} className={`text-xs mt-0.5 hover:underline ${!msg.isRead ? "text-blue-500" : "text-gray-400"}`}>{msg.email}</a>
                       </div>
                     </div>
                     <div className="flex items-center gap-1.5 flex-shrink-0">
@@ -167,10 +169,10 @@ export default function IletisimPage() {
                   </div>
                 </div>
                 <div className="flex items-center gap-2">
-                  <a href={`mailto:${selected.email}`} className="px-3 py-1.5 text-xs font-bold text-blue-600 hover:bg-blue-50 dark:hover:bg-blue-900/20 rounded-lg transition-colors border border-blue-200 dark:border-blue-900/50 flex items-center gap-1.5">
+                  <button onClick={() => setEmailModal({ open: true, to: selected.email, subject: `Yanıt: İletişim Mesajınız` })} className="px-3 py-1.5 text-xs font-bold text-blue-600 hover:bg-blue-50 dark:hover:bg-blue-900/20 rounded-lg transition-colors border border-blue-200 dark:border-blue-900/50 flex items-center gap-1.5">
                     <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg>
                     Yanıtla
-                  </a>
+                  </button>
                   <button onClick={() => setDeleteModal({ open: true, id: selected.id })} className="px-3 py-1.5 text-xs font-bold text-red-600 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-lg transition-colors border border-red-200 dark:border-red-900/50">Sil</button>
                 </div>
               </div>
@@ -209,6 +211,13 @@ export default function IletisimPage() {
         onConfirm={handleDelete}
         onCancel={() => setDeleteModal({ open: false, id: null })}
         isLoading={deleting}
+      />
+
+      <EmailModal 
+        isOpen={emailModal.open} 
+        onClose={() => setEmailModal({ open: false, to: "", subject: "" })} 
+        toEmail={emailModal.to} 
+        defaultSubject={emailModal.subject} 
       />
     </>
   );
