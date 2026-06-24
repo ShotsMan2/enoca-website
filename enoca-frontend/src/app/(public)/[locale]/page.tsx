@@ -105,13 +105,13 @@ export default async function Home() {
         </div>
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full text-center flex flex-col items-center">
-          <motion.div 
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
-            className="space-y-8 relative z-10 flex flex-col items-center"
-          >
-            <div className="inline-flex items-center gap-3 rounded-none border border-accent/40 bg-accent/10 px-4 py-1.5 clip-diagonal shadow-glow-md">
+          <div className="space-y-8 relative z-10 flex flex-col items-center overflow-visible w-full">
+            <motion.div 
+              initial={{ opacity: 0, y: -20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+              className="inline-flex items-center gap-3 rounded-none border border-accent/40 bg-accent/10 px-4 py-1.5 clip-diagonal shadow-glow-md"
+            >
               <span className="relative flex h-2 w-2">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent opacity-75"></span>
                 <span className="relative inline-flex rounded-full h-2 w-2 bg-accent shadow-glow-sm"></span>
@@ -119,25 +119,52 @@ export default async function Home() {
               <span className="font-mono text-xs font-bold tracking-[0.2em] text-accent uppercase">
                 {tHero('badge')}
               </span>
-            </div>
+            </motion.div>
 
-            <h1 className="text-[3.5rem] leading-[1.05] sm:text-[4.5rem] lg:text-[6rem] font-black tracking-tighter text-foreground mb-4 font-display drop-shadow-2xl max-w-4xl pr-2">
-              {heroSettings.mainTitle}
+            <h1 className="flex flex-col items-center text-[3.5rem] leading-[1.05] sm:text-[4.5rem] lg:text-[6rem] font-black tracking-tighter text-foreground mb-4 font-display drop-shadow-2xl max-w-4xl pr-2 text-center">
+               <motion.span 
+                 initial={{ opacity: 0, x: 100 }}
+                 animate={{ opacity: 1, x: 0 }}
+                 transition={{ duration: 0.8, ease: "easeOut" }}
+                 className="block"
+               >
+                 {heroSettings.mainTitle.replace(heroSettings.highlightedWord || "", "").trim()}
+               </motion.span>
+               {heroSettings.highlightedWord && (
+                 <motion.span 
+                   initial={{ opacity: 0, x: -100 }}
+                   animate={{ opacity: 1, x: 0 }}
+                   transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
+                   className="block text-foreground mt-2" 
+                 >
+                   {heroSettings.highlightedWord}
+                 </motion.span>
+               )}
             </h1>
             
-            <p className="text-lg sm:text-xl text-muted-foreground max-w-2xl leading-relaxed font-mono">
+            <motion.p 
+              initial={{ opacity: 0, y: 50 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, ease: "easeOut", delay: 0.5 }}
+              className="text-lg sm:text-xl text-muted-foreground max-w-2xl leading-relaxed font-mono mt-4"
+            >
               {heroSettings.subtitle}
-            </p>
+            </motion.p>
 
-            <div className="flex flex-col sm:flex-row gap-4 pt-6 justify-center">
+            <motion.div 
+              initial={{ opacity: 0, y: 50 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, ease: "easeOut", delay: 0.7 }}
+              className="flex flex-col sm:flex-row gap-4 pt-6 justify-center"
+            >
               <Button asChild size="lg" className="h-14 px-8 text-sm font-black tracking-widest bg-accent hover:bg-white text-accent-foreground hover:text-black rounded-none clip-chamfer shadow-glow-md hover:shadow-glow-lg transition-all duration-300">
                 <Link href={heroSettings.button1Url || "/cozumler"}>{translateDB(heroSettings.button1Text)}</Link>
               </Button>
               <Button asChild size="lg" variant="secondary" className="h-14 px-8 text-sm font-bold tracking-widest border border-accent/40 bg-transparent hover:bg-accent/10 text-accent rounded-none clip-chamfer transition-all duration-300">
                 <Link href={heroSettings.button2Url || "/iletisim"}>{translateDB(heroSettings.button2Text)}</Link>
               </Button>
-            </div>
-          </motion.div>
+            </motion.div>
+          </div>
         </div>
       </section>
 
