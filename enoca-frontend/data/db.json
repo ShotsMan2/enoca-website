@@ -390,12 +390,21 @@
     },
     {
       "menuTitle": "Yeni Sayfa",
-      "slug": "/yeni-sayfa",
+      "slug": "/cozumler/yeni-sayfa",
       "category": "Çözümler",
       "content": "<p>İçeriği&nbsp;buraya&nbsp;yazın...</p>",
       "status": "published",
-      "updatedAt": "2026-06-23T12:54:26.911Z",
+      "updatedAt": "2026-06-24T08:59:18.450Z",
       "id": 31
+    },
+    {
+      "menuTitle": "efe",
+      "slug": "/cozumler/yeni-sayfa/selimefe",
+      "category": "Çözümler",
+      "content": "<p>sadsadsadsasadsad</p>",
+      "status": "published",
+      "updatedAt": "2026-06-24T08:59:25.659Z",
+      "id": 32
     }
   ],
   "jobs": [
@@ -445,6 +454,18 @@
     }
   ],
   "applications": [
+    {
+      "jobId": 1,
+      "jobTitle": "Frontend Developer (React/Next.js)",
+      "name": "se.lefe",
+      "email": "ads@sda.com",
+      "phone": "023242",
+      "portfolioUrl": "http://localhost:3001/en/kariyer/1",
+      "cvFileName": "Ödev 9 (Sıralama Algoritmaları) (5) (4).pdf",
+      "id": 5,
+      "status": "new",
+      "appliedAt": "2026-06-24T09:08:16.617Z"
+    },
     {
       "jobId": 1,
       "jobTitle": "Frontend Developer (React/Next.js)",
