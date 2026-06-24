@@ -154,7 +154,7 @@
     "name": "Full Name",
     "email": "Email",
     "phone": "Phone",
-    "portfolioUrl": "Portfolio / LinkedIn (Optional)",
+    "portfolioUrl": "Portfolio / LinkedIn",
     "submit": "Submit Application",
     "applicationReceived": "Application Received!",
     "applicationReceivedText": "Thank you for your interest. Our HR team will evaluate your application and get back to you.",

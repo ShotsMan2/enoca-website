@@ -14,6 +14,10 @@ export default function JobApplicationForm({ jobId, jobTitle }: { jobId: number,
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (!cvFile) {
+      alert("Lütfen bir CV yükleyiniz. / Please upload a CV.");
+      return;
+    }
     setStatus("loading");
     try {
       let cvBase64: string | undefined = undefined;
@@ -54,9 +58,8 @@ export default function JobApplicationForm({ jobId, jobTitle }: { jobId: number,
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
       <div>
-        <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-1">{t('name')} *</label>
+        <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-1">{t('name')}</label>
         <input 
-          required 
           type="text" 
           value={formData.name} 
           onChange={e => setFormData({...formData, name: e.target.value})}
@@ -86,8 +89,9 @@ export default function JobApplicationForm({ jobId, jobTitle }: { jobId: number,
         </div>
       </div>
       <div>
-        <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-1">{t('portfolioUrl')}</label>
+        <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-1">{t('portfolioUrl')} *</label>
         <input 
+          required
           type="url" 
           value={formData.portfolioUrl} 
           onChange={e => setFormData({...formData, portfolioUrl: e.target.value})}
@@ -96,7 +100,7 @@ export default function JobApplicationForm({ jobId, jobTitle }: { jobId: number,
       </div>
 
       <div>
-        <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">CV (PDF)</label>
+        <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">CV (PDF) *</label>
         
         {!cvFile ? (
           <div className="relative border-2 border-dashed border-gray-300 dark:border-gray-700 rounded-xl p-6 text-center hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors cursor-pointer group">

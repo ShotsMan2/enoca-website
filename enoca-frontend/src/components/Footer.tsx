@@ -3,17 +3,29 @@
 import { useState } from 'react';
 import { Link } from '@/i18n/routing';
 import { useTranslations, useLocale } from 'next-intl';
-import { SiteSettings, ContentPage } from '@/lib/admin-api';
+import { adminApi, SiteSettings, ContentPage } from '@/lib/admin-api';
 
 export default function Footer({ settings, pages = [] }: { settings?: SiteSettings, pages?: ContentPage[] }) {
     const t = useTranslations('Footer');
     const locale = useLocale();
     const [subscribed, setSubscribed] = useState(false);
+    const [email, setEmail] = useState("");
+    const [loading, setLoading] = useState(false);
 
-    const handleSubscribe = (e: React.FormEvent) => {
+    const handleSubscribe = async (e: React.FormEvent) => {
         e.preventDefault();
-        setSubscribed(true);
-        setTimeout(() => setSubscribed(false), 3000);
+        if (!email) return;
+        setLoading(true);
+        try {
+            await adminApi.subscribeNewsletter(email);
+            setSubscribed(true);
+            setEmail("");
+            setTimeout(() => setSubscribed(false), 5000);
+        } catch (error) {
+            console.error(error);
+        } finally {
+            setLoading(false);
+        }
     };
 
     type MenuItem = {
@@ -223,8 +235,8 @@ export default function Footer({ settings, pages = [] }: { settings?: SiteSettin
                                 </div>
                             ) : (
                                 <form className="flex mt-2 relative z-10" onSubmit={handleSubscribe}>
-                                    <input type="email" required placeholder={t('newsletterEmail')} className="flex-1 h-10 px-4 text-xs bg-background border border-border outline-none focus:border-accent text-foreground font-mono placeholder-muted-foreground transition-all focus:ring-1 focus:ring-accent/50" />
-                                    <button type="submit" className="h-10 px-5 bg-accent text-accent-foreground text-[11px] font-black hover:bg-accent hover:text-white dark:hover:bg-white dark:hover:text-black transition-colors uppercase font-mono clip-chamfer ml-2 shadow-glow-sm">{t('newsletterSubmit')}</button>
+                                    <input type="email" required value={email} onChange={(e) => setEmail(e.target.value)} placeholder={t('newsletterEmail')} className="flex-1 h-10 px-4 text-xs bg-background border border-border outline-none focus:border-accent text-foreground font-mono placeholder-muted-foreground transition-all focus:ring-1 focus:ring-accent/50" disabled={loading} />
+                                    <button type="submit" disabled={loading} className="h-10 px-5 bg-accent text-accent-foreground text-[11px] font-black hover:bg-accent hover:text-white dark:hover:bg-white dark:hover:text-black transition-colors uppercase font-mono clip-chamfer ml-2 shadow-glow-sm disabled:opacity-70">{loading ? "..." : t('newsletterSubmit')}</button>
                                 </form>
                             )}
                         </div>

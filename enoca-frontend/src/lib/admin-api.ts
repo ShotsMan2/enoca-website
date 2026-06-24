@@ -119,6 +119,13 @@ export interface JobApplication {
   appliedAt: string;
 }
 
+
+export interface NewsletterSubscriber {
+  id: number;
+  email: string;
+  subscribedAt: string;
+}
+
 // ─── API Helper Fonksiyonu ────────────────────────────────────
 async function fetchEntity(entity: string) {
   const res = await fetch(`/api/admin/${entity}`);
@@ -321,6 +328,39 @@ export const adminApi = {
       throw new Error(data.details || data.error || "E-posta gönderilemedi");
     }
     
+    
     await this.logAction("E-posta Gönderildi", `"${to}" adresine e-posta gönderildi.`);
+  },
+
+  // Newsletter
+  async subscribeNewsletter(email: string): Promise<void> {
+    const list = await fetchEntity('newsletterSubscribers');
+    // Check if already subscribed
+    if (list.find((s: NewsletterSubscriber) => s.email === email)) {
+      return;
+    }
+    const newSubscriber: NewsletterSubscriber = {
+      id: Date.now(),
+      email,
+      subscribedAt: new Date().toISOString()
+    };
+    list.push(newSubscriber);
+    await postEntity('newsletterSubscribers', list);
+    await this.logAction("Yeni Bülten Aboneliği", `${email} bültene abone oldu.`);
+  },
+  
+  async getNewsletterSubscribers(): Promise<NewsletterSubscriber[]> {
+    try {
+      return await fetchEntity('newsletterSubscribers');
+    } catch {
+      return [];
+    }
+  },
+
+  async deleteNewsletterSubscriber(id: number): Promise<void> {
+    const list = await fetchEntity('newsletterSubscribers');
+    const filtered = list.filter((s: NewsletterSubscriber) => s.id !== id);
+    await postEntity('newsletterSubscribers', filtered);
+    await this.logAction("Bülten Aboneliği İptal Edildi", `Bir abonelik silindi (ID: ${id}).`);
   }
 };
