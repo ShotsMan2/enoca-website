@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
+import { revalidatePath } from 'next/cache';
 
 export async function GET(request: Request, { params }: { params: Promise<{ entity: string }> }) {
   const { entity } = await params;
@@ -37,11 +38,14 @@ export async function POST(request: Request, { params }: { params: Promise<{ ent
     const data = await request.json();
     
     if (['stats', 'settings', 'hero', 'homepage'].includes(entity)) {
+      const stringifiedData = JSON.stringify(data);
       await prisma.setting.upsert({
         where: { key: entity },
-        update: { value: data },
-        create: { key: entity, value: data },
+        update: { value: stringifiedData },
+        create: { key: entity, value: stringifiedData },
       });
+      // Cache'i temizle
+      revalidatePath('/', 'layout');
       return NextResponse.json({ success: true, data });
     }
     
@@ -70,13 +74,23 @@ export async function POST(request: Request, { params }: { params: Promise<{ ent
       if(data.length > 0) await prisma.page.createMany({ data });
     } else if (entity === 'jobs') {
       await prisma.job.deleteMany();
-      if(data.length > 0) await prisma.job.createMany({ data });
+      if(data.length > 0) {
+        const jobsData = data.map((j: any) => ({
+          ...j,
+          requirements: JSON.stringify(j.requirements || []),
+          responsibilities: JSON.stringify(j.responsibilities || [])
+        }));
+        await prisma.job.createMany({ data: jobsData });
+      }
     } else if (entity === 'applications') {
       await prisma.application.deleteMany();
       if(data.length > 0) await prisma.application.createMany({ data });
     } else {
       return NextResponse.json({ error: 'Böyle bir entity yok' }, { status: 404 });
     }
+
+    // Cache'i temizle
+    revalidatePath('/', 'layout');
 
     return NextResponse.json({ success: true, data });
   } catch (error) {

@@ -2,13 +2,7 @@ import { PrismaClient } from '@prisma/client';
 import * as fs from 'fs';
 import * as path from 'path';
 
-import { Pool } from 'pg';
-import { PrismaPg } from '@prisma/adapter-pg';
-
-const connectionString = process.env.DATABASE_URL || "postgresql://postgres:SelimEfe23570@localhost:5432/enoca_db";
-const pool = new Pool({ connectionString });
-const adapter = new PrismaPg(pool);
-const prisma = new PrismaClient({ adapter });
+const prisma = new PrismaClient();
 const dbPath = path.join(process.cwd(), 'data', 'db.json');
 
 async function main() {
@@ -94,8 +88,8 @@ async function main() {
           location: j.location,
           type: j.type,
           description: j.description,
-          requirements: j.requirements || [],
-          responsibilities: j.responsibilities || [],
+          requirements: JSON.stringify(j.requirements || []),
+          responsibilities: JSON.stringify(j.responsibilities || []),
           status: j.status,
           createdAt: j.createdAt || new Date().toISOString(),
         },
@@ -128,8 +122,8 @@ async function main() {
     if (data[key]) {
       await prisma.setting.create({
         data: {
-          key,
-          value: data[key] as any,
+          key: key,
+          value: JSON.stringify(data[key]),
         },
       });
     }

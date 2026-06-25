@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { Link } from "@/i18n/routing";
+import Link from "next/link";
 import { ArrowLeft, Home, Search, Compass } from "lucide-react";
 import "../../src/app/globals.css"; // Ensure styles are loaded
 

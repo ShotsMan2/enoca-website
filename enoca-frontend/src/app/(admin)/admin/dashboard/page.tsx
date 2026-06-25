@@ -113,7 +113,7 @@ export default function DashboardPage() {
                   </div>
                 ))
               ) : recentNews.map(n => (
-                <div key={n.id} className="px-6 py-4 flex items-center gap-3 hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors">
+                <Link href="/admin/haberler" key={n.id} className="block px-6 py-4 flex items-center gap-3 hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors cursor-pointer">
                   <div className="w-10 h-10 rounded-xl overflow-hidden flex-shrink-0 bg-gray-100">
                     <img src={n.imageUrl} alt="" className="w-full h-full object-cover" />
                   </div>
@@ -124,7 +124,7 @@ export default function DashboardPage() {
                   <span className={`text-xs font-semibold px-2 py-1 rounded-full flex-shrink-0 ${n.status === "published" ? "bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400" : "bg-gray-100 dark:bg-gray-800 text-gray-500"}`}>
                     {n.status === "published" ? "Yayında" : "Taslak"}
                   </span>
-                </div>
+                </Link>
               ))}
             </div>
           </div>
@@ -144,7 +144,7 @@ export default function DashboardPage() {
                   </div>
                 ))
               ) : recentMessages.map(m => (
-                <div key={m.id} className={`px-6 py-4 hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors ${!m.isRead ? "border-l-2 border-blue-500" : ""}`}>
+                <Link href="/admin/iletisim" key={m.id} className={`block px-6 py-4 hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors cursor-pointer ${!m.isRead ? "border-l-2 border-blue-500" : ""}`}>
                   <div className="flex items-center justify-between mb-1">
                     <p className="text-sm font-semibold text-gray-800 dark:text-white flex items-center gap-2">
                       {m.name}
@@ -153,7 +153,7 @@ export default function DashboardPage() {
                     <p className="text-xs text-gray-400">{new Date(m.receivedAt).toLocaleDateString("tr-TR")}</p>
                   </div>
                   <p className="text-xs text-gray-500 dark:text-gray-400 truncate">{m.message}</p>
-                </div>
+                </Link>
               ))}
             </div>
           </div>

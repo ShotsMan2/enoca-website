@@ -3,23 +3,24 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
 }
 
 model categories {
-  id    Int     @id(map: "PK_24dbc6126a28ff948da33e97d3b") @default(autoincrement())
-  name  String  @db.VarChar
-  slug  String  @unique(map: "UQ_420d9f679d41281f282f5bc7d09") @db.VarChar
+  id    Int     @id @default(autoincrement())
+  name  String
+  slug  String  @unique
   order Int     @default(0)
   links links[]
 }
 
 model links {
-  id         Int         @id(map: "PK_ecf17f4a741d3c5ba0b4c5ab4b6") @default(autoincrement())
-  title      String      @db.VarChar
-  url        String      @db.VarChar
+  id         Int         @id @default(autoincrement())
+  title      String
+  url        String
   categoryId Int?
-  categories categories? @relation(fields: [categoryId], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "FK_e7d9cd6d4f033f1411d5f15a295")
+  categories categories? @relation(fields: [categoryId], references: [id], onDelete: Cascade, onUpdate: NoAction)
 }
 
 model NewsletterSubscriber {
@@ -29,12 +30,12 @@ model NewsletterSubscriber {
 }
 
 model News {
-  id          Int      @id @default(autoincrement())
+  id          Int    @id @default(autoincrement())
   title       String
   summary     String
   imageUrl    String
   publishedAt String
-  status      String   @default("draft")
+  status      String @default("draft")
 }
 
 model Message {
@@ -47,44 +48,44 @@ model Message {
 }
 
 model Page {
-  id          Int      @id @default(autoincrement())
+  id          Int     @id @default(autoincrement())
   menuTitle   String
   menuTitleEn String?
-  slug        String   @unique
+  slug        String  @unique
   category    String
   content     String
-  status      String   @default("draft")
+  status      String  @default("draft")
   updatedAt   String
 }
 
 model Setting {
   id    Int    @id @default(autoincrement())
   key   String @unique
-  value Json
+  value String
 }
 
 model Job {
-  id               Int      @id @default(autoincrement())
+  id               Int    @id @default(autoincrement())
   title            String
   department       String
   location         String
   type             String
   description      String
-  requirements     Json
-  responsibilities Json
-  status           String   @default("active")
+  requirements     String
+  responsibilities String
+  status           String @default("active")
   createdAt        String
 }
 
 model Application {
-  id           Int      @id @default(autoincrement())
-  jobId        Int
-  fullName     String
-  email        String
-  phone        String
-  linkedinUrl  String
-  cvUrl        String
-  coverLetter  String
-  status       String   @default("new")
-  appliedAt    String
+  id          Int    @id @default(autoincrement())
+  jobId       Int
+  fullName    String
+  email       String
+  phone       String
+  linkedinUrl String
+  cvUrl       String
+  coverLetter String
+  status      String @default("new")
+  appliedAt   String
 }
