@@ -76,9 +76,9 @@ export default function ProjectConfigurator() {
                         setCompanySize(opt.id);
                         nextStep();
                       }}
-                      className={`p-6 clip-chamfer border-2 text-left transition-all ${selections.companySize === opt.id ? 'border-accent bg-accent/10 shadow-glow-sm' : 'border-border bg-background hover:border-accent/50'}`}
+                      className={`group p-6 clip-chamfer border-2 text-left transition-all ${selections.companySize === opt.id ? 'border-accent bg-accent/10 shadow-glow-sm' : 'border-border bg-background hover:border-accent/50'}`}
                     >
-                      <h4 className={`text-lg font-bold mb-1 font-mono uppercase ${selections.companySize === opt.id ? 'text-accent' : 'text-foreground'}`}>{opt.title}</h4>
+                      <h4 className={`text-lg font-bold mb-1 font-mono uppercase transition-colors group-hover:text-accent ${selections.companySize === opt.id ? 'text-accent' : 'text-foreground'}`}>{opt.title}</h4>
                       <p className="text-xs font-mono text-muted-foreground">{opt.desc}</p>
                     </button>
                   ))}
@@ -111,7 +111,7 @@ export default function ProjectConfigurator() {
                       className="p-6 clip-chamfer border-2 text-left border-border bg-background hover:border-accent/50 transition-all flex flex-col items-start hover:shadow-glow-sm group"
                     >
                       <div className="text-muted-foreground group-hover:text-accent transition-colors mb-2">{opt.icon}</div>
-                      <h4 className="text-sm font-bold text-foreground leading-tight uppercase font-mono">{opt.title}</h4>
+                      <h4 className="text-sm font-bold transition-colors group-hover:text-accent text-foreground leading-tight uppercase font-mono">{opt.title}</h4>
                     </button>
                   ))}
                 </div>
@@ -141,10 +141,10 @@ export default function ProjectConfigurator() {
                         onClick={() => {
                           toggleTech(opt.id);
                         }}
-                        className={`p-4 clip-chamfer border-2 flex items-center gap-3 transition-all ${isSelected ? 'border-accent bg-accent/10 shadow-glow-sm' : 'border-border bg-background'}`}
+                        className={`group p-4 clip-chamfer border-2 flex items-center gap-3 transition-all ${isSelected ? 'border-accent bg-accent/10 shadow-glow-sm' : 'border-border bg-background hover:border-accent/50'}`}
                       >
-                        <div className={`${isSelected ? 'text-accent' : 'text-muted-foreground'}`}>{opt.icon}</div>
-                        <span className={`text-sm font-bold font-mono uppercase ${isSelected ? 'text-accent' : 'text-foreground'}`}>{opt.title}</span>
+                        <div className={`transition-colors group-hover:text-accent ${isSelected ? 'text-accent' : 'text-muted-foreground'}`}>{opt.icon}</div>
+                        <span className={`text-sm font-bold font-mono uppercase transition-colors group-hover:text-accent ${isSelected ? 'text-accent' : 'text-foreground'}`}>{opt.title}</span>
                       </button>
                     );
                   })}

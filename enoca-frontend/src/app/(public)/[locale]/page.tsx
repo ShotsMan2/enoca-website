@@ -276,7 +276,15 @@ export default async function Home() {
             {realReferences.map((ref, idx: number) => (
                 <a key={idx} href={ref.url} target="_blank" rel="noopener noreferrer" className="flex flex-col items-center justify-center px-8 opacity-50 grayscale hover:opacity-100 hover:grayscale-0 transition-all duration-300 gap-4 group cursor-pointer">
                     <div className="w-40 h-20 bg-white/5 rounded-xl border border-border flex items-center justify-center p-4 group-hover:border-accent/50 transition-colors">
-                        <img src={ref.image} alt={ref.name} className="w-full h-full object-contain" />
+                        <img 
+                          src={ref.image} 
+                          alt={ref.name} 
+                          className={`w-full h-full object-contain ${
+                            ['Akbank', 'Trendyol', 'Garanti BBVA', 'Koç Holding'].includes(ref.name)
+                              ? 'dark:invert dark:hue-rotate-180 dark:brightness-150'
+                              : ''
+                          }`} 
+                        />
                     </div>
                 </a>
             ))}
@@ -317,7 +325,7 @@ export default async function Home() {
                       </div>
                     </div>
                     
-                    <h3 className="text-2xl font-black text-foreground mb-6 uppercase tracking-wider font-mono border-b border-border/50 pb-4">{translateDB(cat.name)}</h3>
+                    <h3 className="text-2xl font-black text-foreground group-hover:text-accent transition-colors duration-300 mb-6 uppercase tracking-wider font-mono border-b border-border/50 pb-4">{translateDB(cat.name)}</h3>
                     <div className="flex flex-col gap-3 mb-6 pointer-events-auto relative z-20">
                       {cat.links?.map((link: { id: string | number; url: string; title: string }) => (
                         <Link 
