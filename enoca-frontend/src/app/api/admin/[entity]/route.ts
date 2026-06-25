@@ -15,11 +15,22 @@ export async function GET(request: Request, { params }: { params: Promise<{ enti
     else if (entity === 'news') result = await prisma.news.findMany({ orderBy: { id: 'asc' } });
     else if (entity === 'messages') result = await prisma.message.findMany({ orderBy: { id: 'asc' } });
     else if (entity === 'pages') result = await prisma.page.findMany({ orderBy: { id: 'asc' } });
-    else if (entity === 'jobs') result = await prisma.job.findMany({ orderBy: { id: 'asc' } });
+    else if (entity === 'jobs') {
+      const rawJobs = await prisma.job.findMany({ orderBy: { id: 'asc' } });
+      result = rawJobs.map(j => ({
+        ...j,
+        requirements: typeof j.requirements === 'string' ? JSON.parse(j.requirements) : j.requirements,
+        responsibilities: typeof j.responsibilities === 'string' ? JSON.parse(j.responsibilities) : j.responsibilities
+      }));
+    }
     else if (entity === 'applications') result = await prisma.application.findMany({ orderBy: { id: 'asc' } });
     else if (['stats', 'settings', 'hero', 'homepage'].includes(entity)) {
       const setting = await prisma.setting.findUnique({ where: { key: entity } });
-      result = setting ? setting.value : {};
+      try {
+        result = setting ? JSON.parse(setting.value) : {};
+      } catch {
+        result = setting ? setting.value : {};
+      }
     } else {
       return NextResponse.json({ error: 'Böyle bir entity yok' }, { status: 404 });
     }
