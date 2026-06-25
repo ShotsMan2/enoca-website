@@ -39,10 +39,9 @@ export default function ROICalculator() {
   const results = calculateROI();
 
   return (
-    <div className="w-full max-w-4xl mx-auto bg-white dark:bg-gray-900 rounded-3xl shadow-2xl border border-gray-200 dark:border-gray-800 overflow-hidden relative">
-      {/* Decorative top bar */}
-      <div className="h-2 w-full bg-gradient-to-r from-blue-600 via-indigo-500 to-purple-600" />
+    <div className="w-full max-w-4xl mx-auto bg-white dark:bg-gray-900 rounded-3xl border border-gray-200 dark:border-gray-800 overflow-hidden relative">
       
+
       <div className="p-8 md:p-12">
         <div className="flex items-center gap-4 mb-8">
           <div className="w-12 h-12 rounded-2xl bg-blue-50 dark:bg-blue-900/20 flex items-center justify-center border border-blue-100 dark:border-blue-800">
@@ -95,7 +94,7 @@ export default function ROICalculator() {
               <button 
                 onClick={handleCalculate}
                 disabled={calculating}
-                className="w-full md:w-auto px-8 py-4 bg-blue-600 hover:bg-blue-700 text-white rounded-xl font-bold text-lg flex items-center justify-center gap-2 transition-all disabled:opacity-70 group shadow-xl shadow-blue-500/20"
+                className="w-full md:w-auto px-8 py-4 bg-blue-600 hover:bg-blue-700 text-white rounded-xl font-bold text-lg flex items-center justify-center gap-2 transition-all disabled:opacity-70 group"
               >
                 {calculating ? (
                   <>

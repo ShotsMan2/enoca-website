@@ -56,7 +56,7 @@ export default function StatsCard({ title, value, change, positive = true, icon,
           </span>
         )}
       </div>
-      <p className="text-3xl font-black text-gray-800 dark:text-white mb-1">{value.toLocaleString()}</p>
+      <p className="text-3xl font-black text-gray-800 dark:text-white mb-1">{value?.toLocaleString() ?? "—"}</p>
       <p className="text-sm font-medium text-gray-500 dark:text-gray-400">{title}</p>
     </div>
   );

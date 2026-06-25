@@ -32,7 +32,7 @@ export default function AnasayfaIcerikPage() {
     if (!data) return;
     setData({
       ...data,
-      features: data.features.map(f => f.id === id ? { ...f, [field]: value } : f)
+      features: (data.features || []).map(f => f.id === id ? { ...f, [field]: value } : f)
     });
   };
 
@@ -49,7 +49,7 @@ export default function AnasayfaIcerikPage() {
     setData({
       ...data,
       categories: [
-        ...data.categories,
+        ...(data.categories || []),
         { id: Date.now().toString(), name: "Yeni Kategori", links: [] }
       ]
     });
@@ -59,7 +59,7 @@ export default function AnasayfaIcerikPage() {
     if (!data) return;
     setData({
       ...data,
-      categories: data.categories.map(c => c.id === id ? { ...c, name } : c)
+      categories: (data.categories || []).map(c => c.id === id ? { ...c, name } : c)
     });
   };
 
@@ -67,7 +67,7 @@ export default function AnasayfaIcerikPage() {
     if (!data) return;
     setData({
       ...data,
-      categories: data.categories.filter(c => c.id !== id)
+      categories: (data.categories || []).filter(c => c.id !== id)
     });
   };
 
@@ -75,11 +75,11 @@ export default function AnasayfaIcerikPage() {
     if (!data) return;
     setData({
       ...data,
-      categories: data.categories.map(c => {
+      categories: (data.categories || []).map(c => {
         if (c.id === categoryId) {
           return {
             ...c,
-            links: [...c.links, { id: Date.now().toString(), title: "Yeni Link", url: "/" }]
+            links: [...(c.links || []), { id: Date.now().toString(), title: "Yeni Link", url: "/" }]
           };
         }
         return c;
@@ -91,11 +91,11 @@ export default function AnasayfaIcerikPage() {
     if (!data) return;
     setData({
       ...data,
-      categories: data.categories.map(c => {
+      categories: (data.categories || []).map(c => {
         if (c.id === categoryId) {
           return {
             ...c,
-            links: c.links.map(l => l.id === linkId ? { ...l, [field]: value } : l)
+            links: (c.links || []).map(l => l.id === linkId ? { ...l, [field]: value } : l)
           };
         }
         return c;
@@ -107,11 +107,11 @@ export default function AnasayfaIcerikPage() {
     if (!data) return;
     setData({
       ...data,
-      categories: data.categories.map(c => {
+      categories: (data.categories || []).map(c => {
         if (c.id === categoryId) {
           return {
             ...c,
-            links: c.links.filter(l => l.id !== linkId)
+            links: (c.links || []).filter(l => l.id !== linkId)
           };
         }
         return c;
@@ -175,7 +175,7 @@ export default function AnasayfaIcerikPage() {
             <div className="space-y-8">
               <h3 className="text-lg font-bold text-gray-800 dark:text-white">Anasayfa Özellik Kartları</h3>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                {data.features.map((feature, idx) => (
+                {(data.features || []).map((feature, idx) => (
                   <div key={feature.id} className="p-4 border border-gray-200 dark:border-gray-700 rounded-xl space-y-4 bg-gray-50 dark:bg-gray-800/50">
                     <div className="flex items-center gap-3">
                       <div className="w-10 h-10 rounded-lg bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 font-mono font-bold flex items-center justify-center">
@@ -239,7 +239,7 @@ export default function AnasayfaIcerikPage() {
               </div>
 
               <div className="space-y-6">
-                {data.categories.map((category) => (
+                {(data.categories || []).map((category, idx) => (
                   <div key={category.id} className="p-5 border border-gray-200 dark:border-gray-700 rounded-xl bg-gray-50 dark:bg-gray-800/30">
                     <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 mb-6">
                       <div className="flex-1 w-full">
@@ -268,10 +268,10 @@ export default function AnasayfaIcerikPage() {
                     </div>
 
                     <div className="space-y-3 pl-4 sm:pl-8 border-l-2 border-gray-200 dark:border-gray-700">
-                      {category.links.length === 0 ? (
+                      {(category.links || []).length === 0 ? (
                         <p className="text-sm text-gray-500 italic">Henüz link eklenmemiş.</p>
                       ) : (
-                        category.links.map((link) => (
+                        (category.links || []).map((link) => (
                           <div key={link.id} className="flex flex-col sm:flex-row items-center gap-3">
                             <input 
                               type="text" 
