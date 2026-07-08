@@ -8,7 +8,7 @@ import { NewsItem } from "@/lib/admin-api";
 
 export default async function NewsPage() {
   const db = await readDB();
-  const news: NewsItem[] = db?.news || [];
+  const news: NewsItem[] = (db?.news || []) as unknown as NewsItem[];
   const activeNews = news.filter((n) => n.status === "published");
 
   return (

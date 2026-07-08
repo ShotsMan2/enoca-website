@@ -3,6 +3,7 @@
 import Navbar from './Navbar';
 import Footer from './Footer';
 import { readDB } from '@/lib/db';
+import { ContentPage } from '@/lib/admin-api';
 
 export default async function PublicLayout({ children }: { children: React.ReactNode }) {
   const db = await readDB();
@@ -14,11 +15,11 @@ export default async function PublicLayout({ children }: { children: React.React
 
   return (
     <div className="min-h-screen flex flex-col w-full overflow-clip">
-      <Navbar settings={settings} pages={db?.pages || []} />
+      <Navbar settings={settings} pages={(db?.pages || []) as unknown as ContentPage[]} />
       <main className="flex-grow w-full">
         {children}
       </main>
-      <Footer settings={settings} pages={db?.pages || []} />
+      <Footer settings={settings} pages={(db?.pages || []) as unknown as ContentPage[]} />
     </div>
   );
 }

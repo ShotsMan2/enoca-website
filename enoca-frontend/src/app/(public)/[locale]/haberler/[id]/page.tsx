@@ -1,5 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 import { readDB } from "@/lib/db";
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { notFound } from "next/navigation";
 import { CalendarDays, ArrowLeft, Share2, ArrowRight } from "lucide-react";
 import PublicLayout from "@/components/PublicLayout";
@@ -12,7 +13,7 @@ export const dynamic = 'force-dynamic';
 export async function generateMetadata({ params }: { params: Promise<{ id: string, locale: string }> }) {
   const { id } = await params;
   const db = await readDB();
-  const newsItem = db?.news?.find((n: NewsItem) => n.id === parseInt(id, 10) && n.status === "published");
+  const newsItem = db?.news?.find((n: any) => n.id === parseInt(id, 10) && n.status === "published");
   
   if (!newsItem) return { title: 'Haber Bulunamadı | Enoca' };
   
@@ -27,16 +28,16 @@ export default async function HaberDetayPage({ params }: { params: Promise<{ id:
   
   const db = await readDB();
   const allNews = db?.news || [];
-  const publishedNews = allNews.filter((n: NewsItem) => n.status === "published");
+  const publishedNews = allNews.filter((n: any) => n.status === "published");
   
-  const newsItem = publishedNews.find((n: NewsItem) => n.id === Number(id));
+  const newsItem = publishedNews.find((n: any) => n.id === Number(id));
 
   if (!newsItem) {
     notFound();
   }
 
   // Find next news item
-  const currentIndex = publishedNews.findIndex((n: NewsItem) => n.id === Number(id));
+  const currentIndex = publishedNews.findIndex((n: any) => n.id === Number(id));
   const nextNews = currentIndex < publishedNews.length - 1 ? publishedNews[currentIndex + 1] : null;
 
   return (

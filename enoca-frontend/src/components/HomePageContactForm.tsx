@@ -36,10 +36,10 @@ export default function HomePageContactForm() {
 
     if (status === "success") {
         return (
-            <div className="bg-green-50 dark:bg-green-900/20 text-green-700 dark:text-green-400 p-8 rounded-2xl text-center border border-green-200 dark:border-green-800">
-                <h3 className="text-2xl font-bold mb-2">{tContact('successTitle')}</h3>
-                <p>{tContact('successMessage')}</p>
-                <Button variant="secondary" className="mt-6" onClick={() => setStatus("idle")}>{tContact('newMsgBtn')}</Button>
+            <div className="bg-green-500/10 text-green-600 dark:text-green-400 p-8 rounded-2xl text-center border border-green-500/20 backdrop-blur-md">
+                <h3 className="text-xl font-semibold mb-2">{tContact('successTitle')}</h3>
+                <p className="text-[14px] opacity-90">{tContact('successMessage')}</p>
+                <Button variant="secondary" className="mt-6 rounded-lg" onClick={() => setStatus("idle")}>{tContact('newMsgBtn')}</Button>
             </div>
         );
     }
@@ -48,25 +48,25 @@ export default function HomePageContactForm() {
         <form onSubmit={handleSubmit} className="space-y-6">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div className="space-y-2">
-                    <label className="text-sm font-medium text-foreground">{tContact('name')}</label>
+                    <label className="text-sm font-semibold tracking-tight text-foreground">{tContact('name')}</label>
                     <input 
                         type="text" 
                         required 
                         value={formData.name}
                         onChange={e => setFormData({ ...formData, name: e.target.value })}
                         placeholder={tContact('namePlaceholder')} 
-                        className="w-full h-12 px-4 rounded-xl border border-border bg-transparent focus:ring-2 focus:ring-accent focus:border-transparent outline-none transition-all"
+                        className="w-full h-12 px-4 rounded-lg border border-border/50 bg-muted/30 focus:bg-background focus:ring-1 focus:ring-accent focus:border-accent outline-none transition-all text-[14px]"
                     />
                 </div>
                 <div className="space-y-2">
-                    <label className="text-sm font-medium text-foreground">{tContact('email')}</label>
+                    <label className="text-sm font-semibold tracking-tight text-foreground">{tContact('email')}</label>
                     <input 
                         type="email" 
                         required 
                         value={formData.email}
                         onChange={e => setFormData({ ...formData, email: e.target.value })}
                         placeholder={tContact('emailPlaceholder')} 
-                        className="w-full h-12 px-4 rounded-xl border border-border bg-transparent focus:ring-2 focus:ring-accent focus:border-transparent outline-none transition-all"
+                        className="w-full h-12 px-4 rounded-lg border border-border/50 bg-muted/30 focus:bg-background focus:ring-1 focus:ring-accent focus:border-accent outline-none transition-all text-[14px]"
                     />
                 </div>
             </div>
@@ -85,18 +85,18 @@ export default function HomePageContactForm() {
             </div>
 
             <div className="space-y-2">
-                <label className="text-sm font-medium text-foreground">{tContact('message')}</label>
+                <label className="text-sm font-semibold tracking-tight text-foreground">{tContact('message')}</label>
                 <textarea 
                     required 
                     rows={4}
                     value={formData.message}
                     onChange={e => setFormData({ ...formData, message: e.target.value })}
                     placeholder={tContact('messagePlaceholder')} 
-                    className="w-full px-4 py-3 rounded-xl border border-border bg-transparent focus:ring-2 focus:ring-accent focus:border-transparent outline-none transition-all resize-none"
+                    className="w-full px-4 py-3 rounded-lg border border-border/50 bg-muted/30 focus:bg-background focus:ring-1 focus:ring-accent focus:border-accent outline-none transition-all resize-none text-[14px]"
                 ></textarea>
             </div>
             <div className="pt-2 text-center">
-                <Button size="lg" type="submit" disabled={status === "loading"} className="px-12 w-full md:w-auto">
+                <Button size="lg" type="submit" disabled={status === "loading"} className="px-12 w-full md:w-auto rounded-lg text-sm">
                     {status === "loading" ? tContact('submitting') : tContact('submit')}
                 </Button>
             </div>
