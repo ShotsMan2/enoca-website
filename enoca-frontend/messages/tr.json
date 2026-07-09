@@ -229,6 +229,25 @@
     "jobs": "Açık Pozisyonlar",
     "backToHome": "Anasayfaya Dön"
   },
+  "HomePage": {
+    "badge": "Enoca | Modern kurumsal dijital deneyim",
+    "titleLine1": "Bağlantıları düzenlerken,",
+    "titleHighlight": "kurumsal hikayenizi",
+    "titleLine2": "güçlendiriyoruz.",
+    "subtitle": "Enoca'nın çözümlerini, inovasyon alanlarını, kariyer fırsatlarını ve topluluk odaklı kaynaklarını tek bir premium görünümde bir araya getiriyoruz.",
+    "ctaContact": "İletişime geç",
+    "ctaCareer": "Kariyer alanlarını keşfet",
+    "featuredHighlight1": "Kurumsal vizyonu canlı tutan dijital deneyimler",
+    "featuredHighlight2": "Ortak çalışma alanları ve erişilebilir kaynaklar",
+    "featuredHighlight3": "Hızlı erişim için önceden yapılandırılmış bağlantılar",
+    "summaryTitle": "Özet görünüm",
+    "summaryHeading": "Kurumsal erişim merkezi",
+    "status": "Aktif",
+    "sectionLabel": "Kurumsal içerik",
+    "sectionHeading": "Enoca'nın vizyonunu ve hizmetlerini şekillendiren alanlar",
+    "sectionSubtitle": "Her kategori, şirketin uzmanlık alanlarını ve erişmek istediğiniz kaynakları tek bir akışta sunar.",
+    "linkCount": "{count} bağlantı"
+  },
   "HomeMisc": {
     "configTitle": "Projenizi ",
     "configHighlight": "Şekillendirin",

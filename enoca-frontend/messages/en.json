@@ -229,6 +229,25 @@
     "jobs": "Job Openings",
     "backToHome": "Back to Home"
   },
+  "HomePage": {
+    "badge": "Enoca | Modern corporate digital experience",
+    "titleLine1": "While organizing connections,",
+    "titleHighlight": "we strengthen your story",
+    "titleLine2": "with confidence.",
+    "subtitle": "We bring Enoca's solutions, innovation areas, career opportunities, and community-focused resources together in one premium experience.",
+    "ctaContact": "Contact us",
+    "ctaCareer": "Explore career areas",
+    "featuredHighlight1": "Digital experiences that keep corporate vision alive",
+    "featuredHighlight2": "Collaborative spaces and accessible resources",
+    "featuredHighlight3": "Pre-configured links for quick access",
+    "summaryTitle": "Overview",
+    "summaryHeading": "Corporate access center",
+    "status": "Active",
+    "sectionLabel": "Corporate content",
+    "sectionHeading": "Areas that shape Enoca's vision and services",
+    "sectionSubtitle": "Each category presents the company's expertise and the resources you want to access in a single flow.",
+    "linkCount": "{count} links"
+  },
   "HomeMisc": {
     "configTitle": "Shape Your ",
     "configHighlight": "Project",

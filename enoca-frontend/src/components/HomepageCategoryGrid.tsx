@@ -1,21 +1,24 @@
 import Link from 'next/link';
 import AnimatedArticle from '@/components/AnimatedArticle';
 import type { HomepageCategoryItem } from '@/lib/homepage-content';
+import { getTranslations } from 'next-intl/server';
 
 type HomepageCategoryGridProps = {
   categories: HomepageCategoryItem[];
 };
 
-export default function HomepageCategoryGrid({ categories }: HomepageCategoryGridProps) {
+export default async function HomepageCategoryGrid({ categories }: HomepageCategoryGridProps) {
+  const t = await getTranslations('HomePage');
+
   return (
     <section className="mx-auto flex w-full max-w-7xl flex-col gap-6 px-6 py-20 lg:px-8">
       <div className="max-w-3xl space-y-3">
-        <p className="text-sm uppercase tracking-[0.35em] text-sky-400">Kurumsal içerik</p>
+        <p className="text-sm uppercase tracking-[0.35em] text-sky-400">{t('sectionLabel')}</p>
         <h2 className="text-3xl font-semibold tracking-tight text-white sm:text-4xl">
-          Enoca&apos;nın vizyonunu ve hizmetlerini şekillendiren alanlar
+          {t('sectionHeading')}
         </h2>
         <p className="text-base text-slate-400 sm:text-lg">
-          Her kategori, şirketin uzmanlık alanlarını ve erişmek istediğiniz kaynakları tek bir akışta sunar.
+          {t('sectionSubtitle')}
         </p>
       </div>
 
