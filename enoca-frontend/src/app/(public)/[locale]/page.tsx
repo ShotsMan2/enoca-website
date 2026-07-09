@@ -1,206 +1,86 @@
-import PublicLayout from "@/components/PublicLayout";
-import { getLocale } from "next-intl/server";
+import Link from 'next/link';
+import AnimatedCard from '@/components/AnimatedCard';
+import HomepageCategoryGrid from '@/components/HomepageCategoryGrid';
+import PublicLayout from '@/components/PublicLayout';
+import { getHomepageCategories } from '@/lib/homepage-content';
+import { getLocale } from 'next-intl/server';
+
+const featuredHighlights = [
+  'Kurumsal vizyonu canlı tutan dijital deneyimler',
+  'Ortak çalışma alanları ve erişilebilir kaynaklar',
+  'Hızlı erişim için önceden yapılandırılmış bağlantılar',
+];
 
 export default async function Home() {
   const locale = await getLocale();
+  const categories = await getHomepageCategories();
 
   return (
     <PublicLayout>
-      {/* HERO SECTION */}
-      <section className="hero-section">
-        <div className="container hero-grid">
-          <div className="hero-content">
-            <span className="eyebrow">High-Scale SAP Engineering</span>
-            <h1 className="huge-heading">
-              We Do
-              <br />
-              SAP CX Hybris
-              <br />
-              <span style={{ color: "var(--accent)" }}>Architectures.</span>
-            </h1>
-            <p className="hero-subtitle">
-              We design, configure, and migrate enterprise-scale SAP commerce systems. Our model-driven architecture guarantees high throughput, structural elasticity, and predictable sprint delivery.
-            </p>
-            <div className="btn-group">
-              <a href="#solutions" className="btn btn-primary">
-                Explore Architecture
-              </a>
-              <a href="#telemetry" className="btn btn-secondary">
-                View Telemetry
-              </a>
+      <section className="mx-auto flex min-h-[78vh] w-full max-w-7xl flex-col justify-center px-6 py-24 sm:px-8 lg:px-10 lg:py-32">
+        <div className="grid items-center gap-12 lg:grid-cols-[1.1fr_0.9fr]">
+          <div className="space-y-8">
+            <div className="inline-flex w-fit items-center rounded-full border border-sky-400/30 bg-sky-400/10 px-4 py-2 text-sm font-medium text-sky-300">
+              Enoca | Modern kurumsal dijital deneyim
             </div>
-          </div>
-          <div className="hero-visual-container">
-            <div className="blueprint-lines"></div>
-            <div className="relative z-10 text-[var(--accent)] opacity-80 flex flex-col items-center">
-              {/* Animated Blueprint Element Placeholder */}
-              <div className="border border-[var(--accent)] !rounded-full animate-[spin_20s_linear_infinite] border-dashed" style={{ width: '250px', height: '250px' }}></div>
-              <div className="absolute inset-0 flex items-center justify-center">
-                <span className="font-mono text-xs tracking-widest uppercase">System Core</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* TRUST INDICATORS */}
-      <section className="py-8 bg-[#030303] border-b border-[var(--border)]">
-        <div className="container trust-container !mt-0 !pt-0 !border-t-0">
-          <div className="trust-stat">
-            <span className="trust-num">
-              25<span className="accent-plus">+</span>
-            </span>
-            <span className="trust-label">Enterprise Deploys</span>
-          </div>
-          <div className="trust-stat">
-            <span className="trust-num">
-              15<span className="accent-plus">+</span>
-            </span>
-            <span className="trust-label">Years Core Experience</span>
-          </div>
-          <div className="trust-stat">
-            <span className="trust-num">
-              99.9<span className="accent-plus">%</span>
-            </span>
-            <span className="trust-label">Uptime Execution</span>
-          </div>
-          <div className="trust-stat">
-            <span className="trust-num">Global</span>
-            <span className="trust-label">Client Network</span>
-          </div>
-        </div>
-      </section>
-
-      {/* CREDIBILITY BAR */}
-      <section className="credibility-bar">
-        <div className="container">
-          <div className="logo-carousel-track">
-            <div className="tech-logo-item">SAP COMMERCE ENGINE</div>
-            <div className="tech-logo-item">HANA IN-MEMORY DB</div>
-            <div className="tech-logo-item">SPRING FRAMEWORK</div>
-            <div className="tech-logo-item">APACHE SOLR SEARCH</div>
-            <div className="tech-logo-item">NAGIOS SYSTEM MONITOR</div>
-            <div className="tech-logo-item">HYPERIC HQ METRICS</div>
-          </div>
-        </div>
-      </section>
-
-      {/* SHOWROOM LIGHT: COMPOSABLE COMMERCE */}
-      <section id="solutions" className="section-showroom-light">
-        <div className="container">
-          <div className="eyebrow mb-8">Model-Driven Architecture</div>
-          
-          <div className="storytelling-block">
-            <div className="story-content">
-              <h2 className="section-heading">Decoupled by Design</h2>
-              <p className="text-lg">
-                We engineer scalable composable commerce platforms separating the
-                frontend presentation layer from the backend commerce engine. This
-                allows for lightning-fast user experiences while maintaining robust
-                enterprise transactional integrity.
+            <div className="space-y-4">
+              <h1 className="text-4xl font-semibold tracking-tight text-white sm:text-5xl lg:text-6xl">
+                Bağlantıları düzenlerken,<br />
+                <span className="text-sky-400">kurumsal hikayenizi</span> güçlendiriyoruz.
+              </h1>
+              <p className="max-w-2xl text-lg leading-8 text-slate-300 sm:text-xl">
+                Enoca&apos;nın çözümlerini, inovasyon alanlarını, kariyer fırsatlarını ve topluluk odaklı kaynaklarını tek bir premium görünümde bir araya getiriyoruz.
               </p>
-              <div className="story-tech-specs">
-                <span className="tech-badge">Headless Commerce</span>
-                <span className="tech-badge">API-First</span>
-                <span className="tech-badge">Microservices</span>
-              </div>
-              <div className="mt-6">
-                <a href="/architecture" className="btn-text text-[var(--accent)]">
-                  <span>View Specifications</span>
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                    <path d="M5 12h14M12 5l7 7-7 7" />
-                  </svg>
-                </a>
-              </div>
             </div>
-            <div className="story-visual-panel">
-              <div className="story-blueprint-label">Fig. 1 — Headless Architecture</div>
-              <div className="flex gap-8 items-center text-black/50">
-                <div className="p-4 border border-[var(--border-light)]">Next.js UI</div>
-                <div>→</div>
-                <div className="p-4 border border-[var(--border-light)]">GraphQL API</div>
-                <div>→</div>
-                <div className="p-4 border border-[var(--border-light)]">SAP Commerce</div>
-              </div>
+            <div className="flex flex-col gap-3 sm:flex-row">
+              <Link href={`/${locale}/iletisim`} className="rounded-full bg-sky-500 px-6 py-3 text-center font-medium text-white transition hover:bg-sky-400">
+                İletişime geç
+              </Link>
+              <Link href={`/${locale}/kariyer`} className="rounded-full border border-white/15 px-6 py-3 text-center font-medium text-slate-200 transition hover:border-sky-400/40 hover:text-white">
+                Kariyer alanlarını keşfet
+              </Link>
+            </div>
+            <div className="flex flex-wrap gap-3">
+              {featuredHighlights.map((item) => (
+                <span key={item} className="rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm text-slate-300">
+                  {item}
+                </span>
+              ))}
             </div>
           </div>
-          
-          <div className="storytelling-block">
-            <div className="story-visual-panel order-2 lg:order-1">
-              <div className="story-blueprint-label">Fig. 2 — Global Monitoring</div>
-              <div className="w-full h-full bg-[#050505] p-6 text-[var(--fg)] font-mono text-xs flex flex-col justify-end gap-2">
-                <div className="text-[var(--success)]">[OK] Database Node 1 Latency: 12ms</div>
-                <div className="text-[var(--success)]">[OK] Session Cache Hit Rate: 98.4%</div>
-                <div className="text-[var(--warn)]">[WARN] Payment Gateway API Spike detected</div>
-                <div className="text-[var(--success)]">[OK] Auto-scaling Group Expanded</div>
+
+          <AnimatedCard className="rounded-[2rem] border border-white/10 bg-slate-950/70 p-8 shadow-[0_35px_120px_rgba(2,132,199,0.2)] backdrop-blur">
+            <div className="flex items-center justify-between">
+              <div>
+                <p className="text-sm uppercase tracking-[0.35em] text-slate-400">Özet görünüm</p>
+                <h2 className="mt-2 text-2xl font-semibold text-white">Kurumsal erişim merkezi</h2>
+              </div>
+              <div className="rounded-full border border-emerald-400/30 bg-emerald-400/10 px-3 py-1 text-sm font-medium text-emerald-300">
+                Aktif
               </div>
             </div>
-            <div className="story-content order-1 lg:order-2">
-              <h2 className="section-heading">Proactive Telemetry</h2>
-              <p className="text-lg">
-                Hope is not a strategy. We integrate Nagios and Hyperic HQ to monitor
-                the entire technology stack in real-time. We detect anomalies before
-                they impact your customers.
-              </p>
-              <div className="story-tech-specs">
-                <span className="tech-badge">Nagios</span>
-                <span className="tech-badge">Hyperic HQ</span>
-                <span className="tech-badge">Predictive Alerts</span>
-              </div>
+            <div className="mt-8 space-y-4">
+              {categories.map((category) => (
+                <div key={category.slug} className="rounded-2xl border border-white/10 bg-white/5 p-4">
+                  <div className="flex items-center justify-between">
+                    <h3 className="font-semibold text-white">{category.name}</h3>
+                    <span className="text-sm text-slate-400">{category.links.length} link</span>
+                  </div>
+                  <div className="mt-3 flex flex-wrap gap-2">
+                    {category.links.map((link) => (
+                      <span key={link.id} className="rounded-full border border-sky-400/20 bg-sky-400/10 px-3 py-1 text-sm text-sky-300">
+                        {link.title}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              ))}
             </div>
-          </div>
+          </AnimatedCard>
         </div>
       </section>
 
-      {/* HEALTH DASHBOARD */}
-      <section id="telemetry" className="health-section py-[128px]">
-        <div className="container">
-          <div className="health-grid">
-            <div>
-              <div className="eyebrow mb-4">Live System Status</div>
-              <h2 className="section-heading text-white">All Systems Operational</h2>
-              <p className="text-[var(--muted)] text-lg max-w-[45ch] mb-8">
-                View real-time heartbeat data from our central command. We maintain
-                absolute transparency with our enterprise clients regarding system health.
-              </p>
-              <a href="/status" className="btn btn-secondary">
-                View Full Status Page
-              </a>
-            </div>
-            <div className="terminal-container shadow-glow-sm">
-              <div className="terminal-header">
-                <div>
-                  <span className="terminal-status-dot animate-pulse"></span>
-                  ENOCA COMMAND LINE
-                </div>
-                <div>SECURE CONNECTION</div>
-              </div>
-              <div className="terminal-log-flow">
-                <div className="log-line">
-                  <span className="log-time">10:45:01.02</span>
-                  <span className="log-msg text-white">System initialization check passed.</span>
-                </div>
-                <div className="log-line">
-                  <span className="log-time">10:45:01.15</span>
-                  <span className="log-msg text-white">Load balancers optimized across eu-central-1.</span>
-                </div>
-                <div className="log-line">
-                  <span className="log-time">10:45:02.44</span>
-                  <span className="log-msg text-[var(--success)]">INFO: Zero technical debt detected in latest build.</span>
-                </div>
-                <div className="log-line">
-                  <span className="log-time">10:45:03.12</span>
-                  <span className="log-msg text-white">SAP Hybris cronjobs executed successfully.</span>
-                </div>
-                <div className="log-line">
-                  <span className="log-time">10:45:04.88</span>
-                  <span className="log-msg text-[var(--accent)]">AWAITING INPUT_</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+      <HomepageCategoryGrid categories={categories} />
     </PublicLayout>
   );
 }

@@ -1,94 +1,101 @@
-# Enoca Full-Stack Projesi
+<<<<<<< HEAD
+<p align="center">
+  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
+</p>
 
-Bu proje, backend tarafında **NestJS** ve **PostgreSQL**, frontend tarafında ise **Next.js**, **Tailwind CSS** ve **Prisma** kullanılarak geliştirilmiş modern bir full-stack web uygulamasıdır. Proje, "Kategoriler" (Categories) ve "Bağlantılar" (Links) yönetimi üzerine odaklanmıştır.
+[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
+[circleci-url]: https://circleci.com/gh/nestjs/nest
 
----
+  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
+    <p align="center">
+<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
+<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
+<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
+<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
+<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
+<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
+<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
+  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
+    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
+  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
+</p>
+  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
+  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
 
-## 📂 Proje Yapısı
+## Description
 
-Proje temel olarak iki ana bölümden oluşmaktadır:
+[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
 
-- **Root (Kök) Dizin (`/src` vd.):** NestJS tabanlı backend uygulaması.
-- **`enoca-frontend/` Dizini:** Next.js tabanlı frontend (kullanıcı arayüzü) uygulaması.
+## Project setup
 
----
+```bash
+$ npm install
+```
 
-## 🛠️ Backend (NestJS)
+## Compile and run the project
 
-Backend uygulaması güçlü ve ölçeklenebilir bir mimari sunan NestJS framework'ü ile geliştirilmiştir.
+```bash
+# development
+$ npm run start
 
-### Kullanılan Teknolojiler
-- **Framework:** NestJS
-- **ORM:** TypeORM
-- **Veritabanı:** PostgreSQL (Varsayılan DB: `enoca_db`)
-- **Test:** Jest
+# watch mode
+$ npm run start:dev
 
-### Ana Modüller
-- `CategoriesModule`: Kategori işlemlerinin yürütüldüğü modül.
-- `LinksModule`: Bağlantı/Link işlemlerinin yürütüldüğü modül.
+# production mode
+$ npm run start:prod
+```
 
-### Kurulum ve Çalıştırma
+## Run tests
 
-1. **Veritabanı Hazırlığı:** PostgreSQL sunucunuzun çalıştığından ve `enoca_db` adında bir veritabanı oluşturulduğundan emin olun (kullanıcı adı: `postgres`, şifre ayarlarına `src/app.module.ts` içerisinden bakabilirsiniz).
-2. **Bağımlılıkları Yükleme:**
-   ```bash
-   npm install
-   ```
-3. **Uygulamayı Çalıştırma (Geliştirme Modu):**
-   ```bash
-   npm run start:dev
-   ```
-4. **Testleri Çalıştırma:**
-   ```bash
-   npm run test
-   ```
+```bash
+# unit tests
+$ npm run test
 
----
+# e2e tests
+$ npm run test:e2e
 
-## 💻 Frontend (Next.js)
+# test coverage
+$ npm run test:cov
+```
 
-Kullanıcı arayüzü modern, hızlı ve SEO dostu bir yapı sunan Next.js ile geliştirilmiştir. Frontend klasörü `enoca-frontend` dizininde bulunur.
+## Deployment
 
-### Kullanılan Teknolojiler
-- **Framework:** Next.js (v16)
-- **Stil & Tasarım:** Tailwind CSS v4, Framer Motion (Animasyonlar), Lucide React (İkonlar)
-- **Durum Yönetimi (State):** Zustand
-- **ORM (API Route/BFF):** Prisma
-- **UI Geliştirme:** Storybook
-- **Test:** Playwright (E2E Testleri), Vitest (Birim Testleri)
-- **Diğer:** Next-intl (Çoklu dil), Recharts (Grafikler)
+When you're ready to deploy your NestJS application to production, there are some key steps you can take to ensure it runs as efficiently as possible. Check out the [deployment documentation](https://docs.nestjs.com/deployment) for more information.
 
-### Kurulum ve Çalıştırma
+If you are looking for a cloud-based platform to deploy your NestJS application, check out [Mau](https://mau.nestjs.com), our official platform for deploying NestJS applications on AWS. Mau makes deployment straightforward and fast, requiring just a few simple steps:
 
-1. **Klasöre Geçiş:**
-   ```bash
-   cd enoca-frontend
-   ```
-2. **Bağımlılıkları Yükleme:**
-   ```bash
-   npm install
-   ```
-3. **Uygulamayı Çalıştırma (Geliştirme Modu):**
-   Next.js uygulaması varsayılan olarak `3001` portunda ayağa kalkacaktır.
-   ```bash
-   npm run dev
-   ```
-4. **Storybook'u Çalıştırma (Bileşen Geliştirme):**
-   ```bash
-   npm run storybook
-   ```
-5. **E2E Testlerini Çalıştırma:**
-   ```bash
-   npm run test:e2e
-   ```
+```bash
+$ npm install -g @nestjs/mau
+$ mau deploy
+```
 
----
+With Mau, you can deploy your application in just a few clicks, allowing you to focus on building features rather than managing infrastructure.
 
-## 🚀 Deployment (Canlıya Alma)
+## Resources
 
-- **Backend** tarafı derlenip (`npm run build`) Node.js sunucusunda (`npm run start:prod`) çalıştırılabilir.
-- **Frontend** tarafı standart Next.js yapısında derlenip (`npm run build` ve ardından `npm run start`) sunulabilir.
+Check out a few resources that may come in handy when working with NestJS:
 
-## 📄 Lisans
+- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
+- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
+- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
+- Deploy your application to AWS with the help of [NestJS Mau](https://mau.nestjs.com) in just a few clicks.
+- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
+- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
+- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
+- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
 
-Bu projenin özel kısımları `UNLICENSED` olarak ayarlanmış durumdadır.
+## Support
+
+Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+
+## Stay in touch
+
+- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
+- Website - [https://nestjs.com](https://nestjs.com/)
+- Twitter - [@nestframework](https://twitter.com/nestframework)
+
+## License
+
+Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+=======
+
