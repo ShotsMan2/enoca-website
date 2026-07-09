@@ -38,10 +38,7 @@ export default function Navbar({ settings, pages = [] }: { settings?: SiteSettin
                 
                 {/* LOGO */}
                 <Link href="/" className="flex items-center gap-4 text-white font-[var(--font-display)] font-black text-xl tracking-[0.15em] no-underline">
-                    <div className="w-6 h-6 border-2 border-[var(--accent)] relative">
-                        <div className="absolute top-[2px] left-[2px] w-[6px] h-[6px] bg-[var(--accent)]"></div>
-                    </div>
-                    ENOCA
+                    <img src="/logo.png" alt="Enoca" className="h-8 w-auto object-contain hover:opacity-90 transition-opacity" />
                 </Link>
 
                 {/* DESKTOP NAV */}

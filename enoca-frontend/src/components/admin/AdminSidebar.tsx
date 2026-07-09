@@ -141,16 +141,13 @@ export default function AdminSidebar() {
       <div className="flex items-center justify-between h-16 px-4 border-b border-gray-200 dark:border-gray-700 flex-shrink-0">
         {!collapsed && (
           <Link href="/admin/dashboard" className="flex items-center gap-2">
-            <span className="w-3 h-3 bg-blue-600 rounded-sm" />
-            <span className="text-lg font-black tracking-tight text-blue-600">
-              enoca<sup className="text-xs">™</sup>
-            </span>
+            <img src="/logo.png" alt="Enoca" className="h-7 w-auto object-contain" />
             <span className="text-xs font-semibold text-gray-400 uppercase tracking-widest ml-1">Admin</span>
           </Link>
         )}
         {collapsed && (
           <Link href="/admin/dashboard" className="mx-auto">
-            <span className="w-3 h-3 bg-blue-600 rounded-sm block" />
+            <img src="/logo-icon.png" alt="Enoca" className="h-6 w-auto object-contain mx-auto" />
           </Link>
         )}
         <button

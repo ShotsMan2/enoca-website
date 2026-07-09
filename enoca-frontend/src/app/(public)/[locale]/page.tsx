@@ -10,18 +10,16 @@ export default async function Home() {
       <section className="hero-section">
         <div className="container hero-grid">
           <div className="hero-content">
-            <div className="eyebrow">Enterprise Commerce Architects</div>
+            <span className="eyebrow">High-Scale SAP Engineering</span>
             <h1 className="huge-heading">
-              Zero Tech Debt.
+              We Do
               <br />
-              Absolute
+              SAP CX Hybris
               <br />
-              Uptime.
+              <span style={{ color: "var(--accent)" }}>Architectures.</span>
             </h1>
             <p className="hero-subtitle">
-              ENOCA engineers mission-critical enterprise commerce platforms. We
-              specialize in high-scale SAP CX Hybris delivery, model-driven
-              architecture, and proactive system monitoring.
+              We design, configure, and migrate enterprise-scale SAP commerce systems. Our model-driven architecture guarantees high throughput, structural elasticity, and predictable sprint delivery.
             </p>
             <div className="btn-group">
               <a href="#solutions" className="btn btn-primary">
@@ -36,7 +34,7 @@ export default async function Home() {
             <div className="blueprint-lines"></div>
             <div className="relative z-10 text-[var(--accent)] opacity-80 flex flex-col items-center">
               {/* Animated Blueprint Element Placeholder */}
-              <div className="w-64 h-64 border border-[var(--accent)] rounded-full animate-[spin_20s_linear_infinite] border-dashed"></div>
+              <div className="border border-[var(--accent)] !rounded-full animate-[spin_20s_linear_infinite] border-dashed" style={{ width: '250px', height: '250px' }}></div>
               <div className="absolute inset-0 flex items-center justify-center">
                 <span className="font-mono text-xs tracking-widest uppercase">System Core</span>
               </div>
@@ -49,28 +47,26 @@ export default async function Home() {
       <section className="py-8 bg-[#030303] border-b border-[var(--border)]">
         <div className="container trust-container !mt-0 !pt-0 !border-t-0">
           <div className="trust-stat">
-            <div className="trust-num">
-              99.99<span className="accent-plus">%</span>
-            </div>
-            <div className="trust-label">Guaranteed SLA Uptime</div>
+            <span className="trust-num">
+              25<span className="accent-plus">+</span>
+            </span>
+            <span className="trust-label">Enterprise Deploys</span>
           </div>
           <div className="trust-stat">
-            <div className="trust-num">
-              50<span className="accent-plus">M+</span>
-            </div>
-            <div className="trust-label">Daily Transactions</div>
+            <span className="trust-num">
+              15<span className="accent-plus">+</span>
+            </span>
+            <span className="trust-label">Years Core Experience</span>
           </div>
           <div className="trust-stat">
-            <div className="trust-num">
-              15<span className="accent-plus">yrs</span>
-            </div>
-            <div className="trust-label">SAP Hybris Expertise</div>
+            <span className="trust-num">
+              99.9<span className="accent-plus">%</span>
+            </span>
+            <span className="trust-label">Uptime Execution</span>
           </div>
           <div className="trust-stat">
-            <div className="trust-num">
-              Zero
-            </div>
-            <div className="trust-label">Critical Failures</div>
+            <span className="trust-num">Global</span>
+            <span className="trust-label">Client Network</span>
           </div>
         </div>
       </section>
@@ -79,11 +75,12 @@ export default async function Home() {
       <section className="credibility-bar">
         <div className="container">
           <div className="logo-carousel-track">
-            <div className="tech-logo-item">SAP COMMERCE CLOUD</div>
-            <div className="tech-logo-item">NEXT.JS</div>
-            <div className="tech-logo-item">SPRING BOOT</div>
-            <div className="tech-logo-item">KUBERNETES</div>
-            <div className="tech-logo-item">NAGIOS TELEMETRY</div>
+            <div className="tech-logo-item">SAP COMMERCE ENGINE</div>
+            <div className="tech-logo-item">HANA IN-MEMORY DB</div>
+            <div className="tech-logo-item">SPRING FRAMEWORK</div>
+            <div className="tech-logo-item">APACHE SOLR SEARCH</div>
+            <div className="tech-logo-item">NAGIOS SYSTEM MONITOR</div>
+            <div className="tech-logo-item">HYPERIC HQ METRICS</div>
           </div>
         </div>
       </section>
@@ -132,10 +129,10 @@ export default async function Home() {
             <div className="story-visual-panel order-2 lg:order-1">
               <div className="story-blueprint-label">Fig. 2 — Global Monitoring</div>
               <div className="w-full h-full bg-[#050505] p-6 text-[var(--fg)] font-mono text-xs flex flex-col justify-end gap-2">
-                <div className="text-green-500">[OK] Database Node 1 Latency: 12ms</div>
-                <div className="text-green-500">[OK] Session Cache Hit Rate: 98.4%</div>
-                <div className="text-yellow-500">[WARN] Payment Gateway API Spike detected</div>
-                <div className="text-green-500">[OK] Auto-scaling Group Expanded</div>
+                <div className="text-[var(--success)]">[OK] Database Node 1 Latency: 12ms</div>
+                <div className="text-[var(--success)]">[OK] Session Cache Hit Rate: 98.4%</div>
+                <div className="text-[var(--warn)]">[WARN] Payment Gateway API Spike detected</div>
+                <div className="text-[var(--success)]">[OK] Auto-scaling Group Expanded</div>
               </div>
             </div>
             <div className="story-content order-1 lg:order-2">
@@ -189,7 +186,7 @@ export default async function Home() {
                 </div>
                 <div className="log-line">
                   <span className="log-time">10:45:02.44</span>
-                  <span className="log-msg text-green-400">INFO: Zero technical debt detected in latest build.</span>
+                  <span className="log-msg text-[var(--success)]">INFO: Zero technical debt detected in latest build.</span>
                 </div>
                 <div className="log-line">
                   <span className="log-time">10:45:03.12</span>
@@ -197,7 +194,7 @@ export default async function Home() {
                 </div>
                 <div className="log-line">
                   <span className="log-time">10:45:04.88</span>
-                  <span className="log-msg text-blue-400">AWAITING INPUT_</span>
+                  <span className="log-msg text-[var(--accent)]">AWAITING INPUT_</span>
                 </div>
               </div>
             </div>

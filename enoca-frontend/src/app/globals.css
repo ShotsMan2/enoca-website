@@ -55,6 +55,46 @@
     --success: #10b981;
     --warn: #f59e0b;
     --danger: #ef4444;
+
+    /* Multiplicative typography scaling */
+    --text-xs: 12px;
+    --text-sm: 14px;
+    --text-base: 16px;
+    --text-lg: 20px;
+    --text-xl: 28px;
+    --text-2xl: 36px;
+    --text-3xl: 56px;
+    --text-4xl: 84px;
+
+    --leading-body: 1.5;
+    --leading-tight: 1.15;
+    --tracking-display: -0.02em;
+
+    --space-1: 8px;
+    --space-2: 16px;
+    --space-3: 24px;
+    --space-4: 32px;
+    --space-6: 48px;
+    --space-8: 64px;
+    --space-12: 96px;
+
+    --section-y-desktop: 128px;
+    --section-y-tablet: 80px;
+    --section-y-phone: 56px;
+
+    /* Zero border-radius EVERYWHERE (BMW Identity) */
+    --radius-sm: 0px;
+    --radius-md: 0px;
+    --radius-lg: 0px;
+    --radius-pill: 0px;
+
+    --focus-ring: 0 0 0 2px var(--accent-hover);
+    --motion-fast: 200ms;
+    --motion-base: 400ms;
+    --ease-standard: cubic-bezier(0.16, 1, 0.3, 1);
+    
+    --container-max: 1440px;
+    --container-gutter: 48px;
   }
 
   * {
@@ -186,5 +226,371 @@
   .btn-secondary:hover {
     border-color: #ffffff;
     background-color: rgba(255, 255, 255, 0.05);
+  }
+
+  /* Containers */
+  .container {
+    max-width: var(--container-max);
+    margin: 0 auto;
+    padding: 0 var(--container-gutter);
+    position: relative;
+  }
+
+  @media (max-width: 1024px) {
+    :root {
+      --container-gutter: 32px;
+    }
+  }
+
+  @media (max-width: 640px) {
+    :root {
+      --container-gutter: 20px;
+    }
+  }
+
+  /* ─── LAYOUT SECTIONS ─── */
+  section {
+    padding: var(--section-y-desktop) 0;
+    border-bottom: 1px solid var(--border);
+    position: relative;
+  }
+
+  @media (max-width: 768px) {
+    section {
+      padding: var(--section-y-tablet) 0;
+    }
+  }
+
+  /* Showroom Pacing alternates dark and light surfaces */
+  .section-showroom-dark {
+    background-color: #050505;
+    color: var(--fg);
+  }
+
+  .section-showroom-light {
+    background-color: var(--bg-light);
+    color: var(--fg-dark);
+    border-bottom: 1px solid var(--border-light);
+  }
+
+  .section-showroom-light h1,
+  .section-showroom-light h2,
+  .section-showroom-light h3,
+  .section-showroom-light h4 {
+    color: var(--fg-dark);
+  }
+
+  .section-showroom-light p {
+    color: #555861;
+  }
+
+  /* ─── HERO SECTION ─── */
+  .hero-section {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    padding-top: 120px;
+    padding-bottom: var(--space-8);
+    overflow: hidden;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .hero-grid {
+    display: grid;
+    grid-template-columns: 1.2fr 0.8fr;
+    gap: var(--space-8);
+    align-items: center;
+  }
+
+  @media (max-width: 1024px) {
+    .hero-grid {
+      grid-template-columns: 1fr;
+      gap: var(--space-6);
+    }
+  }
+
+  .hero-content {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+  }
+
+  .hero-subtitle {
+    max-width: 58ch;
+    font-size: var(--text-lg);
+    font-weight: 300;
+    color: var(--muted);
+    line-height: 1.6;
+  }
+
+  .hero-visual-container {
+    width: 100%;
+    height: 500px;
+    position: relative;
+    border: 1px solid var(--border);
+    background-color: rgba(10, 10, 12, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+  }
+
+  .hero-visual-canvas {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+  }
+
+  .blueprint-lines {
+    position: absolute;
+    inset: 0;
+    background-image: 
+      linear-gradient(to right, rgba(28, 105, 212, 0.05) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(28, 105, 212, 0.05) 1px, transparent 1px);
+    background-size: 20px 20px;
+    z-index: 0;
+    pointer-events: none;
+  }
+
+  /* Trust indicators directly below hero header content */
+  .trust-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--space-2);
+    border-top: 1px solid var(--border);
+    padding-top: var(--space-4);
+    margin-top: var(--space-4);
+  }
+
+  @media (max-width: 640px) {
+    .trust-container {
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--space-3);
+    }
+  }
+
+  .trust-stat {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .trust-num {
+    font-family: var(--font-display);
+    font-size: var(--text-xl);
+    font-weight: 200;
+    color: #ffffff;
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+
+  .trust-num span.accent-plus {
+    color: var(--accent);
+  }
+
+  .trust-label {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+
+  /* ─── LOGO GRID (CREDIBILITY SHOWROOM) ─── */
+  .credibility-bar {
+    padding: var(--space-4) 0;
+    background-color: #030303;
+    border-bottom: 1px solid var(--border);
+    overflow: hidden;
+  }
+
+  .logo-carousel-track {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--space-6);
+    flex-wrap: wrap;
+  }
+
+  @media (max-width: 768px) {
+    .logo-carousel-track {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--space-2);
+      justify-items: center;
+    }
+  }
+
+  .tech-logo-item {
+    font-family: var(--font-mono);
+    font-weight: 500;
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    color: var(--meta);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .tech-logo-item::before {
+    content: "";
+    width: 4px;
+    height: 4px;
+    background-color: var(--border-light);
+    display: inline-block;
+    opacity: 0.3;
+  }
+
+  /* ─── COMPOSABLE SOLUTIONS & HORIZONTAL STORIES ─── */
+  .storytelling-block {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-8);
+    align-items: center;
+    padding: var(--space-8) 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .section-showroom-light .storytelling-block {
+    border-color: var(--border-light);
+  }
+
+  .storytelling-block:last-child {
+    border-bottom: none;
+  }
+
+  @media (max-width: 1024px) {
+    .storytelling-block {
+      grid-template-columns: 1fr;
+      gap: var(--space-4);
+      padding: var(--space-4) 0;
+    }
+  }
+
+  .story-content {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+  }
+
+  .story-tech-specs {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin: var(--space-2) 0;
+  }
+
+  .tech-badge {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    background-color: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: var(--fg);
+  }
+
+  .section-showroom-light .tech-badge {
+    background-color: rgba(0, 0, 0, 0.02);
+    border-color: var(--border-light);
+    color: var(--fg-dark);
+  }
+
+  .story-visual-panel {
+    border: 1px solid var(--border);
+    height: 400px;
+    background-color: rgba(10, 10, 12, 0.6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .section-showroom-light .story-visual-panel {
+    border-color: var(--border-light);
+    background-color: var(--surface-light);
+  }
+
+  .story-blueprint-label {
+    position: absolute;
+    top: 16px;
+    left: 16px;
+    font-family: var(--font-mono);
+    font-size: 10px;
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+
+  /* ─── REAL-TIME HEALTH DASHBOARD (TELEMETRY) ─── */
+  .health-section {
+    background-color: #030303;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .health-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-8);
+    align-items: center;
+  }
+
+  @media (max-width: 1024px) {
+    .health-grid {
+      grid-template-columns: 1fr;
+      gap: var(--space-4);
+    }
+  }
+
+  .terminal-container {
+    border: 1px solid var(--border);
+    background-color: #000000;
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    color: #a9b1d6; /* Monokai/technical aesthetic */
+    padding: var(--space-3);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .terminal-header {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 12px;
+    margin-bottom: 16px;
+    color: var(--muted);
+  }
+
+  .terminal-status-dot {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    background-color: var(--success);
+    margin-right: 8px;
+  }
+
+  .terminal-log-flow {
+    height: 180px;
+    overflow-y: hidden;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    line-height: 1.4;
+  }
+
+  .log-line {
+    display: flex;
+    gap: 16px;
+  }
+
+  .log-time {
+    color: var(--accent);
+  }
+
+  .log-msg {
+    color: #ffffff;
   }
 }

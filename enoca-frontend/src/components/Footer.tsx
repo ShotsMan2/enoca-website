@@ -241,11 +241,8 @@ export default function Footer({ settings, pages = [] }: { settings?: SiteSettin
                         </div>
                         
                         <div className="flex flex-col items-center md:items-end gap-1 mt-6 lg:mt-0">
-                            <div className="text-xl font-[var(--font-display)] font-black tracking-[0.15em] text-white flex items-center gap-2">
-                                <div className="w-3 h-3 border border-[var(--accent)] relative">
-                                    <div className="absolute top-[1px] left-[1px] w-[3px] h-[3px] bg-[var(--accent)]"></div>
-                                </div>
-                                ENOCA
+                            <div className="flex items-center gap-2">
+                                <img src="/logo.png" alt="Enoca" className="h-6 w-auto object-contain" />
                             </div>
                             <div className="text-[10px] font-[var(--font-mono)] tracking-wider text-[var(--meta)] uppercase mt-2">
                                 {t('copyright')}
