@@ -34,6 +34,7 @@ export default defineConfig({
           name: 'unit',
           environment: 'node',
           globals: true,
+          include: ['src/**/*.test.ts', 'src/**/*.test.tsx'],
         },
       },
     ],

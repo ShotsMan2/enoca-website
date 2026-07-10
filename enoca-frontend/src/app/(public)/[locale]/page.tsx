@@ -3,14 +3,17 @@ import AnimatedCard from '@/components/AnimatedCard';
 import HomepageCategoryGrid from '@/components/HomepageCategoryGrid';
 import PublicLayout from '@/components/PublicLayout';
 import { getHomepageCategories } from '@/lib/homepage-content';
-import { buildHomepageCopy } from '@/lib/homepage-translations';
+import { buildHomepageCopy, translateCategories } from '@/lib/homepage-translations';
 import { getLocale, getTranslations } from 'next-intl/server';
 
 export default async function Home() {
   const locale = await getLocale();
-  const categories = await getHomepageCategories();
+  const rawCategories = await getHomepageCategories();
   const t = await getTranslations('HomePage');
+  const tCategories = await getTranslations('Categories');
+
   const copy = buildHomepageCopy((key, values) => t(key, values));
+  const categories = translateCategories(rawCategories, (key) => tCategories(key));
 
   return (
     <PublicLayout>

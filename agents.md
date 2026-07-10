@@ -1,4 +1,4 @@
-# 🤖 Enoca Full-Stack Projesi - Yapay Zeka Ajanları Kılavuzu (agents.md)
+  # 🤖 Enoca Full-Stack Projesi - Yapay Zeka Ajanları Kılavuzu (agents.md)
 
 Bu belge, "Enoca Full-Stack Link and Category Management System" projesinde görev alacak tüm yapay zeka ajanlarının (kod yazarları, mimarlar, test uzmanları) uyması gereken temel kuralları, üstlendikleri rolleri, kodlama standartlarını ve iş akışlarını tanımlar.
 

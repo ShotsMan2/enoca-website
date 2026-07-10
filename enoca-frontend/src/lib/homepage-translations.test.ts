@@ -1,5 +1,71 @@
 import { describe, expect, it } from 'vitest';
-import { buildHomepageCopy } from './homepage-translations';
+import { buildHomepageCopy, slugify, translateCategories } from './homepage-translations';
+
+describe('slugify', () => {
+  it('correctly converts Turkish characters and punctuation to a URL-friendly slug', () => {
+    expect(slugify('SAP CX Mimarlığı')).toBe('sap-cx-mimarligi');
+    expect(slugify('E-ticaret Platformları')).toBe('e-ticaret-platformlari');
+    expect(slugify('Ar-Ge ve İnovasyon')).toBe('ar-ge-ve-inovasyon');
+    expect(slugify('Ürün Tasarımı')).toBe('urun-tasarimi');
+    expect(slugify('Akıllı Otomasyon')).toBe('akilli-otomasyon');
+    expect(slugify('  Hello World!  ')).toBe('hello-world');
+  });
+});
+
+describe('translateCategories', () => {
+  it('translates category names and link titles using a dictionary-like translator', () => {
+    const mockCategories = [
+      {
+        id: 1,
+        name: 'Yazılım Çözümleri',
+        slug: 'yazilim-cozumleri',
+        order: 1,
+        links: [
+          { id: 11, title: 'SAP CX Mimarlığı', url: '/sap-cx' },
+          { id: 12, title: 'E-ticaret Platformları', url: '/e-ticaret' },
+        ],
+      },
+    ];
+
+    const mockTranslator = (key: string) => {
+      const dict: Record<string, string> = {
+        'yazilim-cozumleri': 'Software Solutions',
+        'sap-cx-mimarligi': 'SAP CX Architecture',
+        'e-ticaret-platformlari': 'E-commerce Platforms',
+      };
+      return dict[key] ?? key;
+    };
+
+    const translated = translateCategories(mockCategories, mockTranslator);
+
+    expect(translated[0].name).toBe('Software Solutions');
+    expect(translated[0].links[0].title).toBe('SAP CX Architecture');
+    expect(translated[0].links[1].title).toBe('E-commerce Platforms');
+  });
+
+  it('falls back to database original values when translation is missing', () => {
+    const mockCategories = [
+      {
+        id: 1,
+        name: 'Original Category',
+        slug: 'original-category',
+        order: 1,
+        links: [
+          { id: 11, title: 'Original Link', url: '/link' },
+        ],
+      },
+    ];
+
+    const mockTranslator = (key: string) => {
+      return `Categories.${key}`;
+    };
+
+    const translated = translateCategories(mockCategories, mockTranslator);
+
+    expect(translated[0].name).toBe('Original Category');
+    expect(translated[0].links[0].title).toBe('Original Link');
+  });
+});
 
 describe('buildHomepageCopy', () => {
   it('returns translated strings and link counts for the home page', () => {

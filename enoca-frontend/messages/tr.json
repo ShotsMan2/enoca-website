@@ -285,5 +285,19 @@
     "report1": "2024 4. Çeyrek Finansal Sonuçları",
     "report2": "Yatırımcı Sunumu - Q4 2024",
     "report3": "Kurumsal Yönetişim İlkeleri"
+  },
+  "Categories": {
+    "yazilim-cozumleri": "Yazılım Çözümleri",
+    "sap-cx-mimarligi": "SAP CX Mimarlığı",
+    "e-ticaret-platformlari": "E-ticaret Platformları",
+    "ar-ge-ve-inovasyon": "Ar-Ge ve İnovasyon",
+    "urun-tasarimi": "Ürün Tasarımı",
+    "akilli-otomasyon": "Akıllı Otomasyon",
+    "kariyer": "Kariyer",
+    "acik-pozisyonlar": "Açık Pozisyonlar",
+    "staj-programi": "Staj Programı",
+    "sosyal-sorumluluk": "Sosyal Sorumluluk",
+    "etki-programlari": "Etki Programları",
+    "topluluk-destekleri": "Topluluk Destekleri"
   }
 }

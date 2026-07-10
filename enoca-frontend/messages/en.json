@@ -285,5 +285,19 @@
     "report1": "Q4 2024 Financial Results",
     "report2": "Investor Presentation - Q4 2024",
     "report3": "Corporate Governance Principles"
+  },
+  "Categories": {
+    "yazilim-cozumleri": "Software Solutions",
+    "sap-cx-mimarligi": "SAP CX Architecture",
+    "e-ticaret-platformlari": "E-commerce Platforms",
+    "ar-ge-ve-inovasyon": "R&D and Innovation",
+    "urun-tasarimi": "Product Design",
+    "akilli-otomasyon": "Smart Automation",
+    "kariyer": "Careers",
+    "acik-pozisyonlar": "Open Positions",
+    "staj-programi": "Internship Program",
+    "sosyal-sorumluluk": "Social Responsibility",
+    "etki-programlari": "Impact Programs",
+    "topluluk-destekleri": "Community Support"
   }
 }
