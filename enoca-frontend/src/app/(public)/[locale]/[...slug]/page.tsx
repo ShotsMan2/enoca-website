@@ -200,9 +200,9 @@ export default async function CatchAllPage({
     return (
         <PublicLayout>
         <PageTransition>
-        <div className="min-h-screen bg-background relative overflow-hidden">
+        <div className="min-h-screen bg-transparent relative overflow-hidden">
             {/* Dekoratif Arka Plan Işıltısı */}
-            <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-accent/5 rounded-full blur-[120px] -z-10" />
+            <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-sky-500/5 rounded-full blur-[120px] -z-10" />
 
             <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 pb-20 md:pt-12 md:pb-32">
                 
@@ -215,20 +215,20 @@ export default async function CatchAllPage({
                     
                     {/* Modern Breadcrumb (Sayfa Hiyerarşisi) */}
                     <div className="flex items-center flex-wrap gap-2 mb-8">
-                         <div className="inline-flex items-center gap-3 rounded-full border border-accent/20 bg-accent/5 px-4 py-1.5">
+                         <div className="inline-flex items-center gap-3 rounded-full border border-sky-400/20 bg-sky-400/5 px-4 py-1.5">
                             <span className="relative flex h-2 w-2">
-                                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent opacity-75"></span>
-                                <span className="relative inline-flex rounded-full h-2 w-2 bg-accent"></span>
+                                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-sky-400 opacity-75"></span>
+                                <span className="relative inline-flex rounded-full h-2 w-2 bg-sky-400"></span>
                             </span>
-                            <span className="font-mono text-xs font-medium tracking-[0.15em] text-accent uppercase">
+                            <span className="font-mono text-xs font-medium tracking-[0.15em] text-sky-400 uppercase">
                                 {topCategory}
                             </span>
                         </div>
                         
                         {slugArray.slice(1).map((segment, index) => (
                             <div key={index} className="flex items-center gap-2">
-                                <ChevronRight className="w-4 h-4 text-muted-foreground/50" />
-                                <span className="text-sm font-medium text-muted-foreground uppercase tracking-wide">
+                                <ChevronRight className="w-4 h-4 text-slate-500" />
+                                <span className="text-sm font-medium text-slate-400 uppercase tracking-wide">
                                     {index === slugArray.length - 2 ? pageTitle : translateDB(segment.replace(/-/g, ' '))}
                                 </span>
                             </div>
@@ -237,26 +237,26 @@ export default async function CatchAllPage({
 
                     {/* Başlık */}
                     <div className="relative mb-12">
-                        <h1 className="text-5xl md:text-6xl lg:text-7xl font-display font-black uppercase tracking-tighter leading-tight bg-gradient-to-r from-[#0055FF] via-[#0077FF] to-[#00AAFF] bg-clip-text text-transparent drop-shadow-sm pb-1 pr-2">
+                        <h1 className="text-5xl md:text-6xl lg:text-7xl font-display font-black uppercase tracking-tighter leading-tight bg-gradient-to-r from-sky-400 via-blue-500 to-indigo-500 bg-clip-text text-transparent drop-shadow-sm pb-1 pr-2">
                             {pageTitle}
                         </h1>
-                        <div className="w-24 h-1.5 bg-gradient-to-r from-accent to-transparent rounded-full mt-4"></div>
+                        <div className="w-24 h-1.5 bg-gradient-to-r from-sky-400 to-transparent rounded-full mt-4"></div>
                     </div>
 
                     {/* İçerik Kartı */}
-                    <div className="w-full bg-card rounded-2xl shadow-md border border-border p-8 md:p-12 relative overflow-hidden">
+                    <div className="w-full bg-slate-950/70 border border-white/10 backdrop-blur rounded-[2rem] shadow-[0_35px_120px_rgba(2,132,199,0.15)] p-8 md:p-12 relative overflow-hidden">
                         {/* Subtle inner glow */}
-                        <div className="absolute -bottom-20 -right-20 w-40 h-40 bg-accent/10 rounded-full blur-[50px] -z-10" />
+                        <div className="absolute -bottom-20 -right-20 w-40 h-40 bg-sky-500/10 rounded-full blur-[50px] -z-10" />
                         
                         {dynamicPage ? (
-                            <div className="prose prose-lg dark:prose-invert max-w-none" dangerouslySetInnerHTML={{ __html: translateDB(dynamicPage.content) }} />
+                            <div className="prose prose-lg prose-invert max-w-none text-slate-300 prose-headings:text-white prose-a:text-sky-400 hover:prose-a:text-sky-300 prose-strong:text-white" dangerouslySetInnerHTML={{ __html: translateDB(dynamicPage.content) }} />
                         ) : subPages.length > 0 ? (
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                                 {subPages.map((sub: any) => (
-                                    <Link key={sub.id} href={sub.slug} className="group p-6 bg-white dark:bg-gray-800 rounded-2xl border border-gray-100 dark:border-gray-700 hover:shadow-xl hover:-translate-y-1 transition-all">
-                                        <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2 group-hover:text-blue-600 transition-colors">{translateDB(sub.menuTitle)}</h3>
-                                        <p className="text-sm text-gray-500 line-clamp-2">{translateDB(sub.content).replace(/<[^>]*>?/gm, '').substring(0, 120)}...</p>
-                                        <div className="mt-4 flex items-center text-sm font-semibold text-blue-600">
+                                    <Link key={sub.id} href={sub.slug} className="group p-6 bg-slate-950/70 border border-white/10 hover:border-sky-400/40 hover:shadow-[0_20px_50px_rgba(2,132,199,0.1)] backdrop-blur rounded-2xl transition-all">
+                                        <h3 className="text-xl font-bold text-white mb-2 group-hover:text-sky-400 transition-colors">{translateDB(sub.menuTitle)}</h3>
+                                        <p className="text-sm text-slate-400 line-clamp-2">{translateDB(sub.content).replace(/<[^>]*>?/gm, '').substring(0, 120)}...</p>
+                                        <div className="mt-4 flex items-center text-sm font-semibold text-sky-400">
                                             {translateDB("İncele")} <ChevronRight className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" />
                                         </div>
                                     </Link>
@@ -264,24 +264,24 @@ export default async function CatchAllPage({
                             </div>
                         ) : (
                             <>
-                                <p className="text-lg md:text-xl text-muted-foreground leading-relaxed">
+                                <p className="text-lg md:text-xl text-slate-300 leading-relaxed">
                                     {t('catchAllDesc', { pageTitle })}
                                 </p>
                                 
-                                <div className="mt-10 pt-8 border-t border-border/50">
-                                    <h3 className="text-xl font-bold text-foreground mb-6">{t('techTitle')}</h3>
-                                    <ul className="space-y-4 text-muted-foreground">
+                                <div className="mt-10 pt-8 border-t border-white/10">
+                                    <h3 className="text-xl font-bold text-white mb-6">{t('techTitle')}</h3>
+                                    <ul className="space-y-4 text-slate-400">
                                         <li className="flex items-start gap-4">
-                                            <div className="w-8 h-8 rounded-full bg-accent/10 text-accent flex-shrink-0 flex items-center justify-center text-sm font-bold mt-0.5">✓</div>
-                                            <p>{t('techPoint1')}</p>
+                                            <div className="w-8 h-8 rounded-full bg-sky-400/10 text-sky-400 flex-shrink-0 flex items-center justify-center text-sm font-bold mt-0.5">✓</div>
+                                            <p className="text-slate-300">{t('techPoint1')}</p>
                                         </li>
                                         <li className="flex items-start gap-4">
-                                            <div className="w-8 h-8 rounded-full bg-accent/10 text-accent flex-shrink-0 flex items-center justify-center text-sm font-bold mt-0.5">✓</div>
-                                            <p>{t('techPoint2')}</p>
+                                            <div className="w-8 h-8 rounded-full bg-sky-400/10 text-sky-400 flex-shrink-0 flex items-center justify-center text-sm font-bold mt-0.5">✓</div>
+                                            <p className="text-slate-300">{t('techPoint2')}</p>
                                         </li>
                                         <li className="flex items-start gap-4">
-                                            <div className="w-8 h-8 rounded-full bg-accent/10 text-accent flex-shrink-0 flex items-center justify-center text-sm font-bold mt-0.5">✓</div>
-                                            <p>{t('techPoint3')}</p>
+                                            <div className="w-8 h-8 rounded-full bg-sky-400/10 text-sky-400 flex-shrink-0 flex items-center justify-center text-sm font-bold mt-0.5">✓</div>
+                                            <p className="text-slate-300">{t('techPoint3')}</p>
                                         </li>
                                     </ul>
                                 </div>
