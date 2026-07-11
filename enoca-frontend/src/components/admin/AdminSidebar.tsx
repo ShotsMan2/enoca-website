@@ -135,10 +135,10 @@ export default function AdminSidebar() {
 
   return (
     <aside
-      className={`relative flex flex-col h-screen backdrop-blur-xl bg-white/70 dark:bg-gray-950/70 border-r border-border transition-all duration-300 z-50 ${collapsed ? "w-16" : "w-64"}`}
+      className={`relative flex flex-col h-screen bg-[#050505] border-r border-[#18191f] transition-all duration-300 z-50 ${collapsed ? "w-16" : "w-64"}`}
     >
       {/* Logo */}
-      <div className="flex items-center justify-between h-16 px-4 border-b border-gray-200 dark:border-gray-700 flex-shrink-0">
+      <div className="flex items-center justify-between h-16 px-4 border-b border-[#18191f] flex-shrink-0 bg-[#0a0a0c]">
         {!collapsed && (
           <Link href="/admin/dashboard" className="flex items-center gap-2">
             <img src="/logo.png" alt="Enoca" className="h-7 w-auto object-contain" />
@@ -152,7 +152,7 @@ export default function AdminSidebar() {
         )}
         <button
           onClick={() => setCollapsed(!collapsed)}
-          className={`w-8 h-8 rounded-lg flex items-center justify-center text-gray-500 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors ${collapsed ? "mx-auto" : ""}`}
+          className={`w-8 h-8 flex items-center justify-center text-gray-500 hover:bg-[#18191f] hover:text-white transition-colors ${collapsed ? "mx-auto" : ""}`}
         >
           <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
             {collapsed ? (
@@ -173,37 +173,28 @@ export default function AdminSidebar() {
               key={item.href}
               href={item.href}
               title={collapsed ? item.label : undefined}
-              className={`group flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-semibold transition-all duration-300 ease-out relative overflow-hidden ${
+              className={`group flex items-center gap-3 px-4 py-3 text-sm font-mono uppercase tracking-widest transition-all duration-300 ease-out relative overflow-hidden border border-transparent ${
                 isActive
-                  ? "text-white shadow-lg shadow-blue-500/20"
-                  : "text-muted-foreground hover:text-foreground"
+                  ? "text-white bg-[#0a0a0c] border-[#18191f] border-l-[#1c69d4] border-l-2"
+                  : "text-[#606266] hover:text-white hover:bg-[rgba(255,255,255,0.02)] hover:border-[#18191f]"
               }`}
             >
-              {/* Liquid Active Background */}
-              {isActive && (
-                <div className="absolute inset-0 bg-blue-600 rounded-xl" />
-              )}
-              {/* Liquid Hover Background (only for inactive) */}
-              {!isActive && (
-                <div className="absolute inset-0 bg-muted/0 group-hover:bg-muted/80 rounded-xl transition-colors duration-300" />
-              )}
-              
-              <span className="flex-shrink-0 relative z-10 transition-transform duration-300 group-hover:scale-110 group-hover:rotate-3">{item.icon}</span>
+              <span className="flex-shrink-0 relative z-10 transition-transform duration-300 group-hover:scale-110">{item.icon}</span>
               {!collapsed && <span className="flex-1 relative z-10">{item.label}</span>}
               {!collapsed && item.badge && unread > 0 && (
-                <span className="bg-red-500 text-white text-xs font-bold px-1.5 py-0.5 rounded-full min-w-[20px] text-center relative z-10 shadow-sm">
+                <span className="bg-[#1c69d4] text-white text-[10px] font-bold px-2 py-0.5 min-w-[20px] text-center relative z-10">
                   {unread}
                 </span>
               )}
               {collapsed && item.badge && unread > 0 && (
-                <span className="absolute top-1 right-1 w-2.5 h-2.5 bg-red-500 rounded-full border-2 border-white dark:border-gray-900" />
+                <span className="absolute top-2 right-2 w-2 h-2 bg-[#1c69d4] border border-[#050505]" />
               )}
             </Link>
           );
         })}
       </nav>
 
-      <div className={`p-4 border-t border-gray-200 dark:border-gray-700 flex-shrink-0 ${collapsed ? "flex justify-center" : ""}`}>
+      <div className={`p-4 border-t border-[#18191f] flex-shrink-0 bg-[#0a0a0c] ${collapsed ? "flex justify-center" : ""}`}>
         <a
           href="/"
           target="_blank"

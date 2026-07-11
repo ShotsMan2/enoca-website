@@ -48,14 +48,19 @@ export interface SiteSettings {
 }
 
 export interface HeroSettings {
-  mainTitle: string;
+  badge: string;
+  titleLine1: string;
+  titleHighlight: string;
+  titleLine2: string;
   subtitle: string;
-  highlightedWord: string;
-  button1Text: string;
-  button1Url: string;
-  button2Text: string;
-  button2Url: string;
-  description: string;
+  ctaContact: string;
+  ctaCareer: string;
+  featuredHighlight1: string;
+  featuredHighlight2: string;
+  featuredHighlight3: string;
+  summaryTitle: string;
+  summaryHeading: string;
+  status: string;
 }
 
 export interface HomepageFeature {

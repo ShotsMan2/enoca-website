@@ -5,14 +5,40 @@ import PublicLayout from '@/components/PublicLayout';
 import { getHomepageCategories } from '@/lib/homepage-content';
 import { buildHomepageCopy, translateCategories } from '@/lib/homepage-translations';
 import { getLocale, getTranslations } from 'next-intl/server';
+import { readDB } from '@/lib/db';
+import AgentMarquee from '@/components/AgentMarquee';
 
 export default async function Home() {
   const locale = await getLocale();
   const rawCategories = await getHomepageCategories();
   const t = await getTranslations('HomePage');
   const tCategories = await getTranslations('Categories');
+  const dbData = await readDB();
+  const heroSettings = dbData?.hero || {};
 
   const copy = buildHomepageCopy((key, values) => t(key, values));
+  
+  // Override translations with DB settings if they exist
+  if (heroSettings.badge) copy.badge = heroSettings.badge;
+  if (heroSettings.titleLine1) copy.titleLine1 = heroSettings.titleLine1;
+  if (heroSettings.titleHighlight) copy.titleHighlight = heroSettings.titleHighlight;
+  if (heroSettings.titleLine2) copy.titleLine2 = heroSettings.titleLine2;
+  if (heroSettings.subtitle) copy.subtitle = heroSettings.subtitle;
+  if (heroSettings.ctaContact) copy.ctaContact = heroSettings.ctaContact;
+  if (heroSettings.ctaCareer) copy.ctaCareer = heroSettings.ctaCareer;
+  if (heroSettings.summaryTitle) copy.summaryTitle = heroSettings.summaryTitle;
+  if (heroSettings.summaryHeading) copy.summaryHeading = heroSettings.summaryHeading;
+  if (heroSettings.status) copy.status = heroSettings.status;
+  
+  // Custom logic for featured highlights override
+  if (heroSettings.featuredHighlight1 || heroSettings.featuredHighlight2 || heroSettings.featuredHighlight3) {
+    copy.featuredHighlights = [
+      heroSettings.featuredHighlight1,
+      heroSettings.featuredHighlight2,
+      heroSettings.featuredHighlight3
+    ].filter(Boolean) as string[];
+  }
+
   const categories = translateCategories(rawCategories, (key) =>
     tCategories.has(key) ? tCategories(key) : key
   );
@@ -81,6 +107,8 @@ export default async function Home() {
           </AnimatedCard>
         </div>
       </section>
+
+      <AgentMarquee />
 
       <HomepageCategoryGrid categories={categories} />
     </PublicLayout>
