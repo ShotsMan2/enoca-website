@@ -13,14 +13,12 @@ export default function NotFound() {
   }, []);
 
   if (!mounted) return null;
+  useEffect(() => {
+    document.title = "Sayfa Bulunamadı | Enoca";
+  }, []);
 
   return (
-    <html lang="tr">
-      <head>
-        <title>Sayfa Bulunamadı | Enoca</title>
-      </head>
-      <body>
-        <div className="min-h-screen bg-background flex flex-col items-center justify-center p-4 relative overflow-hidden font-sans">
+    <div className="min-h-screen bg-background flex flex-col items-center justify-center p-4 relative overflow-hidden font-sans">
       {/* Decorative Background */}
       <div className="absolute inset-0 bg-dot-pattern opacity-10 pointer-events-none" />
       <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-accent rounded-full blur-[150px] opacity-10 pointer-events-none" />
@@ -84,7 +82,5 @@ export default function NotFound() {
         </div>
       </div>
     </div>
-      </body>
-    </html>
   );
 }

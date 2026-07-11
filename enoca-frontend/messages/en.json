@@ -229,6 +229,25 @@
     "jobs": "Job Openings",
     "backToHome": "Back to Home"
   },
+  "HomePage": {
+    "badge": "Enoca | Modern corporate digital experience",
+    "titleLine1": "While organizing connections,",
+    "titleHighlight": "we strengthen your story",
+    "titleLine2": "with confidence.",
+    "subtitle": "We bring Enoca's solutions, innovation areas, career opportunities, and community-focused resources together in one premium experience.",
+    "ctaContact": "Contact us",
+    "ctaCareer": "Explore career areas",
+    "featuredHighlight1": "Digital experiences that keep corporate vision alive",
+    "featuredHighlight2": "Collaborative spaces and accessible resources",
+    "featuredHighlight3": "Pre-configured links for quick access",
+    "summaryTitle": "Overview",
+    "summaryHeading": "Corporate access center",
+    "status": "Active",
+    "sectionLabel": "Corporate content",
+    "sectionHeading": "Areas that shape Enoca's vision and services",
+    "sectionSubtitle": "Each category presents the company's expertise and the resources you want to access in a single flow.",
+    "linkCount": "{count} links"
+  },
   "HomeMisc": {
     "configTitle": "Shape Your ",
     "configHighlight": "Project",
@@ -266,5 +285,44 @@
     "report1": "Q4 2024 Financial Results",
     "report2": "Investor Presentation - Q4 2024",
     "report3": "Corporate Governance Principles"
+  },
+  "Categories": {
+    "yazilim-cozumleri": "Software Solutions",
+    "sap-cx-mimarligi": "SAP CX Architecture",
+    "e-ticaret-platformlari": "E-commerce Platforms",
+    "ar-ge-ve-inovasyon": "R&D and Innovation",
+    "urun-tasarimi": "Product Design",
+    "akilli-otomasyon": "Smart Automation",
+    "kariyer": "Careers",
+    "acik-pozisyonlar": "Open Positions",
+    "staj-programi": "Internship Program",
+    "sosyal-sorumluluk": "Social Responsibility",
+    "etki-programlari": "Impact Programs",
+    "topluluk-destekleri": "Community Support",
+    "cozumlerimiz": "Our Solutions",
+    "e-ticaret-sistemleri": "E-Commerce Systems",
+    "mobil-uygulama-gelistirme": "Mobile App Development",
+    "danismanlik": "Consulting",
+    "hybris-danismanligi": "Hybris Consulting",
+    "sap-teknik-danismanlik": "SAP Technical Consulting",
+    "sap-fonksiyonel-danismanlik": "SAP Functional Consulting",
+    "gelistirme-danismanligi": "Development Consulting",
+    "kalite-yonetimi": "Quality Management",
+    "dis-kaynak-hizmetleri": "Outsourcing Services",
+    "diskaynak-hizmetleri": "Outsourcing Services"
+  },
+  "CommandPalette": {
+    "placeholder": "What are you looking for? (Solutions, Careers...)",
+    "noResults": "No results found.",
+    "go": "Go →",
+    "quickMenu": "Quick Menu",
+    "toClose": "To close",
+    "results": {
+      "solutions": "Our Solutions",
+      "news": "News & Blog",
+      "careers": "Careers & Job Openings",
+      "contact": "Contact",
+      "about": "About Us"
+    }
   }
 }

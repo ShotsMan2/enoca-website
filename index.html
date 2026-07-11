@@ -1,0 +1,2670 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ENOCA — Enterprise SAP Commerce Cloud Architects &amp; Engineers</title>
+  
+  <!-- SEO & Optimization Meta Tags -->
+  <meta name="description" content="ENOCA engineers mission-critical enterprise commerce platforms. We specialize in high-scale SAP CX Hybris delivery, model-driven architecture, and proactive system monitoring." />
+  <meta name="keywords" content="SAP Commerce Cloud, SAP CX Hybris, Composable Commerce, Nagios, Hyperic HQ, SAP HANA, Enterprise Software Architecture, Next.js, React" />
+  <link rel="canonical" href="https://enoca.com" />
+  
+  <!-- OpenGraph / Facebook -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="ENOCA — Enterprise SAP Commerce Cloud Architects" />
+  <meta property="og:description" content="We engineer decoupled, high-performance commerce systems with German precision. Zero technical debt, absolute uptime." />
+  <meta property="og:url" content="https://enoca.com" />
+  <meta property="og:image" content="https://enoca.com/assets/og-image.jpg" />
+  
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="ENOCA — Enterprise SAP Commerce Cloud Architects" />
+  <meta name="twitter:description" content="We engineer decoupled, high-performance commerce systems with German precision. Zero technical debt, absolute uptime." />
+  <meta name="twitter:image" content="https://enoca.com/assets/og-image.jpg" />
+
+  <!-- Fonts: IBM Plex Mono for technical indicators, Outfit for high-end tracked headers (BMWTypeNextLatin fallbacks) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;400;500;600;700&family=Outfit:wght@200;300;400;500;700;900&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ─────────────────────────────────────────────────────────────────────────
+     * ACTIVE DESIGN SYSTEM TOKENS — BMW BRAND CONTRACT (MODERN LUXURY & PRECISION)
+     * ───────────────────────────────────────────────────────────────────────── */
+    :root {
+      --bg: #050505;          /* Near-black deep cinematic foundation */
+      --bg-light: #ffffff;    /* High-contrast showroom content surface */
+      --surface: #0a0a0c;     /* Deep technical dark panel */
+      --surface-light: #f9f9fb; /* Muted light content panel */
+      
+      --fg: #f3f4f6;          /* Technical gray for main reading on dark */
+      --fg-dark: #111115;     /* Near-black text on white surface */
+      --muted: #8e9196;       /* Secondary info */
+      --meta: #606266;        /* Structural labeling */
+
+      --border: #18191f;      /* Hairline dark borders */
+      --border-light: #e4e7eb;/* Hairline light borders */
+      
+      --accent: #1c69d4;      /* BMW Blue — Singular interactive accent */
+      --accent-hover: #0653b6;/* BMW Focus Blue */
+      --accent-glow: rgba(28, 105, 212, 0.15);
+
+      --success: #10b981;
+      --warn: #f59e0b;
+      --danger: #ef4444;
+
+      --font-display: "Outfit", "Helvetica Neue", Arial, sans-serif;
+      --font-body: "Outfit", "Helvetica Neue", Arial, sans-serif;
+      --font-mono: "IBM Plex Mono", monospace;
+
+      /* Multiplicative typography scaling */
+      --text-xs: 12px;
+      --text-sm: 14px;
+      --text-base: 16px;
+      --text-lg: 20px;
+      --text-xl: 28px;
+      --text-2xl: 36px;
+      --text-3xl: 56px;
+      --text-4xl: 84px;
+
+      --leading-body: 1.5;
+      --leading-tight: 1.15;
+      --tracking-display: -0.02em;
+
+      --space-1: 8px;
+      --space-2: 16px;
+      --space-3: 24px;
+      --space-4: 32px;
+      --space-6: 48px;
+      --space-8: 64px;
+      --space-12: 96px;
+
+      --section-y-desktop: 128px;
+      --section-y-tablet: 80px;
+      --section-y-phone: 56px;
+
+      /* Zero border-radius EVERYWHERE (BMW Identity) */
+      --radius-sm: 0px;
+      --radius-md: 0px;
+      --radius-lg: 0px;
+      --radius-pill: 0px;
+
+      --focus-ring: 0 0 0 2px var(--accent-hover);
+      --motion-fast: 200ms;
+      --motion-base: 400ms;
+      --ease-standard: cubic-bezier(0.16, 1, 0.3, 1); /* Ultra premium ease-out */
+      
+      --container-max: 1440px;
+      --container-gutter: 48px;
+    }
+
+    /* Core Reset */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      border-radius: 0 !important; /* Force global zero border-radius */
+    }
+
+    html {
+      scroll-behavior: smooth;
+      background-color: var(--bg);
+      scrollbar-width: thin;
+      scrollbar-color: var(--accent) var(--bg);
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--fg);
+      font-family: var(--font-body);
+      font-size: var(--text-base);
+      line-height: var(--leading-body);
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    /* Selection Color */
+    ::selection {
+      background-color: var(--accent);
+      color: #ffffff;
+    }
+
+    /* ─── TECHNICAL DRAWING GRID BACKGROUNDS ─── */
+    .bg-grid {
+      position: fixed;
+      inset: 0;
+      background-size: 80px 80px;
+      background-image: 
+        linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+      z-index: -10;
+      pointer-events: none;
+    }
+
+    .bg-radial-gradient {
+      position: fixed;
+      width: 100vw;
+      height: 100vh;
+      inset: 0;
+      background: radial-gradient(circle at 50% 30%, rgba(28, 105, 212, 0.1) 0%, transparent 60%);
+      z-index: -9;
+      pointer-events: none;
+    }
+
+    .custom-noise {
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3e%3cfilter id='noiseFilter'%3e%3cturbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3e%3c/filter%3e%3crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.025'/%3e%3c/svg%3e");
+      z-index: -8;
+      pointer-events: none;
+    }
+
+    /* Containers */
+    .container {
+      max-width: var(--container-max);
+      margin: 0 auto;
+      padding: 0 var(--container-gutter);
+      position: relative;
+    }
+
+    @media (max-width: 1024px) {
+      :root {
+        --container-gutter: 32px;
+      }
+    }
+
+    @media (max-width: 640px) {
+      :root {
+        --container-gutter: 20px;
+      }
+    }
+
+    /* ─── TYPOGRAPHY ─── */
+    h1, h2, h3, h4, h5, h6 {
+      font-family: var(--font-display);
+      text-transform: uppercase;
+      font-weight: 200; /* Whispered elegance weight */
+      letter-spacing: var(--tracking-display);
+      line-height: var(--leading-tight);
+      color: #ffffff;
+    }
+
+    /* Oversized typography elements */
+    .huge-heading {
+      font-size: clamp(2.5rem, 7vw, var(--text-4xl));
+      font-weight: 200;
+      letter-spacing: -0.03em;
+      text-transform: uppercase;
+      line-height: 0.95;
+    }
+
+    .section-heading {
+      font-size: clamp(1.8rem, 4vw, var(--text-3xl));
+      margin-bottom: var(--space-2);
+      font-weight: 300;
+    }
+
+    .eyebrow {
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 0.25em;
+      margin-bottom: var(--space-2);
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 6px;
+      height: 6px;
+      background-color: var(--accent);
+      display: inline-block;
+    }
+
+    p {
+      color: var(--fg);
+      font-weight: 300;
+      line-height: 1.6;
+    }
+
+    p.lead {
+      font-size: var(--text-lg);
+      color: var(--muted);
+      max-width: 65ch;
+    }
+
+    /* ─── BUTTONS ─── */
+    .btn-group {
+      display: flex;
+      gap: var(--space-2);
+      flex-wrap: wrap;
+      margin-top: var(--space-4);
+    }
+
+    .btn {
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      padding: 18px 36px;
+      border: 1px solid var(--border);
+      background-color: transparent;
+      color: #ffffff;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      transition: all var(--motion-fast) var(--ease-standard);
+      text-decoration: none;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Magnetic effect hover simulation */
+    .btn-primary {
+      background-color: var(--accent);
+      border-color: var(--accent);
+      color: #ffffff;
+    }
+
+    .btn-primary:hover {
+      background-color: var(--accent-hover);
+      border-color: var(--accent-hover);
+      box-shadow: 0 0 20px rgba(28, 105, 212, 0.4);
+    }
+
+    .btn-secondary {
+      border-color: rgba(255, 255, 255, 0.2);
+      background-color: rgba(255, 255, 255, 0.02);
+    }
+
+    .btn-secondary:hover {
+      border-color: #ffffff;
+      background-color: rgba(255, 255, 255, 0.05);
+    }
+
+    .btn-text {
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      color: var(--accent);
+      text-decoration: none;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: color var(--motion-fast) var(--ease-standard);
+    }
+
+    .btn-text:hover {
+      color: #ffffff;
+    }
+
+    .btn-text svg {
+      transition: transform var(--motion-fast) var(--ease-standard);
+    }
+
+    .btn-text:hover svg {
+      transform: translateX(4px);
+    }
+
+    /* ─── LAYOUT SECTIONS ─── */
+    section {
+      padding: var(--section-y-desktop) 0;
+      border-bottom: 1px solid var(--border);
+      position: relative;
+    }
+
+    @media (max-width: 768px) {
+      section {
+        padding: var(--section-y-tablet) 0;
+      }
+    }
+
+    /* Showroom Pacing alternates dark and light surfaces */
+    .section-showroom-dark {
+      background-color: #050505;
+      color: var(--fg);
+    }
+
+    .section-showroom-light {
+      background-color: var(--bg-light);
+      color: var(--fg-dark);
+      border-bottom: 1px solid var(--border-light);
+    }
+
+    .section-showroom-light h1,
+    .section-showroom-light h2,
+    .section-showroom-light h3,
+    .section-showroom-light h4 {
+      color: var(--fg-dark);
+    }
+
+    .section-showroom-light p {
+      color: #555861;
+    }
+
+    /* ─── NAVIGATION ─── */
+    header.site-header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 90px;
+      z-index: 1000;
+      background-color: rgba(5, 5, 5, 0.8);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      transition: all var(--motion-base) var(--ease-standard);
+    }
+
+    header.site-header.scrolled {
+      height: 70px;
+      background-color: rgba(5, 5, 5, 0.95);
+    }
+
+    .nav-container {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      text-decoration: none;
+      color: #ffffff;
+      font-family: var(--font-display);
+      font-weight: 900;
+      font-size: var(--text-lg);
+      letter-spacing: 0.15em;
+    }
+
+    .logo-mark {
+      width: 24px;
+      height: 24px;
+      border: 2px solid var(--accent);
+      position: relative;
+    }
+
+    .logo-mark::after {
+      content: "";
+      position: absolute;
+      width: 6px;
+      height: 6px;
+      background-color: var(--accent);
+      top: 2px;
+      left: 2px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: var(--space-4);
+      list-style: none;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--muted);
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      padding: 8px 0;
+      position: relative;
+      transition: color var(--motion-fast) var(--ease-standard);
+    }
+
+    .nav-links a:hover {
+      color: #ffffff;
+    }
+
+    .nav-links a::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 1px;
+      background-color: var(--accent);
+      transform: scaleX(0);
+      transform-origin: right;
+      transition: transform var(--motion-fast) var(--ease-standard);
+    }
+
+    .nav-links a:hover::after {
+      transform: scaleX(1);
+      transform-origin: left;
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: var(--space-2);
+    }
+
+    /* Sound Switcher */
+    .sound-toggle-btn {
+      background: transparent;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: var(--muted);
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all var(--motion-fast) var(--ease-standard);
+    }
+
+    .sound-toggle-btn:hover, .sound-toggle-btn.active {
+      border-color: var(--accent);
+      color: #ffffff;
+    }
+
+    /* Mobile Hamburger Menu */
+    .mobile-menu-toggle {
+      display: none;
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: #ffffff;
+    }
+
+    @media (max-width: 1024px) {
+      .nav-links, .nav-actions .btn {
+        display: none;
+      }
+      .mobile-menu-toggle {
+        display: block;
+      }
+    }
+
+    /* ─── HERO SECTION ─── */
+    .hero-section {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding-top: 120px;
+      padding-bottom: var(--space-8);
+      overflow: hidden;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: var(--space-8);
+      align-items: center;
+    }
+
+    @media (max-width: 1024px) {
+      .hero-grid {
+        grid-template-columns: 1fr;
+        gap: var(--space-6);
+      }
+    }
+
+    .hero-content {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-3);
+    }
+
+    .hero-subtitle {
+      max-width: 58ch;
+      font-size: var(--text-lg);
+      font-weight: 300;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    .hero-visual-container {
+      width: 100%;
+      height: 500px;
+      position: relative;
+      border: 1px solid var(--border);
+      background-color: rgba(10, 10, 12, 0.5);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+    }
+
+    .hero-visual-canvas {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+    }
+
+    .blueprint-lines {
+      position: absolute;
+      inset: 0;
+      background-image: 
+        linear-gradient(to right, rgba(28, 105, 212, 0.05) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(28, 105, 212, 0.05) 1px, transparent 1px);
+      background-size: 20px 20px;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    /* Trust indicators directly below hero header content */
+    .trust-container {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: var(--space-2);
+      border-top: 1px solid var(--border);
+      padding-top: var(--space-4);
+      margin-top: var(--space-4);
+    }
+
+    @media (max-width: 640px) {
+      .trust-container {
+        grid-template-columns: repeat(2, 1fr);
+        gap: var(--space-3);
+      }
+    }
+
+    .trust-stat {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .trust-num {
+      font-family: var(--font-display);
+      font-size: var(--text-xl);
+      font-weight: 200;
+      color: #ffffff;
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+
+    .trust-num span.accent-plus {
+      color: var(--accent);
+    }
+
+    .trust-label {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+
+    /* ─── LOGO GRID (CREDIBILITY SHOWROOM) ─── */
+    .credibility-bar {
+      padding: var(--space-4) 0;
+      background-color: #030303;
+      border-bottom: 1px solid var(--border);
+      overflow: hidden;
+    }
+
+    .logo-carousel-track {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: var(--space-6);
+      flex-wrap: wrap;
+    }
+
+    @media (max-width: 768px) {
+      .logo-carousel-track {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: var(--space-2);
+        justify-items: center;
+      }
+    }
+
+    .tech-logo-item {
+      font-family: var(--font-mono);
+      font-weight: 500;
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      color: var(--meta);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .tech-logo-item::before {
+      content: "";
+      width: 4px;
+      height: 4px;
+      background-color: var(--border-light);
+      display: inline-block;
+      opacity: 0.3;
+    }
+
+    /* ─── COMPOSABLE SOLUTIONS & HORIZONTAL STORIES ─── */
+    .storytelling-block {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-8);
+      align-items: center;
+      padding: var(--space-8) 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .section-showroom-light .storytelling-block {
+      border-color: var(--border-light);
+    }
+
+    .storytelling-block:last-child {
+      border-bottom: none;
+    }
+
+    @media (max-width: 1024px) {
+      .storytelling-block {
+        grid-template-columns: 1fr;
+        gap: var(--space-4);
+        padding: var(--space-4) 0;
+      }
+    }
+
+    .story-content {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-2);
+    }
+
+    .story-tech-specs {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin: var(--space-2) 0;
+    }
+
+    .tech-badge {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      text-transform: uppercase;
+      padding: 4px 10px;
+      background-color: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: var(--fg);
+    }
+
+    .section-showroom-light .tech-badge {
+      background-color: rgba(0, 0, 0, 0.02);
+      border-color: var(--border-light);
+      color: var(--fg-dark);
+    }
+
+    .story-visual-panel {
+      border: 1px solid var(--border);
+      height: 400px;
+      background-color: rgba(10, 10, 12, 0.6);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .section-showroom-light .story-visual-panel {
+      border-color: var(--border-light);
+      background-color: var(--surface-light);
+    }
+
+    .story-blueprint-label {
+      position: absolute;
+      top: 16px;
+      left: 16px;
+      font-family: var(--font-mono);
+      font-size: 10px;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+
+    /* ─── REAL-TIME HEALTH DASHBOARD (TELEMETRY) ─── */
+    .health-section {
+      background-color: #030303;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .health-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-8);
+      align-items: center;
+    }
+
+    @media (max-width: 1024px) {
+      .health-grid {
+        grid-template-columns: 1fr;
+        gap: var(--space-4);
+      }
+    }
+
+    .terminal-container {
+      border: 1px solid var(--border);
+      background-color: #000000;
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      color: #a9b1d6; /* Monokai/technical aesthetic */
+      padding: var(--space-3);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .terminal-header {
+      display: flex;
+      justify-content: space-between;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 12px;
+      margin-bottom: 16px;
+      color: var(--muted);
+    }
+
+    .terminal-status-dot {
+      display: inline-block;
+      width: 8px;
+      height: 8px;
+      background-color: var(--success);
+      margin-right: 8px;
+    }
+
+    .terminal-log-flow {
+      height: 180px;
+      overflow-y: hidden;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      line-height: 1.4;
+    }
+
+    .log-line {
+      display: flex;
+      gap: 16px;
+    }
+
+    .log-time {
+      color: var(--accent);
+    }
+
+    .log-msg {
+      color: #ffffff;
+    }
+
+    .log-msg.highlight {
+      color: var(--warn);
+    }
+
+    .health-metrics-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      border-top: 1px solid var(--border);
+      padding-top: 16px;
+      margin-top: 16px;
+    }
+
+    .metric-gauge {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .gauge-label {
+      color: var(--muted);
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 6px;
+    }
+
+    .gauge-value {
+      font-size: var(--text-sm);
+      color: #ffffff;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+
+    .gauge-bar {
+      height: 4px;
+      background-color: var(--border);
+      position: relative;
+    }
+
+    .gauge-fill {
+      height: 100%;
+      background-color: var(--accent);
+      transition: width var(--motion-base) var(--ease-standard);
+    }
+
+    /* ─── CASE STUDIES (PREMIUM ENTERPRISE PORTFOLIO) ─── */
+    .cases-container {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-8);
+      margin-top: var(--space-6);
+    }
+
+    .case-card {
+      border: 1px solid var(--border);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      min-height: 500px;
+      background-color: rgba(10, 10, 12, 0.4);
+      transition: border-color var(--motion-base) var(--ease-standard);
+    }
+
+    .case-card:hover {
+      border-color: var(--accent);
+    }
+
+    @media (max-width: 1024px) {
+      .case-card {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .case-info {
+      padding: var(--space-6);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      border-right: 1px solid var(--border);
+    }
+
+    @media (max-width: 1024px) {
+      .case-info {
+        border-right: none;
+        border-bottom: 1px solid var(--border);
+      }
+    }
+
+    .case-metrics-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-3);
+      border-top: 1px solid var(--border);
+      padding-top: var(--space-3);
+      margin-top: var(--space-3);
+    }
+
+    .case-metric {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .case-metric-value {
+      font-family: var(--font-display);
+      font-size: var(--text-xl);
+      color: #ffffff;
+      font-weight: 300;
+    }
+
+    .case-visual-panel {
+      background-color: #030303;
+      padding: var(--space-6);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .case-diorama-canvas {
+      width: 100%;
+      height: 250px;
+      border: 1px dashed rgba(255, 255, 255, 0.05);
+      position: relative;
+    }
+
+    /* ─── SYSTEM ECOSYSTEM MAP (TECH STACK) ─── */
+    .ecosystem-section {
+      overflow: hidden;
+    }
+
+    .ecosystem-container {
+      border: 1px solid var(--border);
+      height: 550px;
+      background-color: rgba(8, 8, 10, 0.5);
+      position: relative;
+      overflow: hidden;
+      margin-top: var(--space-6);
+    }
+
+    .ecosystem-canvas {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 2;
+    }
+
+    .ecosystem-overlay-info {
+      position: absolute;
+      bottom: var(--space-3);
+      left: var(--space-3);
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      color: var(--muted);
+      z-index: 5;
+      background-color: rgba(5, 5, 5, 0.9);
+      border: 1px solid var(--border);
+      padding: var(--space-2);
+      max-width: 320px;
+      pointer-events: none;
+    }
+
+    /* ─── CONSULTANCY BREAKDOWN GRID ─── */
+    .practices-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--space-4);
+      margin-top: var(--space-6);
+    }
+
+    @media (max-width: 1024px) {
+      .practices-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .practice-card {
+      border: 1px solid var(--border-light);
+      background-color: var(--surface-light);
+      padding: var(--space-4);
+      transition: all var(--motion-fast) var(--ease-standard);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      min-height: 240px;
+    }
+
+    .practice-card:hover {
+      border-color: var(--accent);
+      background-color: #ffffff;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.02);
+    }
+
+    .practice-num {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      color: var(--accent);
+    }
+
+    /* ─── CONTACT SECTION ─── */
+    .contact-section {
+      background-color: #030303;
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 0.9fr 1.1fr;
+      gap: var(--space-8);
+    }
+
+    @media (max-width: 1024px) {
+      .contact-grid {
+        grid-template-columns: 1fr;
+        gap: var(--space-4);
+      }
+    }
+
+    .contact-details {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      height: 100%;
+    }
+
+    .contact-channels {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-3);
+      margin-top: var(--space-4);
+    }
+
+    .channel-item {
+      border-left: 2px solid var(--border);
+      padding-left: var(--space-2);
+    }
+
+    .channel-label {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .channel-val {
+      font-size: var(--text-base);
+      color: #ffffff;
+      font-weight: 300;
+    }
+
+    .contact-form {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-2);
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+
+    .form-label {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--muted);
+      margin-bottom: 8px;
+    }
+
+    .form-input {
+      font-family: var(--font-body);
+      font-size: var(--text-base);
+      background-color: rgba(255, 255, 255, 0.02);
+      border: 1px solid var(--border);
+      color: #ffffff;
+      padding: 16px;
+      transition: all var(--motion-fast) var(--ease-standard);
+    }
+
+    .form-input:focus {
+      outline: none;
+      border-color: var(--accent);
+      background-color: rgba(28, 105, 212, 0.03);
+    }
+
+    textarea.form-input {
+      min-height: 140px;
+      resize: vertical;
+    }
+
+    /* ─── FOOTER SECTION ─── */
+    footer.site-footer {
+      background-color: #000000;
+      border-top: 1px solid var(--border);
+      padding: var(--space-12) 0 var(--space-4) 0;
+    }
+
+    .footer-outro-block {
+      border-bottom: 1px solid var(--border);
+      padding-bottom: var(--space-6);
+      margin-bottom: var(--space-6);
+    }
+
+    .footer-outro-headline {
+      font-size: clamp(2rem, 5vw, var(--text-3xl));
+      font-weight: 200;
+      line-height: 1.1;
+      max-width: 25ch;
+      margin-bottom: var(--space-3);
+    }
+
+    .footer-main-grid {
+      display: grid;
+      grid-template-columns: 1.5fr repeat(3, 1fr);
+      gap: var(--space-6);
+      margin-bottom: var(--space-8);
+    }
+
+    @media (max-width: 900px) {
+      .footer-main-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: var(--space-4);
+      }
+    }
+
+    @media (max-width: 480px) {
+      .footer-main-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .footer-col h5 {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      color: var(--accent);
+      margin-bottom: var(--space-2);
+    }
+
+    .footer-links-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .footer-links-list a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: var(--text-sm);
+      font-weight: 300;
+      transition: color var(--motion-fast) var(--ease-standard);
+    }
+
+    .footer-links-list a:hover {
+      color: #ffffff;
+    }
+
+    .footer-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-top: 1px solid var(--border);
+      padding-top: var(--space-3);
+      font-size: var(--text-xs);
+      color: var(--meta);
+      flex-wrap: wrap;
+      gap: var(--space-2);
+    }
+
+    .footer-legal-links {
+      display: flex;
+      gap: var(--space-2);
+    }
+
+    .footer-legal-links a {
+      color: var(--meta);
+      text-decoration: none;
+      transition: color var(--motion-fast) var(--ease-standard);
+    }
+
+    .footer-legal-links a:hover {
+      color: #ffffff;
+    }
+
+    /* ─── DEVELOPER HUB SPECIFICATIONS OVERLAY ─── */
+    .dev-hub-trigger {
+      position: fixed;
+      bottom: var(--space-3);
+      right: var(--space-3);
+      z-index: 9999;
+      background-color: var(--accent);
+      color: #ffffff;
+      border: none;
+      width: 56px;
+      height: 56px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 10px 30px rgba(28, 105, 212, 0.4);
+      transition: all var(--motion-fast) var(--ease-standard);
+    }
+
+    .dev-hub-trigger:hover {
+      background-color: var(--accent-hover);
+      transform: scale(1.05);
+    }
+
+    .dev-hub-modal {
+      position: fixed;
+      inset: 0;
+      background-color: rgba(5, 5, 5, 0.98);
+      z-index: 10000;
+      display: none;
+      padding: var(--space-4);
+      overflow-y: auto;
+    }
+
+    .dev-hub-modal.open {
+      display: block;
+    }
+
+    .dev-hub-container {
+      max-width: 1280px;
+      margin: 0 auto;
+      background-color: #0a0a0c;
+      border: 1px solid var(--border);
+      min-height: 85vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .dev-hub-header {
+      padding: var(--space-3);
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .dev-hub-close {
+      background: none;
+      border: none;
+      color: #ffffff;
+      cursor: pointer;
+      font-size: 24px;
+      line-height: 1;
+    }
+
+    .dev-hub-body {
+      display: grid;
+      grid-template-columns: 300px 1fr;
+      flex-grow: 1;
+    }
+
+    @media (max-width: 900px) {
+      .dev-hub-body {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .dev-hub-sidebar {
+      border-right: 1px solid var(--border);
+      padding: var(--space-3);
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+    }
+
+    .dev-hub-nav-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-1);
+    }
+
+    .dev-hub-nav-item {
+      cursor: pointer;
+      color: var(--muted);
+      padding: 8px 12px;
+      border-left: 2px solid transparent;
+      transition: all var(--motion-fast) var(--ease-standard);
+    }
+
+    .dev-hub-nav-item:hover, .dev-hub-nav-item.active {
+      color: #ffffff;
+      background-color: rgba(255, 255, 255, 0.02);
+      border-left-color: var(--accent);
+    }
+
+    .dev-hub-content {
+      padding: var(--space-4);
+      overflow-x: auto;
+    }
+
+    .code-block {
+      font-family: var(--font-mono);
+      font-size: var(--text-sm);
+      color: #a9b1d6;
+      line-height: 1.6;
+      background-color: #020204;
+      padding: var(--space-3);
+      border: 1px solid var(--border);
+      white-space: pre;
+    }
+
+    /* ─── UTILITIES & KINETIC HOVERS ─── */
+    .glow-overlay {
+      position: absolute;
+      width: 150px;
+      height: 150px;
+      background: radial-gradient(circle, var(--accent-glow) 0%, transparent 70%);
+      pointer-events: none;
+      z-index: 1;
+      transform: translate(-50%, -50%);
+      opacity: 0;
+      transition: opacity var(--motion-fast) var(--ease-standard);
+    }
+
+    .interactive-panel:hover .glow-overlay {
+      opacity: 1;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Blueprint Lines & Environmental Gradients -->
+  <div class="bg-grid"></div>
+  <div class="bg-radial-gradient"></div>
+  <div class="custom-noise"></div>
+
+  <!-- Header Nav -->
+  <header class="site-header" id="mainHeader">
+    <div class="container nav-container">
+      <a href="#" class="logo">
+        <div class="logo-mark"></div>
+        <span>ENOCA</span>
+      </a>
+      
+      <ul class="nav-links">
+        <li><a href="#engineering">Engineering</a></li>
+        <li><a href="#solutions">Solutions</a></li>
+        <li><a href="#health">System Health</a></li>
+        <li><a href="#consultancy">Consultancy</a></li>
+        <li><a href="#cases">Case Studies</a></li>
+        <li><a href="#ecosystem">Ecosystem</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+      
+      <div class="nav-actions">
+        <!-- Web Audio synthesis ambient controller -->
+        <button class="sound-toggle-btn" id="audioToggle" title="Toggle Spatial Audio Ambience">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+            <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07" class="sound-wave"></path>
+          </svg>
+        </button>
+        <a href="#contact" class="btn btn-primary" style="padding: 10px 20px; font-size: 10px;">Book Discovery Call</a>
+      </div>
+      
+      <button class="mobile-menu-toggle" aria-label="Toggle navigation menu">
+        <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path d="M4 6h16M4 12h16M4 18h16"/>
+        </svg>
+      </button>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero-section section-showroom-dark">
+    <div class="container hero-grid">
+      <div class="hero-content">
+        <span class="eyebrow">High-Scale SAP Engineering</span>
+        <h1 class="huge-heading">We do<br/>SAP CX Hybris<br/><span style="color: var(--accent);">Architectures.</span></h1>
+        <p class="hero-subtitle">We design, configure, and migrate enterprise-scale SAP commerce systems. Our model-driven architecture guarantees high throughput, structural elasticity, and predictable sprint delivery.</p>
+        
+        <!-- Trust Metrics Grid -->
+        <div class="trust-container">
+          <div class="trust-stat">
+            <span class="trust-num">25<span class="accent-plus">+</span></span>
+            <span class="trust-label">Enterprise Deploys</span>
+          </div>
+          <div class="trust-stat">
+            <span class="trust-num">15<span class="accent-plus">+</span></span>
+            <span class="trust-label">Years Core Experience</span>
+          </div>
+          <div class="trust-stat">
+            <span class="trust-num">99.9<span class="accent-plus">%</span></span>
+            <span class="trust-label">Uptime Execution</span>
+          </div>
+          <div class="trust-stat">
+            <span class="trust-num">Global</span>
+            <span class="trust-label">Client Network</span>
+          </div>
+        </div>
+
+        <div class="btn-group">
+          <a href="#contact" class="btn btn-primary">Book Discovery Call</a>
+          <a href="#cases" class="btn btn-secondary">Explore Case Studies</a>
+        </div>
+      </div>
+      
+      <!-- Interactive Architecture Visual (3D Node Simulation) -->
+      <div class="hero-visual-container">
+        <div class="blueprint-lines"></div>
+        <canvas class="hero-visual-canvas" id="heroNetworkCanvas"></canvas>
+        <span class="story-blueprint-label" style="top: 20px; left: 20px;">System: Dynamic Infrastructure Node Map // Live Render</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Technical Credibility Bar -->
+  <div class="credibility-bar">
+    <div class="container logo-carousel-track">
+      <div class="tech-logo-item">SAP COMMERCE ENGINE</div>
+      <div class="tech-logo-item">HANA IN-MEMORY DB</div>
+      <div class="tech-logo-item">SPRING FRAMEWORK</div>
+      <div class="tech-logo-item">APACHE SOLR SEARCH</div>
+      <div class="tech-logo-item">NAGIOS SYSTEM MONITOR</div>
+      <div class="tech-logo-item">HYPERIC HQ METRICS</div>
+    </div>
+  </div>
+
+  <!-- Continuous Story Block: Engineering Philosophy -->
+  <section class="section-showroom-dark" id="engineering">
+    <div class="container">
+      <div style="max-width: 800px; margin-bottom: var(--space-8);">
+        <span class="eyebrow">01 / Structural Strategy</span>
+        <h2 class="section-heading">Separation of Concerns as an Architecture</h2>
+        <p class="lead">We believe traditional monolithic platforms restrict growth. We implement headless interfaces that decouple transactional APIs from modern presentation engines.</p>
+      </div>
+
+      <div class="storytelling-block">
+        <div class="story-content">
+          <span class="eyebrow">System Foundation</span>
+          <h3>Headless &amp; Composable Frameworks</h3>
+          <p>By splitting the frontend view layer from SAP Commerce backend logic, we achieve lightning-fast catalog query times, dynamic caching behaviors, and instant page renders across global markets.</p>
+          <div class="story-tech-specs">
+            <span class="tech-badge">Next.js App Router</span>
+            <span class="tech-badge">React Server Components</span>
+            <span class="tech-badge">OCC RESTful APIs</span>
+            <span class="tech-badge">CDN Edge Routing</span>
+          </div>
+          <p style="font-size: var(--text-sm); color: var(--muted);">Business Value: Headless configuration prevents catalog synchronization locking and scales independently to survive extreme traffic events.</p>
+        </div>
+        
+        <!-- Architectural Composable Schematic Panel -->
+        <div class="story-visual-panel">
+          <span class="story-blueprint-label">Architecture: Headless Interface Decoupling</span>
+          <svg width="80%" height="80%" viewBox="0 0 400 300" style="font-family: var(--font-mono); font-size: 10px; fill: #ffffff;">
+            <!-- Grid reference -->
+            <path d="M 50 0 L 50 300 M 200 0 L 200 300 M 350 0 L 350 300" stroke="rgba(255,255,255,0.03)" stroke-width="1"/>
+            <path d="M 0 75 L 400 75 M 0 150 L 400 150 M 0 225 L 400 225" stroke="rgba(255,255,255,0.03)" stroke-width="1"/>
+            
+            <!-- Storefront Block -->
+            <rect x="30" y="30" width="340" height="50" fill="none" stroke="var(--accent)" stroke-width="1.5"/>
+            <text x="200" y="60" text-anchor="middle" letter-spacing="0.1em" fill="#ffffff">DECOUPLED FRONTEND (NEXT.JS EDGE HOISTS)</text>
+            
+            <!-- Connective API Pipes -->
+            <line x1="100" y1="80" x2="100" y2="170" stroke="var(--accent)" stroke-dasharray="4,4"/>
+            <line x1="200" y1="80" x2="200" y2="170" stroke="var(--accent)" stroke-dasharray="4,4"/>
+            <line x1="300" y1="80" x2="300" y2="170" stroke="var(--accent)" stroke-dasharray="4,4"/>
+            <rect x="150" y="105" width="100" height="30" fill="#0c0c0e" stroke="var(--border)" stroke-width="1"/>
+            <text x="200" y="123" text-anchor="middle" fill="var(--muted)">SAP OCC GraphQL</text>
+
+            <!-- Commerce Core Block -->
+            <rect x="30" y="170" width="340" height="80" fill="none" stroke="rgba(255, 255, 255, 0.2)" stroke-width="1.5"/>
+            <text x="200" y="195" text-anchor="middle" letter-spacing="0.1em" fill="#ffffff">SAP COMMERCE ENGINE CORE</text>
+            
+            <!-- Backend Modules -->
+            <rect x="50" y="210" width="90" height="25" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="1"/>
+            <text x="95" y="226" text-anchor="middle" fill="var(--muted)">B2B / B2C Engine</text>
+            
+            <rect x="155" y="210" width="90" height="25" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="1"/>
+            <text x="200" y="226" text-anchor="middle" fill="var(--muted)">PIM Synchronization</text>
+
+            <rect x="260" y="210" width="90" height="25" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="1"/>
+            <text x="305" y="226" text-anchor="middle" fill="var(--muted)">HANA Database</text>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Continuous Story Block: SAP Multi Commerce -->
+  <section class="section-showroom-light" id="solutions">
+    <div class="container">
+      <div style="max-width: 800px; margin-bottom: var(--space-8);">
+        <span class="eyebrow">02 / Technical Domain</span>
+        <h2 class="section-heading" style="color: var(--fg-dark);">SAP CX Commerce Scope</h2>
+        <p class="lead" style="color: #555861;">Complete integration across critical channels, establishing unified catalog logic and global scalability parameters.</p>
+      </div>
+
+      <!-- Tabbed layout representing technical subcomponents -->
+      <div style="border-top: 1px solid var(--border-light); padding-top: var(--space-2);">
+        <div style="display: flex; gap: var(--space-4); margin-bottom: var(--space-4); border-bottom: 1px solid var(--border-light); overflow-x: auto;">
+          <button class="btn btn-secondary tab-action active" onclick="activateTab('tab-b2b')" style="border-bottom: 2px solid var(--accent); padding-bottom: 12px; border: none; background: transparent; color: var(--fg-dark);">B2B Complex Commerce</button>
+          <button class="btn btn-secondary tab-action" onclick="activateTab('tab-b2c')" style="padding-bottom: 12px; border: none; background: transparent; color: var(--muted);">B2C Transactional Scale</button>
+          <button class="btn btn-secondary tab-action" onclick="activateTab('tab-mdm')" style="padding-bottom: 12px; border: none; background: transparent; color: var(--muted);">Master Data &amp; PIM</button>
+        </div>
+
+        <div class="tab-pane active" id="tab-b2b">
+          <div style="display: grid; grid-template-columns: 1fr 1.2fr; gap: var(--space-6); align-items: start;">
+            <div>
+              <h4 style="font-weight: 500; font-size: var(--text-lg); margin-bottom: 12px;">Multi-Store Account Topographies</h4>
+              <p style="margin-bottom: 16px;">We architect parent-child authorization levels, customer-specific pricing structures, dynamic tax calculation algorithms, and multi-warehouse routing rules inside SAP Commerce Core.</p>
+              <a href="#contact" class="btn-text">
+                Request B2B Architecture Audit
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+              </a>
+            </div>
+            <div style="border: 1px solid var(--border-light); padding: var(--space-3); background-color: var(--surface-light); font-family: var(--font-mono); font-size: 11px;">
+              <div style="color: var(--accent); margin-bottom: 6px;">// B2B Pricing Rule Schema Example</div>
+              <div>class B2BPriceCalculator implements CustomerPricingService {</div>
+              <div style="padding-left: 20px;">public PriceInfo calculateCustomPrice(CustomerModel customer, ProductModel product) {</div>
+              <div style="padding-left: 40px;">B2BUnitModel unit = customer.getParentB2BUnit();</div>
+              <div style="padding-left: 40px;">DiscountGroup group = unit.getContractDiscountGroup();</div>
+              <div style="padding-left: 40px;">return pricingDao.fetchTierPrice(product, group);</div>
+              <div style="padding-left: 20px;">}</div>
+              <div>}</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="tab-pane" id="tab-b2c" style="display: none;">
+          <div style="display: grid; grid-template-columns: 1fr 1.2fr; gap: var(--space-6); align-items: start;">
+            <div>
+              <h4 style="font-weight: 500; font-size: var(--text-lg); margin-bottom: 12px;">Lightning-Fast Consumer Flows</h4>
+              <p style="margin-bottom: 16px;">Omnichannel customer experience centered on fast checkouts, flexible payment gateway hooks, dynamic recommendations via search indexes, and mobile-responsive storefront integrations.</p>
+              <a href="#contact" class="btn-text">
+                Request B2C Scaling Blueprint
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+              </a>
+            </div>
+            <div style="border: 1px solid var(--border-light); padding: var(--space-3); background-color: var(--surface-light); font-family: var(--font-mono); font-size: 11px;">
+              <div style="color: var(--accent); margin-bottom: 6px;">// High-Throughput Checkout Handler</div>
+              <div>async function processB2COrder(cartId, paymentToken) {</div>
+              <div style="padding-left: 20px;">const order = await sapGateway.post('/orders', { cartId, paymentToken });</div>
+              <div style="padding-left: 20px;">if (order.status === 'SUCCESS') {</div>
+              <div style="padding-left: 40px;">await edgeCache.invalidateOrderHistory(order.userId);</div>
+              <div style="padding-left: 40px;">return { statusCode: 200, body: order.id };</div>
+              <div style="padding-left: 20px;">}</div>
+              <div>}</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="tab-pane" id="tab-mdm" style="display: none;">
+          <div style="display: grid; grid-template-columns: 1fr 1.2fr; gap: var(--space-6); align-items: start;">
+            <div>
+              <h4 style="font-weight: 500; font-size: var(--text-lg); margin-bottom: 12px;">Product Information Management (PIM)</h4>
+              <p style="margin-bottom: 16px;">We establish catalog validation systems to synchronize products, configurations, translations, and stocks across ERP systems and global market facades.</p>
+              <a href="#contact" class="btn-text">
+                Verify Data Flow Systems
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+              </a>
+            </div>
+            <div style="border: 1px solid var(--border-light); padding: var(--space-3); background-color: var(--surface-light); font-family: var(--font-mono); font-size: 11px;">
+              <div style="color: var(--accent); margin-bottom: 6px;">// PIM Attribute Syncer Configuration</div>
+              <div>{</div>
+              <div style="padding-left: 20px;">"syncJobName": "erp-pim-catalog-syncer",</div>
+              <div style="padding-left: 20px;">"sourceSystem": "SAP_ERP_ECC",</div>
+              <div style="padding-left: 20px;">"targetCatalog": "MasterProductCatalog:Staged",</div>
+              <div style="padding-left: 20px;">"attributesMapping": ["sku", "basePrice", "localizedDescr", "dimensionData"]</div>
+              <div>}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Real-Time Infrastructure Monitoring (Telemetry Console) -->
+  <section class="health-section section-showroom-dark" id="health">
+    <div class="container health-grid">
+      <div>
+        <span class="eyebrow">03 / Operations Defenses</span>
+        <h2 class="section-heading">Proactive System Monitoring &amp; Telemetry</h2>
+        <p class="lead" style="margin-bottom: var(--space-4);">We don't wait for your transaction engine to degrade. We instrument every node, database connector, Solr server, and JVM thread execution pool.</p>
+        <p>Using enterprise-grade Nagios and Hyperic HQ hooks, our infrastructure configurations raise alerts and launch self-healing recovery processes before conversions drop.</p>
+      </div>
+
+      <!-- Dynamic Monitoring Simulator Terminal -->
+      <div class="terminal-container">
+        <div class="terminal-header">
+          <div><span class="terminal-status-dot"></span>NAGIOS HQ AGENT // STABLE RUNTIME</div>
+          <div id="terminalClock">12:25:49</div>
+        </div>
+        <div class="terminal-log-flow" id="terminalLogContainer">
+          <!-- Lines inserted via Javascript -->
+        </div>
+        
+        <div class="health-metrics-row">
+          <div class="metric-gauge">
+            <span class="gauge-label">Tomcat JVM Heap</span>
+            <span class="gauge-value" id="jvmHeapText">4.8 GB / 8.0 GB</span>
+            <div class="gauge-bar"><div class="gauge-fill" id="jvmHeapBar" style="width: 60%;"></div></div>
+          </div>
+          <div class="metric-gauge">
+            <span class="gauge-label">DB Connection Pool</span>
+            <span class="gauge-value" id="dbPoolText">18 / 100</span>
+            <div class="gauge-bar"><div class="gauge-fill" id="dbPoolBar" style="width: 18%;"></div></div>
+          </div>
+          <div class="metric-gauge">
+            <span class="gauge-label">Solr Search latency</span>
+            <span class="gauge-value" id="solrLatencyText">12 ms</span>
+            <div class="gauge-bar"><div class="gauge-fill" id="solrLatencyBar" style="width: 12%;"></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Continuous Story Block: Technical Consultancy Breakdown -->
+  <section class="section-showroom-light" id="consultancy">
+    <div class="container">
+      <div style="max-width: 800px; margin-bottom: var(--space-8);">
+        <span class="eyebrow">04 / Agile Advisory</span>
+        <h2 class="section-heading" style="color: var(--fg-dark);">Strategic Consulting Practices</h2>
+        <p class="lead" style="color: #555861;">Deploying engineering leaders, database architects, and functional designers directly to your sprint teams.</p>
+      </div>
+
+      <div class="practices-grid">
+        <div class="practice-card">
+          <div class="practice-num">PRACTICE_01 // ARCHITECTS</div>
+          <div>
+            <h4 style="font-weight: 500; font-size: var(--text-lg); margin-bottom: 12px; color: var(--fg-dark);">Technical Consulting</h4>
+            <p style="font-size: var(--text-sm);">Sizing hardware clusters, managing cloud migrations (AWS, GCP), building Kubernetes configurations, and designing composable data routes.</p>
+          </div>
+        </div>
+
+        <div class="practice-card">
+          <div class="practice-num">PRACTICE_02 // STRATEGISTS</div>
+          <div>
+            <h4 style="font-weight: 500; font-size: var(--text-lg); margin-bottom: 12px; color: var(--fg-dark);">Functional Consulting</h4>
+            <p style="font-size: var(--text-sm);">Aligning client workflows with native SAP commerce features, catalog synchronization trees, checkout optimizations, and multi-currency configurations.</p>
+          </div>
+        </div>
+
+        <div class="practice-card">
+          <div class="practice-num">PRACTICE_03 // CODE ENGINEERS</div>
+          <div>
+            <h4 style="font-weight: 500; font-size: var(--text-lg); margin-bottom: 12px; color: var(--fg-dark);">Development &amp; Outsourcing</h4>
+            <p style="font-size: var(--text-sm);">Fast deployment of certified Java SAP developers, Spring Framework specialists, and Next.js React frontend architects to boost delivery velocity.</p>
+          </div>
+        </div>
+
+        <div class="practice-card">
+          <div class="practice-num">PRACTICE_04 // QA AUTOMATION</div>
+          <div>
+            <h4 style="font-weight: 500; font-size: var(--text-lg); margin-bottom: 12px; color: var(--fg-dark);">Quality Assurance</h4>
+            <p style="font-size: var(--text-sm);">Automating test coverage (Jest, Playwright), visual regression checkers, stress simulation suites, and vulnerability scanning routines.</p>
+          </div>
+        </div>
+
+        <div class="practice-card">
+          <div class="practice-num">PRACTICE_05 // CORE ARCHITECTURE</div>
+          <div>
+            <h4 style="font-weight: 500; font-size: var(--text-lg); margin-bottom: 12px; color: var(--fg-dark);">Model-Driven Architecture</h4>
+            <p style="font-size: var(--text-sm);">Formal modeling of business classes to auto-generate platform APIs, isolating the system core from updates and deprecation debt.</p>
+          </div>
+        </div>
+
+        <div class="practice-card">
+          <div class="practice-num">PRACTICE_06 // SIMULATION R&amp;D</div>
+          <div>
+            <h4 style="font-weight: 500; font-size: var(--text-lg); margin-bottom: 12px; color: var(--fg-dark);">R&amp;D Lab &amp; Analytics</h4>
+            <p style="font-size: var(--text-sm);">Profiling code systems under artificial transaction peaks, analyzing data distributions, and engineering high-velocity indexing pools.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Premium Case Studies -->
+  <section class="section-showroom-dark" id="cases">
+    <div class="container">
+      <div style="max-width: 800px; margin-bottom: var(--space-8);">
+        <span class="eyebrow">05 / Verified Delivery</span>
+        <h2 class="section-heading">Enterprise Case Studies</h2>
+        <p class="lead">Proving performance through measurable infrastructure metrics. No generic success claims, only raw statistics.</p>
+      </div>
+
+      <div class="cases-container">
+        <!-- Case Study 1 -->
+        <div class="case-card">
+          <div class="case-info">
+            <div>
+              <span class="eyebrow" style="color: var(--accent);">B2B Migrations // Composable Shift</span>
+              <h3 style="margin: 12px 0; font-weight: 300;">PROJECT HORIZON</h3>
+              <p style="font-size: var(--text-sm); margin-bottom: 16px;">We migrated a global industrial parts retailer from an ancient SAP monolith to a composable headless Next.js facade linked to SAP Commerce Cloud APIs.</p>
+            </div>
+            
+            <div class="case-metrics-grid">
+              <div class="case-metric">
+                <span class="case-metric-value">420 ms</span>
+                <span class="trust-label">Time-to-Interactive</span>
+              </div>
+              <div class="case-metric">
+                <span class="case-metric-value">+38%</span>
+                <span class="trust-label">Checkout Conversion</span>
+              </div>
+              <div class="case-metric">
+                <span class="case-metric-value">0%</span>
+                <span class="trust-label">Catalog Lockdowns</span>
+              </div>
+              <div class="case-metric">
+                <span class="case-metric-value">20 Hours</span>
+                <span class="trust-label">Average Catalog Update</span>
+              </div>
+            </div>
+          </div>
+          
+          <div class="case-visual-panel">
+            <span class="story-blueprint-label">Horizon System Metrics Simulation</span>
+            <div class="case-diorama-canvas" id="dioramaHorizon"></div>
+          </div>
+        </div>
+
+        <!-- Case Study 2 -->
+        <div class="case-card">
+          <div class="case-info">
+            <div>
+              <span class="eyebrow" style="color: var(--accent);">B2C Scalability // High-Throughput Rollout</span>
+              <h3 style="margin: 12px 0; font-weight: 300;">PROJECT TITAN</h3>
+              <p style="font-size: var(--text-sm); margin-bottom: 16px;">We re-engineered catalog search indexing and database scaling configurations for a high-volume global apparel consumer facade experiencing extreme load peaks.</p>
+            </div>
+            
+            <div class="case-metrics-grid">
+              <div class="case-metric">
+                <span class="case-metric-value">12,000+</span>
+                <span class="trust-label">Orders / Minute Peak</span>
+              </div>
+              <div class="case-metric">
+                <span class="case-metric-value">99.99%</span>
+                <span class="trust-label">Delivery Success</span>
+              </div>
+              <div class="case-metric">
+                <span class="case-metric-value">1.2 Sec</span>
+                <span class="trust-label">Solr Index Sync Delay</span>
+              </div>
+              <div class="case-metric">
+                <span class="case-metric-value">Automatic</span>
+                <span class="trust-label">Failover Recovery</span>
+              </div>
+            </div>
+          </div>
+          
+          <div class="case-visual-panel">
+            <span class="story-blueprint-label">Titan Infrastructure Topology Simulation</span>
+            <div class="case-diorama-canvas" id="dioramaTitan"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Interactive Ecosystem Network Map (Tech Stack) -->
+  <section class="section-showroom-dark" id="ecosystem">
+    <div class="container">
+      <div style="max-width: 800px; margin-bottom: var(--space-4);">
+        <span class="eyebrow">06 / Code Relationships</span>
+        <h2 class="section-heading">Technology &amp; Integration Ecosystem</h2>
+        <p class="lead">Our core stack is an interconnected topology of robust frameworks, databases, and search clusters designed to operate with zero friction.</p>
+      </div>
+
+      <div class="ecosystem-container">
+        <canvas class="ecosystem-canvas" id="ecosystemCanvas"></canvas>
+        <div class="ecosystem-overlay-info">
+          <div style="color: #ffffff; font-weight: 600; margin-bottom: 6px;" id="nodeTitle">Hover Over Infrastructure Nodes</div>
+          <div id="nodeDesc">Explore how SAP Commerce Core links dynamically with in-memory HANA databases, search clusters, frontend edge CDNs, and telemetry health controllers.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact & Call to Action -->
+  <section class="contact-section section-showroom-dark" id="contact">
+    <div class="container contact-grid">
+      <div class="contact-details">
+        <div>
+          <span class="eyebrow">07 / Connect</span>
+          <h2 class="section-heading">Connect with Our Engineering Teams</h2>
+          <p class="lead">Ready to deploy high-performance commerce systems? Submit your technical requirements below to initiate an architectural review.</p>
+        </div>
+
+        <div class="contact-channels">
+          <div class="channel-item">
+            <span class="channel-label">Operations HQ</span>
+            <div class="channel-val">ENOCA Technology Office, Istanbul</div>
+          </div>
+          <div class="channel-item">
+            <span class="channel-label">Direct Communication</span>
+            <div class="channel-val">info@enoca.com</div>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <form class="contact-form" onsubmit="submitForm(event)">
+          <div class="form-group">
+            <label class="form-label" for="clientName">Corporate Identity / Entity Name</label>
+            <input type="text" id="clientName" class="form-input" required placeholder="e.g. Retail Corp Global" />
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="clientEmail">Engineering Contact Email</label>
+            <input type="email" id="clientEmail" class="form-input" required placeholder="e.g. cto@retailcorpglobal.com" />
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="clientPhone">Telephone Number</label>
+            <input type="tel" id="clientPhone" class="form-input" placeholder="e.g. +90 (212) 555-0100" />
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="clientMessage">System Architecture Brief &amp; Requirements</label>
+            <textarea id="clientMessage" class="form-input" required placeholder="Outline your current SAP Hybris version, database scales, or migration requirements..."></textarea>
+          </div>
+
+          <button type="submit" class="btn btn-primary" id="formSubmitBtn" style="margin-top: 12px;">Submit Requirements</button>
+          
+          <div id="formSuccess" style="display: none; font-family: var(--font-mono); font-size: var(--text-xs); color: var(--success); border: 1px solid var(--success); padding: 12px; margin-top: 16px;">
+            ✓ REQUIREMENTS RECORDED. AN ARCHITECTURE ENGINEER WILL REACH OUT WITHIN 12 HOURS WITH AN ASSESSMENT.
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- Premium Footer -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-outro-block">
+        <h2 class="footer-outro-headline">Ready to engineer your next commerce platform?</h2>
+        <a href="#contact" class="btn btn-primary">Let's build something mission-critical</a>
+      </div>
+
+      <div class="footer-main-grid">
+        <div class="footer-col">
+          <a href="#" class="logo" style="margin-bottom: 24px;">
+            <div class="logo-mark"></div>
+            <span>ENOCA</span>
+          </a>
+          <p style="font-size: var(--text-sm); color: var(--muted); max-width: 32ch;">Architects and builders of high-scale enterprise transaction systems. Precision engineered, globally validated.</p>
+        </div>
+
+        <div class="footer-col">
+          <h5>Core Solutions</h5>
+          <ul class="footer-links-list">
+            <li><a href="#solutions">SAP CX Commerce Cloud</a></li>
+            <li><a href="#solutions">SAP HANA Migrations</a></li>
+            <li><a href="#health">Nagios Telemetry Agents</a></li>
+            <li><a href="#health">Hyperic HQ JVM Tuning</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h5>Consultancy</h5>
+          <ul class="footer-links-list">
+            <li><a href="#consultancy">Architecture Auditing</a></li>
+            <li><a href="#consultancy">Functional Optimization</a></li>
+            <li><a href="#consultancy">CI/CD &amp; QA Automation</a></li>
+            <li><a href="#consultancy">Outsource Engineering</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h5>Resource Center</h5>
+          <ul class="footer-links-list">
+            <li><a href="#engineering">Architecture Library</a></li>
+            <li><a href="#cases">Case Studies Matrix</a></li>
+            <li><a href="#ecosystem">Integrations Map</a></li>
+            <li><a href="#" id="devHubFooterLink">Developer Hub Handoff</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div>&copy; 2026 ENOCA. All Rights Reserved. Model-Driven Architecture Framework.</div>
+        <div class="footer-legal-links">
+          <a href="#">Privacy Policy</a>
+          <a href="#">Security Disclosure</a>
+          <a href="#">Terms of Engagement</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Floating Developer Hub Trigger -->
+  <button class="dev-hub-trigger" id="devHubOpen" title="Toggle Developer Specifications overlay">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <polyline points="16 18 22 12 16 6"></polyline>
+      <polyline points="8 6 2 12 8 18"></polyline>
+    </svg>
+  </button>
+
+  <!-- Developer Hub Modal -->
+  <div class="dev-hub-modal" id="devHubModal">
+    <div class="dev-hub-container">
+      <div class="dev-hub-header">
+        <span style="font-family: var(--font-mono); font-size: var(--text-xs); color: var(--accent);">ENOCA // NEXT.JS ENTERPRISE DESIGN SPECIFICATIONS HANDOUT</span>
+        <button class="dev-hub-close" id="devHubClose">&times;</button>
+      </div>
+
+      <div class="dev-hub-body">
+        <div class="dev-hub-sidebar">
+          <ul class="dev-hub-nav-list">
+            <li class="dev-hub-nav-item active" data-target="nextjs-tree">Directory Structure</li>
+            <li class="dev-hub-nav-item" data-target="theme-tokens">CSS Design System Tokens</li>
+            <li class="dev-hub-nav-item" data-target="comp-hero">Component: HeroSection.tsx</li>
+            <li class="dev-hub-nav-item" data-target="comp-health">Component: HealthTerminal.tsx</li>
+            <li class="dev-hub-nav-item" data-target="seo-config">SEO &amp; Dynamic Schemas</li>
+            <li class="dev-hub-nav-item" data-target="robots-sitemap">robots.txt &amp; sitemap.xml</li>
+          </ul>
+        </div>
+
+        <div class="dev-hub-content">
+          <!-- Folder Architecture -->
+          <div class="dev-hub-panel active" id="panel-nextjs-tree">
+            <h3 style="color:#ffffff; margin-bottom:12px; font-size:var(--text-base);">Enterprise next.js directory structure</h3>
+            <div class="code-block">enoca-enterprise-facade/
+├── src/
+│   ├── app/
+│   │   ├── layout.tsx         # Root layout with dynamic font injection and preload definitions
+│   │   ├── page.tsx           # Page Server component composition with section routing
+│   │   ├── sitemap.ts         # Dynamically updated sitemap mapping
+│   │   ├── robots.ts          # Search crawler instruction router
+│   │   └── api/
+│   │       └── requirements/
+│   │           └── route.ts   # Secure endpoint for contact briefs & ERP pipeline integrations
+│   ├── components/
+│   │   ├── Header.tsx         # Floating scroll-responsive navigation
+│   │   ├── HeroSection.tsx    # Cinematic typography with interactive Canvas system simulation
+│   │   ├── HealthTerminal.tsx # Proactive telemetry interface module
+│   │   ├── PracticeGrid.tsx   # Consultancy practice card mappings
+│   │   ├── CaseStudyCard.tsx  # Dynamic performance case cards
+│   │   └── TechEcosystem.tsx  # Dynamic technology link component
+│   ├── styles/
+│   │   └── globals.css        # Base design tokens mapped to tailwind variables
+│   └── lib/
+│       ├── validation.ts      # Multi-field contact validation utilities
+│       └── telemetry.ts       # Mock interface telemetry generators
+├── public/
+│   └── assets/                # Blueprint vector files and schematic drawings
+├── next.config.js             # Asset optimizer headers & dynamic edge routings
+└── tsconfig.json</div>
+          </div>
+
+          <!-- CSS Tokens -->
+          <div class="dev-hub-panel" id="panel-theme-tokens" style="display:none;">
+            <h3 style="color:#ffffff; margin-bottom:12px; font-size:var(--text-base);">CSS Custom properties (design-tokens.css)</h3>
+            <div class="code-block">:root {
+  /* BMW Active Design System parameters */
+  --bg: #050505;
+  --bg-light: #ffffff;
+  --surface: #0a0a0c;
+  --accent: #1c69d4;          /* BMW highlight blue */
+  --accent-hover: #0653b6;    /* BMW focus blue */
+  
+  /* Strictly Zero border radius across every element */
+  --radius-sm: 0px;
+  --radius-md: 0px;
+  --radius-lg: 0px;
+  
+  /* Font fallbacks for premium rendering */
+  --font-display: "Outfit", sans-serif;
+  --font-body: "Outfit", sans-serif;
+  --font-mono: "IBM Plex Mono", monospace;
+  
+  /* Tight line-height values */
+  --leading-body: 1.5;
+  --leading-tight: 1.15;
+}</div>
+          </div>
+
+          <!-- Component Hero -->
+          <div class="dev-hub-panel" id="panel-comp-hero" style="display:none;">
+            <h3 style="color:#ffffff; margin-bottom:12px; font-size:var(--text-base);">React Component: HeroSection.tsx</h3>
+            <div class="code-block">import React, { useEffect, useRef } from 'react';
+import Link from 'next/link';
+
+export const HeroSection: React.FC = () => {
+  const canvasRef = useRef&lt;HTMLCanvasElement&gt;(null);
+
+  useEffect(() => {
+    // 3D/Interactive Particle Node Map Animation Engine logic
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    // Canvas loop implementation...
+  }, []);
+
+  return (
+    &lt;section className="min-h-screen flex items-center bg-[#050505] text-white pt-[120px] overflow-hidden border-b border-[#18191f]"&gt;
+      &lt;div className="max-w-[1440px] mx-auto px-12 grid grid-cols-1 lg:grid-cols-[1.2fr_0.8fr] gap-16 items-center"&gt;
+        &lt;div className="flex flex-col gap-6"&gt;
+          &lt;span className="font-mono text-xs text-[#1c69d4] tracking-widest uppercase block"&gt;High-Scale SAP Engineering&lt;/span&gt;
+          &lt;h1 className="text-5xl lg:text-7xl font-extralight tracking-tight uppercase"&gt;
+            We do&lt;br/&gt;SAP CX Hybris&lt;br/&gt;&lt;span className="text-[#1c69d4]"&gt;Architectures.&lt;/span&gt;
+          &lt;/h1&gt;
+          &lt;p className="text-[#8e9196] font-light max-w-[58ch]"&gt;
+            We design, configure, and migrate enterprise-scale SAP commerce systems. Our model-driven architecture guarantees high throughput.
+          &lt;/p&gt;
+          &lt;div className="flex gap-4"&gt;
+            &lt;Link href="#contact" className="bg-[#1c69d4] px-8 py-4 font-mono text-xs uppercase"&gt;Book Discovery Call&lt;/Link&gt;
+            &lt;Link href="#cases" className="border border-white/20 px-8 py-4 font-mono text-xs uppercase"&gt;Explore Case Studies&lt;/Link&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div className="relative h-[500px] border border-[#18191f] bg-[#0a0a0c]/50"&gt;
+          &lt;canvas ref={canvasRef} className="absolute inset-0 w-full h-full" /&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/section&gt;
+  );
+};</div>
+          </div>
+
+          <!-- Component Health -->
+          <div class="dev-hub-panel" id="panel-comp-health" style="display:none;">
+            <h3 style="color:#ffffff; margin-bottom:12px; font-size:var(--text-base);">React Component: HealthTerminal.tsx</h3>
+            <div class="code-block">import React, { useEffect, useState } from 'react';
+
+export const HealthTerminal: React.FC = () => {
+  const [logs, setLogs] = useState&lt;string[]&gt;([]);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      const timestamp = new Date().toLocaleTimeString();
+      const newLog = `[${timestamp}] INFO: SAP OCC API request successfully processed. Latency: 12ms.`;
+      setLogs((prev) => [...prev.slice(-20), newLog]);
+    }, 2000);
+    return () => clearInterval(interval);
+  }, []);
+
+  return (
+    &lt;div className="bg-black border border-[#18191f] p-6 font-mono text-xs text-[#a9b1d6]"&gt;
+      &lt;div className="flex justify-between border-b border-[#18191f] pb-3"&gt;
+        &lt;div&gt;&lt;span className="w-2 h-2 bg-emerald-500 inline-block mr-2"&gt;&lt;/span&gt;SYSTEM RUNNING&lt;/div&gt;
+      &lt;/div&gt;
+      &lt;div className="mt-4 h-[180px] overflow-y-auto"&gt;
+        {logs.map((log, idx) => (
+          &lt;div key={idx} className="py-1"&gt;{log}&lt;/div&gt;
+        ))}
+      &lt;/div&gt;
+    &lt;/div&gt;
+  );
+};</div>
+          </div>
+
+          <!-- SEO Config -->
+          <div class="dev-hub-panel" id="panel-seo-config" style="display:none;">
+            <h3 style="color:#ffffff; margin-bottom:12px; font-size:var(--text-base);">Dynamic SEO Metadata &amp; JSON-LD Schema (layout.tsx)</h3>
+            <div class="code-block">import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'ENOCA — Enterprise SAP Commerce Cloud Architects &amp; Engineers',
+  description: 'Enterprise consulting services for SAP CX Hybris, Custom Agile Application Development, and proactive Server Monitoring with Nagios &amp; Hyperic HQ.',
+  alternates: {
+    canonical: 'https://enoca.com',
+  },
+  openGraph: {
+    title: 'ENOCA — Enterprise SAP Commerce Cloud Architects',
+    description: 'We design, configure, and migrate enterprise-scale SAP commerce systems with German-level precision.',
+    url: 'https://enoca.com',
+    siteName: 'ENOCA',
+    images: [{ url: 'https://enoca.com/assets/og-image.jpg', width: 1200, height: 630 }],
+    locale: 'en_US',
+    type: 'website',
+  },
+};
+
+const jsonLdSchema = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "ENOCA",
+  "url": "https://enoca.com",
+  "logo": "https://enoca.com/assets/logo.svg",
+  "contactPoint": {
+    "@type": "ContactPoint",
+    "telephone": "+90-212-555-0100",
+    "contactType": "technical support",
+    "email": "info@enoca.com"
+  }
+};</div>
+          </div>
+
+          <!-- Sitemap Config -->
+          <div class="dev-hub-panel" id="panel-robots-sitemap" style="display:none;">
+            <h3 style="color:#ffffff; margin-bottom:12px; font-size:var(--text-base);">Dynamic sitemap.ts &amp; robots.ts App router endpoints</h3>
+            <div class="code-block">// src/app/sitemap.ts
+import { MetadataRoute } from 'next';
+
+export default function sitemap(): MetadataRoute.Sitemap {
+  return [
+    {
+      url: 'https://enoca.com',
+      lastModified: new Date(),
+      changeFrequency: 'weekly',
+      priority: 1.0,
+    },
+    {
+      url: 'https://enoca.com/#solutions',
+      lastModified: new Date(),
+      changeFrequency: 'monthly',
+      priority: 0.8,
+    },
+  ];
+}
+
+// src/app/robots.ts
+import { MetadataRoute } from 'next';
+
+export default function robots(): MetadataRoute.Robots {
+  return {
+    rules: {
+      userAgent: '*',
+      allow: '/',
+    },
+    sitemap: 'https://enoca.com/sitemap.xml',
+  };
+}</div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Audio elements for feedback click sounds -->
+  <audio id="audioClick" preload="auto" src="data:audio/wav;base64,UklGRigAAABXQVZFZm10IBAAAAABAAEARKwAAIhYAQACABAAZGF0YQQAAAAAAA==\"></audio>
+
+  <!-- Interactive JavaScript Systems Logic -->
+  <script>
+    /* ─────────────────────────────────────────────────────────────────────────
+     * SCROLL SENSITIVE HEADER ANIMATION
+     * ───────────────────────────────────────────────────────────────────────── */
+    const header = document.getElementById('mainHeader');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 50) {
+        header.classList.add('scrolled');
+      } else {
+        header.classList.remove('scrolled');
+      }
+    });
+
+    /* ─────────────────────────────────────────────────────────────────────────
+     * TAB TRIGGER ENGINE
+     * ───────────────────────────────────────────────────────────────────────── */
+    function activateTab(tabId) {
+      // Deactivate all triggers and tab panes
+      document.querySelectorAll('.tab-action').forEach(btn => {
+        btn.classList.remove('active');
+        btn.style.borderBottom = 'none';
+        btn.style.color = 'var(--muted)';
+      });
+      document.querySelectorAll('.tab-pane').forEach(pane => {
+        pane.style.display = 'none';
+      });
+
+      // Activate selected
+      const activeBtn = event.currentTarget;
+      activeBtn.classList.add('active');
+      activeBtn.style.borderBottom = '2px solid var(--accent)';
+      activeBtn.style.color = 'var(--fg-dark)';
+      document.getElementById(tabId).style.display = 'block';
+      playSystemClick();
+    }
+
+    /* ─────────────────────────────────────────────────────────────────────────
+     * REAL-TIME TELEMETRY SIMULATION (NAGIOS / HYPERIC HQ ENGINE)
+     * ───────────────────────────────────────────────────────────────────────── */
+    const logsContainer = document.getElementById('terminalLogContainer');
+    const clockElement = document.getElementById('terminalClock');
+    const jvmText = document.getElementById('jvmHeapText');
+    const jvmBar = document.getElementById('jvmHeapBar');
+    const dbText = document.getElementById('dbPoolText');
+    const dbBar = document.getElementById('dbPoolBar');
+    const solrText = document.getElementById('solrLatencyText');
+    const solrBar = document.getElementById('solrLatencyBar');
+
+    const logMessages = [
+      "INFO: SAP Commerce Cloud OCC API requests processed. Uptime: 100%.",
+      "INFO: Catalog sync job completed. 1,420 items cataloged in 1.2s.",
+      "DEBUG: JVM Memory Garbage Collection successfully recycled 320MB.",
+      "INFO: Apache Solr cluster health: green. Replicas in sync.",
+      "WARN: Slow query detected on catalog search: 'industrial connectors' - Latency: 180ms.",
+      "INFO: Database connection pool recycled inactive session successfully.",
+      "INFO: Nagios agent reported ping heartbeat status OK.",
+      "INFO: Hyperic HQ telemetry data pushed to global metrics orchestrator."
+    ];
+
+    function updateTerminalTelemetry() {
+      // Time update
+      const now = new Date();
+      clockElement.textContent = now.toTimeString().split(' ')[0];
+
+      // Insert new log line
+      const randomMsg = logMessages[Math.floor(Math.random() * logMessages.length)];
+      const logLine = document.createElement('div');
+      logLine.className = 'log-line';
+      if (randomMsg.includes('WARN')) {
+        logLine.innerHTML = `<span class="log-time">[${now.toLocaleTimeString()}]</span><span class="log-msg highlight">${randomMsg}</span>`;
+      } else {
+        logLine.innerHTML = `<span class="log-time">[${now.toLocaleTimeString()}]</span><span class="log-msg">${randomMsg}</span>`;
+      }
+      
+      logsContainer.appendChild(logLine);
+      if (logsContainer.childNodes.length > 25) {
+        logsContainer.removeChild(logsContainer.firstChild);
+      }
+      logsContainer.scrollTop = logsContainer.scrollHeight;
+
+      // Randomize statistics indicators
+      const newHeap = (4.0 + Math.random() * 2.0).toFixed(1);
+      jvmText.textContent = `${newHeap} GB / 8.0 GB`;
+      jvmBar.style.width = `${(newHeap / 8.0) * 100}%`;
+
+      const newDb = Math.floor(10 + Math.random() * 25);
+      dbText.textContent = `${newDb} / 100`;
+      dbBar.style.width = `${newDb}%`;
+
+      const newSolr = Math.floor(8 + Math.random() * 30);
+      solrText.textContent = `${newSolr} ms`;
+      solrBar.style.width = `${Math.min(newSolr, 100)}%`;
+    }
+    setInterval(updateTerminalTelemetry, 2500);
+
+    /* ─────────────────────────────────────────────────────────────────────────
+     * INTERACTIVE HERO ARCHITECTURE CANVAS (3D NODE MAP SIMULATOR)
+     * ───────────────────────────────────────────────────────────────────────── */
+    const heroCanvas = document.getElementById('heroNetworkCanvas');
+    const heroCtx = heroCanvas.getContext('2d');
+    let width = heroCanvas.width = heroCanvas.offsetWidth;
+    let height = heroCanvas.height = heroCanvas.offsetHeight;
+
+    window.addEventListener('resize', () => {
+      width = heroCanvas.width = heroCanvas.offsetWidth;
+      height = heroCanvas.height = heroCanvas.offsetHeight;
+    });
+
+    const particles = [];
+    const maxParticles = 60;
+
+    for (let i = 0; i < maxParticles; i++) {
+      particles.push({
+        x: Math.random() * width,
+        y: Math.random() * height,
+        vx: (Math.random() - 0.5) * 0.8,
+        vy: (Math.random() - 0.5) * 0.8,
+        radius: Math.random() * 2 + 1,
+        color: i % 10 === 0 ? '#1c69d4' : 'rgba(255,255,255,0.3)'
+      });
+    }
+
+    let mouse = { x: null, y: null };
+    heroCanvas.addEventListener('mousemove', (e) => {
+      const rect = heroCanvas.getBoundingClientRect();
+      mouse.x = e.clientX - rect.left;
+      mouse.y = e.clientY - rect.top;
+    });
+
+    heroCanvas.addEventListener('mouseleave', () => {
+      mouse.x = null;
+      mouse.y = null;
+    });
+
+    function drawHeroNetwork() {
+      heroCtx.clearRect(0, 0, width, height);
+
+      // Blueprint lines intersection points
+      heroCtx.fillStyle = 'rgba(28, 105, 212, 0.2)';
+      for (let x = 0; x < width; x += 40) {
+        for (let y = 0; y < height; y += 40) {
+          heroCtx.fillRect(x - 1, y - 1, 2, 2);
+        }
+      }
+
+      particles.forEach((p, idx) => {
+        p.x += p.vx;
+        p.y += p.vy;
+
+        if (p.x < 0 || p.x > width) p.vx *= -1;
+        if (p.y < 0 || p.y > height) p.vy *= -1;
+
+        // Attract to mouse
+        if (mouse.x && mouse.y) {
+          const dx = mouse.x - p.x;
+          const dy = mouse.y - p.y;
+          const dist = Math.hypot(dx, dy);
+          if (dist < 120) {
+            p.x += dx * 0.02;
+            p.y += dy * 0.02;
+          }
+        }
+
+        heroCtx.beginPath();
+        heroCtx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+        heroCtx.fillStyle = p.color;
+        heroCtx.fill();
+
+        // Connect nearby nodes
+        for (let j = idx + 1; j < particles.length; j++) {
+          const p2 = particles[j];
+          const dx = p.x - p2.x;
+          const dy = p.y - p2.y;
+          const dist = Math.hypot(dx, dy);
+
+          if (dist < 100) {
+            heroCtx.beginPath();
+            heroCtx.moveTo(p.x, p.y);
+            heroCtx.lineTo(p2.x, p2.y);
+            heroCtx.strokeStyle = `rgba(28, 105, 212, ${0.15 * (1 - dist/100)})`;
+            heroCtx.stroke();
+          }
+        }
+      });
+
+      requestAnimationFrame(drawHeroNetwork);
+    }
+    drawHeroNetwork();
+
+    /* ─────────────────────────────────────────────────────────────────────────
+     * INTERACTIVE TECH STACK ECOSYSTEM MAP ENGINE
+     * ───────────────────────────────────────────────────────────────────────── */
+    const ecoCanvas = document.getElementById('ecosystemCanvas');
+    const ecoCtx = ecoCanvas.getContext('2d');
+    let ecoWidth = ecoCanvas.width = ecoCanvas.offsetWidth;
+    let ecoHeight = ecoCanvas.height = ecoCanvas.offsetHeight;
+
+    const nodeTitle = document.getElementById('nodeTitle');
+    const nodeDesc = document.getElementById('nodeDesc');
+
+    window.addEventListener('resize', () => {
+      ecoWidth = ecoCanvas.width = ecoCanvas.offsetWidth;
+      ecoHeight = ecoCanvas.height = ecoCanvas.offsetHeight;
+    });
+
+    const ecoNodes = [
+      { id: 'sap-commerce', label: 'SAP COMMERCE CORE', x: 0.5, y: 0.5, size: 28, color: '#1c69d4', desc: 'Core business orchestration suite, executing transactional, checkouts, and catalog mappings.' },
+      { id: 'sap-hana', label: 'SAP HANA IN-MEMORY DB', x: 0.3, y: 0.3, size: 18, color: '#ffffff', desc: 'High-performance databases powering real-time inventory queries and secure customer record storage.' },
+      { id: 'solr-search', label: 'APACHE SOLR SEARCH', x: 0.7, y: 0.3, size: 18, color: '#ffffff', desc: 'Enterprise search engine synchronization node, processing catalog filters and faceted query streams.' },
+      { id: 'spring-fw', label: 'SPRING WEB CORE', x: 0.25, y: 0.7, size: 16, color: '#8e9196', desc: 'Robust application framework containing core business APIs, configurations, and OCC structures.' },
+      { id: 'nextjs-facade', label: 'NEXT.JS EDGE FRONTEND', x: 0.75, y: 0.7, size: 20, color: '#1c69d4', desc: 'Decoupled presentation layer optimizing Time-to-Interactive and conversion margins at CDN edges.' },
+      { id: 'telemetry-monitor', label: 'TELEMETRY CONTROLLER', x: 0.5, y: 0.15, size: 14, color: '#ffffff', desc: 'Nagios & Hyperic HQ monitoring nodes analyzing heap memory, search speeds, and DB connections.' }
+    ];
+
+    let hoveredNode = null;
+    let ecoMouse = { x: 0, y: 0 };
+
+    ecoCanvas.addEventListener('mousemove', (e) => {
+      const rect = ecoCanvas.getBoundingClientRect();
+      ecoMouse.x = e.clientX - rect.left;
+      ecoMouse.y = e.clientY - rect.top;
+
+      let found = null;
+      ecoNodes.forEach(node => {
+        const nx = node.x * ecoWidth;
+        const ny = node.y * ecoHeight;
+        if (Math.hypot(ecoMouse.x - nx, ecoMouse.y - ny) < node.size + 15) {
+          found = node;
+        }
+      });
+
+      if (found !== hoveredNode) {
+        hoveredNode = found;
+        if (hoveredNode) {
+          nodeTitle.textContent = hoveredNode.label;
+          nodeDesc.textContent = hoveredNode.desc;
+          nodeTitle.style.color = 'var(--accent)';
+          playSystemClick();
+        } else {
+          nodeTitle.textContent = "Hover Over Infrastructure Nodes";
+          nodeDesc.textContent = "Explore how SAP Commerce Core links dynamically with in-memory HANA databases, search clusters, frontend edge CDNs, and telemetry health controllers.";
+          nodeTitle.style.color = '#ffffff';
+        }
+      }
+    });
+
+    function drawEcosystem() {
+      ecoCtx.clearRect(0, 0, ecoWidth, ecoHeight);
+
+      // Draw technical blueprint coordinates reference grid lines
+      ecoCtx.strokeStyle = 'rgba(255, 255, 255, 0.03)';
+      ecoCtx.lineWidth = 1;
+      for (let i = 0; i < ecoWidth; i += 60) {
+        ecoCtx.beginPath();
+        ecoCtx.moveTo(i, 0);
+        ecoCtx.lineTo(i, ecoHeight);
+        ecoCtx.stroke();
+      }
+      for (let j = 0; j < ecoHeight; j += 60) {
+        ecoCtx.beginPath();
+        ecoCtx.moveTo(0, j);
+        ecoCtx.lineTo(ecoWidth, j);
+        ecoCtx.stroke();
+      }
+
+      // Draw connections
+      ecoCtx.lineWidth = 1;
+      ecoNodes.forEach((node, i) => {
+        const nx = node.x * ecoWidth;
+        const ny = node.y * ecoHeight;
+
+        for (let j = i + 1; j < ecoNodes.length; j++) {
+          const other = ecoNodes[j];
+          const ox = other.x * ecoWidth;
+          const oy = other.y * ecoHeight;
+
+          ecoCtx.beginPath();
+          ecoCtx.moveTo(nx, ny);
+          ecoCtx.lineTo(ox, oy);
+          
+          if (hoveredNode && (hoveredNode.id === node.id || hoveredNode.id === other.id)) {
+            ecoCtx.strokeStyle = 'rgba(28, 105, 212, 0.4)';
+            ecoCtx.lineWidth = 1.5;
+          } else {
+            ecoCtx.strokeStyle = 'rgba(255, 255, 255, 0.05)';
+            ecoCtx.lineWidth = 0.8;
+          }
+          ecoCtx.stroke();
+        }
+      });
+
+      // Draw nodes
+      ecoNodes.forEach(node => {
+        const nx = node.x * ecoWidth;
+        const ny = node.y * ecoHeight;
+
+        ecoCtx.beginPath();
+        ecoCtx.rect(nx - node.size, ny - node.size, node.size * 2, node.size * 2);
+        
+        if (hoveredNode && hoveredNode.id === node.id) {
+          ecoCtx.fillStyle = 'var(--accent)';
+          ecoCtx.strokeStyle = '#ffffff';
+          ecoCtx.lineWidth = 2;
+        } else {
+          ecoCtx.fillStyle = '#0a0a0c';
+          ecoCtx.strokeStyle = node.color;
+          ecoCtx.lineWidth = 1;
+        }
+        ecoCtx.fill();
+        ecoCtx.stroke();
+
+        // Node labels
+        ecoCtx.font = '500 9px "IBM Plex Mono"';
+        ecoCtx.fillStyle = hoveredNode && hoveredNode.id === node.id ? '#ffffff' : 'var(--muted)';
+        ecoCtx.textAlign = 'center';
+        ecoCtx.fillText(node.label, nx, ny + node.size + 14);
+      });
+
+      requestAnimationFrame(drawEcosystem);
+    }
+    drawEcosystem();
+
+    /* ─────────────────────────────────────────────────────────────────────────
+     * PREMIUM 3D DIORAMA EFFECT IN CASE STUDIES
+     * ───────────────────────────────────────────────────────────────────────── */
+    function initCaseDiorama(canvasId, particleColor) {
+      const parent = document.getElementById(canvasId);
+      if (!parent) return;
+
+      const scene = document.createElement('div');
+      scene.style.position = 'absolute';
+      scene.style.inset = '0';
+      scene.style.overflow = 'hidden';
+      scene.style.display = 'flex';
+      scene.style.alignItems = 'center';
+      scene.style.justifyContent = 'center';
+      parent.appendChild(scene);
+
+      // Create diorama visual layers (Blueprint technical lines & metrics grid)
+      const layers = [];
+      const numLayers = 3;
+      for (let i = 0; i < numLayers; i++) {
+        const layer = document.createElement('div');
+        layer.style.position = 'absolute';
+        layer.style.width = '120%';
+        layer.style.height = '120%';
+        layer.style.border = '1px solid rgba(255, 255, 255, 0.02)';
+        layer.style.transition = 'transform 0.1s ease-out';
+        layer.style.display = 'flex';
+        layer.style.alignItems = 'center';
+        layer.style.justifyContent = 'center';
+        
+        // Inside layers draw schematic boxes
+        if (i === 0) {
+          layer.innerHTML = `<div style="width: 200px; height: 120px; border: 1px solid ${particleColor}; opacity: 0.1; font-family: monospace; font-size: 8px; color: ${particleColor}; padding: 8px;">SCHEMA_GRID_L0</div>`;
+        } else if (i === 1) {
+          layer.innerHTML = `<div style="width: 140px; height: 80px; border: 1.5px solid #ffffff; opacity: 0.2; font-family: monospace; font-size: 8px; color: #ffffff; padding: 6px;">DATA_GATEWAY_L1</div>`;
+        } else {
+          layer.innerHTML = `<div style="width: 80px; height: 40px; border: 2px solid ${particleColor}; font-family: monospace; font-size: 8px; color: #ffffff; padding: 4px; background: #000; box-shadow: 0 0 15px ${particleColor};">STABLE_CORE</div>`;
+        }
+
+        scene.appendChild(layer);
+        layers.push(layer);
+      }
+
+      parent.addEventListener('mousemove', (e) => {
+        const rect = parent.getBoundingClientRect();
+        const mouseX = e.clientX - rect.left - rect.width / 2;
+        const mouseY = e.clientY - rect.top - rect.height / 2;
+
+        layers.forEach((layer, idx) => {
+          const depthFactor = (idx + 1) * 0.05;
+          const rx = mouseX * depthFactor;
+          const ry = mouseY * depthFactor;
+          layer.style.transform = `translate(${rx}px, ${ry}px) rotateY(${rx * 0.1}deg) rotateX(${-ry * 0.1}deg)`;
+        });
+      });
+
+      parent.addEventListener('mouseleave', () => {
+        layers.forEach(layer => {
+          layer.style.transform = 'translate(0, 0) rotateY(0) rotateX(0)';
+        });
+      });
+    }
+
+    initCaseDiorama('dioramaHorizon', '#1c69d4');
+    initCaseDiorama('dioramaTitan', '#ffffff');
+
+    /* ─────────────────────────────────────────────────────────────────────────
+     * SPATIAL AUDIO HUM & INTERACTIVE SYNTHESIS ENGINE (WEB AUDIO API)
+     * ───────────────────────────────────────────────────────────────────────── */
+    const audioToggle = document.getElementById('audioToggle');
+    const audioToggleFooter = document.getElementById('devHubFooterLink');
+    let audioCtx = null;
+    let mainOsc = null;
+    let oscVolume = null;
+    let soundWaves = document.querySelector('.sound-wave');
+
+    function initAudioEngine() {
+      try {
+        window.AudioContext = window.AudioContext || window.webkitAudioContext;
+        audioCtx = new AudioContext();
+
+        // 1. Synth Depth Ambient Sound
+        mainOsc = audioCtx.createOscillator();
+        mainOsc.type = 'sine';
+        mainOsc.frequency.setValueAtTime(55, audioCtx.currentTime); // Low depth G note
+        
+        oscVolume = audioCtx.createGain();
+        oscVolume.gain.setValueAtTime(0.00, audioCtx.currentTime); // Start muted
+
+        mainOsc.connect(oscVolume);
+        oscVolume.connect(audioCtx.destination);
+        mainOsc.start();
+
+        // Transition hum volume up slowly
+        oscVolume.gain.linearRampToValueAtTime(0.08, audioCtx.currentTime + 3);
+      } catch(e) {
+        console.error("Web Audio API not supported on this platform: ", e);
+      }
+    }
+
+    function toggleAudio() {
+      if (!audioCtx) {
+        initAudioEngine();
+        audioToggle.classList.add('active');
+        audioToggle.style.borderColor = 'var(--accent)';
+        audioToggle.style.color = '#ffffff';
+        if (soundWaves) soundWaves.style.display = 'block';
+      } else {
+        if (audioCtx.state === 'suspended') {
+          audioCtx.resume();
+          oscVolume.gain.linearRampToValueAtTime(0.08, audioCtx.currentTime + 0.5);
+          audioToggle.classList.add('active');
+          if (soundWaves) soundWaves.style.display = 'block';
+        } else if (audioCtx.state === 'running') {
+          oscVolume.gain.linearRampToValueAtTime(0.00, audioCtx.currentTime + 0.5);
+          setTimeout(() => {
+            audioCtx.suspend();
+          }, 600);
+          audioToggle.classList.remove('active');
+          if (soundWaves) soundWaves.style.display = 'none';
+        }
+      }
+    }
+
+    audioToggle.addEventListener('click', toggleAudio);
+
+    function playSystemClick() {
+      if (!audioCtx || audioCtx.state !== 'running') return;
+      
+      const clickOsc = audioCtx.createOscillator();
+      const clickGain = audioCtx.createGain();
+      
+      clickOsc.type = 'sine';
+      clickOsc.frequency.setValueAtTime(1200, audioCtx.currentTime); // High pitch click
+      clickOsc.frequency.exponentialRampToValueAtTime(2000, audioCtx.currentTime + 0.04);
+      
+      clickGain.gain.setValueAtTime(0.02, audioCtx.currentTime);
+      clickGain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + 0.05);
+      
+      clickOsc.connect(clickGain);
+      clickGain.connect(audioCtx.destination);
+      clickOsc.start();
+      clickOsc.stop(audioCtx.currentTime + 0.06);
+    }
+
+    // Attach sound feedback to all interactive navigation items
+    document.querySelectorAll('.nav-links a, .btn, .practice-card').forEach(el => {
+      el.addEventListener('mouseenter', playSystemClick);
+    });
+
+    /* ─────────────────────────────────────────────────────────────────────────
+     * SECURE CONTACT FORM ACTION
+     * ───────────────────────────────────────────────────────────────────────── */
+    function submitForm(event) {
+      event.preventDefault();
+      const formSuccess = document.getElementById('formSuccess');
+      formSuccess.style.display = 'block';
+
+      // Reset
+      document.getElementById('clientName').value = '';
+      document.getElementById('clientEmail').value = '';
+      document.getElementById('clientPhone').value = '';
+      document.getElementById('clientMessage').value = '';
+
+      setTimeout(() => {
+        formSuccess.style.display = 'none';
+      }, 7000);
+      playSystemClick();
+    }
+
+    /* ─────────────────────────────────────────────────────────────────────────
+     * DEVELOPER HUB OVERLAY PANEL ENGINE
+     * ───────────────────────────────────────────────────────────────────────── */
+    const devHubOpen = document.getElementById('devHubOpen');
+    const devHubClose = document.getElementById('devHubClose');
+    const devHubModal = document.getElementById('devHubModal');
+
+    devHubOpen.addEventListener('click', () => {
+      devHubModal.classList.add('open');
+      document.body.style.overflow = 'hidden'; // Stop background scroll
+      playSystemClick();
+    });
+
+    devHubClose.addEventListener('click', () => {
+      devHubModal.classList.remove('open');
+      document.body.style.overflow = 'auto'; // Resume scroll
+      playSystemClick();
+    });
+
+    devHubFooterLink.addEventListener('click', (e) => {
+      e.preventDefault();
+      devHubModal.classList.add('open');
+      document.body.style.overflow = 'hidden';
+      playSystemClick();
+    });
+
+    // Developer Hub tab selector logic
+    const devHubNavItems = document.querySelectorAll('.dev-hub-nav-item');
+    const devHubPanels = document.querySelectorAll('.dev-hub-panel');
+
+    devHubNavItems.forEach(item => {
+      item.addEventListener('click', () => {
+        devHubNavItems.forEach(i => i.classList.remove('active'));
+        devHubPanels.forEach(p => p.style.display = 'none');
+
+        item.classList.add('active');
+        const target = item.getAttribute('data-target');
+        document.getElementById('panel-' + target).style.display = 'block';
+        playSystemClick();
+      });
+    });
+  </script>
+</body>
+</html>

@@ -271,7 +271,8 @@
       "category": "Danışmanlık",
       "content": "<h2>Hybris Danışmanlığı</h2><p>Bu sayfanın içeriğini admin panelinden güncelleyebilirsiniz.</p>",
       "status": "published",
-      "updatedAt": "2026-06-20T08:18:48.070Z"
+      "updatedAt": "2026-06-20T08:18:48.070Z",
+      "menuTitleEn": "Hybris Consulting"
     },
     {
       "id": 16,
@@ -280,7 +281,8 @@
       "category": "Danışmanlık",
       "content": "<h2>SAP Teknik Danışmanlık</h2><p>Bu sayfanın içeriğini admin panelinden güncelleyebilirsiniz.</p>",
       "status": "published",
-      "updatedAt": "2026-06-20T08:18:48.070Z"
+      "updatedAt": "2026-06-20T08:18:48.070Z",
+      "menuTitleEn": "SAP Technical Consulting"
     },
     {
       "id": 17,
@@ -289,7 +291,8 @@
       "category": "Danışmanlık",
       "content": "<h2>SAP Fonksiyonel Danışmanlık</h2><p>Bu sayfanın içeriğini admin panelinden güncelleyebilirsiniz.</p>",
       "status": "published",
-      "updatedAt": "2026-06-20T08:18:48.070Z"
+      "updatedAt": "2026-06-20T08:18:48.070Z",
+      "menuTitleEn": "SAP Functional Consulting"
     },
     {
       "id": 18,
@@ -298,7 +301,8 @@
       "category": "Danışmanlık",
       "content": "<h2>Geliştirme Danışmanlığı</h2><p>Bu sayfanın içeriğini admin panelinden güncelleyebilirsiniz.</p>",
       "status": "published",
-      "updatedAt": "2026-06-20T08:18:48.070Z"
+      "updatedAt": "2026-06-20T08:18:48.070Z",
+      "menuTitleEn": "Development Consulting"
     },
     {
       "id": 19,
@@ -307,7 +311,8 @@
       "category": "Danışmanlık",
       "content": "<h2>Kalite Yönetimi</h2><p>Bu sayfanın içeriğini admin panelinden güncelleyebilirsiniz.</p>",
       "status": "published",
-      "updatedAt": "2026-06-20T08:18:48.070Z"
+      "updatedAt": "2026-06-20T08:18:48.070Z",
+      "menuTitleEn": "Quality Management"
     },
     {
       "id": 20,
@@ -316,7 +321,8 @@
       "category": "Danışmanlık",
       "content": "<h2>Dış Kaynak Hizmetleri</h2><p>Bu sayfanın içeriğini admin panelinden güncelleyebilirsiniz.</p>",
       "status": "published",
-      "updatedAt": "2026-06-20T08:18:48.070Z"
+      "updatedAt": "2026-06-20T08:18:48.070Z",
+      "menuTitleEn": "Outsourcing Services"
     },
     {
       "id": 21,

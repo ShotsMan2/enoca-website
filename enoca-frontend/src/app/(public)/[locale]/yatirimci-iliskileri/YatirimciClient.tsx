@@ -61,13 +61,13 @@ export default function YatirimciClient() {
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-16">
-            <div className="bg-card border border-border rounded-3xl p-8 shadow-sm">
+            <div className="bg-slate-950/70 border border-white/10 backdrop-blur shadow-[0_35px_120px_rgba(2,132,199,0.15)] rounded-3xl p-8">
               <div className="flex items-center justify-between mb-8">
                 <div>
                   <h3 className="text-2xl font-bold text-foreground mb-1">{t('financeTitle')}</h3>
                   <p className="text-sm text-muted-foreground">{t('financeDesc')}</p>
                 </div>
-                <button className="p-2 bg-muted rounded-xl hover:bg-accent hover:text-white transition-colors text-muted-foreground">
+                <button className="p-2 bg-white/5 border border-white/10 rounded-xl hover:bg-accent hover:text-white transition-colors text-muted-foreground">
                   <Download className="w-5 h-5" />
                 </button>
               </div>
@@ -76,20 +76,27 @@ export default function YatirimciClient() {
                   <AreaChart data={financialData} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
                     <defs>
                       <linearGradient id="colorRev" x1="0" y1="0" x2="0" y2="1">
-                        <stop offset="5%" stopColor="#3B82F6" stopOpacity={0.3}/>
-                        <stop offset="95%" stopColor="#3B82F6" stopOpacity={0}/>
+                        <stop offset="5%" stopColor="#3B82F6" stopOpacity={0.4}/>
+                        <stop offset="95%" stopColor="#3B82F6" stopOpacity={0.01}/>
                       </linearGradient>
                       <linearGradient id="colorProf" x1="0" y1="0" x2="0" y2="1">
-                        <stop offset="5%" stopColor="#10B981" stopOpacity={0.3}/>
-                        <stop offset="95%" stopColor="#10B981" stopOpacity={0}/>
+                        <stop offset="5%" stopColor="#10B981" stopOpacity={0.4}/>
+                        <stop offset="95%" stopColor="#10B981" stopOpacity={0.01}/>
                       </linearGradient>
                     </defs>
-                    <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#374151" opacity={0.1} />
-                    <XAxis dataKey="year" stroke="#6B7280" fontSize={12} tickLine={false} axisLine={false} />
-                    <YAxis stroke="#6B7280" fontSize={12} tickLine={false} axisLine={false} />
+                    <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#374151" opacity={0.08} />
+                    <XAxis dataKey="year" stroke="#94a3b8" fontSize={12} tickLine={false} axisLine={false} />
+                    <YAxis stroke="#94a3b8" fontSize={12} tickLine={false} axisLine={false} />
                     <Tooltip 
-                      contentStyle={{ backgroundColor: 'var(--card)', borderColor: 'var(--border)', borderRadius: '0.75rem', color: 'var(--foreground)' }}
-                      itemStyle={{ fontWeight: 'bold' }}
+                      contentStyle={{ 
+                        backgroundColor: 'rgba(15, 23, 42, 0.95)', 
+                        borderColor: 'rgba(255, 255, 255, 0.1)', 
+                        borderRadius: '0.75rem', 
+                        color: '#f8fafc',
+                        backdropFilter: 'blur(8px)',
+                        boxShadow: '0 10px 25px -5px rgba(2, 132, 199, 0.2)'
+                      }}
+                      itemStyle={{ fontWeight: 'bold', color: '#f8fafc' }}
                     />
                     <Area type="monotone" dataKey="revenue" stroke="#3B82F6" strokeWidth={3} fillOpacity={1} fill="url(#colorRev)" name={t('chartRev')} />
                     <Area type="monotone" dataKey="profit" stroke="#10B981" strokeWidth={3} fillOpacity={1} fill="url(#colorProf)" name={t('chartProf')} />
@@ -98,7 +105,7 @@ export default function YatirimciClient() {
               </div>
             </div>
 
-            <div className="bg-card border border-border rounded-3xl p-8 shadow-sm flex flex-col justify-between">
+            <div className="bg-slate-950/70 border border-white/10 backdrop-blur shadow-[0_35px_120px_rgba(2,132,199,0.15)] rounded-3xl p-8 flex flex-col justify-between">
               <div>
                 <h3 className="text-2xl font-bold text-foreground mb-1">{t('esgTitle')}</h3>
                 <p className="text-sm text-muted-foreground mb-8">{t('esgDesc')}</p>
@@ -110,7 +117,7 @@ export default function YatirimciClient() {
                         <span className="text-foreground">{item.metric}</span>
                         <span className="text-accent">%{item.val}</span>
                       </div>
-                      <div className="h-2.5 w-full bg-muted rounded-full overflow-hidden">
+                      <div className="h-2.5 w-full bg-white/10 rounded-full overflow-hidden">
                         <motion.div 
                           initial={{ width: 0 }}
                           whileInView={{ width: `${item.val}%` }}
@@ -124,7 +131,7 @@ export default function YatirimciClient() {
                 </div>
               </div>
 
-              <div className="mt-8 pt-6 border-t border-border">
+              <div className="mt-8 pt-6 border-t border-white/10">
                 <button onClick={() => window.print()} className="flex items-center gap-2 text-accent font-bold hover:underline">
                   {t('esgDownload')} <ArrowRight className="w-4 h-4" />
                 </button>
@@ -132,7 +139,7 @@ export default function YatirimciClient() {
             </div>
           </div>
 
-          <div className="bg-card border border-border rounded-3xl p-8 md:p-12 shadow-sm">
+          <div className="bg-slate-950/70 border border-white/10 backdrop-blur shadow-[0_35px_120px_rgba(2,132,199,0.15)] rounded-3xl p-8 md:p-12">
             <h3 className="text-2xl font-bold mb-8 text-foreground">{t('reportsTitle')}</h3>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               {[
@@ -140,9 +147,9 @@ export default function YatirimciClient() {
                 { title: t('report2'), type: "PPTX", size: "15.1 MB" },
                 { title: t('report3'), type: "PDF", size: "1.2 MB" },
               ].map((doc, idx) => (
-                <div onClick={() => window.print()} key={idx} className="p-6 border border-border rounded-2xl bg-muted/30 hover:bg-muted transition-colors group cursor-pointer shadow-sm hover:shadow-md">
+                <div onClick={() => window.print()} key={idx} className="p-6 border border-white/10 rounded-2xl bg-white/5 hover:bg-white/10 hover:border-white/20 transition-all group cursor-pointer shadow-lg">
                   <div className="flex items-center justify-between mb-4">
-                    <span className="px-2.5 py-1 bg-background border border-border text-muted-foreground text-xs font-bold rounded-lg">{doc.type}</span>
+                    <span className="px-2.5 py-1 bg-slate-900/60 border border-white/10 text-muted-foreground text-xs font-bold rounded-lg">{doc.type}</span>
                     <Download className="w-5 h-5 text-muted-foreground group-hover:text-accent transition-colors" />
                   </div>
                   <h4 className="font-bold text-lg mb-2 text-foreground">{doc.title}</h4>
@@ -164,9 +171,9 @@ function StatCard({ icon, title, value, desc }: { icon: React.ReactNode; title: 
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
-      className="bg-card border border-border rounded-2xl p-6 shadow-sm hover:shadow-md transition-shadow"
+      className="bg-slate-950/70 border border-white/10 backdrop-blur shadow-[0_35px_120px_rgba(2,132,199,0.15)] rounded-2xl p-6 transition-all hover:border-white/20"
     >
-      <div className="w-12 h-12 rounded-xl bg-muted flex items-center justify-center mb-4">
+      <div className="w-12 h-12 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center mb-4">
         {icon}
       </div>
       <h4 className="text-sm font-bold text-muted-foreground mb-1">{title}</h4>

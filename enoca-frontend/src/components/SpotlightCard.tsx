@@ -39,13 +39,13 @@ export default function SpotlightCard({ children, className = "" }: { children: 
       onBlur={handleBlur}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
-      className={`relative overflow-hidden rounded-2xl border border-border bg-card shadow-sm transition-all hover:-translate-y-1 hover:shadow-xl ${className}`}
+      className={`relative overflow-hidden rounded-3xl border border-border/50 bg-card/60 backdrop-blur-xl shadow-sm transition-all hover:-translate-y-1 hover:shadow-md ${className}`}
     >
       <motion.div
         className="pointer-events-none absolute -inset-px opacity-0 transition duration-300 z-0"
         animate={{
           opacity,
-          background: `radial-gradient(600px circle at ${position.x}px ${position.y}px, rgba(0, 85, 255, 0.08), transparent 40%)`,
+          background: `radial-gradient(600px circle at ${position.x}px ${position.y}px, rgba(0, 112, 243, 0.06), transparent 40%)`,
         }}
       />
       <div className="relative z-10 h-full">

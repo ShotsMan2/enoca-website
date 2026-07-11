@@ -172,27 +172,27 @@ export default function Footer({ settings, pages = [] }: { settings?: SiteSettin
     });
 
     return (
-        <footer className="bg-card border-t border-accent/30 pt-16 pb-8 relative overflow-hidden">
-            <div className="absolute inset-0 bg-grid-pattern opacity-10 pointer-events-none" />
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <footer className="bg-[#050505] border-t border-[var(--border)] pt-20 pb-10 relative overflow-hidden font-[var(--font-sans)] text-white">
+            <div className="bg-grid absolute inset-0 opacity-[0.2] pointer-events-none" />
+            <div className="max-w-[1440px] mx-auto px-6 lg:px-12 relative z-10">
                 
                 {/* Footer Menu Grid */}
                 <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8 mb-16">
                     {menuItems.map((col, idx) => (
                         <div key={idx} className="space-y-4">
-                            <h4 className="text-foreground font-bold tracking-wider mb-6 text-sm uppercase">
-                                <Link href={col.url} className="hover:text-accent dark:hover:text-accent transition-colors">{col.title}</Link>
+                            <h4 className="text-white font-[var(--font-mono)] text-[11px] uppercase tracking-widest mb-6">
+                                <Link href={col.url} className="hover:text-[var(--accent)] transition-colors">{col.title}</Link>
                             </h4>
                             <div className="space-y-3">
                                 {col.children?.map((child, cIdx) => (
                                     <div key={cIdx} className={cIdx > 0 && child.subChildren ? "pt-2 space-y-2" : "space-y-2"}>
-                                        <Link href={child.url} className={`block text-[13px] font-bold hover:text-accent dark:hover:text-accent transition-colors ${!child.subChildren && "leading-relaxed"}`}>
+                                        <Link href={child.url} className={`block text-[13px] text-[var(--muted)] hover:text-white transition-colors ${!child.subChildren && "leading-relaxed"}`}>
                                             {child.title}
                                         </Link>
                                         {child.subChildren && child.subChildren.length > 0 && (
-                                            <div className="space-y-1.5 pl-3 border-l border-white/10 mt-1">
+                                            <div className="space-y-1.5 pl-3 border-l border-[var(--border)] mt-1">
                                                 {child.subChildren.map((sub, sIdx) => (
-                                                    <Link key={sIdx} href={sub.url} className="block text-xs hover:text-accent dark:hover:text-accent transition-colors">
+                                                    <Link key={sIdx} href={sub.url} className="block text-xs text-[var(--meta)] hover:text-[var(--accent)] transition-colors">
                                                         {sub.title}
                                                     </Link>
                                                 ))}
@@ -206,46 +206,45 @@ export default function Footer({ settings, pages = [] }: { settings?: SiteSettin
                 </div>
 
                 {/* Alt Telif ve Kısayollar */}
-                <div className="border-t border-border/50 pt-8 flex flex-col md:flex-row justify-between items-center gap-6">
+                <div className="border-t border-[var(--border)] pt-8 flex flex-col md:flex-row justify-between items-center gap-6">
                     
-                    <div className="flex items-center gap-6 text-[11px] md:text-xs font-bold tracking-wider">
+                    <div className="flex items-center gap-6 text-[10px] md:text-xs font-[var(--font-mono)] uppercase tracking-wider text-[var(--muted)]">
                         {/* Sosyal İkonlar */}
                         {settings?.linkedinUrl && (
-                            <a href={settings.linkedinUrl} target="_blank" rel="noreferrer" className="flex items-center justify-center w-8 h-8 rounded-full bg-[#333333] hover:bg-accent hover:text-white dark:hover:bg-accent dark:hover:text-white transition-all text-white" aria-label="LinkedIn">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+                            <a href={settings.linkedinUrl} target="_blank" rel="noreferrer" className="hover:text-[var(--accent)] transition-all" aria-label="LinkedIn">
+                                LINKEDIN
                             </a>
                         )}
                         {settings?.twitterUrl && (
-                            <a href={settings.twitterUrl} target="_blank" rel="noreferrer" className="flex items-center justify-center w-8 h-8 rounded-full bg-[#333333] hover:bg-accent hover:text-white dark:hover:bg-accent dark:hover:text-white transition-all text-white" aria-label="X (Twitter)">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                            <a href={settings.twitterUrl} target="_blank" rel="noreferrer" className="hover:text-[var(--accent)] transition-all" aria-label="X (Twitter)">
+                                TWITTER
                             </a>
                         )}
-                        <Link href={settings?.privacyUrl || "/gizlilik"} className="text-foreground hover:text-accent dark:hover:text-accent transition-colors uppercase">{t('privacy')}</Link>
-                        <Link href={settings?.termsUrl || "/kullanim-kosullari"} className="text-foreground hover:text-accent dark:hover:text-accent transition-colors uppercase">{t('terms')}</Link>
+                        <Link href={settings?.privacyUrl || "/gizlilik"} className="hover:text-white transition-colors">{t('privacy')}</Link>
+                        <Link href={settings?.termsUrl || "/kullanim-kosullari"} className="hover:text-white transition-colors">{t('terms')}</Link>
                     </div>
                     
                     <div className="flex flex-col md:flex-row items-center md:items-end justify-between gap-6 w-full lg:w-auto">
-                        <div className="flex flex-col w-full max-w-sm gap-2 bg-background/50 p-5 rounded-none clip-chamfer border border-accent/20 shadow-glow-md relative overflow-hidden group">
-                            <div className="absolute inset-0 bg-gradient-to-r from-accent/0 via-accent/5 to-accent/0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000" />
-                            <h4 className="text-foreground text-sm font-black tracking-widest uppercase mb-1 font-mono">{t('newsletterTitle')}</h4>
-                            <p className="text-[11px] text-muted-foreground font-mono">{t('newsletterDesc')}</p>
+                        <div className="flex flex-col w-full max-w-sm gap-2 bg-[#0a0a0c] p-6 border border-[var(--border)] relative overflow-hidden group">
+                            <h4 className="text-[var(--accent)] font-[var(--font-mono)] text-[10px] uppercase tracking-widest mb-1">{t('newsletterTitle')}</h4>
+                            <p className="text-[13px] text-[var(--muted)] font-light">{t('newsletterDesc')}</p>
                             {subscribed ? (
-                                <div className="mt-2 h-10 px-3 flex items-center bg-accent/10 border border-accent/30 text-accent text-xs clip-chamfer font-mono font-medium">
-                                    {t('newsletterSuccess')}
+                                <div className="mt-2 h-10 px-3 flex items-center bg-[rgba(28,105,212,0.1)] border border-[var(--accent)] text-[var(--success)] text-xs font-[var(--font-mono)]">
+                                    [OK] {t('newsletterSuccess')}
                                 </div>
                             ) : (
                                 <form className="flex mt-2 relative z-10" onSubmit={handleSubscribe}>
-                                    <input type="email" required value={email} onChange={(e) => setEmail(e.target.value)} placeholder={t('newsletterEmail')} className="flex-1 h-10 px-4 text-xs bg-background border border-border outline-none focus:border-accent text-foreground font-mono placeholder-muted-foreground transition-all focus:ring-1 focus:ring-accent/50" disabled={loading} />
-                                    <button type="submit" disabled={loading} className="h-10 px-5 bg-accent text-accent-foreground text-[11px] font-black hover:bg-accent hover:text-white dark:hover:bg-white dark:hover:text-black transition-colors uppercase font-mono clip-chamfer ml-2 shadow-glow-sm disabled:opacity-70">{loading ? "..." : t('newsletterSubmit')}</button>
+                                    <input type="email" required value={email} onChange={(e) => setEmail(e.target.value)} placeholder={t('newsletterEmail')} className="flex-1 h-10 px-4 text-[13px] bg-black border border-[var(--border)] outline-none focus:border-[var(--accent)] text-white placeholder-[var(--meta)] transition-all" disabled={loading} />
+                                    <button type="submit" disabled={loading} className="h-10 px-5 bg-[var(--accent)] hover:bg-[var(--accent-hover)] border border-[var(--accent)] text-white font-[var(--font-mono)] text-[10px] uppercase tracking-widest transition-colors ml-2 disabled:opacity-70">{loading ? "..." : t('newsletterSubmit')}</button>
                                 </form>
                             )}
                         </div>
                         
                         <div className="flex flex-col items-center md:items-end gap-1 mt-6 lg:mt-0">
-                            <div className="text-3xl font-display font-black tracking-tighter text-foreground opacity-40 grayscale hover:grayscale-0 hover:text-[#0f2256] dark:hover:text-accent transition-all duration-500">
-                                enoca<sup className="text-xs font-sans ml-0.5">&trade;</sup>
+                            <div className="flex items-center gap-2">
+                                <img src="/logo.png" alt="Enoca" className="h-6 w-auto object-contain" />
                             </div>
-                            <div className="text-[11px] font-medium tracking-wider text-[#777777]">
+                            <div className="text-[10px] font-[var(--font-mono)] tracking-wider text-[var(--meta)] uppercase mt-2">
                                 {t('copyright')}
                             </div>
                         </div>

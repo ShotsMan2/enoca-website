@@ -44,9 +44,11 @@ export default function SplashScreen() {
         
         {/* Logo Text Animation */}
         <div className="relative z-10 overflow-hidden mb-6">
-          <h1 className="text-5xl md:text-7xl font-display font-black text-white tracking-tighter translate-y-[100%] animate-[slideUp_0.8s_ease-out_forwards]">
-            enoca<span className="text-accent">.</span>
-          </h1>
+          <img 
+            src="/logo.png" 
+            alt="Enoca Logo" 
+            className="h-16 md:h-20 w-auto object-contain translate-y-[100%] animate-[slideUp_0.8s_ease-out_forwards]" 
+          />
         </div>
 
         {/* Loading Bar */}

@@ -108,7 +108,7 @@ export default function PublicAIAssistant() {
       <div className="fixed bottom-6 right-6 z-[90]">
         <button
           onClick={() => setIsOpen(!isOpen)}
-          className="group relative w-14 h-14 bg-gradient-to-tr from-blue-600 to-indigo-600 rounded-full flex items-center justify-center shadow-2xl shadow-blue-500/30 hover:scale-110 transition-transform duration-300"
+          className="group relative w-14 h-14 bg-accent hover:bg-accent-secondary rounded-full flex items-center justify-center shadow-lg hover:shadow-accent/40 transition-all duration-300"
         >
           <div className="absolute inset-0 bg-white/20 rounded-full animate-ping opacity-0 group-hover:opacity-100" style={{ animationDuration: '3s' }} />
           {isOpen ? (
@@ -134,10 +134,10 @@ export default function PublicAIAssistant() {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 20, scale: 0.95 }}
             transition={{ duration: 0.2 }}
-            className="fixed bottom-24 right-6 w-80 sm:w-96 bg-white dark:bg-gray-900 rounded-2xl shadow-2xl border border-gray-200 dark:border-gray-700 overflow-hidden z-[90] flex flex-col h-[500px] max-h-[calc(100vh-120px)]"
+            className="fixed bottom-24 right-6 w-80 sm:w-96 bg-card/95 backdrop-blur-3xl rounded-3xl shadow-2xl border border-border/50 overflow-hidden z-[90] flex flex-col h-[500px] max-h-[calc(100vh-120px)]"
           >
             {/* Header */}
-            <div className="bg-gradient-to-r from-blue-600 to-indigo-600 p-4 flex items-center justify-between">
+            <div className="bg-gradient-to-r from-accent to-accent-secondary p-5 flex items-center justify-between border-b border-white/10">
               <div className="flex items-center gap-3">
                 <div className="w-10 h-10 bg-white/10 rounded-xl flex items-center justify-center backdrop-blur-sm relative">
                   <Bot className="w-5 h-5 text-white" />
@@ -156,7 +156,7 @@ export default function PublicAIAssistant() {
             </div>
 
             {/* Messages */}
-            <div className="flex-1 overflow-y-auto p-4 space-y-4 bg-gray-50/50 dark:bg-gray-900/50">
+            <div className="flex-1 overflow-y-auto p-5 space-y-5 bg-background/50">
               {messages.map((msg) => (
                 <div
                   key={msg.id}
@@ -165,14 +165,14 @@ export default function PublicAIAssistant() {
                   <div
                     className={`px-4 py-2.5 rounded-2xl ${
                       msg.sender === "user"
-                        ? "bg-blue-600 text-white rounded-br-sm"
-                        : "bg-white dark:bg-gray-800 border border-gray-100 dark:border-gray-700 text-gray-800 dark:text-gray-200 rounded-bl-sm"
+                        ? "bg-foreground text-background rounded-br-sm shadow-sm"
+                        : "bg-card border border-border/50 text-foreground rounded-bl-sm shadow-sm"
                     }`}
                   >
-                    {msg.sender === "ai" && <Sparkles className="w-3 h-3 text-blue-500 mb-1" />}
-                    <p className="text-sm leading-relaxed">{msg.text}</p>
+                    {msg.sender === "ai" && <Sparkles className="w-3 h-3 text-accent mb-1" />}
+                    <p className="text-[14px] leading-relaxed">{msg.text}</p>
                   </div>
-                  <span className="text-[10px] text-gray-400 dark:text-gray-500 mt-1 px-1">
+                  <span className="text-[10px] text-muted-foreground mt-1 px-1">
                     {msg.timestamp}
                   </span>
                 </div>
@@ -180,10 +180,10 @@ export default function PublicAIAssistant() {
               
               {isTyping && (
                 <div className="flex flex-col max-w-[85%] mr-auto items-start">
-                  <div className="px-4 py-3.5 rounded-2xl bg-white dark:bg-gray-800 border border-gray-100 dark:border-gray-700 rounded-bl-sm flex items-center gap-1.5">
-                    <span className="w-1.5 h-1.5 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: "0ms" }}></span>
-                    <span className="w-1.5 h-1.5 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: "150ms" }}></span>
-                    <span className="w-1.5 h-1.5 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: "300ms" }}></span>
+                  <div className="px-4 py-3.5 rounded-2xl bg-card border border-border/50 rounded-bl-sm flex items-center gap-1.5 shadow-sm">
+                    <span className="w-1.5 h-1.5 bg-muted-foreground rounded-full animate-bounce" style={{ animationDelay: "0ms" }}></span>
+                    <span className="w-1.5 h-1.5 bg-muted-foreground rounded-full animate-bounce" style={{ animationDelay: "150ms" }}></span>
+                    <span className="w-1.5 h-1.5 bg-muted-foreground rounded-full animate-bounce" style={{ animationDelay: "300ms" }}></span>
                   </div>
                 </div>
               )}
@@ -191,18 +191,18 @@ export default function PublicAIAssistant() {
             </div>
 
             {/* Input Form */}
-            <form onSubmit={handleSend} className="p-3 bg-white dark:bg-gray-900 border-t border-gray-100 dark:border-gray-800 flex items-center gap-2">
+            <form onSubmit={handleSend} className="p-4 bg-card/80 backdrop-blur-md border-t border-border/50 flex items-center gap-3">
               <input
                 type="text"
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
                 placeholder={tPlaceholder}
-                className="flex-1 bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-gray-200 text-sm rounded-xl px-4 py-3 outline-none focus:ring-2 focus:ring-blue-500/20 transition-all"
+                className="flex-1 bg-background/50 text-foreground text-[14px] rounded-2xl px-4 py-3 outline-none focus:ring-1 focus:ring-accent border border-border/50 transition-all placeholder-muted-foreground"
               />
               <button
                 type="submit"
                 disabled={!input.trim() || isTyping}
-                className="w-11 h-11 bg-blue-600 hover:bg-blue-700 disabled:bg-gray-300 dark:disabled:bg-gray-700 text-white rounded-xl flex items-center justify-center transition-colors shadow-md shadow-blue-600/20 disabled:shadow-none"
+                className="w-11 h-11 bg-accent hover:bg-accent-secondary disabled:opacity-50 text-white rounded-full flex items-center justify-center transition-colors shadow-md disabled:shadow-none"
               >
                 <Send className="w-4 h-4" />
               </button>
