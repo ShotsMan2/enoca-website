@@ -108,10 +108,7 @@ export default function Navbar({ settings, pages = [] }: { settings?: SiteSettin
         },
         { 
             title: tFooter('news'), 
-            url: "/haberler",
-            children: [
-                { title: tFooter('latestNews'), url: "/haberler/enocadan-son-haberler" }
-            ]
+            url: "/haberler"
         },
         {
             title: tFooter('corporate'),
@@ -197,7 +194,7 @@ export default function Navbar({ settings, pages = [] }: { settings?: SiteSettin
                                             <div className="bg-slate-950/95 border border-white/10 p-8 shadow-2xl backdrop-blur-xl rounded-none w-max max-w-[800px] flex gap-12">
                                                 {item.children!.map((child, cIdx) => (
                                                     <div key={cIdx} className="flex flex-col min-w-[160px]">
-                                                        <Link href={child.url} className={`text-[14px] uppercase tracking-widest hover:text-white transition-colors block mb-3 ${child.subChildren ? 'text-[var(--accent)] font-[var(--font-mono)]' : 'text-[var(--muted)] font-[var(--font-mono)]'}`}>
+                                                        <Link href={child.url} className={`text-[14px] uppercase tracking-widest hover:text-white transition-colors block mb-3 text-[var(--accent)] font-[var(--font-mono)]`}>
                                                             {child.title}
                                                         </Link>
                                                         {child.subChildren && child.subChildren.length > 0 && (
@@ -294,7 +291,7 @@ export default function Navbar({ settings, pages = [] }: { settings?: SiteSettin
                                             <Link 
                                                 href={child.url} 
                                                 onClick={() => setIsMobileMenuOpen(false)} 
-                                                className={`font-[var(--font-mono)] text-[13px] uppercase tracking-wider block ${child.subChildren ? 'text-[var(--accent)] mb-3' : 'text-[var(--muted)] hover:text-white'}`}
+                                                className={`font-[var(--font-mono)] text-[13px] uppercase tracking-wider block text-[var(--accent)] ${child.subChildren ? 'mb-3' : 'hover:text-white'}`}
                                             >
                                                 {child.title}
                                             </Link>

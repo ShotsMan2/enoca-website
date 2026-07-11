@@ -24,7 +24,7 @@ export default async function JobDetailsPage({ params }: { params: Promise<{ id:
 
   return (
     <PublicLayout>
-      <div className="min-h-screen py-12 lg:py-20">
+      <div className="min-h-screen pt-32 pb-12 lg:pt-40 lg:pb-20">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           
           <div className="grid grid-cols-1 lg:grid-cols-[1fr_400px] gap-12 items-start">

@@ -113,10 +113,7 @@ export default function Footer({ settings, pages = [] }: { settings?: SiteSettin
         },
         { 
             title: t('news'), 
-            url: "/haberler",
-            children: [
-                { title: t('latestNews'), url: "/haberler/enocadan-son-haberler" }
-            ]
+            url: "/haberler"
         },
         {
             title: t('corporate'),

@@ -5,29 +5,32 @@ export const dynamic = 'force-dynamic';
 import { CalendarDays } from "lucide-react";
 import PublicLayout from "@/components/PublicLayout";
 import { NewsItem } from "@/lib/admin-api";
+import { getTranslations } from "next-intl/server";
 
-export default async function NewsPage() {
+export default async function NewsPage({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params;
+  const t = await getTranslations("NewsPage");
   const db = await readDB();
   const news: NewsItem[] = (db?.news || []) as unknown as NewsItem[];
   const activeNews = news.filter((n) => n.status === "published");
 
   return (
     <PublicLayout>
-      <div className="min-h-screen py-16">
+      <div className="min-h-screen pt-32 pb-16">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           
           <div className="text-center mb-16">
             <h1 className="text-4xl md:text-5xl font-black font-display text-white tracking-tight mb-4">
-              Haberler
+              {t("title")}
             </h1>
             <p className="text-lg text-slate-300 font-medium max-w-2xl mx-auto">
-              Şirketimizden en son güncellemeler, etkinlikler ve duyurular.
+              {t("subtitle")}
             </p>
           </div>
 
           {activeNews.length === 0 ? (
             <div className="text-center py-20 bg-slate-950/70 border border-white/10 backdrop-blur rounded-3xl">
-              <p className="text-slate-300 text-lg">Şu anda yayınlanmış bir haber bulunmuyor.</p>
+              <p className="text-slate-300 text-lg">{t("noNews")}</p>
             </div>
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -42,7 +45,7 @@ export default async function NewsPage() {
                     />
                     <div className="absolute top-4 left-4 bg-white/5 border border-white/10 backdrop-blur-md px-3 py-1.5 rounded-full text-xs font-bold text-slate-200 shadow-sm flex items-center gap-1.5">
                       <CalendarDays className="w-3.5 h-3.5 text-sky-400" />
-                      {new Date(item.publishedAt).toLocaleDateString("tr-TR", { month: "short", day: "numeric", year: "numeric" })}
+                      {new Date(item.publishedAt).toLocaleDateString(locale === "en" ? "en-US" : "tr-TR", { month: "short", day: "numeric", year: "numeric" })}
                     </div>
                   </div>
                   
@@ -58,7 +61,7 @@ export default async function NewsPage() {
                     {/* Footer (Read More) */}
                     <div className="mt-auto pt-4 border-t border-white/10">
                       <span className="inline-flex items-center text-sm font-bold text-sky-400 group-hover:text-sky-300 transition-colors">
-                        Haberi Oku 
+                        {t("readNews")} 
                         <svg className="w-4 h-4 ml-1.5 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                           <path strokeLinecap="round" strokeLinejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
                         </svg>

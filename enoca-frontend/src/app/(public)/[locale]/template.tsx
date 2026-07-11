@@ -13,10 +13,10 @@ export default function Template({ children }: { children: React.ReactNode }) {
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 24 }}
-      animate={mounted ? { opacity: 1, y: 0 } : { opacity: 0, y: 24 }}
+      initial={{ opacity: 0 }}
+      animate={mounted ? { opacity: 1 } : { opacity: 0 }}
       transition={{ duration: 0.45, ease: 'easeOut' }}
-      className="will-change-[opacity,transform]"
+      className="will-change-[opacity]"
     >
       {children}
     </motion.div>

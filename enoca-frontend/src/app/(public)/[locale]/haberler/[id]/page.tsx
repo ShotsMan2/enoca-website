@@ -4,9 +4,9 @@ import { readDB } from "@/lib/db";
 import { notFound } from "next/navigation";
 import { CalendarDays, ArrowLeft, Share2, ArrowRight } from "lucide-react";
 import PublicLayout from "@/components/PublicLayout";
-import { NewsItem } from "@/lib/admin-api";
 import { Link } from "@/i18n/routing";
 import NewsClientFeatures from "@/components/NewsClientFeatures";
+import { getTranslations } from "next-intl/server";
 
 export const dynamic = 'force-dynamic';
 
@@ -14,17 +14,19 @@ export async function generateMetadata({ params }: { params: Promise<{ id: strin
   const { id } = await params;
   const db = await readDB();
   const newsItem = db?.news?.find((n: any) => n.id === parseInt(id, 10) && n.status === "published");
+  const t = await getTranslations("NewsPage");
   
-  if (!newsItem) return { title: 'Haber Bulunamadı | Enoca' };
+  if (!newsItem) return { title: t('notFoundTitle') };
   
   return {
-    title: `${newsItem.title} | Enoca Haberler`,
-    description: newsItem.summary || `${newsItem.title} hakkında detaylar.`,
+    title: `${newsItem.title} | Enoca ${t('title')}`,
+    description: newsItem.summary || t('metaDesc', { title: newsItem.title }),
   };
 }
 
 export default async function HaberDetayPage({ params }: { params: Promise<{ id: string, locale: string }> }) {
-  const { id } = await params;
+  const { id, locale } = await params;
+  const t = await getTranslations("NewsPage");
   
   const db = await readDB();
   const allNews = db?.news || [];
@@ -42,11 +44,11 @@ export default async function HaberDetayPage({ params }: { params: Promise<{ id:
 
   return (
     <PublicLayout>
-      <div className="min-h-screen py-12 lg:py-20">
+      <div className="min-h-screen pt-32 pb-12 lg:pt-40 lg:pb-20">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           
           <Link href="/haberler" className="inline-flex items-center gap-2 text-sm font-semibold text-slate-400 hover:text-sky-400 transition-colors mb-8">
-            <ArrowLeft className="w-4 h-4" /> Haberlere Dön
+            <ArrowLeft className="w-4 h-4" /> {t("backToNews")}
           </Link>
 
           <article className="bg-slate-950/70 border border-white/10 backdrop-blur rounded-[2rem] p-6 lg:p-12 shadow-2xl">
@@ -63,7 +65,7 @@ export default async function HaberDetayPage({ params }: { params: Promise<{ id:
             <div className="flex items-center gap-4 text-sm text-slate-400 mb-6 font-medium">
               <span className="flex items-center gap-2">
                 <CalendarDays className="w-4 h-4 text-sky-400" />
-                {new Date(newsItem.publishedAt).toLocaleDateString("tr-TR", {
+                {new Date(newsItem.publishedAt).toLocaleDateString(locale === "en" ? "en-US" : "tr-TR", {
                   year: "numeric",
                   month: "long",
                   day: "numeric"
@@ -71,7 +73,7 @@ export default async function HaberDetayPage({ params }: { params: Promise<{ id:
               </span>
               <span className="w-1.5 h-1.5 bg-white/10 rounded-full"></span>
               <span className="bg-white/5 border border-white/10 text-slate-200 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider">
-                Kurumsal Haber
+                {t("corporateNews")}
               </span>
             </div>
 
@@ -80,21 +82,18 @@ export default async function HaberDetayPage({ params }: { params: Promise<{ id:
             </h1>
 
             <div className="prose prose-lg dark:prose-invert max-w-none prose-blue">
-              {/* Not: NewsItem modelinde detaylı HTML 'content' alanı olmadığı için şimdilik 'summary' kullanılıyor. 
-                  Tam entegrasyonda 'content' alanı kullanılmalıdır. */}
               <p className="text-xl text-slate-200 leading-relaxed font-medium">
                 {newsItem.summary}
               </p>
               
-              {/* Okunabilirliği artıran temsili makale gövdesi uzatması (gerçek veride content alanından gelmeli) */}
               <div className="mt-8 text-slate-300 leading-relaxed space-y-6">
-                <p>Enoca™ olarak sektördeki yenilikçi adımlarımızı sürdürmeye devam ediyoruz. Gelişen teknoloji trendlerini yakından takip ederek, iş ortaklarımıza ve müşterilerimize sunduğumuz çözümlerin kalitesini her geçen gün artırmak temel önceliğimizdir.</p>
-                <p>Mevcut başarılarımızın üzerine koyarak ilerlediğimiz bu yolda, dijital dönüşüm süreçlerine öncülük eden projelerimizle sektördeki konumumuzu güçlendiriyoruz. Bu vizyon doğrultusunda hayata geçirdiğimiz uygulamalar ve vizyoner yaklaşımlarımız, global arenadaki rekabet gücümüzü artırıyor.</p>
+                <p>{t("dummyParagraph1")}</p>
+                <p>{t("dummyParagraph2")}</p>
               </div>
             </div>
 
             <div className="mt-12 pt-8 border-t border-white/10 flex items-center justify-between">
-              <span className="text-sm font-semibold text-slate-200">Bu haberi paylaş:</span>
+              <span className="text-sm font-semibold text-slate-200">{t("shareThisNews")}</span>
               <div className="flex items-center gap-3">
                 <button className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-slate-300 hover:bg-sky-500 hover:text-white hover:border-sky-500 transition-colors">
                   <Share2 className="w-4 h-4" />
@@ -110,7 +109,7 @@ export default async function HaberDetayPage({ params }: { params: Promise<{ id:
           {/* Sırada Okunacaklar Modülü */}
           {nextNews && (
             <div className="mt-24 pt-12 border-t border-white/10 animate-in fade-in slide-in-from-bottom-10 duration-1000">
-              <p className="text-sm font-bold text-sky-400 tracking-widest uppercase mb-4">Sıradaki Haber</p>
+              <p className="text-sm font-bold text-sky-400 tracking-widest uppercase mb-4">{t("nextNews")}</p>
               <Link 
                 href={`/haberler/${nextNews.id}`}
                 className="group block p-8 sm:p-10 rounded-3xl bg-slate-950/70 border border-white/10 hover:border-sky-400/40 hover:shadow-2xl hover:shadow-sky-500/10 transition-all duration-500"

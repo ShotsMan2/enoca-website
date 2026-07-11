@@ -311,6 +311,20 @@
     "dis-kaynak-hizmetleri": "Outsourcing Services",
     "diskaynak-hizmetleri": "Outsourcing Services"
   },
+  "NewsPage": {
+    "title": "News",
+    "subtitle": "Latest updates, events, and announcements from our company.",
+    "noNews": "There are currently no published news.",
+    "readNews": "Read News",
+    "backToNews": "Back to News",
+    "shareThisNews": "Share this news:",
+    "corporateNews": "Corporate News",
+    "dummyParagraph1": "As Enoca™, we continue to take innovative steps in the sector. Following developing technology trends closely, increasing the quality of the solutions we offer to our business partners and customers every day is our primary priority.",
+    "dummyParagraph2": "Moving forward by building on our current achievements, we strengthen our position in the sector with our projects leading digital transformation processes. The applications and visionary approaches we have implemented in line with this vision increase our competitiveness in the global arena.",
+    "metaTitle": "News | Enoca",
+    "notFoundTitle": "News Not Found | Enoca",
+    "metaDesc": "Details about {title}."
+  },
   "CommandPalette": {
     "placeholder": "What are you looking for? (Solutions, Careers...)",
     "noResults": "No results found.",

@@ -311,6 +311,20 @@
     "dis-kaynak-hizmetleri": "Dış Kaynak Hizmetleri",
     "diskaynak-hizmetleri": "Dış Kaynak Hizmetleri"
   },
+  "NewsPage": {
+    "title": "Haberler",
+    "subtitle": "Şirketimizden en son güncellemeler, etkinlikler ve duyurular.",
+    "noNews": "Şu anda yayınlanmış bir haber bulunmuyor.",
+    "readNews": "Haberi Oku",
+    "backToNews": "Haberlere Dön",
+    "shareThisNews": "Bu haberi paylaş:",
+    "corporateNews": "Kurumsal Haber",
+    "dummyParagraph1": "Enoca™ olarak sektördeki yenilikçi adımlarımızı sürdürmeye devam ediyoruz. Gelişen teknoloji trendlerini yakından takip ederek, iş ortaklarımıza ve müşterilerimize sunduğumuz çözümlerin kalitesini her geçen gün artırmak temel önceliğimizdir.",
+    "dummyParagraph2": "Mevcut başarılarımızın üzerine koyarak ilerlediğimiz bu yolda, dijital dönüşüm süreçlerine öncülük eden projelerimizle sektördeki konumumuzu güçlendiriyoruz. Bu vizyon doğrultusunda hayata geçirdiğimiz uygulamalar ve vizyoner yaklaşımlarımız, global arenadaki rekabet gücümüzü artırıyor.",
+    "metaTitle": "Haberler | Enoca",
+    "notFoundTitle": "Haber Bulunamadı | Enoca",
+    "metaDesc": "{title} hakkında detaylar."
+  },
   "CommandPalette": {
     "placeholder": "Ne arıyorsunuz? (Çözümler, Kariyer...)",
     "noResults": "Sonuç bulunamadı.",
