@@ -65,7 +65,7 @@ export default async function ContactPage() {
                           <div>
                               <p className="text-sm font-semibold text-slate-400">Genel Merkez</p>
                               <p className="text-base font-medium text-slate-300 mt-1">
-                                  Bilişim Vadisi, Teknoloji Geliştirme Bölgesi, Kocaeli, Türkiye
+                                  Şehit Fethi Sokak No: 49/6 34660 Acıbadem, Üsküdar, İstanbul
                               </p>
                           </div>
                       </div>
@@ -96,17 +96,17 @@ export default async function ContactPage() {
 
         </div>
 
-        {/* Google Harita (Opsiyonel Dekoratif) */}
+        {/* Google Harita */}
         <div className="mt-12 w-full h-[400px] bg-slate-950/70 border border-white/10 rounded-3xl overflow-hidden relative shadow-[0_35px_120px_rgba(2,132,199,0.15)]">
           <iframe 
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3016.9205561042784!2d29.4316127!3d40.8735391!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14cad1fa46271a09%3A0xb30cf3b08e7ff1b1!2zQmlsacWfaW0gVmFkaXNp!5e0!3m2!1str!2str!4v1700000000000!5m2!1str!2str" 
+              src="https://maps.google.com/maps?q=Enoca&t=&z=14&ie=UTF8&iwloc=&output=embed" 
               width="100%" 
               height="100%" 
               style={{ border: 0 }} 
               allowFullScreen={true} 
               loading="lazy" 
               referrerPolicy="no-referrer-when-downgrade"
-              className="grayscale opacity-90 hover:grayscale-0 transition-all duration-500"
+              className="invert hue-rotate-180 contrast-125 opacity-90 hover:opacity-100 transition-all duration-500"
           />
         </div>
 
