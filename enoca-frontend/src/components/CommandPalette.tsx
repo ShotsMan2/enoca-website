@@ -4,11 +4,13 @@ import { useEffect, useState } from "react";
 import { useRouter } from "@/i18n/routing";
 import { Search, X, Briefcase, FileText, Send, Newspaper, LayoutGrid } from "lucide-react";
 import { AnimatePresence, motion } from "framer-motion";
+import { useTranslations } from "next-intl";
 
 export default function CommandPalette() {
   const [open, setOpen] = useState(false);
   const [query, setQuery] = useState("");
   const router = useRouter();
+  const t = useTranslations("CommandPalette");
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -30,13 +32,15 @@ export default function CommandPalette() {
     };
   }, []);
 
-  const results = [
-    { title: "Çözümlerimiz", icon: <LayoutGrid className="w-4 h-4" />, href: "/cozumler" },
-    { title: "Haberler & Blog", icon: <Newspaper className="w-4 h-4" />, href: "/haberler" },
-    { title: "Kariyer & İş İlanları", icon: <Briefcase className="w-4 h-4" />, href: "/kariyer" },
-    { title: "İletişim", icon: <Send className="w-4 h-4" />, href: "/iletisim" },
-    { title: "Hakkımızda", icon: <FileText className="w-4 h-4" />, href: "/hakkimizda" },
-  ].filter(item => item.title.toLowerCase().includes(query.toLowerCase()));
+  const items = [
+    { title: t("results.solutions"), icon: <LayoutGrid className="w-4 h-4" />, href: "/cozumler" },
+    { title: t("results.news"), icon: <Newspaper className="w-4 h-4" />, href: "/haberler" },
+    { title: t("results.careers"), icon: <Briefcase className="w-4 h-4" />, href: "/kariyer" },
+    { title: t("results.contact"), icon: <Send className="w-4 h-4" />, href: "/iletisim" },
+    { title: t("results.about"), icon: <FileText className="w-4 h-4" />, href: "/hakkimizda" },
+  ];
+
+  const results = items.filter(item => item.title.toLowerCase().includes(query.toLowerCase()));
 
   return (
     <AnimatePresence>
@@ -67,7 +71,7 @@ export default function CommandPalette() {
           <input 
             autoFocus
             type="text" 
-            placeholder="Ne arıyorsunuz? (Çözümler, Kariyer...)"
+            placeholder={t("placeholder")}
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             className="flex-1 h-14 bg-transparent outline-none text-foreground placeholder:text-muted-foreground text-lg"
@@ -83,7 +87,7 @@ export default function CommandPalette() {
         {/* Sonuçlar */}
         <div className="max-h-72 overflow-y-auto p-2">
           {results.length === 0 ? (
-            <p className="p-4 text-center text-muted-foreground text-sm">Sonuç bulunamadı.</p>
+            <p className="p-4 text-center text-muted-foreground text-sm">{t("noResults")}</p>
           ) : (
             results.map((item, idx) => (
               <button
@@ -98,7 +102,7 @@ export default function CommandPalette() {
                   {item.icon}
                 </div>
                 <span className="text-foreground font-medium flex-1">{item.title}</span>
-                <span className="text-xs text-muted-foreground opacity-0 group-hover:opacity-100 transition-opacity">Git →</span>
+                <span className="text-xs text-muted-foreground opacity-0 group-hover:opacity-100 transition-opacity">{t("go")}</span>
               </button>
             ))
           )}
@@ -106,9 +110,9 @@ export default function CommandPalette() {
 
         {/* Footer (İpucu) */}
         <div className="px-4 py-3 border-t border-border bg-muted/20 flex justify-between items-center text-xs text-muted-foreground font-medium">
-          <span>Hızlı Menü</span>
+          <span>{t("quickMenu")}</span>
           <div className="flex items-center gap-2">
-            <span>Kapatmak için</span>
+            <span>{t("toClose")}</span>
             <kbd className="px-2 py-1 bg-muted rounded border border-border font-mono text-[10px]">ESC</kbd>
           </div>
         </div>

@@ -32,6 +32,48 @@ export default function Navbar({ settings, pages = [] }: { settings?: SiteSettin
         { title: t('contact'), url: "/iletisim" },
     ];
 
+    const getSubpagesForMenuItem = (item: typeof menuItems[0]) => {
+        if (!pages) return [];
+        const matched = pages.filter(p => {
+            if (p.status !== 'published') return false;
+            
+            // Check if slug starts with url + '/'
+            const isSlugSub = p.slug.startsWith(item.url + '/');
+            
+            // Map categories
+            const categoryMap: Record<string, string[]> = {
+                "/cozumler": ["Çözümler", "Solutions"],
+                "/danismanlik": ["Danışmanlık", "Consulting"],
+                "/projeler": ["Projeler", "Projects"],
+                "/teknoloji": ["Teknoloji", "Technology"],
+                "/kurumsal": ["Kurumsal", "Corporate"],
+            };
+            
+            const isCategorySub = categoryMap[item.url]?.includes(p.category) || false;
+            
+            return isSlugSub || isCategorySub;
+        });
+
+        // For corporate, also add dynamic items like Kariyer (/kariyer)
+        if (item.url === '/kurumsal') {
+            const hasCareers = matched.some(p => p.slug === '/kariyer');
+            if (!hasCareers) {
+                matched.push({
+                    id: 999,
+                    menuTitle: "Kariyer",
+                    menuTitleEn: "Careers",
+                    slug: "/kariyer",
+                    category: "Kurumsal",
+                    status: "published",
+                    content: "",
+                    updatedAt: ""
+                } as any);
+            }
+        }
+
+        return matched;
+    };
+
     return (
         <header className={`fixed top-0 left-0 w-full z-[1000] bg-[#050505]/80 backdrop-blur-xl border-b border-[var(--border)] flex items-center transition-all duration-400 ${scrolled ? 'h-[70px]' : 'h-[90px]'}`}>
             <div className="w-full max-w-[1440px] mx-auto px-6 lg:px-12 flex justify-between items-center">
@@ -43,13 +85,38 @@ export default function Navbar({ settings, pages = [] }: { settings?: SiteSettin
 
                 {/* DESKTOP NAV */}
                 <ul className="hidden lg:flex gap-8 list-none">
-                    {menuItems.map((item, idx) => (
-                        <li key={idx}>
-                            <Link href={item.url} className="text-[var(--muted)] font-[var(--font-mono)] text-[12px] uppercase tracking-[0.08em] py-2 relative transition-colors duration-200 hover:text-white after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-full after:h-[1px] after:bg-[var(--accent)] after:scale-x-0 after:origin-right hover:after:scale-x-100 hover:after:origin-left after:transition-transform">
-                                {item.title}
-                            </Link>
-                        </li>
-                    ))}
+                    {menuItems.map((item, idx) => {
+                        const subpages = getSubpagesForMenuItem(item);
+                        return (
+                            <li key={idx} className="relative group py-2">
+                                <Link 
+                                    href={item.url} 
+                                    className="text-[var(--muted)] font-[var(--font-mono)] text-[12px] uppercase tracking-[0.08em] py-2 relative transition-colors duration-200 hover:text-white after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-full after:h-[1px] after:bg-[var(--accent)] after:scale-x-0 after:origin-right hover:after:scale-x-100 hover:after:origin-left after:transition-transform"
+                                >
+                                    {item.title}
+                                </Link>
+                                {subpages.length > 0 && (
+                                    <div className="absolute top-full left-1/2 -translate-x-1/2 pt-2 hidden group-hover:block z-[1000]">
+                                        <ul className="min-w-[240px] bg-slate-950/95 border border-white/10 p-2 flex flex-col gap-1 shadow-2xl backdrop-blur-xl rounded-none">
+                                            {subpages.map((sub, sIdx) => {
+                                                const subTitle = locale === 'en' ? (sub.menuTitleEn || sub.menuTitle) : sub.menuTitle;
+                                                return (
+                                                    <li key={sIdx} className="w-full">
+                                                        <Link 
+                                                            href={sub.slug}
+                                                            className="block w-full px-4 py-2 text-[var(--muted)] font-[var(--font-mono)] text-[11px] uppercase tracking-wider hover:text-white hover:bg-white/5 transition-colors duration-150 rounded-none text-left"
+                                                        >
+                                                            {subTitle}
+                                                        </Link>
+                                                    </li>
+                                                );
+                                            })}
+                                        </ul>
+                                    </div>
+                                )}
+                            </li>
+                        );
+                    })}
                 </ul>
 
                 {/* ACTIONS */}
@@ -80,16 +147,37 @@ export default function Navbar({ settings, pages = [] }: { settings?: SiteSettin
             {/* MOBILE MENU */}
             {isMobileMenuOpen && (
                 <div className="absolute top-full left-0 w-full bg-[#050505] border-b border-[var(--border)] p-4 flex flex-col gap-4 lg:hidden">
-                    {menuItems.map((item, idx) => (
-                        <Link 
-                            key={idx} 
-                            href={item.url} 
-                            onClick={() => setIsMobileMenuOpen(false)}
-                            className="font-[var(--font-mono)] text-[12px] uppercase text-white tracking-widest p-2 border-b border-[var(--border)]"
-                        >
-                            {item.title}
-                        </Link>
-                    ))}
+                    {menuItems.map((item, idx) => {
+                        const subpages = getSubpagesForMenuItem(item);
+                        return (
+                            <div key={idx} className="flex flex-col border-b border-[var(--border)] pb-2">
+                                <Link 
+                                    href={item.url} 
+                                    onClick={() => setIsMobileMenuOpen(false)}
+                                    className="font-[var(--font-mono)] text-[12px] uppercase text-white tracking-widest p-2"
+                                >
+                                    {item.title}
+                                </Link>
+                                {subpages.length > 0 && (
+                                    <div className="flex flex-col gap-2 pl-4 pb-2">
+                                        {subpages.map((sub, sIdx) => {
+                                            const subTitle = locale === 'en' ? (sub.menuTitleEn || sub.menuTitle) : sub.menuTitle;
+                                            return (
+                                                <Link
+                                                    key={sIdx}
+                                                    href={sub.slug}
+                                                    onClick={() => setIsMobileMenuOpen(false)}
+                                                    className="font-[var(--font-mono)] text-[11px] uppercase text-[var(--muted)] hover:text-white tracking-wider"
+                                                >
+                                                    {subTitle}
+                                                </Link>
+                                            );
+                                        })}
+                                    </div>
+                                )}
+                            </div>
+                        );
+                    })}
                     <div className="flex justify-between items-center pt-4">
                         <button 
                             onClick={() => { router.replace(pathname, {locale: locale === 'tr' ? 'en' : 'tr'}); setIsMobileMenuOpen(false); }}

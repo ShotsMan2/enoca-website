@@ -298,6 +298,31 @@
     "staj-programi": "Internship Program",
     "sosyal-sorumluluk": "Social Responsibility",
     "etki-programlari": "Impact Programs",
-    "topluluk-destekleri": "Community Support"
+    "topluluk-destekleri": "Community Support",
+    "cozumlerimiz": "Our Solutions",
+    "e-ticaret-sistemleri": "E-Commerce Systems",
+    "mobil-uygulama-gelistirme": "Mobile App Development",
+    "danismanlik": "Consulting",
+    "hybris-danismanligi": "Hybris Consulting",
+    "sap-teknik-danismanlik": "SAP Technical Consulting",
+    "sap-fonksiyonel-danismanlik": "SAP Functional Consulting",
+    "gelistirme-danismanligi": "Development Consulting",
+    "kalite-yonetimi": "Quality Management",
+    "dis-kaynak-hizmetleri": "Outsourcing Services",
+    "diskaynak-hizmetleri": "Outsourcing Services"
+  },
+  "CommandPalette": {
+    "placeholder": "What are you looking for? (Solutions, Careers...)",
+    "noResults": "No results found.",
+    "go": "Go →",
+    "quickMenu": "Quick Menu",
+    "toClose": "To close",
+    "results": {
+      "solutions": "Our Solutions",
+      "news": "News & Blog",
+      "careers": "Careers & Job Openings",
+      "contact": "Contact",
+      "about": "About Us"
+    }
   }
 }

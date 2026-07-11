@@ -298,6 +298,31 @@
     "staj-programi": "Staj Programı",
     "sosyal-sorumluluk": "Sosyal Sorumluluk",
     "etki-programlari": "Etki Programları",
-    "topluluk-destekleri": "Topluluk Destekleri"
+    "topluluk-destekleri": "Topluluk Destekleri",
+    "cozumlerimiz": "Çözümlerimiz",
+    "e-ticaret-sistemleri": "E-Ticaret Sistemleri",
+    "mobil-uygulama-gelistirme": "Mobil Uygulama Geliştirme",
+    "danismanlik": "Danışmanlık",
+    "hybris-danismanligi": "Hybris Danışmanlığı",
+    "sap-teknik-danismanlik": "SAP Teknik Danışmanlık",
+    "sap-fonksiyonel-danismanlik": "SAP Fonksiyonel Danışmanlık",
+    "gelistirme-danismanligi": "Geliştirme Danışmanlığı",
+    "kalite-yonetimi": "Kalite Yönetimi",
+    "dis-kaynak-hizmetleri": "Dış Kaynak Hizmetleri",
+    "diskaynak-hizmetleri": "Dış Kaynak Hizmetleri"
+  },
+  "CommandPalette": {
+    "placeholder": "Ne arıyorsunuz? (Çözümler, Kariyer...)",
+    "noResults": "Sonuç bulunamadı.",
+    "go": "Git →",
+    "quickMenu": "Hızlı Menü",
+    "toClose": "Kapatmak için",
+    "results": {
+      "solutions": "Çözümlerimiz",
+      "news": "Haberler & Blog",
+      "careers": "Kariyer & İş İlanları",
+      "contact": "İletişim",
+      "about": "Hakkımızda"
+    }
   }
 }

@@ -13,7 +13,9 @@ export default async function Home() {
   const tCategories = await getTranslations('Categories');
 
   const copy = buildHomepageCopy((key, values) => t(key, values));
-  const categories = translateCategories(rawCategories, (key) => tCategories(key));
+  const categories = translateCategories(rawCategories, (key) =>
+    tCategories.has(key) ? tCategories(key) : key
+  );
 
   return (
     <PublicLayout>
