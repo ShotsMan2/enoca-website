@@ -11,16 +11,19 @@ import { getTranslations } from "next-intl/server";
 export const dynamic = 'force-dynamic';
 
 export async function generateMetadata({ params }: { params: Promise<{ id: string, locale: string }> }) {
-  const { id } = await params;
+  const { id, locale } = await params;
   const db = await readDB();
   const newsItem = db?.news?.find((n: any) => n.id === parseInt(id, 10) && n.status === "published");
   const t = await getTranslations("NewsPage");
   
   if (!newsItem) return { title: t('notFoundTitle') };
   
+  const title = locale === "en" && newsItem.titleEn ? newsItem.titleEn : newsItem.title;
+  const summary = locale === "en" && newsItem.summaryEn ? newsItem.summaryEn : newsItem.summary;
+  
   return {
-    title: `${newsItem.title} | Enoca ${t('title')}`,
-    description: newsItem.summary || t('metaDesc', { title: newsItem.title }),
+    title: `${title} | Enoca ${t('title')}`,
+    description: summary || t('metaDesc', { title: title }),
   };
 }
 
@@ -78,12 +81,12 @@ export default async function HaberDetayPage({ params }: { params: Promise<{ id:
             </div>
 
             <h1 className="text-3xl md:text-4xl lg:text-5xl font-black font-display text-white mb-8 leading-tight">
-              {newsItem.title}
+              {locale === "en" && newsItem.titleEn ? newsItem.titleEn : newsItem.title}
             </h1>
 
             <div className="prose prose-lg dark:prose-invert max-w-none prose-blue">
               <p className="text-xl text-slate-200 leading-relaxed font-medium">
-                {newsItem.summary}
+                {locale === "en" && newsItem.summaryEn ? newsItem.summaryEn : newsItem.summary}
               </p>
               
               <div className="mt-8 text-slate-300 leading-relaxed space-y-6">
@@ -102,7 +105,7 @@ export default async function HaberDetayPage({ params }: { params: Promise<{ id:
             </div>
 
             {/* Share & Scroll Features */}
-            <NewsClientFeatures title={newsItem.title} />
+            <NewsClientFeatures title={locale === "en" && newsItem.titleEn ? newsItem.titleEn : newsItem.title} />
 
           </article>
 
@@ -117,9 +120,9 @@ export default async function HaberDetayPage({ params }: { params: Promise<{ id:
                 <div className="flex flex-col md:flex-row gap-8 items-center justify-between">
                   <div className="flex-1 space-y-4">
                     <h3 className="text-2xl sm:text-3xl font-bold text-white group-hover:text-sky-400 transition-colors font-display leading-tight">
-                      {nextNews.title}
+                      {locale === "en" && nextNews.titleEn ? nextNews.titleEn : nextNews.title}
                     </h3>
-                    <p className="text-slate-300 line-clamp-2">{nextNews.summary}</p>
+                    <p className="text-slate-300 line-clamp-2">{locale === "en" && nextNews.summaryEn ? nextNews.summaryEn : nextNews.summary}</p>
                   </div>
                   <div className="shrink-0 w-16 h-16 rounded-full bg-sky-500 text-white flex items-center justify-center group-hover:translate-x-2 transition-transform duration-300 shadow-lg shadow-sky-500/20">
                     <ArrowRight className="w-8 h-8" />

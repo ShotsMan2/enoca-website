@@ -21,7 +21,9 @@ export interface ActivityLog {
 export interface NewsItem {
   id: number;
   title: string;
+  titleEn?: string | null;
   summary: string;
+  summaryEn?: string | null;
   imageUrl: string;
   publishedAt: string;
   status: "published" | "draft";

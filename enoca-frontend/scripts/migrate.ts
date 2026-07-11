@@ -37,7 +37,9 @@ async function main() {
       await prisma.news.create({
         data: {
           title: n.title,
+          titleEn: n.titleEn || null,
           summary: n.summary,
+          summaryEn: n.summaryEn || null,
           imageUrl: n.imageUrl,
           publishedAt: n.publishedAt,
           status: n.status,

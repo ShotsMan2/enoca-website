@@ -52,10 +52,10 @@ export default async function NewsPage({ params }: { params: Promise<{ locale: s
                   {/* İçerik */}
                   <div className="p-6 flex flex-col flex-1">
                     <h3 className="text-xl font-bold text-white mb-3 line-clamp-2 group-hover:text-sky-400 transition-colors">
-                      {item.title}
+                      {locale === "en" && item.titleEn ? item.titleEn : item.title}
                     </h3>
                     <p className="text-slate-300 text-sm leading-relaxed line-clamp-3 mb-6">
-                      {item.summary}
+                      {locale === "en" && item.summaryEn ? item.summaryEn : item.summary}
                     </p>
                     
                     {/* Footer (Read More) */}

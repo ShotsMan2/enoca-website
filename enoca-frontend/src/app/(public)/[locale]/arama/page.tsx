@@ -9,10 +9,13 @@ import PublicLayout from "@/components/PublicLayout";
 import { ContentPage, NewsItem, JobPosting } from "@/lib/admin-api";
 
 export default async function SearchPage({
+    params,
     searchParams
 }: {
+    params: Promise<{ locale: string }>,
     searchParams: Promise<{ q?: string }>
 }) {
+    const { locale } = await params;
     const resolvedParams = await searchParams;
     const query = resolvedParams.q || "";
     const lowerQuery = query.toLowerCase();
@@ -30,10 +33,15 @@ export default async function SearchPage({
     ) || []) as ContentPage[];
 
     // Search in News
-    const news: NewsItem[] = (db?.news?.filter((n: any) => 
-        n.status === "published" && 
-        (n.title.toLowerCase().includes(lowerQuery) || n.summary.toLowerCase().includes(lowerQuery))
-    ) || []) as NewsItem[];
+    const news: NewsItem[] = (db?.news?.filter((n: any) => {
+        if (n.status !== "published") return false;
+        if (locale === "en") {
+            const tEn = n.titleEn?.toLowerCase() || "";
+            const sEn = n.summaryEn?.toLowerCase() || "";
+            return tEn.includes(lowerQuery) || sEn.includes(lowerQuery) || n.title.toLowerCase().includes(lowerQuery) || n.summary.toLowerCase().includes(lowerQuery);
+        }
+        return n.title.toLowerCase().includes(lowerQuery) || n.summary.toLowerCase().includes(lowerQuery);
+    }) || []) as NewsItem[];
 
     // Search in Jobs
     const jobs: JobPosting[] = (db?.jobs?.filter((j: any) => 
@@ -122,8 +130,12 @@ export default async function SearchPage({
                                     {news.map(n => (
                                         <Link key={n.id} href="/haberler" className="block group">
                                             <div className="bg-slate-950/70 border border-white/10 hover:border-sky-400/40 rounded-xl p-5 transition-all duration-300 hover:shadow-[0_20px_50px_rgba(2,132,199,0.1)] backdrop-blur">
-                                                <h3 className="font-bold text-lg text-white group-hover:text-sky-400 transition-colors">{n.title}</h3>
-                                                <p className="text-sm text-slate-400 mt-1 line-clamp-2">{n.summary}</p>
+                                                <h3 className="font-bold text-lg text-white group-hover:text-sky-400 transition-colors">
+                                                    {locale === "en" && n.titleEn ? n.titleEn : n.title}
+                                                </h3>
+                                                <p className="text-sm text-slate-400 mt-1 line-clamp-2">
+                                                    {locale === "en" && n.summaryEn ? n.summaryEn : n.summary}
+                                                </p>
                                             </div>
                                         </Link>
                                     ))}

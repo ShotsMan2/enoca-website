@@ -90,7 +90,16 @@
     "successTitle": "Thank you!",
     "successMessage": "Your message has been successfully received. We will get back to you as soon as possible.",
     "newMsgBtn": "Send New Message",
-    "honeypotLabel": "Please leave this field empty"
+    "honeypotLabel": "Please leave this field empty",
+    "pageTag": "Contact",
+    "pageTitle": "Get in Touch",
+    "pageDesc": "You can contact us for your projects, consulting requests, or questions. We are happy to assist you.",
+    "infoTitle": "Contact Information",
+    "emailLabel": "E-mail",
+    "phoneLabel": "Phone",
+    "addressLabel": "Headquarters",
+    "addressText": "Şehit Fethi Sokak No: 49/6 34660 Acıbadem, Üsküdar, Istanbul",
+    "socialMedia": "Social Media"
   },
   "Footer": {
     "solutions": "SOLUTIONS",
@@ -323,7 +332,8 @@
     "dummyParagraph2": "Moving forward by building on our current achievements, we strengthen our position in the sector with our projects leading digital transformation processes. The applications and visionary approaches we have implemented in line with this vision increase our competitiveness in the global arena.",
     "metaTitle": "News | Enoca",
     "notFoundTitle": "News Not Found | Enoca",
-    "metaDesc": "Details about {title}."
+    "metaDesc": "Details about {title}.",
+    "nextNews": "Next News"
   },
   "CommandPalette": {
     "placeholder": "What are you looking for? (Solutions, Careers...)",

@@ -3,10 +3,12 @@ export const dynamic = 'force-dynamic';
 import { Mail, Phone, MapPin } from "lucide-react";
 import PublicLayout from "@/components/PublicLayout";
 import HomePageContactForm from "@/components/HomePageContactForm";
+import { getTranslations } from "next-intl/server";
 
 export default async function ContactPage() {
   const db = await readDB();
   const settings = db?.settings || {};
+  const t = await getTranslations('Contact');
 
   return (
     <PublicLayout>
@@ -15,13 +17,13 @@ export default async function ContactPage() {
         <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-sky-500/5 rounded-full blur-[120px] -z-10 pointer-events-none" />
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
           <div className="inline-flex items-center gap-2 px-3 py-1 bg-sky-500/10 text-sky-400 rounded-full text-xs font-bold uppercase tracking-widest mb-4 border border-sky-500/20">
-            İletişim
+            {t('pageTag')}
           </div>
           <h1 className="text-4xl md:text-5xl font-black font-display tracking-tight mb-4 text-white">
-            İletişime Geçin
+            {t('pageTitle')}
           </h1>
           <p className="text-lg text-slate-300 font-medium max-w-2xl mx-auto">
-            Projeleriniz, danışmanlık talepleriniz veya sorularınız için bizimle iletişime geçebilirsiniz. Size yardımcı olmaktan memnuniyet duyarız.
+            {t('pageDesc')}
           </p>
         </div>
       </div>
@@ -32,7 +34,7 @@ export default async function ContactPage() {
             {/* İletişim Bilgileri */}
             <div className="bg-slate-950/70 border border-white/10 backdrop-blur shadow-[0_35px_120px_rgba(2,132,199,0.15)] rounded-3xl p-8 flex flex-col gap-8 h-fit">
               <div>
-                  <h2 className="text-2xl font-bold text-white mb-6">İletişim Bilgileri</h2>
+                  <h2 className="text-2xl font-bold text-white mb-6">{t('infoTitle')}</h2>
                   <div className="space-y-6">
                       {settings.email && (
                           <div className="flex items-start gap-4">
@@ -40,7 +42,7 @@ export default async function ContactPage() {
                                   <Mail className="w-6 h-6 text-sky-400" />
                               </div>
                               <div>
-                                  <p className="text-sm font-semibold text-slate-400">E-Posta</p>
+                                  <p className="text-sm font-semibold text-slate-400">{t('emailLabel')}</p>
                                   <a href={`mailto:${settings.email}`} className="text-lg font-medium text-slate-300 hover:text-sky-400 transition-colors">{settings.email}</a>
                               </div>
                           </div>
@@ -52,7 +54,7 @@ export default async function ContactPage() {
                                   <Phone className="w-6 h-6 text-sky-400" />
                               </div>
                               <div>
-                                  <p className="text-sm font-semibold text-slate-400">Telefon</p>
+                                  <p className="text-sm font-semibold text-slate-400">{t('phoneLabel')}</p>
                                   <a href={`tel:${settings.phone}`} className="text-lg font-medium text-slate-300 hover:text-sky-400 transition-colors">{settings.phone}</a>
                               </div>
                           </div>
@@ -63,9 +65,9 @@ export default async function ContactPage() {
                               <MapPin className="w-6 h-6 text-sky-400" />
                           </div>
                           <div>
-                              <p className="text-sm font-semibold text-slate-400">Genel Merkez</p>
+                              <p className="text-sm font-semibold text-slate-400">{t('addressLabel')}</p>
                               <p className="text-base font-medium text-slate-300 mt-1">
-                                  Şehit Fethi Sokak No: 49/6 34660 Acıbadem, Üsküdar, İstanbul
+                                  {t('addressText')}
                               </p>
                           </div>
                       </div>
@@ -73,7 +75,7 @@ export default async function ContactPage() {
               </div>
 
               <div className="pt-8 border-t border-white/10">
-                  <h3 className="text-sm font-bold text-white mb-4 uppercase tracking-wider">Sosyal Medya</h3>
+                  <h3 className="text-sm font-bold text-white mb-4 uppercase tracking-wider">{t('socialMedia')}</h3>
                   <div className="flex gap-3">
                       {settings.linkedinUrl && (
                           <a href={settings.linkedinUrl} target="_blank" rel="noopener noreferrer" className="w-10 h-10 bg-white/5 border border-white/10 rounded-full flex items-center justify-center text-slate-300 hover:bg-[#0A66C2] hover:text-white transition-all">
@@ -81,8 +83,8 @@ export default async function ContactPage() {
                           </a>
                       )}
                       {settings.twitterUrl && (
-                          <a href={settings.twitterUrl} target="_blank" rel="noopener noreferrer" className="w-10 h-10 bg-white/5 border border-white/10 rounded-full flex items-center justify-center text-slate-300 hover:bg-[#1DA1F2] hover:text-white transition-all">
-                              <svg className="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/></svg>
+                          <a href={settings.twitterUrl} target="_blank" rel="noopener noreferrer" className="w-10 h-10 bg-white/5 border border-white/10 rounded-full flex items-center justify-center text-slate-300 hover:bg-black hover:text-white transition-all">
+                              <svg className="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.008 5.965h-1.853z"/></svg>
                           </a>
                       )}
                   </div>

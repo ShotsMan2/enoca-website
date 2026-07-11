@@ -21,7 +21,9 @@
     {
       "id": 1,
       "title": "Enoca Yeni Nesil E-Ticaret Çözümlerini Duyurdu",
+      "titleEn": "Enoca Announced Next Generation E-Commerce Solutions",
       "summary": "B2B ve B2C e-ticaret altyapılarında devrim yaratacak yeni SAP CX modülleri tanıtıldı.",
+      "summaryEn": "New SAP CX modules that will revolutionize B2B and B2C e-commerce infrastructures were introduced.",
       "imageUrl": "https://picsum.photos/seed/news1/400/200",
       "publishedAt": "2025-06-15",
       "status": "published"
@@ -29,7 +31,9 @@
     {
       "id": 2,
       "title": "Büyük Veri Analitiğinde Yeni Dönem",
+      "titleEn": "New Era in Big Data Analytics",
       "summary": "SAP HANA entegrasyonu ile şirketlerin veri işleme hızı %400 arttı.",
+      "summaryEn": "With SAP HANA integration, companies' data processing speed increased by 400%.",
       "imageUrl": "https://picsum.photos/seed/news2/400/200",
       "publishedAt": "2025-06-10",
       "status": "published"
@@ -37,7 +41,9 @@
     {
       "id": 3,
       "title": "Yılın Teknoloji Partneri Ödülü",
+      "titleEn": "Technology Partner of the Year Award",
       "summary": "Enoca, bu yıl da inovasyon ve müşteri memnuniyeti alanında ödüle layık görüldü.",
+      "summaryEn": "Enoca was deemed worthy of the award in the field of innovation and customer satisfaction this year as well.",
       "imageUrl": "https://picsum.photos/seed/news3/400/200",
       "publishedAt": "2025-06-05",
       "status": "published"
@@ -45,7 +51,9 @@
     {
       "id": 4,
       "title": "Bulut Bilişim Semineri Tamamlandı",
+      "titleEn": "Cloud Computing Seminar Completed",
       "summary": "Sektör liderlerinin katılımıyla gerçekleşen seminer büyük ilgi gördü.",
+      "summaryEn": "The seminar held with the participation of industry leaders attracted great interest.",
       "imageUrl": "https://picsum.photos/seed/news4/400/200",
       "publishedAt": "2025-05-20",
       "status": "published"
@@ -53,7 +61,9 @@
     {
       "id": 5,
       "title": "Enoca 2025 Teknoloji Raporu Yayınlandı",
+      "titleEn": "Enoca 2025 Technology Report Published",
       "summary": "Yıllık teknoloji trendleri raporumuz hazır.",
+      "summaryEn": "Our annual technology trends report is ready.",
       "imageUrl": "https://picsum.photos/seed/news5/400/200",
       "publishedAt": "2025-05-15",
       "status": "published"
@@ -61,7 +71,9 @@
     {
       "id": 6,
       "title": "Kariyer Fırsatları: SAP Danışmanı Aranıyor",
+      "titleEn": "Career Opportunities: SAP Consultant Wanted",
       "summary": "Yeni pozisyonlar için başvurular başladı.",
+      "summaryEn": "Applications for new positions have started.",
       "imageUrl": "https://picsum.photos/seed/news6/400/200",
       "publishedAt": "2025-05-10",
       "status": "draft"

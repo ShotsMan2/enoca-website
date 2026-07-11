@@ -90,7 +90,16 @@
     "successTitle": "Teşekkürler!",
     "successMessage": "Mesajınız başarıyla alınmıştır. En kısa sürede size dönüş yapacağız.",
     "newMsgBtn": "Yeni Mesaj Gönder",
-    "honeypotLabel": "Lütfen bu alanı boş bırakın"
+    "honeypotLabel": "Lütfen bu alanı boş bırakın",
+    "pageTag": "İletişim",
+    "pageTitle": "İletişime Geçin",
+    "pageDesc": "Projeleriniz, danışmanlık talepleriniz veya sorularınız için bizimle iletişime geçebilirsiniz. Size yardımcı olmaktan memnuniyet duyarız.",
+    "infoTitle": "İletişim Bilgileri",
+    "emailLabel": "E-Posta",
+    "phoneLabel": "Telefon",
+    "addressLabel": "Genel Merkez",
+    "addressText": "Şehit Fethi Sokak No: 49/6 34660 Acıbadem, Üsküdar, İstanbul",
+    "socialMedia": "Sosyal Medya"
   },
   "Footer": {
     "solutions": "ÇÖZÜMLER",
@@ -323,7 +332,8 @@
     "dummyParagraph2": "Mevcut başarılarımızın üzerine koyarak ilerlediğimiz bu yolda, dijital dönüşüm süreçlerine öncülük eden projelerimizle sektördeki konumumuzu güçlendiriyoruz. Bu vizyon doğrultusunda hayata geçirdiğimiz uygulamalar ve vizyoner yaklaşımlarımız, global arenadaki rekabet gücümüzü artırıyor.",
     "metaTitle": "Haberler | Enoca",
     "notFoundTitle": "Haber Bulunamadı | Enoca",
-    "metaDesc": "{title} hakkında detaylar."
+    "metaDesc": "{title} hakkında detaylar.",
+    "nextNews": "Sıradaki Haber"
   },
   "CommandPalette": {
     "placeholder": "Ne arıyorsunuz? (Çözümler, Kariyer...)",

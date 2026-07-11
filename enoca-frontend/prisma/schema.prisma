@@ -30,12 +30,14 @@ model NewsletterSubscriber {
 }
 
 model News {
-  id          Int    @id @default(autoincrement())
+  id          Int     @id @default(autoincrement())
   title       String
+  titleEn     String?
   summary     String
+  summaryEn   String?
   imageUrl    String
   publishedAt String
-  status      String @default("draft")
+  status      String  @default("draft")
 }
 
 model Message {
