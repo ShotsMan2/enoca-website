@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import Marquee from "./Marquee";
+import { useTranslations } from "next-intl";
 
 const references = [
   { name: "Adese", logo: "/references/adese.png" },
@@ -30,15 +31,17 @@ const references = [
 ];
 
 export default function AgentMarquee() {
+  const t = useTranslations("References");
+
   return (
     <section className="py-20 border-t border-white/5 relative overflow-hidden">
       {/* Subtle background glow */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-3/4 h-32 bg-sky-500/5 blur-[120px] pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-6 mb-16 text-center relative z-10">
-        <p className="text-sm uppercase tracking-[0.35em] text-slate-400 mb-4">Güvenilir İş Ortaklarımız</p>
+        <p className="text-sm uppercase tracking-[0.35em] text-slate-400 mb-4">{t("subtitle")}</p>
         <h2 className="text-3xl md:text-4xl font-semibold text-white tracking-tight">
-          REFERANSLAR
+          {t("title")}
         </h2>
       </div>
 

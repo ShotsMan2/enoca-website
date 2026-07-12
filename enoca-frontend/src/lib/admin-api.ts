@@ -164,7 +164,8 @@ export const adminApi = {
   },
   async logAction(action: string, details: string): Promise<void> {
     try {
-      const list = await fetchEntity('logs').catch(() => []);
+      const fetched = await fetchEntity('logs').catch(() => []);
+      const list: ActivityLog[] = Array.isArray(fetched) ? fetched : [];
       const newId = list.length ? Math.max(...list.map((l: ActivityLog) => l.id)) + 1 : 1;
       list.unshift({ id: newId, action, details, timestamp: new Date().toISOString() });
       await postEntity('logs', list);

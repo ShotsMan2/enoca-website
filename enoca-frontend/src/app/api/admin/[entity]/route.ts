@@ -24,10 +24,11 @@ export async function GET(request: Request, { params }: { params: Promise<{ enti
       }));
     }
     else if (entity === 'applications') result = await prisma.application.findMany({ orderBy: { id: 'asc' } });
-    else if (['stats', 'settings', 'hero', 'homepage'].includes(entity)) {
+    else if (['stats', 'settings', 'hero', 'homepage', 'logs'].includes(entity)) {
       const setting = await prisma.setting.findUnique({ where: { key: entity } });
       try {
-        result = setting ? JSON.parse(setting.value) : {};
+        const parsed = setting ? JSON.parse(setting.value) : (entity === 'logs' ? [] : {});
+        result = parsed;
       } catch {
         result = setting ? setting.value : {};
       }
@@ -48,7 +49,7 @@ export async function POST(request: Request, { params }: { params: Promise<{ ent
   try {
     const data = await request.json();
     
-    if (['stats', 'settings', 'hero', 'homepage'].includes(entity)) {
+    if (['stats', 'settings', 'hero', 'homepage', 'logs'].includes(entity)) {
       const stringifiedData = JSON.stringify(data);
       await prisma.setting.upsert({
         where: { key: entity },
