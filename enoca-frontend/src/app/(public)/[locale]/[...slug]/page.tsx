@@ -76,6 +76,8 @@ export default async function CatchAllPage({
             "İncele": "View Details",
             "Bu sayfanın içeriğini admin panelinden güncelleyebilirsiniz.": "You can update the content of this page from the admin panel.",
             "Sayfa": "Page",
+            "Enoca ekibine katılmak ve kariyer fırsatlarını incelemek için kariyer sayfamızı ziyaret edin.": "Visit our careers page to join the Enoca team and explore career opportunities.",
+            "Projeleriniz, danışmanlık talepleriniz veya sorularınız için bizimle iletişime geçebilirsiniz.": "You can contact us for your projects, consulting requests, or questions.",
             
             // Slug & Unaccented Versions
             "arastirma gelistirme": "R&D",
@@ -174,14 +176,27 @@ export default async function CatchAllPage({
     let subPages = db?.pages?.filter((p: any) => p.slug.startsWith(currentSlug + "/") && p.status === "published") || [];
 
     if (currentSlug === "/kurumsal") {
-        const extraPages = db?.pages?.filter((p: any) => 
-            p.slug === "/bilgi-guvenligi-politikasi" || 
-            p.slug === "/kisisel-verilerin-korunmasi-ve-islenmesi-politikasi"
-        ) || [];
+        const hakkimizda = db?.pages?.find((p: any) => p.slug === "/kurumsal/hakkimizda" && p.status === "published");
+        const yasalBilgiler = db?.pages?.find((p: any) => p.slug === "/kurumsal/yasal-bilgiler" && p.status === "published");
+        const bilgiGuvenligi = db?.pages?.find((p: any) => p.slug === "/bilgi-guvenligi-politikasi" && p.status === "published");
+        const kvkk = db?.pages?.find((p: any) => p.slug === "/kisisel-verilerin-korunmasi-ve-islenmesi-politikasi" && p.status === "published");
+
+        const orderedPages: any[] = [];
         
-        subPages = [...subPages, ...extraPages];
+        if (hakkimizda) {
+            orderedPages.push(hakkimizda);
+        } else {
+            orderedPages.push({
+                id: 996,
+                menuTitle: "Hakkımızda",
+                slug: "/kurumsal/hakkimizda",
+                category: "Kurumsal",
+                content: "HakkımızdaEnoca, 2013 yılından bu yana SAP teknolojileri alanında uzmanlaşmış bir teknoloji...",
+                status: "published"
+            });
+        }
         
-        subPages.push({
+        orderedPages.push({
             id: 999,
             menuTitle: "Kariyer",
             slug: "/kariyer",
@@ -189,6 +204,56 @@ export default async function CatchAllPage({
             content: "Enoca ekibine katılmak ve kariyer fırsatlarını incelemek için kariyer sayfamızı ziyaret edin.",
             status: "published"
         } as any);
+
+        if (yasalBilgiler) {
+            orderedPages.push(yasalBilgiler);
+        } else {
+            orderedPages.push({
+                id: 997,
+                menuTitle: "Yasal Bilgiler",
+                slug: "/kurumsal/yasal-bilgiler",
+                category: "Kurumsal",
+                content: "Bu sayfanın içeriğini admin panelinden güncelleyebilirsiniz.",
+                status: "published"
+            });
+        }
+
+        if (bilgiGuvenligi) {
+            orderedPages.push(bilgiGuvenligi);
+        } else {
+            orderedPages.push({
+                id: 995,
+                menuTitle: "Bilgi Güvenliği Politikası",
+                slug: "/bilgi-guvenligi-politikasi",
+                category: "Kurumsal",
+                content: "Bu sayfanın içeriğini admin panelinden güncelleyebilirsiniz.",
+                status: "published"
+            });
+        }
+
+        if (kvkk) {
+            orderedPages.push(kvkk);
+        } else {
+            orderedPages.push({
+                id: 994,
+                menuTitle: "KVKK",
+                slug: "/kisisel-verilerin-korunmasi-ve-islenmesi-politikasi",
+                category: "Kurumsal",
+                content: "Bu sayfanın içeriğini admin panelinden güncelleyebilirsiniz.",
+                status: "published"
+            });
+        }
+
+        orderedPages.push({
+            id: 998,
+            menuTitle: "İletişim",
+            slug: "/iletisim",
+            category: "Kurumsal",
+            content: "Projeleriniz, danışmanlık talepleriniz veya sorularınız için bizimle iletişime geçebilirsiniz.",
+            status: "published"
+        } as any);
+
+        subPages = orderedPages;
     }
 
     const pageTitleRaw = dynamicPage?.menuTitle || formatSlugToTitle(slugArray.length > 0 ? slugArray[slugArray.length - 1].replace(/-/g, ' ') : 'Sayfa');
