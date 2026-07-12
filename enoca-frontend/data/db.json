@@ -601,26 +601,37 @@
       {
         "id": 1,
         "number": "01",
-        "title": "Global Standartlarda Kalite",
-        "text": "Projenizin her aşamasında uluslararası yazılım geliştirme standartlarını ve best-practice'leri uyguluyoruz."
+        "title": "Empatik Yol Arkadaşınız: Pi",
+        "text": "Inflection AI tarafından geliştirilen Pi, size her konuda destek olmak ve keyifli sohbetler etmek için tasarlanmış dost canlısı bir yapay zeka asistanıdır. Sizi anlayan, duygularınıza değer veren ve her zaman yanınızda olan bu cana yakın asistanla hemen tanışın.",
+        "image": "/features/pi.png"
       },
       {
         "id": 2,
         "number": "02",
-        "title": "Ölçeklenebilir Mimari",
-        "text": "İşiniz büyüdükçe sizinle birlikte büyüyebilen, yüksek trafik ve yük altında sorunsuz çalışan sistemler tasarlıyoruz."
+        "title": "Devin: İlk Otonom Yapay Zeka Yazılım Mühendisi",
+        "text": "Cognition tarafından geliştirilen Devin, karmaşık yazılım projelerini uçtan uca planlayıp kodlayabilen dünyanın ilk tam otonom yapay zeka yazılım mühendisidir. Kendi başına hata ayıklayıp yeni yetenekler öğrenebilen Devin ile yazılım süreçlerinizi devrim niteliğinde hızlandırın.",
+        "image": "/features/devin.png"
       },
       {
         "id": 3,
         "number": "03",
-        "title": "Çevik Geliştirme (Agile)",
-        "text": "Scrum ve Kanban metodolojileriyle şeffaf, hızlı ve geri bildirimlere anında yanıt verebilen bir süreç sunuyoruz."
+        "title": "OpenCode: Açık Kaynaklı Yapay Zeka Asistanı",
+        "text": "OpenCode, yazılım geliştirme sürecinizi hızlandıran açık kaynaklı bir akıllı kodlama asistanıdır. Gelişmiş yapay zeka özellikleri sayesinde daha temiz, güvenli ve verimli kod yazmanıza yardımcı olur.",
+        "image": "/features/opencode.png"
       },
       {
         "id": 4,
         "number": "04",
-        "title": "7/24 Kesintisiz Destek",
-        "text": "Proje tesliminden sonra da yanınızdayız. Olası sorunlara karşı anında müdahale ediyor, sistemlerinizin ayakta kalmasını sağlıyoruz."
+        "title": "GitHub Copilot: Yapay Zeka Destekli Eş Programcınız",
+        "text": "GitHub Copilot, yazılım geliştirme sürecinizi hızlandıran lider yapay zeka eş programcınızdır. Bağlama uygun anlık kod önerileri sunarak rutin işleri azaltır ve asıl yaratıcı çözümlere odaklanmanızı sağlar.",
+        "image": "/features/copilot.png"
+      },
+      {
+        "id": 5,
+        "number": "05",
+        "title": "Cursor: Yapay Zeka Odaklı Kod Editörü",
+        "text": "Cursor, sizinle birlikte eşli programlama yaparak geliştirme sürecinizi hızlandıran yapay zeka tabanlı akıllı bir kod editörüdür. Derin bağlam anlayışı ve anlık kod önerileriyle üretkenliğinizi maksimum seviyeye çıkarır.",
+        "image": "/features/cursor.png"
       }
     ],
     "references": [

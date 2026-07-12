@@ -68,6 +68,7 @@ export interface HomepageFeature {
   number: string;
   title: string;
   text: string;
+  image?: string;
 }
 
 export interface HomepageCategoryLink {

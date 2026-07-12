@@ -58,14 +58,19 @@
     "btnSecondary": "Bize Ulaşın"
   },
   "Features": {
-    "01title": "GELECEĞİN TİCARETİ",
-    "01text": "Özellikle bilişim alanında teknolojideki gelişmeler hızlıca şekillenmeye devam ediyor. Gün geçtikçe daha fazla insan bu gelişmelerden faydalanmaya başlıyor.",
-    "02title": "ÇOKLU TİCARET",
-    "02text": "SAP CX Hybris ile her yerde ticaret yapın. SAP CX Hybris Çoklu Ticaret Platformu çok kanallı, sağlam, üst düzey ölçeklenebilir bir yapı sunar.",
-    "03title": "ÇEVİK OLUN",
-    "03text": "\"Çevik Geliştirme\" birçok tekrarlı ve ilerleyen yazılım geliştirme metodları için birleştiricidir. Hız ve kaliteyi aynı anda yakalayın.",
-    "04title": "SİSTEM SAĞLIĞI",
-    "04text": "Sisteminizin düşük performansından hiç şikayet ettiniz mi? Bir sisteme çok para harcamak, doğrudan beklenen performansı sağlamaz. İzleme şarttır."
+    "badge": "YAPAY ZEKA ARAÇLARIMIZ",
+    "title": "Geliştirme Sürecimizi Güçlendiren Araçlar",
+    "subtitle": "Projelerimizde en ileri yapay zeka destekli araçları kullanarak daha hızlı, kaliteli ve verimli çözümler sunuyoruz.",
+    "featureLabel": "ÖZELLİK",
+    "exploreMore": "Daha Fazla Keşfet",
+    "feature_01_title": "Global Standartlarda Kalite",
+    "feature_01_text": "Projenizin her aşamasında uluslararası yazılım geliştirme standartlarını ve best-practice'leri uyguluyoruz.",
+    "feature_02_title": "Ölçeklenebilir Mimari",
+    "feature_02_text": "İşiniz büyüdükçe sizinle birlikte büyüyebilen, yüksek trafik ve yük altında sorunsuz çalışan sistemler tasarlıyoruz.",
+    "feature_03_title": "Çevik Geliştirme (Agile)",
+    "feature_03_text": "Scrum ve Kanban metodolojileriyle şeffaf, hızlı ve geri bildirimlere anında yanıt verebilen bir süreç sunuyoruz.",
+    "feature_04_title": "7/24 Kesintisiz Destek",
+    "feature_04_text": "Proje tesliminden sonra da yanınızdayız. Olası sorunlara karşı anında müdahale ediyor, sistemlerinizin ayakta kalmasını sağlıyoruz."
   },
   "References": {
     "title": "REFERANSLAR",

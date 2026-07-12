@@ -45,8 +45,13 @@ export default function HomePageContactForm() {
     }
 
     return (
-        <form onSubmit={handleSubmit} className="space-y-6">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="space-y-6">
+            <div className="space-y-2">
+                <h2 className="text-2xl font-bold tracking-tight text-white sm:text-3xl">{tContact('title')}</h2>
+                <p className="text-sm text-slate-400">{tContact('subtitle')}</p>
+            </div>
+            <form onSubmit={handleSubmit} className="space-y-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div className="space-y-2">
                     <label className="text-sm font-semibold tracking-tight text-foreground">{tContact('name')}</label>
                     <input 
@@ -100,6 +105,7 @@ export default function HomePageContactForm() {
                     {status === "loading" ? tContact('submitting') : tContact('submit')}
                 </Button>
             </div>
-        </form>
+            </form>
+        </div>
     );
 }

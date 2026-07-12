@@ -58,14 +58,19 @@
     "btnSecondary": "Contact Us"
   },
   "Features": {
-    "01title": "FUTURE OF COMMERCE",
-    "01text": "Technological developments, especially in the IT sector, continue to take shape rapidly. More and more people are beginning to benefit from these advances every day.",
-    "02title": "MULTI-COMMERCE",
-    "02text": "Do business anywhere with SAP CX Hybris. The SAP CX Hybris Multi-Commerce Platform offers an omni-channel, robust, highly scalable architecture.",
-    "03title": "BE AGILE",
-    "03text": "\"Agile Development\" is a unifier for many iterative and progressive software development methodologies. Achieve speed and quality at the same time.",
-    "04title": "SYSTEM HEALTH",
-    "04text": "Have you ever complained about the low performance of your system? Spending a lot of money on a system doesn't directly guarantee the expected performance. Monitoring is essential."
+    "badge": "OUR AI TOOLS",
+    "title": "Tools That Power Our Development",
+    "subtitle": "We deliver faster, higher quality and more efficient solutions by leveraging cutting-edge AI-powered tools in our projects.",
+    "featureLabel": "FEATURE",
+    "exploreMore": "Explore More",
+    "feature_01_title": "Quality at Global Standards",
+    "feature_01_text": "We apply international software development standards and best practices at every stage of your project.",
+    "feature_02_title": "Scalable Architecture",
+    "feature_02_text": "We design systems that can grow with you as your business expands, operating smoothly under high traffic and load.",
+    "feature_03_title": "Agile Development (Agile)",
+    "feature_03_text": "We offer a transparent, fast process that can immediately respond to feedback using Scrum and Kanban methodologies.",
+    "feature_04_title": "24/7 Uninterrupted Support",
+    "feature_04_text": "We are by your side even after project delivery. We intervene immediately in case of potential problems, keeping your systems active."
   },
   "References": {
     "title": "REFERENCES",

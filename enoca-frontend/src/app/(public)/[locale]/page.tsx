@@ -7,6 +7,8 @@ import { buildHomepageCopy, translateCategories } from '@/lib/homepage-translati
 import { getLocale, getTranslations } from 'next-intl/server';
 import { readDB } from '@/lib/db';
 import AgentMarquee from '@/components/AgentMarquee';
+import HomePageContactForm from '@/components/HomePageContactForm';
+import HomepageFeatures from '@/components/HomepageFeatures';
 
 export default async function Home() {
   const locale = await getLocale();
@@ -15,6 +17,8 @@ export default async function Home() {
   const tCategories = await getTranslations('Categories');
   const dbData = await readDB();
   const heroSettings = dbData?.hero || {};
+  const homepageData = (dbData?.homepage as { features?: { id: number; number: string; title: string; text: string; image?: string }[] }) || {};
+  const features = homepageData.features || [];
 
   const copy = buildHomepageCopy((key, values) => t(key, values));
   
@@ -108,9 +112,17 @@ export default async function Home() {
         </div>
       </section>
 
+      <HomepageFeatures features={features} />
+
       <AgentMarquee />
 
       <HomepageCategoryGrid categories={categories} />
+
+      <section className="mx-auto w-full max-w-7xl px-6 py-12 sm:px-8 lg:px-10 mb-20">
+        <div className="mx-auto max-w-3xl bg-slate-950/70 border border-white/10 backdrop-blur shadow-[0_35px_120px_rgba(2,132,199,0.15)] rounded-3xl p-8">
+          <HomePageContactForm />
+        </div>
+      </section>
     </PublicLayout>
   );
 }
