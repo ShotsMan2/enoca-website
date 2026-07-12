@@ -11,10 +11,10 @@ interface StatsCardProps {
 }
 
 const colorMap = {
-  blue:   { bg: "bg-[#050505]",   icon: "bg-[#18191f] text-blue-500",   text: "text-blue-500" },
-  green:  { bg: "bg-[#050505]", icon: "bg-[#18191f] text-green-500", text: "text-green-500" },
-  purple: { bg: "bg-[#050505]",icon: "bg-[#18191f] text-purple-500",text: "text-purple-500"},
-  orange: { bg: "bg-[#050505]",icon: "bg-[#18191f] text-orange-500",text: "text-orange-500"},
+  blue:   { bg: "bg-white dark:bg-[#050505]",   icon: "bg-gray-100 dark:bg-[#18191f] text-blue-500",   text: "text-blue-500" },
+  green:  { bg: "bg-white dark:bg-[#050505]", icon: "bg-gray-100 dark:bg-[#18191f] text-green-500", text: "text-green-500" },
+  purple: { bg: "bg-white dark:bg-[#050505]",icon: "bg-gray-100 dark:bg-[#18191f] text-purple-500",text: "text-purple-500"},
+  orange: { bg: "bg-white dark:bg-[#050505]",icon: "bg-gray-100 dark:bg-[#18191f] text-orange-500",text: "text-orange-500"},
 };
 
 export default function StatsCard({ title, value, change, positive = true, icon, color, sparklineData }: StatsCardProps) {
@@ -37,7 +37,7 @@ export default function StatsCard({ title, value, change, positive = true, icon,
   };
 
   return (
-    <div className={`group relative p-6 ${c.bg} border border-[#18191f] hover:border-[#606266] transition-all duration-300 overflow-hidden`}>
+    <div className={`group relative p-6 ${c.bg} border border-gray-200 dark:border-[#18191f] hover:border-gray-400 dark:hover:border-[#606266] transition-all duration-300 overflow-hidden shadow-sm`}>
       {/* Background Sparkline */}
       {sparklineData && (
         <svg className="absolute bottom-0 left-0 w-full h-1/2 opacity-20 group-hover:opacity-30 transition-opacity duration-300" preserveAspectRatio="none" viewBox="0 0 100 100">
@@ -51,13 +51,13 @@ export default function StatsCard({ title, value, change, positive = true, icon,
           {icon}
         </span>
         {change && (
-          <span className={`text-[10px] font-mono tracking-widest uppercase px-2 py-1 ${positive ? "bg-green-900/30 text-green-400" : "bg-red-900/30 text-red-400"}`}>
+          <span className={`text-[10px] font-mono tracking-widest uppercase px-2 py-1 ${positive ? "bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400" : "bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-400"}`}>
             {positive ? "▲" : "▼"} {change}
           </span>
         )}
       </div>
-      <p className="text-3xl font-mono font-black text-white mb-1">{value?.toLocaleString() ?? "—"}</p>
-      <p className="text-[10px] font-mono tracking-widest uppercase text-[#606266]">{title}</p>
+      <p className="text-3xl font-mono font-black text-gray-900 dark:text-white mb-1">{value?.toLocaleString() ?? "—"}</p>
+      <p className="text-[10px] font-mono tracking-widest uppercase text-gray-500 dark:text-[#606266]">{title}</p>
     </div>
   );
 }

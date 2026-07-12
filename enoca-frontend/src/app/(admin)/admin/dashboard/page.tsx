@@ -34,7 +34,7 @@ export default function DashboardPage() {
   return (
     <>
       <AdminHeader title="Dashboard" />
-      <main className="flex-1 overflow-y-auto p-6 space-y-6">
+      <main className="flex-1 overflow-y-auto p-6 space-y-6 bg-gray-50 dark:bg-gray-950">
 
         {/* İstatistik Kartları */}
         <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4">
@@ -78,14 +78,14 @@ export default function DashboardPage() {
 
         {/* Orta Bölüm: Grafikler */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-6">
-          <div className="bg-[#0a0a0c] border border-[#18191f] p-6">
-            <h2 className="text-[11px] font-mono tracking-widest text-white uppercase mb-6 flex items-center gap-2">
+          <div className="bg-white dark:bg-[#0a0a0c] border border-gray-200 dark:border-[#18191f] p-6 shadow-sm">
+            <h2 className="text-[11px] font-mono tracking-widest text-gray-900 dark:text-white uppercase mb-6 flex items-center gap-2">
               <TrendingUp className="w-5 h-5 text-blue-600" /> Haftalık Ziyaretçi Analizi
             </h2>
             <TrafficChart />
           </div>
-          <div className="bg-[#0a0a0c] border border-[#18191f] p-6">
-            <h2 className="text-[11px] font-mono tracking-widest text-white uppercase mb-6 flex items-center gap-2">
+          <div className="bg-white dark:bg-[#0a0a0c] border border-gray-200 dark:border-[#18191f] p-6 shadow-sm">
+            <h2 className="text-[11px] font-mono tracking-widest text-gray-900 dark:text-white uppercase mb-6 flex items-center gap-2">
               <Users className="w-5 h-5 text-emerald-600" /> Etkileşim: Mesajlar vs Başvurular
             </h2>
             <InteractionChart />
@@ -96,8 +96,8 @@ export default function DashboardPage() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-6">
 
           {/* Son Haberler */}
-          <div className="bg-[#0a0a0c] border border-[#18191f] overflow-hidden">
-            <div className="flex items-center justify-between px-6 py-4 border-b border-[#18191f]">
+          <div className="bg-white dark:bg-[#0a0a0c] border border-gray-200 dark:border-[#18191f] overflow-hidden shadow-sm">
+            <div className="flex items-center justify-between px-6 py-4 border-b border-gray-200 dark:border-[#18191f]">
               <h2 className="font-bold text-gray-800 dark:text-white">Son Haberler</h2>
               <Link href="/admin/haberler" className="text-xs font-semibold text-blue-600 hover:text-blue-700 transition-colors">Tümünü Gör →</Link>
             </div>
@@ -130,8 +130,8 @@ export default function DashboardPage() {
           </div>
 
           {/* Son Mesajlar */}
-          <div className="bg-[#0a0a0c] border border-[#18191f] overflow-hidden">
-            <div className="flex items-center justify-between px-6 py-4 border-b border-[#18191f]">
+          <div className="bg-white dark:bg-[#0a0a0c] border border-gray-200 dark:border-[#18191f] overflow-hidden shadow-sm">
+            <div className="flex items-center justify-between px-6 py-4 border-b border-gray-200 dark:border-[#18191f]">
               <h2 className="font-bold text-gray-800 dark:text-white">Son Mesajlar</h2>
               <Link href="/admin/iletisim" className="text-xs font-semibold text-blue-600 hover:text-blue-700 transition-colors">Tümünü Gör →</Link>
             </div>
@@ -160,12 +160,12 @@ export default function DashboardPage() {
         </div>
 
         {/* 3. Microservices Mimari Haritası */}
-        <div className="bg-[#0a0a0c] border border-[#18191f] p-6 mt-6 overflow-hidden relative group">
-          <h2 className="text-[11px] font-mono tracking-widest text-white uppercase flex items-center gap-2 mb-6">
+        <div className="bg-white dark:bg-[#0a0a0c] border border-gray-200 dark:border-[#18191f] p-6 mt-6 overflow-hidden relative group shadow-sm">
+          <h2 className="text-[11px] font-mono tracking-widest text-gray-900 dark:text-white uppercase flex items-center gap-2 mb-6">
             <Server className="w-4 h-4 text-indigo-500" />
             Mikroservis Sistem Sağlığı (Canlı)
           </h2>
-          <div className="relative w-full h-[300px] bg-[#050505] border border-[#18191f] flex items-center justify-center overflow-hidden">
+          <div className="relative w-full h-[300px] bg-gray-50 dark:bg-[#050505] border border-gray-200 dark:border-[#18191f] flex items-center justify-center overflow-hidden">
             <div className="absolute inset-0 bg-dot-pattern opacity-10" />
             
             <svg className="absolute inset-0 w-full h-full pointer-events-none" style={{ minWidth: 600 }}>
@@ -213,10 +213,10 @@ export default function DashboardPage() {
         {/* 4. Command Center (Sistem Sağlığı) */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-6">
           {/* CPU Usage */}
-          <div className="bg-[#0a0a0c] border border-[#18191f] p-6 flex flex-col items-center text-center relative overflow-hidden group">
+          <div className="bg-white dark:bg-[#0a0a0c] border border-gray-200 dark:border-[#18191f] p-6 flex flex-col items-center text-center relative overflow-hidden group shadow-sm">
             <div className="absolute inset-0 bg-blue-500/5 opacity-0 group-hover:opacity-100 transition-opacity" />
             <Cpu className="w-8 h-8 text-blue-500 mb-3" />
-            <h3 className="text-[10px] font-mono tracking-widest uppercase text-[#606266]">CPU Kullanımı</h3>
+            <h3 className="text-[10px] font-mono tracking-widest uppercase text-gray-500 dark:text-[#606266]">CPU Kullanımı</h3>
             <div className="flex items-baseline gap-1 mt-1">
               <span className="text-3xl font-bold text-gray-900 dark:text-white">24</span>
               <span className="text-sm font-medium text-gray-500">%</span>
@@ -228,10 +228,10 @@ export default function DashboardPage() {
           </div>
 
           {/* RAM Usage */}
-          <div className="bg-[#0a0a0c] border border-[#18191f] p-6 flex flex-col items-center text-center relative overflow-hidden group">
+          <div className="bg-white dark:bg-[#0a0a0c] border border-gray-200 dark:border-[#18191f] p-6 flex flex-col items-center text-center relative overflow-hidden group shadow-sm">
             <div className="absolute inset-0 bg-emerald-500/5 opacity-0 group-hover:opacity-100 transition-opacity" />
             <HardDrive className="w-8 h-8 text-emerald-500 mb-3" />
-            <h3 className="text-[10px] font-mono tracking-widest uppercase text-[#606266]">RAM Kullanımı</h3>
+            <h3 className="text-[10px] font-mono tracking-widest uppercase text-gray-500 dark:text-[#606266]">RAM Kullanımı</h3>
             <div className="flex items-baseline gap-1 mt-1">
               <span className="text-3xl font-bold text-gray-900 dark:text-white">4.2</span>
               <span className="text-sm font-medium text-gray-500">/ 16 GB</span>
@@ -243,10 +243,10 @@ export default function DashboardPage() {
           </div>
 
           {/* Network I/O */}
-          <div className="bg-[#0a0a0c] border border-[#18191f] p-6 flex flex-col items-center text-center relative overflow-hidden group">
+          <div className="bg-white dark:bg-[#0a0a0c] border border-gray-200 dark:border-[#18191f] p-6 flex flex-col items-center text-center relative overflow-hidden group shadow-sm">
             <div className="absolute inset-0 bg-purple-500/5 opacity-0 group-hover:opacity-100 transition-opacity" />
             <Server className="w-8 h-8 text-purple-500 mb-3" />
-            <h3 className="text-[10px] font-mono tracking-widest uppercase text-[#606266]">Ağ G/Ç (Network)</h3>
+            <h3 className="text-[10px] font-mono tracking-widest uppercase text-gray-500 dark:text-[#606266]">Ağ G/Ç (Network)</h3>
             <div className="flex items-baseline gap-1 mt-1">
               <span className="text-3xl font-bold text-gray-900 dark:text-white">12.8</span>
               <span className="text-sm font-medium text-gray-500">MB/s</span>
@@ -259,9 +259,9 @@ export default function DashboardPage() {
         </div>
 
         {/* 5. Bölüm: Aktivite Logları (Audit Trail) */}
-        <div className="bg-[#0a0a0c] border border-[#18191f] overflow-hidden mt-6">
-          <div className="flex items-center justify-between px-6 py-4 border-b border-[#18191f]">
-            <h2 className="text-[11px] font-mono tracking-widest text-white uppercase flex items-center gap-2">
+        <div className="bg-white dark:bg-[#0a0a0c] border border-gray-200 dark:border-[#18191f] overflow-hidden mt-6 shadow-sm">
+          <div className="flex items-center justify-between px-6 py-4 border-b border-gray-200 dark:border-[#18191f]">
+            <h2 className="text-[11px] font-mono tracking-widest text-gray-900 dark:text-white uppercase flex items-center gap-2">
               <Clock className="w-5 h-5 text-blue-600" /> Sistem Aktivite Logları
             </h2>
             <Link href="/admin/audit" className="text-[10px] font-mono uppercase tracking-widest text-blue-500 hover:text-blue-400 transition-colors">Tüm Denetim İzleri (Audit Logs) →</Link>

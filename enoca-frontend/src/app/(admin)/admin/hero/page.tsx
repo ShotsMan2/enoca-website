@@ -21,20 +21,20 @@ export default function HeroPage() {
     setTimeout(() => setSaved(false), 3000);
   };
 
-  const inputCls = "w-full h-10 px-3 border border-[#18191f] bg-[#050505] text-white text-xs font-mono focus:outline-none focus:border-[#1c69d4] transition-all";
-  const labelCls = "text-[10px] font-mono uppercase tracking-widest text-[#606266]";
+  const inputCls = "w-full h-10 px-3 border border-gray-200 dark:border-[#18191f] bg-white dark:bg-[#050505] text-gray-900 dark:text-white text-xs font-mono focus:outline-none focus:border-[#1c69d4] transition-all";
+  const labelCls = "text-[10px] font-mono uppercase tracking-widest text-gray-500 dark:text-[#606266]";
 
   return (
     <>
       <AdminHeader title="Hero Section Yönetimi" />
-      <main className="flex-1 overflow-y-auto p-6">
+      <main className="flex-1 overflow-y-auto p-6 bg-gray-50 dark:bg-gray-950">
         <div className="grid grid-cols-1 xl:grid-cols-[1fr_1.2fr] gap-6 items-start">
 
           {/* Form */}
           <form onSubmit={handleSave} className="space-y-4">
             
-            <div className="bg-[#0a0a0c] border border-[#18191f] p-5 space-y-4">
-              <h2 className="text-[11px] font-mono tracking-widest text-white uppercase border-b border-[#18191f] pb-2">Üst Bilgi & Başlık</h2>
+            <div className="bg-white dark:bg-[#0a0a0c] border border-gray-200 dark:border-[#18191f] p-5 space-y-4 shadow-sm">
+              <h2 className="text-[11px] font-mono tracking-widest text-gray-900 dark:text-white uppercase border-b border-gray-200 dark:border-[#18191f] pb-2">Üst Bilgi & Başlık</h2>
               
               <div className="space-y-1">
                 <label className={labelCls}>Badge (Rozet)</label>
@@ -59,12 +59,12 @@ export default function HeroPage() {
 
               <div className="space-y-1">
                 <label className={labelCls}>Alt Açıklama (Subtitle)</label>
-                <textarea rows={3} value={hero?.subtitle ?? ""} onChange={e => setHero(h => h ? { ...h, subtitle: e.target.value } : h)} className="w-full px-3 py-2 border border-[#18191f] bg-[#050505] text-white text-xs font-mono focus:outline-none focus:border-[#1c69d4] transition-all resize-none" placeholder="Enoca'nın çözümlerini..." />
+                <textarea rows={3} value={hero?.subtitle ?? ""} onChange={e => setHero(h => h ? { ...h, subtitle: e.target.value } : h)} className="w-full px-3 py-2 border border-gray-200 dark:border-[#18191f] bg-white dark:bg-[#050505] text-gray-900 dark:text-white text-xs font-mono focus:outline-none focus:border-[#1c69d4] transition-all resize-none" placeholder="Enoca'nın çözümlerini..." />
               </div>
             </div>
 
-            <div className="bg-[#0a0a0c] border border-[#18191f] p-5 space-y-4">
-              <h2 className="text-[11px] font-mono tracking-widest text-white uppercase border-b border-[#18191f] pb-2">Aksiyon Butonları</h2>
+            <div className="bg-white dark:bg-[#0a0a0c] border border-gray-200 dark:border-[#18191f] p-5 space-y-4 shadow-sm">
+              <h2 className="text-[11px] font-mono tracking-widest text-gray-900 dark:text-white uppercase border-b border-gray-200 dark:border-[#18191f] pb-2">Aksiyon Butonları</h2>
               <div className="grid grid-cols-2 gap-3">
                 <div className="space-y-1">
                   <label className={labelCls}>Birincil Buton (İletişim)</label>
@@ -77,8 +77,8 @@ export default function HeroPage() {
               </div>
             </div>
 
-            <div className="bg-[#0a0a0c] border border-[#18191f] p-5 space-y-4">
-              <h2 className="text-[11px] font-mono tracking-widest text-white uppercase border-b border-[#18191f] pb-2">Öne Çıkan Özellikler (Etiketler)</h2>
+            <div className="bg-white dark:bg-[#0a0a0c] border border-gray-200 dark:border-[#18191f] p-5 space-y-4 shadow-sm">
+              <h2 className="text-[11px] font-mono tracking-widest text-gray-900 dark:text-white uppercase border-b border-gray-200 dark:border-[#18191f] pb-2">Öne Çıkan Özellikler (Etiketler)</h2>
               <div className="space-y-3">
                 <div className="space-y-1">
                   <label className={labelCls}>Özellik 1</label>
@@ -95,8 +95,8 @@ export default function HeroPage() {
               </div>
             </div>
 
-            <div className="bg-[#0a0a0c] border border-[#18191f] p-5 space-y-4">
-              <h2 className="text-[11px] font-mono tracking-widest text-white uppercase border-b border-[#18191f] pb-2">Özet Kartı Sağ Taraf</h2>
+            <div className="bg-white dark:bg-[#0a0a0c] border border-gray-200 dark:border-[#18191f] p-5 space-y-4 shadow-sm">
+              <h2 className="text-[11px] font-mono tracking-widest text-gray-900 dark:text-white uppercase border-b border-gray-200 dark:border-[#18191f] pb-2">Özet Kartı Sağ Taraf</h2>
               <div className="grid grid-cols-2 gap-3">
                 <div className="space-y-1">
                   <label className={labelCls}>Kart Üst Başlık</label>
@@ -123,8 +123,8 @@ export default function HeroPage() {
           </form>
 
           {/* Canlı Önizleme */}
-          <div className="bg-[#0a0a0c] border border-[#18191f] p-5 sticky top-6">
-            <h2 className="text-[11px] font-mono tracking-widest text-white uppercase border-b border-[#18191f] pb-3 mb-6">Canlı Önizleme</h2>
+          <div className="bg-white dark:bg-[#0a0a0c] border border-gray-200 dark:border-[#18191f] p-5 sticky top-6 shadow-sm">
+            <h2 className="text-[11px] font-mono tracking-widest text-gray-900 dark:text-white uppercase border-b border-gray-200 dark:border-[#18191f] pb-3 mb-6">Canlı Önizleme</h2>
             <div className="bg-slate-950 border border-white/10 rounded-3xl p-8 relative overflow-hidden flex items-center justify-center">
               
               <div className="relative z-10 w-full max-w-xl">

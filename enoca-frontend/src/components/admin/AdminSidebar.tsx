@@ -135,14 +135,14 @@ export default function AdminSidebar() {
 
   return (
     <aside
-      className={`relative flex flex-col h-screen bg-[#050505] border-r border-[#18191f] transition-all duration-300 z-50 ${collapsed ? "w-16" : "w-64"}`}
+      className={`relative flex flex-col h-screen bg-white dark:bg-[#050505] border-r border-gray-200 dark:border-[#18191f] transition-all duration-300 z-50 ${collapsed ? "w-16" : "w-64"}`}
     >
       {/* Logo */}
-      <div className="flex items-center justify-between h-16 px-4 border-b border-[#18191f] flex-shrink-0 bg-[#0a0a0c]">
+      <div className="flex items-center justify-between h-16 px-4 border-b border-gray-200 dark:border-[#18191f] flex-shrink-0 bg-gray-50 dark:bg-[#0a0a0c]">
         {!collapsed && (
           <Link href="/admin/dashboard" className="flex items-center gap-2">
             <img src="/logo.png" alt="Enoca" className="h-7 w-auto object-contain" />
-            <span className="text-xs font-semibold text-gray-400 uppercase tracking-widest ml-1">Admin</span>
+            <span className="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-widest ml-1">Admin</span>
           </Link>
         )}
         {collapsed && (
@@ -152,7 +152,7 @@ export default function AdminSidebar() {
         )}
         <button
           onClick={() => setCollapsed(!collapsed)}
-          className={`w-8 h-8 flex items-center justify-center text-gray-500 hover:bg-[#18191f] hover:text-white transition-colors ${collapsed ? "mx-auto" : ""}`}
+          className={`w-8 h-8 flex items-center justify-center text-gray-500 hover:bg-gray-100 dark:hover:bg-[#18191f] hover:text-gray-950 dark:hover:text-white transition-colors ${collapsed ? "mx-auto" : ""}`}
         >
           <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
             {collapsed ? (
@@ -175,8 +175,8 @@ export default function AdminSidebar() {
               title={collapsed ? item.label : undefined}
               className={`group flex items-center gap-3 px-4 py-3 text-sm font-mono uppercase tracking-widest transition-all duration-300 ease-out relative overflow-hidden border border-transparent ${
                 isActive
-                  ? "text-white bg-[#0a0a0c] border-[#18191f] border-l-[#1c69d4] border-l-2"
-                  : "text-[#606266] hover:text-white hover:bg-[rgba(255,255,255,0.02)] hover:border-[#18191f]"
+                  ? "text-gray-900 dark:text-white bg-gray-100 dark:bg-[#0a0a0c] border-gray-200 dark:border-[#18191f] border-l-[#1c69d4] border-l-2"
+                  : "text-gray-500 dark:text-[#606266] hover:text-gray-900 hover:dark:text-white hover:bg-gray-50 dark:hover:bg-[rgba(255,255,255,0.02)] hover:border-gray-200 dark:hover:border-[#18191f]"
               }`}
             >
               <span className="flex-shrink-0 relative z-10 transition-transform duration-300 group-hover:scale-110">{item.icon}</span>
@@ -187,18 +187,18 @@ export default function AdminSidebar() {
                 </span>
               )}
               {collapsed && item.badge && unread > 0 && (
-                <span className="absolute top-2 right-2 w-2 h-2 bg-[#1c69d4] border border-[#050505]" />
+                <span className="absolute top-2 right-2 w-2 h-2 bg-[#1c69d4] border border-white dark:border-[#050505]" />
               )}
             </Link>
           );
         })}
       </nav>
 
-      <div className={`p-4 border-t border-[#18191f] flex-shrink-0 bg-[#0a0a0c] ${collapsed ? "flex justify-center" : ""}`}>
+      <div className={`p-4 border-t border-gray-200 dark:border-[#18191f] flex-shrink-0 bg-gray-50 dark:bg-[#0a0a0c] ${collapsed ? "flex justify-center" : ""}`}>
         <a
           href="/"
           target="_blank"
-          className="flex items-center gap-2 text-xs text-gray-500 hover:text-blue-600 transition-colors"
+          className="flex items-center gap-2 text-xs text-gray-500 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
           title="Siteyi Görüntüle"
         >
           <svg className="w-4 h-4 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>

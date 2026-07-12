@@ -9,8 +9,13 @@ import { useTranslations } from "next-intl";
 export default function CommandPalette() {
   const [open, setOpen] = useState(false);
   const [query, setQuery] = useState("");
+  const [selectedIndex, setSelectedIndex] = useState(0);
   const router = useRouter();
   const t = useTranslations("CommandPalette");
+
+  useEffect(() => {
+    setSelectedIndex(0);
+  }, [query, open]);
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -74,6 +79,21 @@ export default function CommandPalette() {
             placeholder={t("placeholder")}
             value={query}
             onChange={(e) => setQuery(e.target.value)}
+            onKeyDown={(e) => {
+              if (e.key === "ArrowDown") {
+                e.preventDefault();
+                setSelectedIndex((prev) => (prev + 1) % results.length);
+              } else if (e.key === "ArrowUp") {
+                e.preventDefault();
+                setSelectedIndex((prev) => (prev - 1 + results.length) % results.length);
+              } else if (e.key === "Enter") {
+                e.preventDefault();
+                if (results[selectedIndex]) {
+                  setOpen(false);
+                  router.push(results[selectedIndex].href);
+                }
+              }
+            }}
             className="flex-1 h-14 bg-transparent outline-none text-foreground placeholder:text-muted-foreground text-lg"
           />
           <button 
@@ -92,17 +112,26 @@ export default function CommandPalette() {
             results.map((item, idx) => (
               <button
                 key={idx}
+                onMouseEnter={() => setSelectedIndex(idx)}
                 onClick={() => {
                   setOpen(false);
                   router.push(item.href);
                 }}
-                className="w-full flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-muted/50 transition-colors text-left group"
+                className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl transition-colors text-left group ${
+                  idx === selectedIndex ? "bg-muted/50 ring-1 ring-border" : "hover:bg-muted/50"
+                }`}
               >
-                <div className="w-8 h-8 rounded-lg bg-muted flex items-center justify-center text-muted-foreground group-hover:bg-accent group-hover:text-white transition-colors">
+                <div className={`w-8 h-8 rounded-lg flex items-center justify-center transition-colors ${
+                  idx === selectedIndex ? "bg-accent text-white" : "bg-muted text-muted-foreground group-hover:bg-accent group-hover:text-white"
+                }`}>
                   {item.icon}
                 </div>
                 <span className="text-foreground font-medium flex-1">{item.title}</span>
-                <span className="text-xs text-muted-foreground opacity-0 group-hover:opacity-100 transition-opacity">{t("go")}</span>
+                <span className={`text-xs transition-opacity ${
+                  idx === selectedIndex ? "text-foreground opacity-100" : "text-muted-foreground opacity-0 group-hover:opacity-100"
+                }`}>
+                  {t("go")}
+                </span>
               </button>
             ))
           )}

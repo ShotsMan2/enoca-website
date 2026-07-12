@@ -120,20 +120,20 @@ export default function AdminHeader({ title }: { title: string }) {
   };
 
   return (
-    <header className="h-16 bg-[#0a0a0c] border-b border-[#18191f] flex items-center justify-between px-6 flex-shrink-0 relative z-40">
+    <header className="h-16 bg-white dark:bg-[#0a0a0c] border-b border-gray-200 dark:border-[#18191f] flex items-center justify-between px-6 flex-shrink-0 relative z-40">
       {/* Sol: Sayfa Başlığı */}
-      <h1 className="text-lg font-mono tracking-wider font-bold text-white uppercase">{title}</h1>
+      <h1 className="text-lg font-mono tracking-wider font-bold text-gray-900 dark:text-white uppercase">{title}</h1>
 
       {/* Sağ: Kontroller */}
       <div className="flex items-center gap-2">
 
         {/* Sistem Sağlığı Monitörü */}
-        <div className="hidden lg:flex items-center gap-2 px-3 py-1.5 bg-[#050505] mr-2 border border-[#18191f]">
+        <div className="hidden lg:flex items-center gap-2 px-3 py-1.5 bg-gray-50 dark:bg-[#050505] mr-2 border border-gray-200 dark:border-[#18191f]">
           <div className="relative flex h-2 w-2">
             <span className="animate-ping absolute inline-flex h-full w-full bg-[#1c69d4] opacity-75"></span>
             <span className="relative inline-flex h-2 w-2 bg-[#1c69d4]"></span>
           </div>
-          <span className="text-[11px] font-mono text-[#606266] tracking-wide uppercase">
+          <span className="text-[11px] font-mono text-gray-500 dark:text-[#606266] tracking-wide uppercase">
             DB: {latency}ms
           </span>
         </div>
@@ -141,18 +141,18 @@ export default function AdminHeader({ title }: { title: string }) {
         {/* Arama Butonu (Global Cmd+K Tetikleyici) */}
         <button
           onClick={() => window.dispatchEvent(new CustomEvent('open-admin-command-palette'))}
-          className="hidden md:flex items-center gap-2 px-3 py-2 text-sm bg-[#050505] border border-[#18191f] hover:border-[#606266] transition-all text-[#606266]"
+          className="hidden md:flex items-center gap-2 px-3 py-2 text-sm bg-gray-50 dark:bg-[#050505] border border-gray-200 dark:border-[#18191f] hover:border-gray-400 dark:hover:border-[#606266] transition-all text-gray-500 dark:text-[#606266]"
           title="Sistemde Ara (Cmd+K)"
         >
           <Search className="w-4 h-4" />
           <span className="font-mono text-[11px] uppercase tracking-wider mr-4">Arama yap...</span>
-          <kbd className="px-1.5 py-0.5 bg-[#0a0a0c] border border-[#18191f] text-[10px] font-mono font-bold text-[#606266]">⌘K</kbd>
+          <kbd className="px-1.5 py-0.5 bg-white dark:bg-[#0a0a0c] border border-gray-200 dark:border-[#18191f] text-[10px] font-mono font-bold text-gray-500 dark:text-[#606266]">⌘K</kbd>
         </button>
 
         {/* Dark Mode Toggle */}
         <button
           onClick={toggleTheme}
-          className="w-9 h-9 flex items-center justify-center bg-[#050505] border border-[#18191f] hover:bg-[#18191f] transition-colors text-[#606266]"
+          className="w-9 h-9 flex items-center justify-center bg-gray-50 dark:bg-[#050505] border border-gray-200 dark:border-[#18191f] hover:bg-gray-100 dark:hover:bg-[#18191f] transition-colors text-gray-500 dark:text-[#606266]"
           title={isDarkMode ? "Aydınlık Mod" : "Karanlık Mod"}
         >
           {mounted && (isDarkMode ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />)}
@@ -163,20 +163,20 @@ export default function AdminHeader({ title }: { title: string }) {
         <div ref={notifRef} className="relative">
           <button
             onClick={() => { setNotifOpen(prev => !prev); setProfileOpen(false); }}
-            className="w-9 h-9 flex items-center justify-center bg-[#050505] border border-[#18191f] hover:bg-[#18191f] transition-colors text-[#606266] relative"
+            className="w-9 h-9 flex items-center justify-center bg-gray-50 dark:bg-[#050505] border border-gray-200 dark:border-[#18191f] hover:bg-gray-100 dark:hover:bg-[#18191f] transition-colors text-gray-500 dark:text-[#606266] relative"
             title="Bildirimler"
           >
             <Bell className="w-4 h-4" />
             {unreadCount > 0 && (
-              <span className="absolute top-1.5 right-1.5 w-2 h-2 bg-[#1c69d4] border border-[#050505]" />
+              <span className="absolute top-1.5 right-1.5 w-2 h-2 bg-[#1c69d4] border border-white dark:border-[#050505]" />
             )}
           </button>
 
           {notifOpen && (
-            <div className="absolute right-0 top-full mt-2 w-80 bg-[#0a0a0c] border border-[#18191f] shadow-2xl overflow-hidden">
-              <div className="flex items-center justify-between px-4 py-3 border-b border-[#18191f]">
+            <div className="absolute right-0 top-full mt-2 w-80 bg-white dark:bg-[#0a0a0c] border border-gray-200 dark:border-[#18191f] shadow-2xl overflow-hidden">
+              <div className="flex items-center justify-between px-4 py-3 border-b border-gray-200 dark:border-[#18191f]">
                 <div className="flex items-center gap-2">
-                  <h3 className="text-[11px] font-mono uppercase tracking-widest text-white">Bildirimler</h3>
+                  <h3 className="text-[11px] font-mono uppercase tracking-widest text-gray-900 dark:text-white">Bildirimler</h3>
                   {unreadCount > 0 && (
                     <span className="text-[10px] bg-[#1c69d4] text-white font-bold px-1.5 py-0.5">{unreadCount}</span>
                   )}
@@ -214,25 +214,25 @@ export default function AdminHeader({ title }: { title: string }) {
         <div ref={profileRef} className="relative">
           <button
             onClick={() => { setProfileOpen(prev => !prev); setNotifOpen(false); }}
-            className="flex items-center gap-3 pl-4 ml-2 border-l border-[#18191f] hover:opacity-80 transition-opacity"
+            className="flex items-center gap-3 pl-4 ml-2 border-l border-gray-200 dark:border-[#18191f] hover:opacity-80 transition-opacity"
           >
             <div className="w-8 h-8 bg-[#1c69d4] flex items-center justify-center text-white text-sm font-mono font-bold">A</div>
             <div className="hidden md:block text-left">
-              <p className="text-[11px] font-mono tracking-widest uppercase text-white leading-none">Admin</p>
-              <p className="text-[10px] text-[#606266] font-mono mt-1">admin@enoca.com</p>
+              <p className="text-[11px] font-mono tracking-widest uppercase text-gray-900 dark:text-white leading-none">Admin</p>
+              <p className="text-[10px] text-gray-500 dark:text-[#606266] font-mono mt-1">admin@enoca.com</p>
             </div>
-            <ChevronDown className={`w-3.5 h-3.5 text-[#606266] hidden md:block transition-transform ${profileOpen ? "rotate-180" : ""}`} />
+            <ChevronDown className={`w-3.5 h-3.5 text-gray-500 dark:text-[#606266] hidden md:block transition-transform ${profileOpen ? "rotate-180" : ""}`} />
           </button>
 
           {profileOpen && (
-            <div className="absolute right-0 top-full mt-2 w-52 bg-[#0a0a0c] border border-[#18191f] shadow-2xl overflow-hidden">
+            <div className="absolute right-0 top-full mt-2 w-52 bg-white dark:bg-[#0a0a0c] border border-gray-200 dark:border-[#18191f] shadow-2xl overflow-hidden">
 
               <div className="py-1.5">
-                <button onClick={() => { setProfileOpen(false); router.push("/admin/ayarlar"); }} className="w-full flex items-center gap-3 px-4 py-2.5 text-[11px] font-mono uppercase tracking-widest text-[#606266] hover:text-white hover:bg-[#18191f] transition-colors">
-                  <Settings className="w-4 h-4 text-[#606266]" /> Hesap Ayarları
+                <button onClick={() => { setProfileOpen(false); router.push("/admin/ayarlar"); }} className="w-full flex items-center gap-3 px-4 py-2.5 text-[11px] font-mono uppercase tracking-widest text-gray-500 dark:text-[#606266] hover:text-gray-900 hover:dark:text-white hover:bg-gray-100 dark:hover:bg-[#18191f] transition-colors">
+                  <Settings className="w-4 h-4 text-gray-500 dark:text-[#606266]" /> Hesap Ayarları
                 </button>
               </div>
-              <div className="py-1.5 border-t border-[#18191f]">
+              <div className="py-1.5 border-t border-gray-200 dark:border-[#18191f]">
                 <button 
                   onClick={async () => { 
                     setProfileOpen(false); 
@@ -240,7 +240,7 @@ export default function AdminHeader({ title }: { title: string }) {
                     router.push("/admin/login"); 
                     router.refresh();
                   }} 
-                  className="w-full flex items-center gap-3 px-4 py-2.5 text-[11px] font-mono uppercase tracking-widest text-red-500 hover:bg-red-900/20 transition-colors"
+                  className="w-full flex items-center gap-3 px-4 py-2.5 text-[11px] font-mono uppercase tracking-widest text-red-500 hover:bg-red-50 dark:hover:bg-red-900/20 transition-colors"
                 >
                   <LogOut className="w-4 h-4" /> Çıkış Yap
                 </button>

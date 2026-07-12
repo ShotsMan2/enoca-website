@@ -169,7 +169,7 @@ export default function Navbar({ settings, pages = [] }: { settings?: SiteSettin
                 
                 {/* LOGO */}
                 <Link href="/" className="flex items-center gap-4 text-white font-[var(--font-display)] font-black text-xl tracking-[0.15em] no-underline">
-                    <img src="/logo.png" alt="Enoca" className="h-10 w-auto object-contain hover:opacity-90 transition-opacity" />
+                    <img src="/logo.png" alt="Enoca" className="h-8 w-auto object-contain hover:opacity-90 transition-opacity" />
                 </Link>
 
                 {/* DESKTOP NAV */}
