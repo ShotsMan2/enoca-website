@@ -12,7 +12,7 @@ import { ArrowUpDown, Sparkles, Clock } from "lucide-react";
 const PAGE_SIZE = 5;
 
 const emptyForm: Omit<NewsItem, "id"> = {
-  title: "", titleEn: "", summary: "", summaryEn: "", imageUrl: "", publishedAt: new Date().toISOString().slice(0, 10), status: "draft",
+  title: "", titleEn: "", summary: "", summaryEn: "", content: "", contentEn: "", imageUrl: "", publishedAt: new Date().toISOString().slice(0, 10), status: "draft",
 };
 
 export default function HaberlerPage() {
@@ -81,7 +81,7 @@ export default function HaberlerPage() {
 
   const openEdit = (item: NewsItem) => {
     setEditItem(item);
-    setFormData({ title: item.title, titleEn: item.titleEn || "", summary: item.summary, summaryEn: item.summaryEn || "", imageUrl: item.imageUrl, publishedAt: item.publishedAt, status: item.status });
+    setFormData({ title: item.title, titleEn: item.titleEn || "", summary: item.summary, summaryEn: item.summaryEn || "", content: item.content || "", contentEn: item.contentEn || "", imageUrl: item.imageUrl, publishedAt: item.publishedAt, status: item.status });
     setShowForm(true);
   };
 
@@ -130,7 +130,8 @@ export default function HaberlerPage() {
     setFormData(f => ({ 
       ...f, 
       titleEn: `[EN] ${f.title}`,
-      summaryEn: "" 
+      summaryEn: "",
+      contentEn: f.content ? `[EN] ${f.content.substring(0, 20)}...` : ""
     }));
     
     for (let i = 0; i < words.length; i++) {
@@ -324,6 +325,20 @@ export default function HaberlerPage() {
                     <label className="text-[10px] font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wider">İngilizce Özet</label>
                   </div>
                   <textarea rows={2} value={formData.summaryEn || ""} onChange={e => setFormData(f => ({ ...f, summaryEn: e.target.value }))} className="w-full px-4 py-3 rounded-xl border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-800 dark:text-white text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all resize-none" placeholder="Enter english summary..." />
+                </div>
+              </div>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="space-y-1.5">
+                  <div className="flex items-center justify-between px-1">
+                    <label className="text-[10px] font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wider">İçerik</label>
+                  </div>
+                  <textarea rows={6} value={formData.content || ""} onChange={e => setFormData(f => ({ ...f, content: e.target.value }))} className="w-full px-4 py-3 rounded-xl border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-800 dark:text-white text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all resize-none" placeholder="Haberin ana içeriğini girin..." />
+                </div>
+                <div className="space-y-1.5">
+                  <div className="flex items-center justify-between px-1">
+                    <label className="text-[10px] font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wider">İngilizce İçerik</label>
+                  </div>
+                  <textarea rows={6} value={formData.contentEn || ""} onChange={e => setFormData(f => ({ ...f, contentEn: e.target.value }))} className="w-full px-4 py-3 rounded-xl border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-800 dark:text-white text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all resize-none" placeholder="Enter english content..." />
                 </div>
               </div>
               <FloatingInput label="Görsel URL" type="url" value={formData.imageUrl} onChange={e => setFormData(f => ({ ...f, imageUrl: e.target.value }))} />

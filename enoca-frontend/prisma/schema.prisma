@@ -35,6 +35,8 @@ model News {
   titleEn     String?
   summary     String
   summaryEn   String?
+  content     String?
+  contentEn   String?
   imageUrl    String
   publishedAt String
   status      String  @default("draft")

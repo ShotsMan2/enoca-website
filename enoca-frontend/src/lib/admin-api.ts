@@ -24,6 +24,8 @@ export interface NewsItem {
   titleEn?: string | null;
   summary: string;
   summaryEn?: string | null;
+  content?: string | null;
+  contentEn?: string | null;
   imageUrl: string;
   publishedAt: string;
   status: "published" | "draft";

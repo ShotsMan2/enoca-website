@@ -12,10 +12,11 @@ export default function NotFound() {
     setTimeout(() => setMounted(true), 0);
   }, []);
 
-  if (!mounted) return null;
   useEffect(() => {
     document.title = "Sayfa Bulunamadı | Enoca";
   }, []);
+
+  if (!mounted) return null;
 
   return (
     <div className="min-h-screen bg-background flex flex-col items-center justify-center p-4 relative overflow-hidden font-sans">

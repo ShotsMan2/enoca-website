@@ -89,9 +89,8 @@ export default async function HaberDetayPage({ params }: { params: Promise<{ id:
                 {locale === "en" && newsItem.summaryEn ? newsItem.summaryEn : newsItem.summary}
               </p>
               
-              <div className="mt-8 text-slate-300 leading-relaxed space-y-6">
-                <p>{t("dummyParagraph1")}</p>
-                <p>{t("dummyParagraph2")}</p>
+              <div className="mt-8 text-slate-300 leading-relaxed space-y-6 whitespace-pre-wrap">
+                {locale === "en" && newsItem.contentEn ? newsItem.contentEn : (newsItem.content || "")}
               </div>
             </div>
 
