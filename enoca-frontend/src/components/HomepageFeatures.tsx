@@ -65,8 +65,8 @@ export default function HomepageFeatures({ features }: HomepageFeaturesProps) {
             const isExpanded = expandedId === feature.id;
             const titleKey = `feature_${feature.number}_title`;
             const textKey = `feature_${feature.number}_text`;
-            const displayTitle = feature.title || (t.has(titleKey) ? t(titleKey) : "");
-            const displayText = feature.text || (t.has(textKey) ? t(textKey) : "");
+            const displayTitle = (t.has(titleKey) ? t(titleKey) : "") || feature.title || "";
+            const displayText = (t.has(textKey) ? t(textKey) : "") || feature.text || "";
 
             return (
               <motion.div
