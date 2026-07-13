@@ -324,7 +324,16 @@
     "gelistirme-danismanligi": "Geliştirme Danışmanlığı",
     "kalite-yonetimi": "Kalite Yönetimi",
     "dis-kaynak-hizmetleri": "Dış Kaynak Hizmetleri",
-    "diskaynak-hizmetleri": "Dış Kaynak Hizmetleri"
+    "diskaynak-hizmetleri": "Dış Kaynak Hizmetleri",
+    "sap-cx-hybris": "SAP CX Hybris",
+    "sap-cx-hybris-b2c-e-ticaret": "SAP CX Hybris B2C E-Ticaret",
+    "sap-cx-hybris-b2b-e-ticaret": "SAP CX Hybris B2B E-Ticaret",
+    "sap-cozumleri": "SAP Çözümleri",
+    "sap-mobility": "SAP Mobility",
+    "sap-hana": "SAP HANA",
+    "sistem-izleme": "Sistem İzleme",
+    "vfabric-hyperic": "vFabric Hyperic",
+    "nagios": "Nagios"
   },
   "NewsPage": {
     "title": "Haberler",

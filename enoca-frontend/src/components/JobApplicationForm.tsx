@@ -41,7 +41,9 @@ export default function JobApplicationForm({ jobId, jobTitle }: { jobId: number,
         cvFileBase64: cvBase64
       });
       setStatus("success");
-    } catch {
+    } catch (err: any) {
+      console.error(err);
+      alert("Hata oluştu: " + err.message);
       setStatus("error");
     }
   };

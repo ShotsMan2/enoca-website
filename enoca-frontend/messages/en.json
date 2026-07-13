@@ -324,7 +324,16 @@
     "gelistirme-danismanligi": "Development Consulting",
     "kalite-yonetimi": "Quality Management",
     "dis-kaynak-hizmetleri": "Outsourcing Services",
-    "diskaynak-hizmetleri": "Outsourcing Services"
+    "diskaynak-hizmetleri": "Outsourcing Services",
+    "sap-cx-hybris": "SAP CX Hybris",
+    "sap-cx-hybris-b2c-e-ticaret": "SAP CX Hybris B2C E-Commerce",
+    "sap-cx-hybris-b2b-e-ticaret": "SAP CX Hybris B2B E-Commerce",
+    "sap-cozumleri": "SAP Solutions",
+    "sap-mobility": "SAP Mobility",
+    "sap-hana": "SAP HANA",
+    "sistem-izleme": "System Monitoring",
+    "vfabric-hyperic": "vFabric Hyperic",
+    "nagios": "Nagios"
   },
   "NewsPage": {
     "title": "News",

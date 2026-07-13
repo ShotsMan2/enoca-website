@@ -23,7 +23,26 @@ export async function GET(request: Request, { params }: { params: Promise<{ enti
         responsibilities: typeof j.responsibilities === 'string' ? JSON.parse(j.responsibilities) : j.responsibilities
       }));
     }
-    else if (entity === 'applications') result = await prisma.application.findMany({ orderBy: { id: 'asc' } });
+    else if (entity === 'applications') {
+      const rawApps = await prisma.application.findMany({ orderBy: { id: 'asc' } });
+      const rawJobs = await prisma.job.findMany();
+      result = rawApps.map(a => {
+        const job = rawJobs.find(j => j.id === a.jobId);
+        return {
+          id: a.id,
+          jobId: a.jobId,
+          jobTitle: job ? job.title : "Başvuru",
+          name: a.fullName,
+          email: a.email,
+          phone: a.phone,
+          portfolioUrl: a.linkedinUrl,
+          cvFileName: a.cvUrl,
+          cvFileBase64: a.coverLetter,
+          status: a.status,
+          appliedAt: a.appliedAt
+        };
+      });
+    }
     else if (['stats', 'settings', 'hero', 'homepage', 'logs'].includes(entity)) {
       const setting = await prisma.setting.findUnique({ where: { key: entity } });
       try {
@@ -96,7 +115,21 @@ export async function POST(request: Request, { params }: { params: Promise<{ ent
       }
     } else if (entity === 'applications') {
       await prisma.application.deleteMany();
-      if(data.length > 0) await prisma.application.createMany({ data });
+      if(data.length > 0) {
+        const appsData = data.map((a: any) => ({
+          id: a.id,
+          jobId: a.jobId,
+          fullName: a.name || "",
+          email: a.email || "",
+          phone: a.phone || "",
+          linkedinUrl: a.portfolioUrl || "",
+          cvUrl: a.cvFileName || "",
+          coverLetter: a.cvFileBase64 || "",
+          status: a.status || "new",
+          appliedAt: a.appliedAt || new Date().toISOString()
+        }));
+        await prisma.application.createMany({ data: appsData });
+      }
     } else {
       return NextResponse.json({ error: 'Böyle bir entity yok' }, { status: 404 });
     }
