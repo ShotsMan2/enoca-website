@@ -23,7 +23,7 @@ export function translateCategories(
   tCategories: (key: string) => string
 ): HomepageCategoryItem[] {
   return categories.map((category) => {
-    const categoryKey = category.slug;
+    const categoryKey = category.slug || slugify(category.name);
     const translatedName = tCategories(categoryKey);
     const name = (translatedName && translatedName !== categoryKey && !translatedName.endsWith(categoryKey))
       ? translatedName
@@ -40,6 +40,7 @@ export function translateCategories(
 
     return {
       ...category,
+      slug: categoryKey,
       name,
       links,
     };

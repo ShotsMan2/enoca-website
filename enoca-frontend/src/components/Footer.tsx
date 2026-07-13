@@ -169,7 +169,7 @@ export default function Footer({ settings, pages = [] }: { settings?: SiteSettin
     });
 
     return (
-        <footer className="bg-[#050505] border-t border-[var(--border)] pt-20 pb-10 relative overflow-hidden font-[var(--font-sans)] text-white">
+        <footer className="bg-[#030a1d] border-t border-[var(--border)] pt-20 pb-10 relative overflow-hidden font-[var(--font-sans)] text-white">
             <div className="bg-grid absolute inset-0 opacity-[0.2] pointer-events-none" />
             <div className="max-w-[1440px] mx-auto px-6 lg:px-12 relative z-10">
                 
@@ -222,7 +222,7 @@ export default function Footer({ settings, pages = [] }: { settings?: SiteSettin
                     </div>
                     
                     <div className="flex flex-col md:flex-row items-center md:items-end justify-between gap-6 w-full lg:w-auto">
-                        <div className="flex flex-col w-full max-w-sm gap-2 bg-[#0a0a0c] p-6 border border-[var(--border)] relative overflow-hidden group">
+                        <div className="flex flex-col w-full max-w-sm gap-2 bg-[#070f24] p-6 border border-[var(--border)] relative overflow-hidden group">
                             <h4 className="text-[var(--accent)] font-[var(--font-mono)] text-[10px] uppercase tracking-widest mb-1">{t('newsletterTitle')}</h4>
                             <p className="text-[13px] text-[var(--muted)] font-light">{t('newsletterDesc')}</p>
                             {subscribed ? (

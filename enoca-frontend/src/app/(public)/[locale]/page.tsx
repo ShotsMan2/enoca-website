@@ -12,13 +12,14 @@ import HomepageFeatures from '@/components/HomepageFeatures';
 
 export default async function Home() {
   const locale = await getLocale();
-  const rawCategories = await getHomepageCategories();
+
   const t = await getTranslations('HomePage');
   const tCategories = await getTranslations('Categories');
   const dbData = await readDB();
   const heroSettings = dbData?.hero || {};
-  const homepageData = (dbData?.homepage as { features?: { id: number; number: string; title: string; text: string; image?: string }[] }) || {};
+  const homepageData = (dbData?.homepage as { features?: { id: number; number: string; title: string; text: string; image?: string }[], categories?: any[] }) || {};
   const features = homepageData.features || [];
+  const rawCategories = (homepageData.categories && homepageData.categories.length > 0) ? homepageData.categories : await getHomepageCategories();
 
   const copy = buildHomepageCopy((key, values) => t(key, values));
   
@@ -92,8 +93,8 @@ export default async function Home() {
               </div>
             </div>
             <div className="mt-8 space-y-4">
-              {categories.map((category) => (
-                <div key={category.slug} className="rounded-2xl border border-white/10 bg-white/5 p-4">
+              {categories.map((category, index) => (
+                <div key={category.id || category.slug || index} className="rounded-2xl border border-white/10 bg-white/5 p-4">
                   <div className="flex items-center justify-between">
                     <h3 className="font-semibold text-white">{category.name}</h3>
                     <span className="text-sm text-slate-400">{copy.linkCount(category.links.length)}</span>

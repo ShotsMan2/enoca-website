@@ -101,4 +101,12 @@ Ajanların hızlı çalışabilmesi için referans komutlar tablosu:
 | **Bağımlılıklar** | `npm install` | Frontend dizinindeki paketleri kurar |
 
 ---
+
+## 🤖 6. Çoklu Ajan Entegrasyonu (Multi-Agent Integration)
+
+Proje geliştirme sürecinde **Pi, DevinAI, OpenCode, Copilot ve Cursor** gibi çeşitli yapay zeka asistanları aktif olarak kullanılmaktadır. Bu durumun sağlıklı ilerleyebilmesi için:
+- **Kılavuza Uyum:** Tüm ajanlar her prompt veya iş akışında bu `agents.md` dosyasında yer alan özetleri ve kuralları mutlaka okumalı ve mimari kararlara saygı duymalıdır.
+- **Kullanıcı Talepleri ve UI/UX:** "Enter çalışmıyor, burada çalışsın" gibi kullanıcı tarafından belirtilen spesifik davranışsal hata bildirimleri ciddiye alınmalıdır. Özellikle form ve input alanlarında "Enter" tuşu ile işlem yapma gibi temel kullanıcı deneyimi standartları tüm ajanlar tarafından varsayılan olarak uygulanmalıdır.
+
+---
 *Bu doküman projedeki AI destekli geliştirme süreçlerinin kalitesini yüksek standartlarda tutmak için oluşturulmuştur.*

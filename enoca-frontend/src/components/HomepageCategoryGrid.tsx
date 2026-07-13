@@ -25,7 +25,7 @@ export default async function HomepageCategoryGrid({ categories }: HomepageCateg
       <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-4">
         {categories.map((category, index) => (
           <AnimatedArticle
-            key={category.slug}
+            key={category.id || category.slug || index}
             transition={{ duration: 0.35, delay: index * 0.05 }}
             className="group rounded-3xl border border-white/10 bg-white/5 p-6 shadow-[0_25px_80px_rgba(0,0,0,0.28)] backdrop-blur"
           >

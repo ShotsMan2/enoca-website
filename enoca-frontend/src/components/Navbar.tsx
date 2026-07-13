@@ -164,7 +164,7 @@ export default function Navbar({ settings, pages = [] }: { settings?: SiteSettin
     });
 
     return (
-        <header className={`fixed top-0 left-0 w-full z-[1000] bg-[#050505]/80 backdrop-blur-xl border-b border-[var(--border)] flex items-center transition-all duration-400 ${scrolled ? 'h-[70px]' : 'h-[90px]'}`}>
+        <header className={`fixed top-0 left-0 w-full z-[1000] bg-[#030a1d]/80 backdrop-blur-xl border-b border-[var(--border)] flex items-center transition-all duration-400 ${scrolled ? 'h-[70px]' : 'h-[90px]'}`}>
             <div className="w-full max-w-[1440px] mx-auto px-6 lg:px-12 flex justify-between items-center h-full">
                 
                 {/* LOGO */}
@@ -191,7 +191,7 @@ export default function Navbar({ settings, pages = [] }: { settings?: SiteSettin
                                     <div className="absolute top-[calc(100%-1px)] left-1/2 -translate-x-1/2 pt-0 hidden group-hover:block z-[1000]">
                                         {hasSubChildren ? (
                                             /* MEGA MENU LAYOUT */
-                                            <div className="bg-slate-950/95 border border-white/10 p-8 shadow-2xl backdrop-blur-xl rounded-none w-max max-w-[800px] flex gap-12">
+                                            <div className="bg-[#030a1d]/95 border border-white/10 p-8 shadow-2xl backdrop-blur-xl rounded-none w-max max-w-[800px] flex gap-12">
                                                 {item.children!.map((child, cIdx) => (
                                                     <div key={cIdx} className="flex flex-col min-w-[160px]">
                                                         <Link href={child.url} className={`text-[14px] uppercase tracking-widest hover:text-white transition-colors block mb-3 text-[var(--accent)] font-[var(--font-mono)]`}>
@@ -213,7 +213,7 @@ export default function Navbar({ settings, pages = [] }: { settings?: SiteSettin
                                             </div>
                                         ) : (
                                             /* STANDARD DROPDOWN LAYOUT */
-                                            <ul className="min-w-[240px] bg-slate-950/95 border border-white/10 p-2 flex flex-col gap-1 shadow-2xl backdrop-blur-xl rounded-none">
+                                            <ul className="min-w-[240px] bg-[#030a1d]/95 border border-white/10 p-2 flex flex-col gap-1 shadow-2xl backdrop-blur-xl rounded-none">
                                                 {item.children!.map((child, cIdx) => (
                                                     <li key={cIdx} className="w-full">
                                                         <Link 
@@ -260,7 +260,7 @@ export default function Navbar({ settings, pages = [] }: { settings?: SiteSettin
 
             {/* MOBILE MENU */}
             {isMobileMenuOpen && (
-                <div className="absolute top-[calc(100%-1px)] left-0 w-full max-h-[calc(100vh-70px)] overflow-y-auto bg-[#050505] border-b border-[var(--border)] p-4 flex flex-col gap-2 lg:hidden">
+                <div className="absolute top-[calc(100%-1px)] left-0 w-full max-h-[calc(100vh-70px)] overflow-y-auto bg-[#030a1d] border-b border-[var(--border)] p-4 flex flex-col gap-2 lg:hidden">
                     {menuItems.map((item, idx) => {
                         const hasChildren = item.children && item.children.length > 0;
                         
