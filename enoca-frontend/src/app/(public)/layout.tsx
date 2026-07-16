@@ -1,6 +1,7 @@
 import { Outfit, IBM_Plex_Mono } from 'next/font/google';
 import { ThemeProvider } from 'next-themes';
 import { getLocale } from 'next-intl/server';
+import { GoogleAnalytics } from '@next/third-parties/google';
 import JsonLd from '@/components/JsonLd';
 import '../globals.css';
 
@@ -20,6 +21,7 @@ export default async function PublicRootLayout({ children }: { children: React.R
         <div className="bg-grid"></div>
         <div className="bg-radial-gradient"></div>
         <div className="custom-noise"></div>
+        <GoogleAnalytics gaId="G-XYZ" />
         
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem={false}>
           {children}

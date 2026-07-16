@@ -19,8 +19,13 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
         : 'Sayfa';
     
     return {
-        title: `${pageTitle} | Enoca`,
-        description: `Enoca ${pageTitle} çözümleri ve hizmetleri hakkında detaylı bilgi.`,
+        title: `${pageTitle} Linkleri - Enoca Kategori Yönetimi`,
+        description: `${pageTitle} kategorisine ait en güncel ve faydalı bağlantıları inceleyin. Kendi link koleksiyonunuzu oluşturun.`,
+        openGraph: {
+            title: `${pageTitle} Linkleri - Enoca Kategori Yönetimi`,
+            description: `${pageTitle} kategorisine ait en güncel ve faydalı bağlantıları inceleyin. Kendi link koleksiyonunuzu oluşturun.`,
+            type: 'article',
+        },
     };
 }
 
